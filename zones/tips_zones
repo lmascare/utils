@@ -1,0 +1,197 @@
+#!/bin/ksh
+#
+# Create the ZFS dataset first
+
+ID=`id | egrep -c root`
+if [[ ${ID} -eq 0 ]]
+then
+  echo "Must run as root.....exiting"
+  exit 1
+fi
+
+echo "Enter Zone Name : \c"
+read zname junk
+
+zhome=`zfs list | egrep -c 'rpool/export/zones'`
+zhost=`getent hosts ${zname} | wc -l`
+rpassword=`egrep root /etc/shadow | nawk -F: '{print $2}'`
+
+if [[ ${zhost} -gt 1 ]]
+then
+  echo "Non-unique hostname. Retry"
+  exit 1
+else
+  zhost_entry=`getent hosts ${zname} | nawk '{print $1}'`
+  zhost_int=`netstat -in | egrep -v "lo0|Name|^$|default" | nawk '{print $1}'`
+fi
+
+if [[ ${zhome} -eq 0 ]]
+then 
+  echo "Creating Zone Root"
+  zfs create rpool/export/zones
+  zfs set compression=on rpool/export/zones
+  zfs set dedup=on rpool/export/zones
+fi
+
+
+set -x
+
+# zfs create rpool/export/zones/${zname}
+# zfs set quota=4G rpool/export/zones/${zname}
+
+# Now create the zone
+#
+echo "
+create 
+set zonepath=/export/zones/${zname}
+   add fs
+   set dir=/export/home/lmascare
+   set special=/export/home/lmascare
+   set type=lofs
+   add options [rw,nodevices]
+   end
+
+   add net
+   set address=${zhost_entry}/24
+   set physical=${zhost_int}
+   end
+set autoboot=true
+commit
+" > /tmp/zcreate_${zname}
+zonecfg -z ${zname} -f /tmp/zcreate_${zname}
+
+# Zone must NOT be group,world read/executable
+# chmod 700 /export/zones/${zname}
+
+
+# Now run the installer
+# zoneadm -z ${zname} install 
+
+
+# To install the full distribution
+timex zoneadm -z ${zname} install -e slim_install
+
+# Setup the sysidcfg file
+echo "
+system_locale=C
+terminal=vt100
+network_interface=PRIMARY {hostname=${zname}}
+name_service=DNS
+{domain_name=kellynoah.com
+name_server=172.31.251.57,172.31.251.1}
+timezone=US/Eastern
+security_policy=NONE
+nfs4_domain=dynamic
+" > /tmp/sysidcfg_${zname}
+
+cp /tmp/sysidcfg_${zname} /export/zones/${zname}/root/etc/sysidcfg
+
+timex pkg -R /export/zones/${zname}/root install babel_install
+timex pkg -R /export/zones/${zname}/root install entire
+timex pkg -R /export/zones/${zname}/root uninstall slim_install
+
+# pkg -R /export/zones/${zname}/root install utf-8
+# pkg -R /export/zones/${zname}/root install utf-8/manual
+# pkg -R /export/zones/${zname}/root install system/locale/en_us
+ 
+SHADOW_ENTRY='lmascare:$5$lz$zfiSUKhmFEa2seyLGOyh2yRkysEn3Qyl86yhIrXBtg/:6445::::::'
+PASSWD_ENTRY='lmascare:x:101:10:Larry Mascarenhas:/export/home/lmascare:/bin/bash'
+
+zoneadm -z ${zname} boot
+
+zlogin -C ${zname}  
+# Use ~. to disconnect from console
+
+# Ensure auto-boot?=true
+# svcadm enable sys:/system/zones:default
+# pfexec zoneadm -z ${zname} halt
+# pfexec zoneadm -z ${zname} uninstall
+# pfexec zonecfg -z ozone delete -F
+# 
+# To CLONE a zone...
+# Halt the source zone
+# pfexec zoneadm -z ozone halt
+# Export it
+# pfexec zonecfg -z ozone export -f zone_export_ozone
+# Edit the configuration
+# Then create the zone using
+# pfexec zonecfg -z helium -f zone_export_helium
+# pfexec zoneadm -z helium clone ozone 
+# cp sysidcfg /export/zones/helium/root/etc/.
+
+# Note that the user accounts are cloned over as well...Nice.
+
+
+## Moving a zone to a new host
+# pfexec zoneadm -z helium halt
+# pfexec zoneadm -z helium detach
+#
+# Make a tarball of the zone
+# su
+# cd /export/zones
+#
+# Looks like gtar does not work :( Lets try cpio
+# gtar cfpz ~/misc/helium.tar.gz helium  # p -> preserve perms, z -> gzip
+# find helium -print | cpio -oP@/ | gzip > ~/misc/helium.cpio.gz
+#
+# On Destination host
+# pfexec zonecfg -z helium 
+# Now perform the same steps as create zone w/o the install 
+#
+# Note...MUST be full path to the archive file
+# pfexec zoneadm -z helium attach -a /export/home/lmascare/misc/helium.tar.gz -u
+#
+# On original host, the zone can now be deleted
+# pfexec zonecfg -z helium delete -F
+
+# 12/23/2014
+# Zones on S11.2
+# 
+#
+# Create the zfs dataset first. Each zone should be on its own dataset.
+#
+zfs create -o mountpoint=/u/zones krypton_u/zones
+zfs create -o mountpoint=/u/zones/cobalt krypton_u/zones/cobalt
+chmod 700 /u/zones/cobalt/
+zonecfg -z cobalt
+
+Contents of cobalt.zone
+   create -b
+   set zonepath=/u/zones/cobalt
+   set ip-type=shared
+   add net
+      set physical=net0
+      set address=172.31.251.60/24
+      set defrouter=172.31.251.1
+      end
+   set autoboot=true
+   commit
+   exit
+
+zonecfg -z cobalt -f cobalt.zone
+zoneadm -z cobalt install -m cobalt.xml -c cobalt_sc_profile.xml
+zoneadm -z cobalt boot
+
+######
+   add fs
+      set dir=/u/repos/solaris
+      set special=/u/repos/solaris
+      set type=lofs
+      add options [ro,nodevices]
+      end
+#######
+
+System Configuration tool configures
+system hostname, time zone and locale, user and root accounts, 
+name services, support
+location --> /etc/svc/profile/site
+
+install gvim, xterm, xauth etc
+
+
+# Kernel zones
+#
+# rad-zonemgr pkg should be installed for live migration & RAD-administration
+# set_user_reserve_hint_pct -f 80
+# Zone templates are in /etc/zones/
+

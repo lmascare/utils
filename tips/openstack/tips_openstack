@@ -1,0 +1,10 @@
+# pkg install openstack
+
+# svcadm enable -rs ipfilter
+# ipadm set-prop -p forwarding=on ipv4
+# export OS_USERNAME=neutron
+  export OS_PASSWORD=Finally!
+  export OS_TENANT_NAME=service
+  export OS_AUTH_URL=http://$CONTROLLER_ADMIN_NODE:5000/v2.0
+# neutron router-create ext-router
+

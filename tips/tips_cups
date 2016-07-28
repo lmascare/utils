@@ -1,0 +1,17 @@
+#
+# To get the list of printer drivers
+# lpinfo -m 
+
+# SMF services to be online
+# svc:/application/cups/in-lpd:default
+# svc:/application/cups/scheduler:default
+
+#
+# CUPS config dir --> /etc/cups
+# Listens on localhost:631
+# cups log --> /var/log/cups
+# connect firefox http://localhost:631
+
+# Issue on ENVY printer. It should be configured with browser 
+# and set color off, 2 sided, draft.
+# lpadmin -p <printername> -E -v socket://<ip> -m <printer driver> 

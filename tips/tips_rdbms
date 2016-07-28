@@ -1,0 +1,11 @@
+# SWAP should be at least 4Gig
+
+# Set the /etc/project params
+id -p # To verify the project id
+
+# check parameter
+prctl -n project.max-shm-memory -i project group.dba 
+prctl -n project.max-sem-ids -i project group.dba
+
+projmod -sK "project.max-shm-memory=(privileged,4G,deny)" group.dba
+

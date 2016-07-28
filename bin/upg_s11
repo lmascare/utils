@@ -1,0 +1,41 @@
+#!/bin/ksh
+#
+#
+LOGDIR=/u/logs
+LOG=${LOGDIR}/upd_s11.log
+# INC=0.5.11-0.175.2.3.0.5.0
+# INC=0.5.11-0.175.2.4.0.6.0
+# INC=0.5.11-0.175.2.5.0.5.0
+# INC=0.5.11-0.175.2.7.0.4.0
+# INC=0.5.11-0.175.2.8.0.4.0
+# INC=0.5.11-0.175.2.8.0.5.0
+# INC=0.5.11-0.175.2.11.0.5.0
+# INC=0.5.11-0.175.3.1.0.5.0
+# INC=0.5.11-0.175.3.4.0.5.0
+# INC=0.5.11-0.175.3.6.0.5.0
+# INC=0.5.11-0.175.3.7.0.5.0
+# INC=0.5.11-0.175.3.8.0.7.0
+ INC=0.5.11-0.175.3.9.0.4.0
+
+CVE=solaris-11-cpu
+
+
+#PUBLISHER=/u/repos/solaris
+#PUBLISHER=http://krypton:8008/solaris
+
+if [[ ! -d ${LOGDIR} ]]
+then
+	mkdir -p ${LOGDIR}
+	chmod 777 ${LOGDIR}
+fi
+
+echo "`date`  Started Upgrade" >> ${LOG}
+
+# pkg update -nv entire@${INC} >> ${LOG}
+
+#pkg update --accept -g ${PUBLISHER} -C 0 --be-name s11_${INC}  entire@${INC} >> ${LOG}
+
+pkg update --accept -C 0 --be-name s11_${INC}  entire@${INC} >> ${LOG}
+pkg update --accept -C 0 --be-name s11_${INC}  solaris-11-cpu@${INC} >> ${LOG}
+
+echo "`date`  Ended Upgrade" >> ${LOG}

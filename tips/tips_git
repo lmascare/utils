@@ -1,0 +1,113 @@
+#
+# Getting Git on a server
+
+# Setup keys for all the servers that will connect to the Git Server
+# ssh-keygen -C 'lmascare@krypton' -f ~/.ssh/id_dsa -t dsa
+# Update the authorized keys file and verify you can ssh w/o password
+# to all the servers
+# 
+# Create a ZFS dataset for the Shared repository
+# zfs create -o mountpoint=/u/git rpool_u/git
+# chmod 775 /u/git
+# chown staff /u/git
+#
+# create a bare hared epository
+# mkdir /u/git/sysae
+# cd /u/git/sysae
+# git init --bare --shared
+# 
+# From a client you should be able to clone the repository
+# cd misc/gitwork (logged in as lmascare)
+# git clone cobalt:/u/git/sysae
+#
+# GITHUB
+# Add your public key to GitHub
+# cd /u/gitwork
+# git init
+# git clone git@github.com:lmascare/utils.git
+
+# Setup your env
+# git config --global user.name "Larry Mascarenhas"
+# git config --global user.email "LMascare@krypton.kellynoah.com"
+# git config --global color.ui "auto"
+# git config --global merge.tool "gvimdiff"
+#
+# New in GIT2.0
+# git config --global push.default simple
+
+
+# working with the repository
+# Add a file to the local repo and the origin
+#
+# git commit -m 'Initial Version' tips_zones
+# git remote add origin cobalt:/u/git/sysae
+# git pull
+# 
+# Update some files and push to the origin
+# git push origin master
+
+
+# pfexec zfs create rpool/git_repository
+# pfexec zfs set quota=4g rpool/git_repository
+# pfexec zfs set mountpoint=/u/git_repo rpool/git_repository
+# pfexec zfs set compression=on rpool/git_repository
+# git config --global user.name "Larry Mascarenhas"
+# git config --global user.email "LMascare@verizon.net"
+# git config --global color.ui "auto"
+# git config --global alias.co "checkout"
+# git config --global merge.tool "meld"
+# git config --global --list
+# GIT_DIR=/u/git_repo ; export GIT_DIR
+# mkdir lm.git
+# cd /u/git_repo/lm.git
+# git init --bare --shared=group
+# git remote add lm ssh://lmascare@lmascare-laptop/u/git_repo/lm.git
+# git push lm master
+# git init
+# git add nbu_health.pl
+# git commit -m "Message" <filename>
+# git status 
+# git log -l
+# git branch RB_1.0 master
+# After editing 'git commit -a'
+# git checkout RB_1.0
+# After editing 'git commit -a'
+# Tag for release 'git tag 1.0 RB_1.0
+# git tag
+# git checkout master
+# git rebase RB_1.0
+# git branch -d RB_1.0 'to delete the branch'
+# git mv source destination
+# git checkout -b alternate master
+# git checkout master
+# git merge alternate
+
+# Github
+# 
+# Update the ssh keys in GitHub with the public key of the hosts
+# This will allow you to connect to GitHub from the hosts
+#
+# In GitHub, create Organization LANK-Enterprises
+# In this organization, create solaris & utils repos
+#
+# Under misc/gitwork, on the Unix hosts
+# mkdir LANK-Enterprises/solaris
+# mkdir LANK-Enterprises/utils
+#
+# These remotes are to the Parent REPOS in GitHub
+# git remote add lanksol git@github.com:LANK-Enterprises/solaris.git
+# git remote add lankutils git@github.com:LANK-Enterprises/utils.git
+# 
+# In GitHub, create a fork for the solaris & utils repos
+# Then on the Unix host
+# cd misc/gitwork/LANK-Enterprises/utils
+# git remote add origin git@github.com:lmascare/utils.git
+#
+# cd misc/gitwork/LANK-Enterprises/solaris
+# git remote add origin git@github.com:lmascare/solaris.git
+#
+# To review the remotes
+# git remote -v 
+#
+# git pull origin master
+# git pull lanksol master

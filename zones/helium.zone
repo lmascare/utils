@@ -1,0 +1,11 @@
+create -b
+   set zonepath=/u/zones/helium
+   set ip-type=shared
+   add net
+      set physical=net0
+      set address=172.31.251.62/24
+      set defrouter=172.31.251.1
+      end
+   set autoboot=true
+   commit
+   exit

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
+
+-->
+<!DOCTYPE auto_install SYSTEM "file:///usr/share/install/ai.dtd.1">
+<auto_install>
+  <ai_instance name="default">
+    <target>
+      <logical>
+        <zpool name="rpool" is_root="true">
+          <!--
+            Subsequent <filesystem> entries instruct an installer to create
+            following ZFS datasets:
+
+                <root_pool>/export         (mounted on /export)
+                <root_pool>/export/home    (mounted on /export/home)
+
+            Those datasets are part of the standard environment and should
+            always be created.
+
+            In rare cases, if there is a need to deploy an installed system
+            without these datasets, either comment out or remove <filesystem>
+            entries. In such scenario, it has to be also assured that
+            in case of non-interactive post-install configuration, creation
+            of initial user account is disabled in related system
+            configuration profile. Otherwise the installed system would fail
+            to boot.
+          -->
+          <filesystem name="export" mountpoint="/export"/>
+          <filesystem name="export/home"/>
+          <be name="solaris"/>
+        </zpool>
+      </logical>
+    </target>
+    <software type="IPS">
+      <destination>
+        <image>
+          <!-- Specify locales to install -->
+          <facet set="false">facet.locale.*</facet>
+          <facet set="true">facet.locale.de</facet>
+          <facet set="true">facet.locale.de_DE</facet>
+          <facet set="true">facet.locale.en</facet>
+          <facet set="true">facet.locale.en_US</facet>
+          <facet set="true">facet.locale.es</facet>
+          <facet set="true">facet.locale.es_ES</facet>
+          <facet set="true">facet.locale.fr</facet>
+          <facet set="true">facet.locale.fr_FR</facet>
+          <facet set="true">facet.locale.it</facet>
+          <facet set="true">facet.locale.it_IT</facet>
+          <facet set="true">facet.locale.ja</facet>
+          <facet set="true">facet.locale.ja_*</facet>
+          <facet set="true">facet.locale.ko</facet>
+          <facet set="true">facet.locale.ko_*</facet>
+          <facet set="true">facet.locale.pt</facet>
+          <facet set="true">facet.locale.pt_BR</facet>
+          <facet set="true">facet.locale.zh</facet>
+          <facet set="true">facet.locale.zh_CN</facet>
+          <facet set="true">facet.locale.zh_TW</facet>
+        </image>
+      </destination>
+      <source>
+        <!--
+          By default, IPS packages will be installed from publisher
+          "solaris" located at the URI specified by the origin name below.
+          You may specify a different IPS repository to install from by
+          changing the origin name and/or publisher name. You may also
+          specify multiple publishers.
+        -->
+        <publisher name="solaris">
+          <origin name="http://pkg.oracle.com/solaris/release"/>
+        </publisher>
+      </source>
+      <!--
+        The version specified by the "entire" package below, is
+        installed from the specified IPS repository.  If another version
+        is required, the 'entire' package should be specified in the
+        following form:
+
+            <name>pkg:/entire@0.5.11,5.11-0.175.update.sru.platform.build.rev</name>
+
+        For instance, to specify a particular build of S11.2, the following
+        should be used:
+
+            <name>pkg:/entire@0.5.11,5.11-0.175.2.0.0.build</name>
+      -->
+      <software_data action="install">
+        <name>pkg:/entire@0.5.11-0.175.2</name>
+        <name>pkg:/group/system/solaris-large-server</name>
+      </software_data>
+    </software>
+  </ai_instance>
+</auto_install>

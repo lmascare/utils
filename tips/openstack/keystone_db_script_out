@@ -1,0 +1,83 @@
+root@silicon:~/misc/gitwork/sysae/tips/openstack# ./keystone.db_script 
+++ CONTROLLER_ADMIN_NODE=silicon
+++ CONTROLLER_ADMIN_NODE_IP=172.31.251.63
+++ COMPUTE_ADMIN_NODE_IP=172.31.251.63
+++ VOLUME_IP=silicon
+++ CONTROLLER_PUBLIC_ADDRESS=silicon
+++ CONTROLLER_ADMIN_ADDRESS=silicon
+++ CONTROLLER_INTERNAL_ADDRESS=silicon
+++ SERVICE_TOKEN=ffc4e799d48e0ff783f5
+++ ADMIN_PASSWORD='Finally!'
+++ SERVICE_PASSWORD='Finally!'
+++ /usr/demo/openstack/keystone/sample_data.sh
++-------------+-------------------------------------+
+|   Property  |                Value                |
++-------------+-------------------------------------+
+|   adminurl  |  http://silicon:$(admin_port)s/v2.0 |
+|      id     |   c382ab3e89dd4346ae64f8c663760624  |
+| internalurl | http://silicon:$(public_port)s/v2.0 |
+|  publicurl  | http://silicon:$(public_port)s/v2.0 |
+|    region   |              RegionOne              |
+|  service_id |   1f4e5f97f26e4dddbc219eb4f1f71834  |
++-------------+-------------------------------------+
++-------------+--------------------------------------+
+|   Property  |                Value                 |
++-------------+--------------------------------------+
+|   adminurl  | http://silicon:8774/v2/$(tenant_id)s |
+|      id     |   f780c85b52e94d1f9f34d47b7cb73b54   |
+| internalurl | http://silicon:8774/v2/$(tenant_id)s |
+|  publicurl  | http://silicon:8774/v2/$(tenant_id)s |
+|    region   |              RegionOne               |
+|  service_id |   9db35dd865d546c38ac4a3548cdd0aea   |
++-------------+--------------------------------------+
++-------------+--------------------------------------+
+|   Property  |                Value                 |
++-------------+--------------------------------------+
+|   adminurl  | http://silicon:8776/v1/$(tenant_id)s |
+|      id     |   3ff5d9d3c2214100ad1f80dffcf27228   |
+| internalurl | http://silicon:8776/v1/$(tenant_id)s |
+|  publicurl  | http://silicon:8776/v1/$(tenant_id)s |
+|    region   |              RegionOne               |
+|  service_id |   eee3d4b4252b43779c26b4804b76a099   |
++-------------+--------------------------------------+
++-------------+----------------------------------+
+|   Property  |              Value               |
++-------------+----------------------------------+
+|   adminurl  |       http://silicon:9292        |
+|      id     | 311451206e2c417faaafef7247d152a8 |
+| internalurl |       http://silicon:9292        |
+|  publicurl  |       http://silicon:9292        |
+|    region   |            RegionOne             |
+|  service_id | 659731f82986416cb02ddcd39b77e613 |
++-------------+----------------------------------+
++-------------+------------------------------------+
+|   Property  |               Value                |
++-------------+------------------------------------+
+|   adminurl  | http://silicon:8773/services/Admin |
+|      id     |  e94ce03363fc46199daad65c7aa8ec86  |
+| internalurl | http://silicon:8773/services/Cloud |
+|  publicurl  | http://silicon:8773/services/Cloud |
+|    region   |             RegionOne              |
+|  service_id |  a1f3550228d445fcacc3de5aa167bdc1  |
++-------------+------------------------------------+
++-------------+-------------------------------------------+
+|   Property  |                   Value                   |
++-------------+-------------------------------------------+
+|   adminurl  |           http://silicon:8080/v1          |
+|      id     |      a71067f164a14c699c7ad23cb34a67aa     |
+| internalurl | http://silicon:8080/v1/AUTH_$(tenant_id)s |
+|  publicurl  | http://silicon:8080/v1/AUTH_$(tenant_id)s |
+|    region   |                 RegionOne                 |
+|  service_id |      d377cf3f85da4442a67d863269082dcc     |
++-------------+-------------------------------------------+
++-------------+----------------------------------+
+|   Property  |              Value               |
++-------------+----------------------------------+
+|   adminurl  |       http://silicon:9696/       |
+|      id     | 696fa0f07b0147c787d69a6f35609095 |
+| internalurl |       http://silicon:9696/       |
+|  publicurl  |       http://silicon:9696/       |
+|    region   |            RegionOne             |
+|  service_id | 3b4d3f49ce4b41f885b6c0618f9c2e90 |
++-------------+----------------------------------+
+root@silicon:~/misc/gitwork/sysae/tips/openstack# 
