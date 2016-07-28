@@ -1,0 +1,307 @@
+#!/bin/ksh
+# To manually mirror a pkg repository
+#
+# pkgrecv -s http://pkg.oracle.com/solaris/release -d /export/repos/s11_2 -m latest -v *
+
+# With -n option, it performs a trial run
+# pkgrecv -s http://pkg.oracle.com/solaris/release -d /export/repos/s11_2 -m latest -n *
+
+
+# Mirror a repository
+#  http://www.oracle.com/technetwork/articles/servers-storage-admin/howto-set-up-repos-mirror-ips-2266101.html
+# 
+
+# Install pkgtool
+pkg set-publisher -G'*' -g file:///export/repos/s11_2/ -g http://pkg.oracle.com/solaris/release solaris
+pkg install -g http://pkg.oracle.com/solaris/release pkgbuild
+
+# to customize the pkg/server
+svccfg -s svc:/application/pkg/server:default
+setprop pkg/inst_root = astring: "/u/repos/s11_2/"
+setprop pkg/log_access = astring: "/u/logs/pkg_server/access_log"
+setprop pkg/log_errors = astring: "/u/logs/pkg_server/error_log"
+refresh
+quit
+svcadm enable svc:/application/pkg/server:default
+
+root@carbon:~/misc# svccfg -s pkg/server
+svc:/application/pkg/server> delete solaris
+svc:/application/pkg/server> add solaris
+svc:/application/pkg/server> delete solaris
+svc:/application/pkg/server> add sol_repo1
+svc:/application/pkg/server> add sol_repo2
+svc:/application/pkg/server> select sol_repo1
+svc:/application/pkg/server:sol_repo1> setprop pkg/inst_root=/u/repos/s11_2
+svc:/application/pkg/server:sol_repo1> setprop pkg/log_errors=/u/logs/pkg_server/sol_repo1_errors
+svc:/application/pkg/server:sol_repo1> setprop pkg/log_access=/u/logs/pkg_server/sol_repo1_access
+svc:/application/pkg/server:sol_repo1> setprop pkg/port=8080
+svc:/application/pkg/server:sol_repo1> refresh
+svc:/application/pkg/server:sol_repo1>
+svc:/application/pkg/server> select sol_repo2
+svc:/application/pkg/server:sol_repo2> setprop pkg/inst_root=/export/repos/s11_2
+svc:/application/pkg/server:sol_repo2> setprop pkg/log_errors=/u/logs/pkg_server/sol_repo2_errors
+svc:/application/pkg/server:sol_repo2> setprop pkg/log_access=/u/logs/pkg_server/sol_repo2_access
+svc:/application/pkg/server:sol_repo2> setprop pkg/port=8008
+svc:/application/pkg/server:sol_repo2> refresh
+svc:/application/pkg/server:sol_repo2>
+svc:/application/pkg/server> select master_repo
+svc:/application/pkg/server:master_repo> setprop pkg/inst_root=/u/repos/master_repo/s11_2
+svc:/application/pkg/server:master_repo> setprop pkg/port=8000
+svc:/application/pkg/server:master_repo> setprop pkg/log_access=/u/logs/pkg_server/master_repo_access
+svc:/application/pkg/server:master_repo> setprop pkg/log_errors=/u/logs/pkg_server/master_repo_errors
+svc:/application/pkg/server:master_repo> refresh
+svc:/application/pkg/server:master_repo> end
+
+svcadm enable pkg/server:sol_repo1
+svcadm enable pkg/server:sol_repo2
+svcadm disable pkg/server:default
+
+pkg set-publisher -G'*' -g http://127.0.0.1:8080/solaris solaris
+pkg set-publisher -G'*' -g http://127.0.0.1:8008/solaris solaris
+pkg set-publisher -G'*' -g http://127.0.0.1:8000/solaris solaris
+
+# CVE pkg  --> https://blogs.oracle.com/darren/entry/cve_metadata_in_solaris_ips#comments
+# pkg:/support/critical-patch-update/solaris-11-cpu
+# pkg install solaris-11-cpu@2014.10-1
+
+# upgradectrl --> https://blogs.oracle.com/OTNGarage/entry/how_to_prohibit_upgrading_beyond
+#
+set name=pkg.fmri value=upgradectrl@1.0
+set name=pkg.summary value="Incorporation to constrain the version of the OS"
+set name=pkg.description value="This package controls the version of \
+pkg://solaris/entire that can be installed."
+set name=info.classification value="org.opensolaris.category.2008:Meta Packages/Incorporations"
+set name=pkg.depend.install-hold value=core-os
+set name=variant.opensolaris.zone value=global value=nonglobal
+set name=variant.arch value=sparc value=i386
+depend fmri=feature/package/dependency/self type=parent variant.opensolaris.zone=nonglobal
+depend fmri=pkg://solaris/entire type=require
+depend fmri=pkg://solaris/entire@0.5.11,5.11-0.175.2.4 type=incorporate
+
+# Create a repository
+# mkdir /u/repos/myrepo
+# pkgrepo create /u/repos/myrepo
+# pkgrepo -s /u/repos/myrepo set publisher/prefix=LarryM
+# pkgsend -s /u/repos/myrepo publish upgradectrl.p5m
+# 
+# pkg contents -Hro fmri -t depend -a type=incorporate -g /u/repos/myrepo upgradectrl@1
+# pkg install -g /u/repos/myrepo upgradectrl
+#
+# pkgbuild --> http://pkgbuild.sourceforge.net/man.php
+# pkgtool --dumprc >> .pkgtoolrc
+# 
+# Proxying behind an Apache Web Server
+#
+
+## Begin LM Customization ##
+
+AllowEncodedSlashes	NoDecode
+
+# Reduce over the wire size of metadata
+AddOutputFilterByType	DEFLATE	text/html	application/javascript	text/css	text/plain
+
+# Allow more pipelined requests
+MaxKeepAliveRequests	1000
+
+# Set maximum wait time for response
+ProxyTimeout	30
+
+# Disable forward proxying
+ProxyRequests	off
+
+CacheRoot			/u/cache/proxycache
+CacheEnable			disk	/
+CacheMaxFileSize	1000000000
+CacheDirLevels		1
+CacheDirLength		2
+
+# Cache considerations for Catalog Attributes
+# Do not cache it.
+#
+<LocationMatch ".*/catalog.attrs">
+	Header set Cache-Control no-cache
+</LocationMatch>
+
+# No gains in caching searches
+<LocationMatch ".*/search/\d/.*">
+	Header set Cache-Control no-cache
+</LocationMatch>
+
+Redirect	/s11_2	http://127.0.0.1/s11_2/
+ProxyPass	/s11_2/	http://127.0.0.1:8080/ nocanon max=200
+
+CustomLog "/u/logs/apache2/access_log" common
+ErrorLog "/u/logs/apache2/error_log"
+
+# END Apache Config
+
+# SMF config for Proxying
+# setprop pkg/proxy_base=http://10.0.2.15/s11_2
+# setprop pkg/threads=200
+
+
+######
+# S11.2 onwards
+#
+# svccfg -s pkg/server
+# svc:/application/pkg/server> add LarryM
+# svc:/application/pkg/server> select LarryM
+# svc:/application/pkg/server:LarryM> setprop pkg/inst_root="/u/repos/LarryM"
+# svc:/application/pkg/server:LarryM> setprop pkg/log_access="/u/logs/pkg_server/LarryM_access"
+# svc:/application/pkg/server:LarryM> setprop pkg/log_errors="/u/logs/pkg_server/LarryM_errors"
+# svc:/application/pkg/server:LarryM> setprop pkg/standalone=false
+# svc:/application/pkg/server:LarryM> setprop pkg/readonly=true
+# svc:/application/pkg/server:LarryM> refresh
+# svc:/application/pkg/server:LarryM> quit
+# refresh
+# end
+
+# svcadm refresh pkg/server:LarryM
+# svcadm enable pkg/server:LarryM
+# 
+########
+# Mirroring
+##
+#
+# To enable mirrorring from Oracle Repo, ensure your publisher points to the Support
+# Repository. Then enable the pkg/mirror SMF service.
+#
+# Configuration:
+# i.   Create a ref_image (config/ref_image property in pkg/mirror:solaris SMF service)
+# ii.  Set the publisher to the Oracle Support repository using ref_image as -R
+# iii. The system will still have the desired publisher 
+# iv. 
+
+# zfs create -o mountpoint=/u/repos/ref_image krypton_u/repos/ref_image
+# zfs create -o mountpoint=/u/repos/ref_image/solaris krypton_u/repos/ref_image/solaris
+# pkg image-create /u/repos/ref_image/solaris
+#
+# pkg -R /u/repos/ref_image/solaris set-publisher \
+# -k /var/pkg/ssl/pkg.oracle.com.key.pem \
+# -c /var/pkg/ssl/pkg.oracle.com.certificate.pem \
+# -G "*" -g https://pkg.oracle.com/solaris/support/ solaris
+#
+# **** IMPORTANT Publisher definition ****
+root@krypton:~# pkg publisher
+PUBLISHER                   TYPE     STATUS P LOCATION
+solaris                     origin   online F http://krypton:8008/solaris/
+
+root@krypton:~# pkg -R /u/repos/ref_image/solaris publisher
+PUBLISHER                   TYPE     STATUS P LOCATION
+solaris                     origin   online F https://pkg.oracle.com/solaris/support/
+root@krypton:~# 
+# **** Publisher definition END ****
+
+# zfs create -o mountpoint=/u/repos/solaris krypton_u/repos/solaris
+# chown pkg5srv:pkg5srv /u/repos/solaris
+#
+
+# zfs create -o mountpoint=/u/cache krypton_u/cache
+# mkdir -p /u/cache/pkg/mirror
+# chown -R pkg5srv:pkg5srv /u/cache
+
+# Create the SMF Mirror services for Solaris Support
+# svccfg -s pkg/mirror
+# add solaris
+# select solaris
+# setprop config/repository=/u/repos/solaris
+# setprop config/ref_image=/u/repos/ref_image/solaris
+# setprop config/cache_dir=/u/cache/pkg/mirror/
+# setprop config/publishers=solaris
+# setprop config/crontab_period="10 23 * * *"
+# refresh
+# end 
+#
+# svcadm refresh pkg/mirror:solaris
+# svcadm enable pkg/mirror:solaris
+#
+# Note that the 1st time it complains that it cannot mount the zfs dataset
+# but next clearing it allows it to continue
+
+###
+# Running the pkg/depotd service
+#
+# for the appropriate SMF service set
+setprop pkg/standalone=false
+setprop pkg/readonly=true
+setprop pkg/inst_root=/u/repos/solaris
+
+# On the pkg/depot service, set the port as required.
+setprop config/port=8008
+setprop config/log_dir=/u/logs/pkg_depot
+setprop config/cache_dir=/u/cache/pkg_depot
+setprop config/cache_size=10000000000
+
+mkdir /u/logs/pkg_depot /u/cache/pkg_depot
+chown pkg5srv:pkg5srv /u/logs/pkg_depot /u/cache/pkg_depot
+
+
+###
+###  How to access the Oracle Solaris 11 Support repository
+###
+
+    Download your personal key and certificate files, called pkg.oracle.com.key.pem and pkg.oracle.com.certificate.pem from the certificate page. Don't worry if you get logged out, or lose the files. You can come back to this site later and re-download them. We'll assume that you downloaded these files into your Desktop folder, ~/Desktop/.
+
+    Use the following commands to set up your publisher configuration for the Oracle Solaris 11 Support repository:
+
+    	$ sudo pkg set-publisher \
+           	    -k ~/Desktop/pkg.oracle.com.key.pem \
+           	    -c ~/Desktop/pkg.oracle.com.certificate.pem \
+           	    -G "*" -g https://pkg.oracle.com/solaris/support/ solaris
+                            
+
+    	$ pkg set-publisher \
+           	    -k /var/pkg/ssl/pkg.oracle.com.key.pem \
+           	    -c /var/pkg/ssl/pkg.oracle.com.certificate.pem \
+           	    -G "*" -g https://pkg.oracle.com/solaris/support/ solaris
+                            
+    The packaging system will create copies of the key and certificate files and put them into the right place. So if required, you can safely remove both files from ~/Desktop after this step.
+
+    Check your publisher settings, there should be no unrelated mirrors set up. To check for any set up mirrors invoke the following command:
+
+    	$ pkg publisher solaris | grep Mirror
+    	
+    	                
+
+    If the output is empty you are all set. If not remove unrelated mirrors by running:
+
+    	$ sudo pkg set-publisher -M http://mirror1.x.com -M http://mirror2.y.com ... solaris
+    	
+    	                
+
+    To see the packages supplied by this publisher, try:
+
+    	$ pkg list -a 'pkg://solaris/*'
+                            
+
+#
+#
+#
+# Convert SysV pkg to IPS
+# Convert the datastream pkg to filesystem package format
+# mkdir chef-12.5.1-1
+# pkgtrans /tmp/chef-12.5.1-1.sparc.solaris chef-12.5.1-1 chef
+#
+# pkgsend generate ./chef | pkgfmt > chef.p5p
+
+# Add the symlinks
+# 
+# Review scripts list postinstall/postremove etc.
+# Update the p5p file with FMRI
+# set name=pkg.fmri value=chef@12.4.0-1
+# Add REV & hotline information information
+#
+# Verify the pkg using pkglink
+# pkgrepo create /tmp/lm
+# pkgrepo -s /tmp/lm set publisher/prefix=LarryM
+# pkglint -c ./cache -r file:///tmp ./chef.p5p
+#
+# cd chef (cd to the extracted SysV dir which has the pkgmap)
+# pkgsend -s file:///tmp/lm publish ../chef.p5p
+
+# ozone has the repo called LANK that is on the network. pkgs are published to it
+# publishing the pkg to the global zone publisher LarryM
+# pkgrecv -s http://ozone:8080 -d /u/repos/LarryM -v chef
+
+# List publishers in a zone
+# pkg publisher -F tsv

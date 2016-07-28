@@ -1,0 +1,610 @@
+#
+# Search the repository for a pkg that
+# has this library
+#
+# pkg search -r libucb.so.1
+
+# Now install it
+# pfexec pkg install pkgname@version ## Displayed earlier
+#
+
+# In case of timeouts
+# PKG_CLIENT_TIMEOUT=120
+
+##
+# ZFS WORK
+#
+# zfs create rpool/pkg_depot
+# zfs set quota=1gb rpool/pkg_depot
+# zfs set mountpoint=/u/pkg_depot rpool/pkg_depot
+# pfexec zfs set compression=on rpool/pkg_depot
+
+# pfexec zfs create rpool/git_repository
+# pfexec zfs set quota=4g rpool/git_repository
+# pfexec zfs set mountpoint=/u/git_repo rpool/git_repository
+# pfexec zfs set compression=on rpool/git_repository
+#
+# 
+# Solaris10 ZFS
+#
+# zpool create rpool c0t1d0s2
+# lucreate -c be.sol10 -n be.zfs -p rpool
+# lucreate -c be.zfs -n be.zfs1 -p rpool
+# zpool attach -f rpool c0t0d0s2
+# installboot -F zfs /usr/platform/sun4u/lib/fs/zfs/bootblk /dev/rdsk/c0t0d0s2
+# zpool status (gives status of resilver)
+# 
+#
+# ZONE WORK
+# svcadm enable svc:/system/pools:default
+# svcadm enable svc:/system/pools/dynamic:default
+#
+# BEADM Work
+# 
+# pfexec beadm create -d 'DEV 125' -o compression=on DEV_125
+# pfexec beadm create -d 'sol11_exp_01302011' -o compression=on -o dedup=on sol11_exp_01302011
+# pfexec beadm activate sol11_exp_01302011
+# pfexec pkg image-update -v --be-name OSOL_DEV_125
+
+# Create a copy of the OS on a new disk
+# pfexec zpool create rpool_36g c3t0d0s0
+# pfexec zfs set dedup=on rpool_36g
+# pfexec zfs set compression=on rpool_36g
+# timex pfexec beadm create -d 'rpool_36g_0205201' -p rpool_36g rpool_36g_0205201
+
+# To attach a 2nd disk as mirror of OS disk
+# pfexec zpool attach rpool c2t0d0s0 c2t1d0s0
+#
+# Setup Fast reboot on SPARC
+# pfexec svccfg -s system/boot-config:default
+# setprop config/fastreboot_default=true
+# pfexec svcadm refresh svc:/system/boot-config:default
+#
+
+## GIT WORK
+#
+# git config --global user.name "Larry Mascarenhas"
+# git config --global user.email "LMascare@verizon.net"
+# git config --global color.ui "auto"
+# git config --global alias.co "checkout"
+# git config --global merge.tool "meld"
+# git config --global --list
+#
+## Create a Global GIT repository
+# GIT_DIR=/u/git_repo ; export GIT_DIR
+# mkdir lm.git
+# cd /u/git_repo/lm.git
+# git init --bare --shared=group
+# 
+# Setup ssh acccess.
+# git remote add lm ssh://lmascare@lmascare-laptop/u/git_repo/lm.git
+# git push lm master
+#
+
+# Create a repository for a project
+# mkdir misc/nbu
+# cd misc/nbu
+# git init
+# cp / create a file eg nbu_health.pl
+# git add nbu_health.pl
+# git commit -m "Message" <filename>
+# git status 
+# git log -l
+# git branch RB_1.0 master
+# After editing 'git commit -a'
+# git checkout RB_1.0
+# After editing 'git commit -a'
+# Tag for release 'git tag 1.0 RB_1.0
+# git tag
+# 
+# To commit the changes in RB_1.0 to master
+# git checkout master
+# git rebase RB_1.0
+# git branch -d RB_1.0 'to delete the branch'
+#
+# git mv source destination
+#
+# git checkout -b alternate master
+#
+# git checkout master
+# git merge alternate
+#
+# pfexec pkg install SUNWmeld@1.1.5.1,5.11-0.111
+
+
+##
+# Automated Installer Work
+#
+# pfexec zfs create rpool/export/aiimages
+# pfexec zfs set quota=4g rpool/export/aiimages
+#
+# pfexec zfs create rpool/export/aiserver
+# pfexec zfs set quota=4g rpool/export/aiserver
+# pfexec mkdir /export/aiserver/sparc_0906
+# pfexec mkdir /export/aiserver/x86_0906
+#
+# 
+# On oxygen
+#
+# Create the 'aiimages' and 'aiserver' filesystems
+# Establishing quotas
+#
+# pfexec zfs create rpool1/aiimages
+# pfexec zfs create rpool1/aiserver
+# pfexec zfs set mountpoint=/export/aiimages rpool1/aiimages
+# pfexec zfs set mountpoint=/export/aiserver rpool1/aiserver
+# pfexec zfs set quota=4.0g rpool1/aiserver
+# pfexec zfs set quota=4.0g rpool1/aiimages
+#
+# Copying the AI image
+#
+# timex scp osol-dev-131-ai-sparc.iso oxygen:/export/aiimages/sparc_build131/.
+# timex scp osol-dev-131-ai-x86.iso oxygen:/export/aiimages/x86_build131/.
+
+
+#################
+# From Solaris11 Express...enable Multicast DNS
+# pfexec svcadm enable svc:/network/dns/multicast:default
+
+# Solaris11 Express. When creating a service.. the application name MUST
+# begin with an underscore
+#
+# pfexec installadm create-service -n _sol11_exp -i 172.31.251.200 -c 5 \
+# -s /export/aiimages/solari11_express/sol-11-exp-201011-ai-sparc.iso \
+# /export/aiserver/sol11_exp
+#
+# Nitrogen - v210
+# pfexec installadm create-client -e 0:3:ba:a6:ee:1b -t /export/aiserver/sol11_exp -n _sol11_exp
+# 
+# IMPORTANT
+# To boot the SPARC system...
+#
+# boot net:dhcp - install install_debug
+# default password is solaris
+#
+# Create a custom manifest
+# cp /export/aiserver/sol11_exp/auto_install/default.xml $HOME/misc/kellynoah.xml
+# vi kellynoah.xml
+# pfexec installadm add-manifest kellynoah.xml -n sol11_exp
+#
+################
+
+# pfexec installadm create-service -n sparc_0906 -i 172.31.251.101 -c 5 -s 
+# /export/aiimages/osol-0906-ai-sparc.iso /export/aiserver/sparc_0906
+# 
+# pfexec installadm create-service -n x86_0906 -i 172.31.251.110 -c 5 -s 
+# /export/aiimages/osol-0906-ai-x86.iso /export/aiserver/x86_0906
+# 
+# pfexec installadm create-client -e <mac-addr> -t /export/aiserver/sparc_0906 -n
+# sparc_0906
+#
+# pfexec installadm create-client -e <mac-addr> -t /export/aiserver/x86_0906 -n
+# x86_0906
+#
+# svccfg -s svc:/system/install/server:default listpg
+# svccfg -s svc:/system/install/server:default listprop AIsparc_0906
+# svccfg -s svc:/system/install/server:default listprop AIx86_0906
+#
+
+# PKG Work
+# pkg publisher
+# pfexec pkg set-publisher -O http://pkg.opensolaris.org/dev opensolarisdev
+# pfexec pkg set-publisher -e -P opensolarisdev
+# pfexec pkg set-publisher -d opensolaris.org
+
+# pfexec pkg unset-publisher opensolarisdev
+# pfexec pkg set-publisher -O http://pkg.opensolaris.org/release opensolaris.org
+# pfexec pkg set-publisher -e -P opensolaris.org
+#
+# pfexec pkgsend -s file:///u/pkg_depot/repository create-repository
+
+##
+# IPS Package Repository
+#
+# NEW FEATURE...REFRESH the repository
+# pfexec pkgrepo refresh -s /u/ips_repo/sol11_express
+#
+# Get the support repo.
+#
+# Create dir for REPO
+#
+# pfexec zfs create rpool1/ips_repo
+# pfexec zfs set mountpoint=/u/ips_repo rpool1/ips_repo
+# pfexec zfs set quota=5G rpool1/ips_repo
+# pfexec zfs set dedup=on rpool1/ips_repo
+# pfexec mkdir -p /u/ips_repo/osol/sparc
+# pfexec mkdir -p /u/ips_repo/osol/x86
+# pfexec rsync -av pkg.opensolaris.org::osol_dev_files build_134
+
+# Extracting the ISO image to the PKG repository
+# 7z e sol-11-ea-repo-full-iso-a.zip
+# 7z e sol-11-ea-repo-full-iso-b.zip
+# cat sol-11-ea-repo-full-iso-a sol-11-ea-repo-full-iso-b > sol-11-ea-repo-full-iso
+# pfexec lofiadm -a ~/misc/ftp/sources/sol-11-ea-repo-full-iso
+#   Gives you /dev/lofi/1
+# pfexec mount -F hsfs -o ro /dev/lofi/1 /mnt
+# cd /mnt
+# rsync /mnt/repo/ /u/ips_repo/sol11_bld173
+# umount /mnt
+# lofiadm -d /dev/lofi/1
+
+# Default repo should be the sysae
+# Additional repo is the NBU one
+#
+# Manual pkg.depotd
+#
+# pfexec /usr/lib/pkg.depotd -d /u/ips_repo -p 9000 \
+# --set-property publisher.prefix=nbu \
+# --set-property feed.name='Netbackup Toolkit' \
+# --set-property repository.maintainer=lmascarenhas@bloomberg.com \
+# --set-property repository.detailed_url=http://oxygen:9000
+#
+# Create the pkg repository using pkgsend
+# SYSAE
+# pfexec pkgsend -s file:///u/ips_repo/sysae create-repository \
+#  --set-property publisher.prefix=admin  \
+#  --set-property feed.name='Admin Toolkit' \
+#  --set-property repository.name='SysAdmin Utilities' \
+#  --set-property repository.description='A Collection of SysAdmin Utilities'  \
+#  --set-property repository.detailed_url=http://oxygen.kellynoah.com:9000 \
+#  --set-property repository.maintainer_url=http://oxygen.kellynoah.com:9000 \
+#  --set-property repository.maintainer='Larry Mascarenhas <lmascare@kellynoah.com>'
+#
+# Solaris11 uses pkgrepo
+#
+# pfexec pkgrepo create /u/ips_repo/sysae
+# pfexec pkgrepo set -s /u/ips_repo/sysae publisher/prefix=sysae
+# pkgrepo set -s /u/ips_repo/sysae repository/name='SysAdmin Utilities'
+# pfexec pkgrepo set -s /u/ips_repo/sysae repository/detailed_url=http://oxygen.kellynoah.com:9002
+# pfexec pkgrepo set -s /u/ips_repo/sysae repository/maintainer='Larry Mascarenhas <lmascare@kellynoah.com>'
+# pfexec pkgrepo set -s /u/ips_repo/sysae repository/description='A Collection of SysAdmin Utilities'
+# 
+#  pfexec pkgrepo refresh -s /u/ips_repo/sysae
+
+#
+# NBU
+# pfexec pkgsend -s file:///u/ips_repo/nbu create-repository \
+#  --set-property publisher.prefix=nbu  \
+#  --set-property feed.name='Netbackup Toolkit' \
+#  --set-property repository.name='Netbackup SYSAE Utilities' \
+#  --set-property repository.description='A Collection of SysAdmin Utilities for Netbackup'  \
+#  --set-property repository.detailed_url=http://oxygen.kellynoah.com:9001/nbu \
+#  --set-property repository.maintainer_url=http://oxygen.kellynoah.com:9001/nbu \
+#  --set-property repository.maintainer='Larry Mascarenhas <lmascare@kellynoah.com>'
+
+#
+# Enable the service
+# SYSAE
+# pfexec svccfg -s svc:/application/pkg/server listprop|less
+# pfexec svccfg -s svc:/application/pkg/server setprop pkg/inst_root = /u/ips_repo/sysae
+# pfexec svccfg -s svc:/application/pkg/server setprop pkg/port = 9002
+# pfexec svccfg -s svc:/application/pkg/server setprop pkg/log_access=/u/ips_repo/logs/log_access
+# pfexec svccfg -s svc:/application/pkg/server setprop pkg/log_errors=/u/ips_repo/logs/log_errors
+# pfexec svcadm refresh application/pkg/server
+# pfexec svcadm restart application/pkg/server
+# pfexec svcadm enable  application/pkg/server
+#
+# NBU
+# # Setup SMF for NBU
+# pfexec svccfg -s application/pkg/server
+# add nbu
+# select nbu
+# addpg pkg application
+# setprop pkg/port = count: 9001
+# setprop pkg/inst_root = astring: "/u/ips_repo/nbu"
+# setprop pkg/log_access = astring: "/u/ips_repo/logs/log_access"
+# setprop pkg/log_errors = astring: "/u/ips_repo/logs/log_errors"
+# exit
+# pfexec svcadm enable  application/pkg/server:nbu
+
+# Solaris11 Express Repository
+# pfexec svccfg -s application/pkg/server
+# add solaris
+# select solaris
+# addpg pkg application
+# setprop pkg/port = count: 9000
+# setprop pkg/inst_root = astring: "/u/ips_repo/sol11_express"
+# setprop pkg/log_access = astring: "/u/ips_repo/sol11_express/logs/log_access"
+# setprop pkg/log_errors = astring: "/u/ips_repo/sol11_express/logs/log_errors"
+# exit
+# pfexec svcadm enable application/pkg/server:solaris
+
+# Solaris11 Build 173 Repository
+# pfexec svccfg -s application/pkg/server
+# add sol11_bld173
+# select sol11_bld173
+# addpg pkg application
+# setprop pkg/port = count: 9003
+# setprop pkg/inst_root = astring: "/u/ips_repo/sol11_bld173"
+# setprop pkg/log_access = astring: "/u/ips_repo/sol11_bld173/logs/log_access"
+# setprop pkg/log_errors = astring: "/u/ips_repo/sol11_bld173/logs/log_errors"
+# exit
+# pfexec svcadm enable application/pkg/server:sol11_bld173
+# PackageManager Gui
+#
+#/usr/lib/pm-launch packagemanager
+#
+# Adding a pkg
+#
+# You could also use
+# export PKG_REPO=http://localhost:10000/
+# eval `pkgsend -s http://oxygen:9000 open nbu_toolkit@1.0-1`
+# pkgsend -s http://oxygen:9000 add dir mode=555 owner=root group=other path=/usr/openv/nbu_admin/bin
+# pkgsend -s http://oxygen:9000 add dir mode=555 owner=root group=other path=/usr/openv/nbu_admin/etc
+# pkgsend -s http://oxygen:9000 add file nbu_health.pm mode=444 owner=root group=other path=/usr/openv/nbu_admin/etc/nbu_health.pm
+# pkgsend -s http://oxygen:9000 add file nbu_health.pl mode=555 owner=root group=other path=/usr/openv/nbu_admin/bin/nbu_health.pl
+# pkgsend -s http://oxygen:9000 add set name=description value="NBU Toolkit"
+# pkgsend -s http://oxygen:9000 close
+
+#
+# Adding a mirror
+# pfexec svccfg import /var/svc/manifest/application/pkg-server.xml
+# pfexec /usr/lib/pkg.depotd -d /u/pkg_depot/ -p 8009
+# pfexec svccfg -s pkg/server:mirror
+# add mirror
+# select mirror
+# addpg pkg application
+# setprop pkg/inst_root = astring: "/u/pkg_depot"
+# setprop pkg/log_access=/var/adm/pkg_access
+# setprop pkg/log_errors=/var/adm/pkg_errors
+# exit
+#
+# pfexec zfs set atime=off rpool/pkg_depot
+# pfexec pkg set-publisher -O http://pkg.opensolaris.org/release opensolaris.org
+# pfexec pkg set-publisher -e opensolaris.org
+# pfexec pkg image-create -a os=http://localhost:8009 /export/aiimages/mirror 
+# 
+##
+#
+# SSH keys
+# ssh-keygen -C "lmascare@oxygen" -f ~/.ssh/lmascare-os.dsa -t dsa
+# cp lmascare-os.dsa id_dsa
+# cp lmascare-os.dsa.pub id_dsa.pub
+#
+#
+# CROSSBOW
+#
+# dladm show-link
+# pfexec dladm create-vnic -l bge0 -p maxbw=100M,priority=high radium0
+# pfexec dladm delete-vnic radium0
+# pfexec ifconfig radium0 plumb up 
+# pfexec dladm show-linkprop -p maxbw,priority radium0
+# pfexec dladm set-linkprop -p priority=low radium0
+# 
+#
+# Create an etherstub
+# pfexec dladm create-etherstub stub0
+# pfexec dladm create-vnic -l stub0 helium0 
+# pfexec ifconfig helium0 plumb up
+# pfexec ifconfig helium0 172.31.251.61 netmask 255.255.255.0 broadcast 172.31.251.0
+#
+#
+# ZONES
+#
+# IMP. If you create zones and then you run a beadm create to create a copy of the OS
+# it also creates a copy of the zone. If you want to delete a ZONE, you then have to
+# delete all the copies of the OS before you can destroy the zfs datasets for the zones
+#
+#
+# pfexec zfs create rpool/export/home/zones
+# pfexec zfs set mountpoint=/export/zones rpool/export/zones
+# pfexec zfs set compression=on rpool/export/zones
+# pfexec zfs set dedup=on rpool/export/zones
+# pfexec zfs set quota=4g rpool/export/zones
+# 
+# pfexec zonecfg -z zclone
+#  create
+#  set zonepath=/export/zones/zclone
+#  set ip-type=exclusive
+#  verify
+#  commit
+#  exit
+#
+# Printer Administration
+#
+# pfexec lpadmin -x HP_C4780 
+# sleep 1
+
+#
+# Printer Administration
+#
+# pfexec lpadmin -x HP_C4780 
+
+#pfexec lpadmin -p HP_C4780 -v /dev/null -m netstandard_foomatic \
+#      -o dest=hpc4780.kellynoah.com:9100 \
+#      -o banner=never -D 'HP Photosmart C4780' \
+#      -n /etc/lp/ppd/hp-photosmart_c4700_series-hpijs.ppd \
+#      -o protocol=tcp -I postscript -T PS
+#pfexec lpadmin -d HP_C4780
+#pfexec enable HP_C4780
+#pfexec accept HP_C4780
+
+
+# OpenSolaris Standard Support
+#
+How to Install this OpenSolaris standard support Certificate
+
+   1. Download the provided key and certificate files, called OpenSolaris_standard_support.key.pem and OpenSolaris_standard_support.certificate.pem using the buttons above. Don't worry if you get logged out, or lose the files. You can come back to this site later and re-download them. We'll assume that you downloaded these files into your Desktop folder, ~/Desktop/.
+   2. Use the following comands to make a directory inside of /var/pkg to store the key and certificate, and copy the key and certificate into this directory. The key files are kept by reference, so if the files become inaccessible to the packaging system, you will encounter errors. Here is how to do it:
+
+      	$ pfexec mkdir -m 0755 -p /var/pkg/ssl
+      	$ pfexec cp -i ~/Desktop/OpenSolaris_standard_support.key.pem /var/pkg/ssl
+      	$ pfexec cp -i ~/Desktop/OpenSolaris_standard_support.certificate.pem /var/pkg/ssl
+      		
+
+   3. Add the publisher:
+
+      	$ pfexec pkg set-authority \
+                  -k /var/pkg/ssl/OpenSolaris_standard_support.key.pem \
+                  -c /var/pkg/ssl/OpenSolaris_standard_support.certificate.pem \
+                  -O https://pkg.sun.com/opensolaris/support/ opensolaris.org
+      	
+
+   4. To see the packages supplied by this authority, try:
+
+      	$ pkg list -a 'pkg://opensolaris.org/*'
+      	
+
+      If you use the Package Manager graphical application, you will be able to locate the newly discovered packages when you restart Package Manager.
+
+
+##
+# Opensolaris Extras Support
+#
+How to Install this OpenSolaris extras Certificate
+
+   1. Download the provided key and certificate files, called OpenSolaris_extras.key.pem and OpenSolaris_extras.certificate.pem using the buttons above. Don't worry if you get logged out, or lose the files. You can come back to this site later and re-download them. We'll assume that you downloaded these files into your Desktop folder, ~/Desktop/.
+   2. Use the following comands to make a directory inside of /var/pkg to store the key and certificate, and copy the key and certificate into this directory. The key files are kept by reference, so if the files become inaccessible to the packaging system, you will encounter errors. Here is how to do it:
+
+      	$ pfexec mkdir -m 0755 -p /var/pkg/ssl
+      	$ pfexec cp -i ~/Desktop/OpenSolaris_extras.key.pem /var/pkg/ssl
+      	$ pfexec cp -i ~/Desktop/OpenSolaris_extras.certificate.pem /var/pkg/ssl
+      		
+
+   3. Add the publisher:
+
+      	$ pfexec pkg set-authority \
+                  -k /var/pkg/ssl/OpenSolaris_extras.key.pem \
+                  -c /var/pkg/ssl/OpenSolaris_extras.certificate.pem \
+                  -O https://pkg.sun.com/opensolaris/extra/ extra
+      	
+
+   4. To see the packages supplied by this authority, try:
+
+      	$ pkg list -a 'pkg://extra/*'
+      	
+
+      If you use the Package Manager graphical application, you will be able to locate the newly discovered packages when you restart Package Manager.
+
+## Solaris11 Support Certificates
+
+How to Install this Oracle Solaris 11 Express Support Certificate
+
+   1. Download the provided key and certificate files, called Oracle_Solaris_11_Express_Support.key.pem and Oracle_Solaris_11_Express_Support.certificate.pem using the buttons above. Don't worry if you get logged out, or lose the files. You can come back to this site later and re-download them. We'll assume that you downloaded these files into your Desktop folder, ~/Desktop/.
+   2. Use the following comands to make a directory inside of /var/pkg to store the key and certificate, and copy the key and certificate into this directory. The key files are kept by reference, so if the files become inaccessible to the packaging system, you will encounter errors. Here is how to do it:
+
+      	$ sudo mkdir -m 0755 -p /var/pkg/ssl
+      	$ sudo cp -i ~/Desktop/Oracle_Solaris_11_Express_Support.key.pem /var/pkg/ssl
+
+      	$ sudo cp -i ~/Desktop/Oracle_Solaris_11_Express_Support.certificate.pem /var/pkg/ssl
+      	
+
+   3. Add the publisher:
+
+      	$ sudo pkg set-publisher \
+             	    -k /var/pkg/ssl/Oracle_Solaris_11_Express_Support.key.pem \
+             	    -c /var/pkg/ssl/Oracle_Solaris_11_Express_Support.certificate.pem \
+             	    -O https://pkg.oracle.com/solaris/support/ solaris
+      	
+
+   4. Check your publisher settings, there should be no unrelated mirrors set up. To check for any set up mirrors invoke the following command:
+
+      	$ pkg publisher solaris | grep Mirror
+      	
+
+      If the output is empty you are all set. If not remove unrelated mirrors by running:
+
+      	$ sudo pkg set-publisher -M http://mirror1.x.com -M http://mirror2.y.com ... solaris
+      	
+      	
+
+   5. To see the packages supplied by this publisher, try:
+
+      	$ pkg list -a 'pkg://solaris/*'
+
+      	
+
+      If you use the Package Manager graphical application, you will be able to locate the newly discovered packages when you restart Package Manager.
+
+# Support repo
+#
+# Retreive certificate from http://pkg-register.oracle.com
+#
+# First updated firefox with the pkcs12 cert..
+# 
+# pfexec openssl pkcs12 -in /var/pkg/ssl/Oracle_Solaris_11_Express_Support.certificate.pem 
+# -inkey /var/pkg/ssl/Oracle_Solaris_11_Express_Support.key.pem -export > /tmp/Oracle_Solaris_11_Express_support.certificate.pkcs12
+# Password --> Oracle Support
+# 
+# Edit -> Preferences -> Advanced -> Encryption -> View Certificates 
+# -> Your Certificates -> Import -> choose file 
+# (/tmp/Oracle_Solaris_11_Express_support.certificate.pkcs12) -> Choose Token Dialog -> Software Security Devices -> enter password.
+#
+#
+# Now update the repo
+#
+# pfexec pkgrecv -s https://pkg.oracle.com/solaris/support \
+#  -d /u/ips_repo/sol11_express \
+#  --key /var/pkg/ssl/Oracle_Solaris_11_Express_Support.key.pem \
+#  --cert /var/pkg/ssl/Oracle_Solaris_11_Express_Support.certificate.pem 
+
+# Once completed, refresh the repository
+#
+
+## CHROOTED ENV
+#
+# *** IMPORTANT ***
+#
+# Running a NAME SERVER in a CHROOTED ENV
+# Preference is not to CHROOT the env as upgrades do NOT
+# upgrade the chrooted env
+# 
+# pfexec zfs create rpool/export/chroot
+# zfs get all|egrep chroot|less        ## Ensure compression is on
+# pfexec mkdir /export/chroot/domain
+# cd /export/chroot/domain 
+# pfexec mkdir var ; pfexec chmod 770 var ; pfexec chgrp named var
+# cd var ; pfexec mkdir named run ; chgrp named named run ; pfexec chmod 770 named run
+#
+# pfexec scp cobalt:/usr/bin/noshell /usr/bin/noshell
+# pfexec groupadd -g 53 named
+# pfexec useradd -A solaris.smf.manage.bind -c 'DNS Administrator' -d /export/chroot/domain -u 53 
+# -s /usr/bin/noshell -g named named 
+# 
+# Now copy the zone files to /export/chroot/named/var/named
+# Include the named.conf and rndc.conf as well
+# 
+# cd /export/chroot/domain
+# pfexec mkdir dev ; pfexec chmod 750 dev ; pfexec chgrp named dev 
+# cd dev;
+# pfexec  mknod poll c 45 0 ; pfexec chmod 666 poll
+
+# Now configure the name server properties to use the chrooted env
+# pfexec svccfg -s svc:/network/dns/server:default
+# setprop options/configuration_file=/var/named/named.conf
+# setprop options/chroot_dir=/export/chroot/domain
+# setprop start/user=named
+# setprop start/group=named
+# exit
+# pfexec svcadm refresh svc:/network/dns/server:default
+# pfexec svcadm enable svc:/network/dns/server:default
+#
+# To restart named run 'dns'
+# pfexec scp root@cobalt:/usr/local/bin/dns /usr/local/bin/dns
+# Contents --> /usr/sbin/rndc -c /export/chroot/domain/var/named/rndc.conf reload
+# 
+# Use dig/nslookup to ensure zone entries are correct
+#
+# To check config file 
+# pfexec named-checkconf -z -t /export/chroot/domain /var/named/named.conf
+# pfexec named-checkconf -t /export/chroot/domain /var/named/named.conf
+# 
+
+# Additional URLs
+# http://www.oracle.com/technetwork/systems/containers/index-jsp-140778.html 
+#
+# Reverse Proxying all the Repos behind 1 Apache Web Server
+# 
+# /var/installadm/ai-webserver/ai-httpd.conf
+# ProxyRequests On
+# ProxyPass /sysae/ http://oxygen.kellynoah.com:9002/
+# ProxyPassReverse /sysae/ http://oxygen.kellynoah.com:9002/
+
+# ProxyPass /solaris/ http://oxygen.kellynoah.com:9000/
+# ProxyPassReverse /solaris/ http://oxygen.kellynoah.com:9000/
+# 
+# pkgbuild work
+# wget -N http://tinyurl.com/bootstrap-sfe-latest
+# pkgtool --dumprc >> ~/.pkgtoolrc
+# zfs create -o mountpoint=/u/sources -o quota=10G rpool/sources
+# pkgtool download pkgbuild.spec

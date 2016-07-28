@@ -1,0 +1,58 @@
+#
+# Setup requirements
+#
+# Create 'chef' user account
+# Solaris
+
+# zfs create rpool/users
+# zfs set mountpoint=/users rpool/users
+# zfs create rpool/u/chef-repo
+# zfs set mountpoint=/u/chef-repo rpool/u/chef-repo
+# chown 770 /u/chef-repo
+# chgrp staff /u/chef-repo
+
+# groupadd -g 900 chef
+# useradd -u 900 -g 900 -d /users/chef -s /bin/bash \
+# -c 'CHEF Automation' -m chef
+# Passwd --> Finally!
+
+# Ubuntu
+# sudo mkdir /users
+# sudo groupadd -g 900 chef
+# sudo useradd -u 900 -g 900 -d /users/chef -s /bin/bash \
+# -c 'CHEF Automation' -m chef
+# Passwd --> Finally!
+
+# Install GIT in ubuntu
+# sudo apt install git
+# sudo mkdir -p /u/chef-repo
+# sudo chmod 770 /u/chef-repo
+# sudo chgrp staff /u/chef-repo
+
+# download OpsCode chef repo
+# wget http://github.com/opscode/chef-repo/tarball/master
+# extract to /u/chef-repo
+# mv chef-chef-repo-605eeda opscode-chef-repo/
+
+# URL where clients will connect
+# Stored in /etc/chef/client.rb as chef_server_url
+
+#
+# Referenced URL is http://gettingstartedwithchef.com
+#
+# Copy a repo from GitHub
+# wget https://codeload.github.com/chef/chef-repo/legacy.tar.gz/master
+# tar -zxf master
+# mv chef-repo-* chef-repo
+# cd chef-repo
+
+# Tell knife where the cookbooks should reside
+# mkdir .chef
+# echo "cookbook_path [ '/export/home/lmascare/misc/chef/chef-repo/cookbooks' ]" > .chef/knife.rb
+# knife cookbook create phapp
+
+# create a solo.rb with
+# file_cache_path "/u/chef/cache"
+# cookbook_path   "/u/chef/chef-repo/cookbooks"
+
+

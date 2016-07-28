@@ -1,0 +1,5 @@
+- set swap to be size of RAM
+  zfs set volsize=16Gb rpool/swap
+
+- set zfs_arc_max=
+- Download solaris.x64_12102_database 1 & 2.zip to /var/tmp/downloads
