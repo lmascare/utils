@@ -1,0 +1,32 @@
+set textwidth=88
+set showmode
+set showcmd
+set ruler
+set number
+
+" Set Highlighed and Incremental Search
+set hlsearch
+set incsearch
+set background=dark
+:colorscheme desert
+
+if has('syntax')
+	syntax enable
+   syntax on
+endif
+
+set nowrap
+set shiftwidth=2
+set shiftround
+set tabstop=3
+set expandtab
+filetype indent on
+filetype on
+
+autocmd FileType perl set smartindent
+autocmd FileType sh set smartindent
+autocmd FileType c,cpp set cindent
+
+let g:is_kornshell = 1
+let Tlist_Sort_Type = 'name'
+set mouse=a
