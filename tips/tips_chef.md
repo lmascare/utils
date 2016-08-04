@@ -1,6 +1,6 @@
 * Download chef-server from chef.io
 
-**Use the link to setup the chef-server
+**Use the link to setup the chef-server**
 
 https://docs.chef.io/release/server_12-6/install_server.html#standalone
 
@@ -10,7 +10,7 @@ https://docs.chef.io/release/server_12-6/install_server.html#standalone
 * sudo chef-server-ctl org-create larrymasc 'Larry Mascarenhas' --association_user chef --filename larrymasc-validator.pem
    * NOTE: Uppercase in org name is not supported
 
-**Install additional packages from https://packages.chef.io
+**Install additional packages from https://packages.chef.io**
 * sudo chef-server-ctl install chef-manage
 * sudo chef-server-ctl reconfigure
 * sudo chef-manage-ctl reconfigure --accept-license
