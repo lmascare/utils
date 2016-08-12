@@ -15,4 +15,11 @@ https://docs.chef.io/release/server_12-6/install_server.html#standalone
 * sudo chef-server-ctl reconfigure
 * sudo chef-manage-ctl reconfigure --accept-license
 
-* Next is chef Push Jobs
+**Install the Opscode Jobs Push Server**
+**It allows you to push jobs independant of the chef-client run**
+* Download from https://downloads.chef.io/push-jobs-server/ubuntu/
+* sudo dpkg -i opscode-push-jobs-server_1.1.6-1_amd64.deb
+* sudo chef-server-ctl install opscode-push-jobs-server
+* sudo chef-server-ctl reconfigure
+* sudo opscode-push-jobs-server-ctl reconfigure
+* 
