@@ -28,8 +28,10 @@
 * 4 stages of test kitchen
   1. kitchen create
   2. kitchen converge
-  3, kitchen verify
+  3. kitchen verify
   4. kitchen destroy
+
+* Test are in cookbooks/<cookbook>/test/integration/default/serverspec/default_spec.sh
 
 * Download chef-server from chef.io
 
