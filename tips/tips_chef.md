@@ -27,9 +27,9 @@
 ## Test Kitchen
 * 4 stages of test kitchen
   1. kitchen create
-     kitchen converge
-     kitchen verify
-     kitchen destroy
+  2. kitchen converge
+  3, kitchen verify
+  4. kitchen destroy
 
 * Download chef-server from chef.io
 
