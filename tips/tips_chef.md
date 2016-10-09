@@ -1,3 +1,12 @@
+* chef-apply <file.rb> 
+  Run the resources in file.rb
+
+* mkdir chef/cookbooks
+* cd chef/cookbooks
+* chef generate cookbooks workstation
+* chef generate cookbooks apache
+* chef generate recipe apache server
+
 * Download chef-server from chef.io
 
 **Use the link to setup the chef-server**
