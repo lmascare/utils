@@ -1,11 +1,29 @@
 * chef-apply <file.rb> 
-  Run the resources in file.rb
+  Run the resources in file.rb. But it doesn't know how to apply cookbooks.
+  That's done by chef-client
 
 * mkdir chef/cookbooks
 * cd chef/cookbooks
 * chef generate cookbooks workstation
 * chef generate cookbooks apache
 * chef generate recipe apache server
+
+* Run chef-client in --local-mode
+  __cd cookbooks directory__
+  __sudo chef-client --local-mode -r "recipe[apache::server]"__
+
+* Run multiple recipes
+  __sudo chef-client --local-mode -r "recipe[workstation::setup],recipe[apache::server]"__
+
+* Run the default recipe from a cookbook
+  __sudo chef-client --local-mode -r "recipe[COOKBOOK(::default)]"__
+
+* Include recipe include_recipe
+  **include_recipe 'apache::server'**
+
+* Under cookbooks/<cookbook>/recipes/default.rb you can include_recipe
+
+
 
 * Download chef-server from chef.io
 
