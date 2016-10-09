@@ -24,6 +24,12 @@
 * Under cookbooks/<cookbook>/recipes/default.rb you can include_recipe
 
 
+## Test Kitchen
+* 4 stages of test kitchen
+  1. kitchen create
+     kitchen converge
+     kitchen verify
+     kitchen destroy
 
 * Download chef-server from chef.io
 
