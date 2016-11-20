@@ -10,3 +10,5 @@ my_list[::-1]
 my_dict = {"Jessica": "cherries", "Tom": "bananas", "Adam": "apples"}
 my_dict["Jessica"]
 my_dict["Jessioca"] = "Pomegranate"
+
+sudo apt-get install python-matplotlib
