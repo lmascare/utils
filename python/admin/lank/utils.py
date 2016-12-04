@@ -2,14 +2,20 @@
 This Module contains commonly used utilities. It allows standardization
 
 List of functions available in this module
- - logit
- - runcmd
+ - logit  -- Complete
+ - runcmd -- Complete
  -
+
+Todo
+ - 
 '''
 
 import logging
 import sys
 import os
+
+import subprocess
+import shlex
 
 def init():
     global logdir
@@ -86,3 +92,26 @@ def logit(message,level):
                         )
     logging.log(plevel,message)
     #print("From print : {} : {}".format(message,level))
+
+''' 
+Function runcmd
+The purpose of this function is to have a standard way of
+calling OS commands. The STDIN, STDOUT and STDERR are correctly decoded
+
+Examples:
+    utils.runcmd('ps -eaf')
+    utils.runcmd('ifconfig -a')
+'''
+def runcmd(os_cmd):
+    # We use shlex to split the command supplied into tokens for Popen
+    args = shlex.split(os_cmd)
+    # print(os_cmd, args)
+    p = subprocess.Popen(args,
+                         stdout = subprocess.PIPE,
+                         stdin  = subprocess.PIPE,
+                         stderr = subprocess.PIPE
+                         )
+    stdout,stderr = p.communicate()
+    out = stdout.decode('utf-8')
+    err = stdout.decode('utf-8')
+    print(out,err)

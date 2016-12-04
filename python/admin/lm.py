@@ -16,6 +16,8 @@ def main():
     #utils.logit("hello","info")
     #utils.logit("hello","debug")
     
+    utils.runcmd('ps -eaf')
+    utils.runcmd('ifconfig -a')
     
 
 if __name__ == "__main__":
