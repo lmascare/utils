@@ -9,6 +9,36 @@ my_list[::-1]
 
 my_dict = {"Jessica": "cherries", "Tom": "bananas", "Adam": "apples"}
 my_dict["Jessica"]
-my_dict["Jessioca"] = "Pomegranate"
+my_dict["Jessica"] = "Pomegranate"
 
 sudo apt-get install python-matplotlib
+
+# Print formatting
+#
+# OLD Style
+    print ("Logfile is %s/%s" % (logdir, logfile) )
+
+# NEW Style
+    print ("Logfile is {}/{}".format(logdir, logfile) )
+
+# To run os commands, use the subprocess module
+# import subprocess
+# subprocess.call(args, *, stdin=None, stdout=None, stderr=None, shell=False)
+# subprocess.call(["ls","-l"])
+#
+# for pipes, use Popen.communicate() method
+
+# From Python cookbook
+   out_bytes = subprocess.check_output(['netstat', '-an'])
+except subprocess.CalledProcessError as e:
+   out_bytes = e.output # Output generated before error
+   code = e.returncode  # Return code
+
+# To redirect STDERR to STDOUT
+out_bytes = subprocess.check_output(['netstat','-an'],
+                                    stderr = subprocess.STDOUT)
+
+# To execute a command with a timeout
+    out_bytes = subprocess.check_output(['netstat','-an'], timeout = 3)
+except subprocess.TimeoutExpired as e:
+
