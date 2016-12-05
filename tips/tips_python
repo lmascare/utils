@@ -1,3 +1,33 @@
+#
+# Install setuptools
+# Download setuptools tarball.
+# python3 setup.py install
+
+# Install netifaces. This requires python3-dev
+# python3 setup.py install
+#
+# To get the interfaces
+# python3
+#  import netifaces
+#  netifaces.interfaces()
+#  ['lo', 'enp0s3']
+#
+#  >>> netifaces.ifaddresses('enp0s3')
+{17: [{'addr': '08:00:27:3f:2e:61', 'broadcast': 'ff:ff:ff:ff:ff:ff'}], \
+  2: [{'addr': '10.0.2.15', 'netmask': '255.255.255.0', 'broadcast': '10.0.2.255'}], \
+ 10: [{'addr': 'fe80::856c:a7d7:5d70:9ec4%enp0s3', 'netmask': 'ffff:ffff:ffff:ffff::/64'}]}
+>>> ipaddr = addr[netifaces.AF_INET]
+>>> ipaddr
+[{'addr': '10.0.2.15', 'broadcast': '10.0.2.255', 'netmask': '255.255.255.0'}]
+>>> ipaddr[0]
+{'addr': '10.0.2.15', 'broadcast': '10.0.2.255', 'netmask': '255.255.255.0'}
+>>> ipaddr[0]['addr']
+'10.0.2.15'
+>>> netifaces.gateways()
+{'default': {2: ('10.0.2.2', 'enp0s3')}, 2: [('10.0.2.2', 'enp0s3', True)]}
+>>>
+#
+#
 # Lists & dictionaries
 my_list = ["cherries", "bananas", "apples"]
 my_list[0]
