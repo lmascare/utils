@@ -1,10 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 import logging
+import sys
+import os
+
+scriptname = os.path.basename(sys.argv[0])
+print(scriptname)
 
 LOG_FILENAME = '/tmp/example.log'
 logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG,
-    format='%(asctime)s:%(levelname)-8s:%(message)s',
+        format='%(asctime)s:%(levelname)-8s:%(filename)s:%(process)d:%(message)s',
                     datefmt='%m-%d-%Y %H:%M:%S'
                     )
 logging.debug('This DEBUG message should go to the log file')
@@ -12,7 +17,7 @@ logging.info('This INFO message should go to the log file')
 
 # create logger
 logger = logging.getLogger("simple_example")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()
