@@ -41,6 +41,10 @@ my_dict = {"Jessica": "cherries", "Tom": "bananas", "Adam": "apples"}
 my_dict["Jessica"]
 my_dict["Jessica"] = "Pomegranate"
 
+# Using lists or sets
+# Lists --> You want to preserve the insertion order of the items
+# sets  --> Eliminate duplicates (don't care about order)
+
 sudo apt-get install python-matplotlib
 
 # Print formatting
@@ -72,3 +76,30 @@ out_bytes = subprocess.check_output(['netstat','-an'],
     out_bytes = subprocess.check_output(['netstat','-an'], timeout = 3)
 except subprocess.TimeoutExpired as e:
 
+# Star operator
+# data in the star variable is always a list
+#
+def drop_first_last(grades)
+    first, *middle, last = grades
+    return avg(middle)
+
+record = ('Dave', 'dave@example.com', '732-555-1212', '908-555-1212')
+print(phone_numbers)
+['732-555-1212', '908-555-1212']
+
+
+# Modules
+# Controlling the export
+
+# somemodule.py
+def spam();
+    pass
+
+def grok():
+    fail
+
+blah = 42
+
+# Only export spam and grok
+
+__all__ = ['spam', 'grok']
