@@ -1,4 +1,4 @@
-# Prepare a virtualenv 
+# Using django Framework
   * sudo easy_install pip
   * pip install virtualenv
   * Review /usr/local/bin/virtualenvwrapper.sh script to setup.
