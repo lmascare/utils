@@ -1,4 +1,4 @@
-# Prepare a virtualenv 
+# Using django Framework
   * sudo easy_install pip
   * pip install virtualenv
   * Review /usr/local/bin/virtualenvwrapper.sh script to setup.
@@ -9,3 +9,5 @@
   * django-admin startproject bookstore
   * ./manage.py migrate (migrates a SQLite3 DB. look in settings.py)
   * ./manage.py runserver
+
+  * Add to GIT
