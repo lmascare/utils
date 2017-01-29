@@ -15,16 +15,25 @@ application = {
 keys = application.keys()
 values = application.values()
 
-# print(keys)
-# print(values)
+# Give you ['lca','lmgrd']
+print(keys)
+#print(values)
 
-# print(application['lca']['cmd_line'])
+# No foreach in Python. Loop through the array)
+for appl in keys:
+    print(appl)
 
+print(application['lca']['cmd_line'])
+
+# Good Block
+# Here we get the keys for application (lca, lmgrd)
+#
 for app,u_opts in application.items():
-    print(app)
+    print(app, u_opts)
 
-#for u_items in u_opts.items():
-    #print(u_items)
-
-for nested_items in application.values():
-    print(nested_items, nested_items['cmd_line'])
+# From (lca, lmgrd) we get the keys (cmd_line, username) 
+# so we can get the values
+#
+    for app_opts,app_res in u_opts.items():
+        print(app,app_opts)
+#
