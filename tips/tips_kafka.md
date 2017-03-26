@@ -38,3 +38,16 @@ iv.   Connector
    Can we see the topic 
    ./bin/kafka-topics.sh --list --zookeeper localhost:2181 
 ```
+
+4. Post a message
+```
+   cd /u/kafka
+   ./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+```
+   
+5. Read the message
+```
+   cd /u/kafka
+   ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+   --topic test --from-beginning
+```
