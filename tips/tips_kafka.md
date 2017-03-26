@@ -1,19 +1,21 @@
 # Tips for Apache kafka
 
 ## Concepts
-**Kafka is run on a cluster of one or more servers**
-**Kafka Cluster stores streams of records in categories called topics**
-**Each record consists of a key, value & timestamp**
+* Kafka is run on a cluster of one or more servers
+* Kafka Cluster stores streams of records in categories called topics
+* Each record consists of a key, value & timestamp
 
-## Kafka has 4 Core APIs**
-  i.    Producer 
+## Kafka has 4 Core APIs
+  i.    Producer
   ii.   Consumer
   iii.  Streams
   iv.   Connector 
 
-*Kafka requires zookeeper*
-    *Zookeeper runs on port 2181*
-    *Kafka runs on port 9092*
+**Kafka requires zookeeper**
+> 
+> Zookeeper runs on port 2181
+> Kafka runs on port 9092
+>
 
 **To start & test the Kafka Server**
     1. Start zookeeper
