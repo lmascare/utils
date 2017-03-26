@@ -6,10 +6,10 @@
 * Each record consists of a key, value & timestamp
 
 ## Kafka has 4 Core APIs
-i.    Producer 
-ii.   Consumer 
-iii.  Streams 
-iv.   Connector 
+  i.    Producer 
+  ii.   Consumer 
+  iii.  Streams 
+  iv.   Connector 
 
 **Kafka requires zookeeper**
 > 
