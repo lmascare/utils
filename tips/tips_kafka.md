@@ -13,29 +13,29 @@ iv.   Connector
 
 **Kafka requires zookeeper**
 > 
-> Zookeeper runs on port 2181
-> Kafka runs on port 9092
+> Zookeeper runs on port 2181 
+> Kafka runs on port 9092 
 >
 
 **To start & test the Kafka Server** 
 1. Start zookeeper 
->
-> cd /u/kafka
-> ./bin/zookeeper-server-start.sh config/zookeeper.properties
->
+> 
+> cd /u/kafka 
+> ./bin/zookeeper-server-start.sh config/zookeeper.properties 
+> 
 
 2. Start kafka
->
-> cd /u/kafka
-> ./bin/kafka-server-start.sh config/server.properties
->
+> 
+> cd /u/kafka 
+> ./bin/kafka-server-start.sh config/server.properties 
+> 
 
 3. Create a Topic
-
-> cd /u/kafka
-> ./bin/kafka-topics.sh --create --zookeeper localhost:2181 \
-> --replication-factor 1 --partitions 1 --topic test
->
-> Can we see the topic
-> ./bin/kafka-topics.sh --list --zookeeper localhost:2181
->
+> 
+> cd /u/kafka 
+> ./bin/kafka-topics.sh --create --zookeeper localhost:2181 \ 
+> --replication-factor 1 --partitions 1 --topic test 
+> 
+> Can we see the topic 
+> ./bin/kafka-topics.sh --list --zookeeper localhost:2181 
+> 
