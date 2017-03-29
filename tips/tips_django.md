@@ -16,6 +16,6 @@
   * cd bookstore
   * ./manage.py migrate (migrates a SQLite3 DB. look in settings.py)
   * ./manage.py runserver
-  * Point your browser to  <a href="http://127.0.0.1:8000/" </a>
+  * Point your browser to http://127.0.0.1:8000/
 
   * Add to GIT
