@@ -2,6 +2,8 @@
   * sudo easy_install pip
   * pip install virtualenv
 
+  * install pycharm as a Python Editor
+
   ### Ubuntu
   * Review /usr/local/bin/virtualenvwrapper.sh script to setup.
   * Set VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 in .bashrc before
