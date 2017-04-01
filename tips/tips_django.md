@@ -2,6 +2,8 @@
   * sudo easy_install pip
   * pip install virtualenv
 
+  * install pycharm as a Python Editor
+
   ### Ubuntu
   * Review /usr/local/bin/virtualenvwrapper.sh script to setup.
   * Set VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3 in .bashrc before
@@ -18,8 +20,12 @@
   * ./manage.py runserver
   * Point your browser to http://127.0.0.1:8000/
 
-  * Add to GIT
+  * Add GIT in the Version Control Section
 
+  ### Add an application
+  * ./manage.py startapp store
+  * 
+  
   ### Configure the STORE application
   * ./manage.py startapp store
   * In bookstore/settings.py add 'store', to INSTALL_APPS section
