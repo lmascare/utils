@@ -26,3 +26,6 @@
   * ./manage.py makemigrations store
   * ./manage.py sqlmigrate store 0001
   * ./manage.py migrate
+
+  * Install django-registration-redux
+    - pip install django-registration-redux
