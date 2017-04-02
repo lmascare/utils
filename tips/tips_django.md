@@ -26,3 +26,9 @@
   * ./manage.py startapp store
   * 
   
+  ### Configure the STORE application
+  * ./manage.py startapp store
+  * In bookstore/settings.py add 'store', to INSTALL_APPS section
+  * ./manage.py makemigrations store
+  * ./manage.py sqlmigrate store 0001
+  * ./manage.py migrate
