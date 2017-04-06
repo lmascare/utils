@@ -4,7 +4,7 @@ You just signed up for an account at {{ site_name }}. Please click the link belo
 
 http://{{ site.domain }}{% url 'registration_activate' activation_key %}
 
-This link is valid from {{ expiration_days }}. If it wasn't you that signed up for this account, don't panic.
+This link is valid for {{ expiration_days }} days. If it wasn't you that signed up for this account, don't panic.
 Its safe to ignore this email.
 
 - The Mystery Books Team
