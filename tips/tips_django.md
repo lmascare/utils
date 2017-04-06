@@ -25,6 +25,9 @@
   ### Add an application
   * ./manage.py startapp store
   * 
+
+  ### For the admin superuser
+  * ./manage.py createsuperuser
   
   ### Configure the STORE application
   * ./manage.py startapp store
