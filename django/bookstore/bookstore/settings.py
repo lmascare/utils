@@ -106,3 +106,14 @@ STATIC_URL = '/static/'
 # Registration
 ACCOUNT_ACTIVIATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/store/'
+
+# email settings
+EMAIL_BACKEND = "djando.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "lithium"
+EMAIL_HOST_USER = "lmascare@lithium"
+EMAIL_HOST_PASSWORD = "abc123"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "bookstore@lithium"
+
