@@ -5,6 +5,18 @@
     <title>L.A.N.K Enterprises</title>
 </head>
 <body>
-Welcome to the Mystery Book Store!! There are {{ count }} books in stock.
+{% if request.user.is_authenticated %}
+  <h1>
+      Welcome, {% if request.user.first_name %}
+      {{ request.user.first_name }}
+      {% else %}
+      {{ request.username }}
+      {% endif %}! <a href="{% url 'auth_logout' %}" >Logout</a>
+
+  </h1>
+{% else %}
+  <h1>Welcome mysterious person! Would you like to <a href="{% url 'auth_login' %}">Log In?</a> </h1>
+{% endif %}
+Welcome to the Mystery Book Store!! There are {{ count }} books in stock. User Location: {{ request.session.location }}
 </body>
 </html>

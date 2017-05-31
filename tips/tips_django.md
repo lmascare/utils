@@ -36,5 +36,8 @@
   * ./manage.py sqlmigrate store 0001
   * ./manage.py migrate
 
+  ## To show the state of the migrations
+  * ./manage.py showmigrations. The x shows which are done
+
   * Install django-registration-redux
     - pip install django-registration-redux

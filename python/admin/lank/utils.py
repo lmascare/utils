@@ -115,3 +115,12 @@ def runcmd(os_cmd):
     out = stdout.decode('utf-8')
     err = stdout.decode('utf-8')
     print(out,err)
+
+'''
+Function to get the filename from the calling script
+'''
+import inspect
+
+def hello():
+    frame,filename,line_number,function_name,lines,index = inspect.stack()[1]
+    print(frame,filename,line_number,function_name,lines,index)

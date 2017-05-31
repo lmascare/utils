@@ -1,14 +1,21 @@
 '''
 This module contains Classes
- - logme (logging in OO)
- - runcmd (run an OS command)
+ - logme (logging in OO) -- Status completed
+ - runcmd (run an OS command) -- Status not started
 '''
 
+# Will be used by logme
 import sys
 import os
 import logging
 
+# Will be used by runcmd
+import subprocess
+import shlex
+
 '''
+Class logme
+
 In the init section we 
  - define the directory for global logging,
  - create the directory
@@ -22,12 +29,11 @@ In the init section we
 
    This will write "Critical Error" to the logfile as follows
    <-- time stamp  -->:<Level> :<PID>:  <script>  :<message>
-   12-03-2016 22:54:12:CRITICAL:19790:obj_utils.py:Critical Error
+   12-03-2016 22:54:12:CRITICAL:19790:lm.py:Critical Error
 
-ToDo
-  - Need to get the real filename in the log rather than the module filename
+Status
+  - Completed 
 '''
-
 
 class logme:
 
@@ -75,8 +81,13 @@ class logme:
         self.writelog(plevel, message)
 
     def writelog(self,plevel,message):
+        src_filename = os.path.basename(sys.argv[0])
+        # We need to log the source filename. Easiest way is to prepend it to the message
+        message = src_filename + ':' + message
+        #print(message)
         logging.basicConfig(filename=logfile, level=logging.DEBUG,
-                     format='%(asctime)s:%(levelname)-8s:%(process)d:%(filename)s:%(message)s',
+                     #format='%(asctime)s:%(levelname)-8s:%(process)d:%(filename)s:%(message)s',
+                     format='%(asctime)s:%(levelname)-8s:%(process)d:%(message)s',
                      datefmt='%m-%d-%Y %H:%M:%S'
                      )
         logging.log(plevel, message)
@@ -86,6 +97,9 @@ class logme:
 #critlog = mylog.critical('This is a critical test')
 #mylog.critical('This is a critical test')
 #errlog = mylog.error('This is an error test')
+
+# End class logme
+#################
 
 
 
