@@ -6,7 +6,7 @@
  
 ## DDL
 
-** Centos 7 has replaced MySQL with MariaDB
+### Centos 7 has replaced MySQL with MariaDB
  * As root
  * shutdown the mariadb server
     systemctl stop mariadb
@@ -15,9 +15,10 @@
    mysql_install_db --user=mysql
  
  * To recover the root password
-   ** start the server in safe mode
+    **start the server in safe mode
       mysqld_safe --skip-grant-tables
-   ** mysql -u root mysql
+
+    **mysql -u root mysql
       update user set password=PASSWORD("<password>") where user='root';
       flush privileges;
       stop the mysqld_safe process
@@ -43,15 +44,17 @@
  * use lifecycle;
  * CREATE TABLE hostinfo (
       hostname    varchar(128) not null,
-      hostgroup   varchar*128) not null
-   )
-   ## Note group is a reserved word
+      hostgroup   varchar(128) not null
+   );
+
+   *Note group is a reserved word*
 
  * to load the data into the table and ignore the header
 
    load data local infile '/tmp/host.csv' into table hostinfo
     fields terminated by ',' ignore 1 lines;
-   ## Note local and full path are extremely important
+
+    *Note local and full path are extremely important*
 
 
 ## DML
