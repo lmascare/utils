@@ -15,11 +15,10 @@
    mysql_install_db --user=mysql
  
  * To recover the root password
-
- ** start the server in safe mode
+    **start the server in safe mode
       mysqld_safe --skip-grant-tables
 
- ** mysql -u root mysql
+    **mysql -u root mysql
       update user set password=PASSWORD("<password>") where user='root';
       flush privileges;
       stop the mysqld_safe process

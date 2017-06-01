@@ -14,7 +14,8 @@ def db_connect(dbname,dbuser,dbpass,dbport):
                            port=dbport,
                            user=dbuser,
                            passwd=dbpass,
-                           db=dbname
+                           db=dbname,
+                           local_infile=True
                           )
     cur = conn.cursor()
     return (cur, conn)
@@ -32,6 +33,24 @@ def create_table(cur, conn):
     cur.execute(sql)
     cur.close()
     conn.close()
+
+'''
+BULK Loading
+'''
+def bulk_load(cur, conn, loader_file):
+    print(loader_file)
+    sql = """
+    load data local infile '""" + loader_file + """' into table host_info 
+    fields terminated by ','
+    ignore 1 lines
+    """
+    # print(sql)
+    cur.execute(sql)
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
 
 '''
 Run DB query
@@ -55,8 +74,11 @@ The start of it all
 def main():
     (conn_cursor, conn) = db_connect(dbname, dbuser, dbpass, dbport)
     #db_query(conn_cursor, conn)
-    create_table(conn_cursor, conn)
+    #create_table(conn_cursor, conn)
 
+    loader_file = '/home/lmascare/misc/mysql/host.csv'
+
+    bulk_load(conn_cursor, conn, loader_file)
 
 # Where we run it all
 if __name__ == "__main__":
