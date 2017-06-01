@@ -14,6 +14,15 @@ import subprocess
 import shlex
 
 '''
+Variables used everywhere
+'''
+
+dbname = 'lifecycle'
+dbuser = 'lifecycle'
+dbpass = 'waterloo'
+dbport = 3306
+
+'''
 Class logme
 
 In the init section we 

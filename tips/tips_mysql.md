@@ -43,8 +43,9 @@
  * use lifecycle;
  * CREATE TABLE hostinfo (
       hostname    varchar(128) not null,
-      hostgroup   varchar*128) not null
-   )
+      hostgroup   varchar(128) not null
+   );
+
    *Note group is a reserved word*
 
  * to load the data into the table and ignore the header
