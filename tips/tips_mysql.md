@@ -15,17 +15,16 @@
    mysql_install_db --user=mysql
  
  * To recover the root password
-    **start the server in safe mode
-      mysqld_safe --skip-grant-tables
-
-    **mysql -u root mysql
-      update user set password=PASSWORD("<password>") where user='root';
-      flush privileges;
-      stop the mysqld_safe process
+    * start the server in safe mode
+         * mysqld_safe --skip-grant-tables
+         * mysql -u root mysql
+         * update user set password=PASSWORD("<password>") where user='root';
+         * flush privileges;
+         * stop the mysqld_safe process
       
- * systemctl start mariadb
- * /usr/bin/mysql_secure_installation
- * mysql -u root -p mysql (enter root password)
+    * systemctl start mariadb
+    * /usr/bin/mysql_secure_installation
+    * mysql -u root -p mysql (enter root password)
  * create user lifecycle identified by '<password>';
 
 
