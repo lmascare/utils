@@ -7,7 +7,7 @@
 ## DDL
 
 ### Centos 7 has replaced MySQL with MariaDB
- * As root
+ * As root   
  * shutdown the mariadb server
     systemctl stop mariadb
 

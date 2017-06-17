@@ -3,6 +3,7 @@
 
 from obj_utils import dbname, dbpass, dbuser, dbport
 
+#print("dbname --> {}".format(dbname))
 import pymysql
 
 
@@ -79,8 +80,9 @@ def main():
     loader_file = '/home/lmascare/misc/mysql/host.csv'
 
     bulk_load(conn_cursor, conn, loader_file)
-
-# Where we run it all
+'''
+Where we run it all
+'''
 if __name__ == "__main__":
     main()
 
