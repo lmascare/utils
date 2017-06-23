@@ -31,8 +31,10 @@ def main():
 
     mylog = obj_utils.logme()
     mylog.critical('Critical Message')
-    mylog.error('Error Message')
-    mylog.warning('Warning Message')
+    #mylog.error('Error Message')
+    #mylog.warning('Warning Message')
+    mylog.debug('DEBUG Message')
+    mylog.info('INFO Message')
 
 if __name__ == "__main__":
     main()

@@ -99,3 +99,6 @@
 useradd -c 'Larry Mascarenhas' -d /home/lmascare -g 100 -m -k /etc/skel \
 -s /bin/bash -u 1001 lmascare
 passwd lmascare # Set the new password
+
+# To see which pkg provides a file
+yum whatprovides */mkpasswd
