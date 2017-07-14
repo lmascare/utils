@@ -82,3 +82,12 @@
 
 ## DML
  * select count(*) from tablename;
+
+## Backup and Recovery
+ * By default the MySQL datafiles are in /var/lib/mysql  
+ * Use the 'mysqldump' utility to do the backups  
+   **D=`date +'%m%%d%Y_%H%M%S** # Sets D=ddmmyyyy_hrminsec
+   **mysqldump --databases -u lifecyle -p lifecycle > mysql_backup_${D}.sql** # This will dump the entire DB.
+   
+ * This generates the SQL file for recovery using the 'mysql' client  
+   **mysql < mysql_bacup_20170709_190432.sql**

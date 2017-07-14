@@ -1,0 +1,7 @@
+team,country,player
+blah0,blah1,blah2
+Real Madrid,Spain,"{u'shirt': 7, u'FirstName': u'Cristiano', u'LastName': u'Ronaldo', u'position': u'forward'}"
+Real Madrid,Spain,"{'shirt': 9, 'FirstName': 'Karim', 'LastName': 'Banzema', 'position': 'forward'}"
+Real Madrid,Spain,"{'shirt': 11, 'FirstName': 'Gareth', 'LastName': 'Bale', 'position': 'forward'}"
+Real Madrid,Spain,"{'shirt': 4, 'FirstName': 'Sergio', 'LastName': 'Ramos', 'position': 'defender'}"
+Manchester United,England,"{'shirt': 17, 'FirstName': 'Daley', 'LastName': 'Blind', 'position': 'defender'}"
