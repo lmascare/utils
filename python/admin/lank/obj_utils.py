@@ -6,11 +6,18 @@ This module contains Classes
 
 # ToDo
 '''
- - Define a module which has only variables. Those should be imported here. -- Completed
+ - Define a module which has only variables. Those should be imported here.
+    -- Completed
+
  - The logdir check should be outside the class as every invocation of the class
    will run the logdir check.  <<->> Not required. It is called once when class object is initialzed
- - Change logging such that log.debug will display to STDOUT as well. Default will be log.info
- - Port runcmd 
+   Change logging such that log.debug will display to STDOUT as well. Default will be log.info
+    -- Completed
+    
+ - Port runcmd
+  
+ - Create a class to import CSV files 
+ 
 '''
 
 '''
@@ -119,7 +126,7 @@ class logme:
         if (plevel == 50):
             print("{}".format(message))
             print("CRITICAL Level : Mandatory Exit...")
-            exit(1)
+            sys.exit(1)
 
 # End class logme
 #################
