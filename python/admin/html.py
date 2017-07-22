@@ -5,13 +5,28 @@ import urllib
 import urllib2
 
 '''
-TODO
+// ToDo
     - Send username / password tokens to download data
       Complete
       
     - Use proxies
       Complete
 '''
+
+'''
+Requesting a GET with appropriate headers
+'''
+def url_custom_get():
+    url = 'http://www.someserver.com/host/hostname/abc123'
+    accept_json = 'application/json'
+    request_header = {
+        "accept" : accept_json,
+        "content-type" : accept_json
+    }
+    req = urllib2.Request(url, headers=request_header)
+    ''' Note that the data returned is of type str. it has to be converted as desired'''
+    response = urllib2.urlopen(req)
+    print response
 
 '''
 Introducing urllib and encoding data
