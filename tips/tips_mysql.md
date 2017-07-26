@@ -1,5 +1,27 @@
 # MySQL Tips
 
+## MariaDB installation
+ * cd /etc/yum.repos.d
+ * vi mariadb.repo   
+[mariadb]  
+name = Mariadb  
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64  
+gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB  
+gpgcheck=1
+
+### Install and start the services
+ * yum install MariaDB-server MariaDB-client -y  
+ * systemctl start mariadb 
+ * systemctl enable mariadb  
+ * systemctl status mariadb  
+
+### Secure the installation
+ * mysql_secure_installation
+ * Determine defaults  
+    * mysqld --print-defaults
+ * Root login to setup users and databases
+    * mysql -u root -p mysql
+ 
 ## Connection
  * mysql -h <host> -u <user> -p -D <dbname> - P <port(4303)>
  * /etc/my.cnf or /etc/mysql/my.cnf or $HOME/.my.cnf
@@ -8,24 +30,23 @@
 
 ### Centos 7 has replaced MySQL with MariaDB
  * As root   
- * shutdown the mariadb server
-    systemctl stop mariadb
+    * shutdown the mariadb server  
+        systemctl stop mariadb
 
- * Initialize the system dictionary
-   mysql_install_db --user=mysql
+    * Initialize the system dictionary
+        mysql_install_db --user=mysql
  
- * To recover the root password
-    * start the server in safe mode
-         * mysqld_safe --skip-grant-tables
-         * mysql -u root mysql
-         * update user set password=PASSWORD("<password>") where user='root';
-         * flush privileges;
-         * stop the mysqld_safe process
-      
-    * systemctl start mariadb
-    * /usr/bin/mysql_secure_installation
-    * mysql -u root -p mysql (enter root password)
- * create user lifecycle identified by '<password>';
+    * To recover the root password
+        * start the server in safe mode
+            * mysqld_safe --skip-grant-tables
+            * mysql -u root mysql
+            * update user set password=PASSWORD("<password>") where user='root';
+            * flush privileges;
+            * stop the mysqld_safe process
+        * systemctl start mariadb
+        * /usr/bin/mysql_secure_installation
+        * mysql -u root -p mysql (enter root password)
+        * create user lifecycle identified by '<password>';
 
 
  * show tables;

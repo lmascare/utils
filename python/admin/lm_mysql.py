@@ -70,7 +70,7 @@ def db_query(cur, conn):
     conn.close()
 
 '''
-The start of it all
+The fabled Main. Where it all begins.
 '''
 def main():
     (conn_cursor, conn) = db_connect(dbname, dbuser, dbpass, dbport)
@@ -80,6 +80,7 @@ def main():
     loader_file = '/home/lmascare/misc/mysql/host.csv'
 
     bulk_load(conn_cursor, conn, loader_file)
+
 '''
 Where we run it all
 '''
