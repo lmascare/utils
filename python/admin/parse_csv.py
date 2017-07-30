@@ -14,7 +14,7 @@ import json
 
 def process_csv():
     csvfile = 'parse.csv'
-    csv_out = 'parse_output.csv'
+    csv_out = '/tmp/parse_output.csv'
 
     '''
     By default the " is the escape character for CSV and default delimiter is ,
