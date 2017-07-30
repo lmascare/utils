@@ -12,6 +12,9 @@ import csv
 import ast
 import json
 
+'''
+Send output to a writable directory
+'''
 def process_csv():
     csvfile = 'parse.csv'
     csv_out = '/tmp/parse_output.csv'
