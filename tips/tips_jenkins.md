@@ -28,3 +28,12 @@
 * service jenkins start / stop / status
 * chkconfig jenkins on
 
+####Integration with GIT
+* Setup a new item (I used shell to run a script (python))
+* Configure the Project
+* In **_Source Code Management :_** **Enter the URL to the GITHUB repository**
+* In the **_Build Triggers :_**   
+    * Check the Poll SCM box
+    * Enter the Schedule (crontab time schedule)  
+* Apply & Save
+* Once the job runs, check the **Console Output** of the job  
