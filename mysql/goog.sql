@@ -23,5 +23,8 @@ volume  int(10) not null
 
 -- load historical data into a MySQL table
 -- Ensure you convert STR to DATE
-load data local infile '/home/lmascare/misc/mysql/goog.csv' into table goog
-fields terminated by ',' ignore 1 lines set date = str_to_date(@date,'%d-%b-%y');
+load data local infile '/home/lmascare/misc/mysql/goog.csv'
+into table goog
+fields terminated by ',' ignore 1 lines
+(@date, open, high, low, close, volume)
+set date = str_to_date(@date,'%d-%b-%y');

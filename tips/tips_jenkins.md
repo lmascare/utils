@@ -37,3 +37,13 @@
     * Enter the Schedule (crontab time schedule)  
 * Apply & Save
 * Once the job runs, check the **Console Output** of the job  
+
+#### Automated Deployment
+* Start Jenkins
+* Install the Jenkins Deploy Plugin  
+    i. Go to https://wiki.jenkins.io/display/JENKINS/Deploy+Plugin  
+    ii. Download the latest plugin  
+    iii. In the Jenkins Administration site - Manage Jenkinks - Manage Plugins - Available  
+    iv. Choose Deploy to container Plugin (search for deploy)  
+    v. Select **Download & Install after restart**  
+     vi. Jenkins needs to be restarted.  

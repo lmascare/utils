@@ -112,3 +112,14 @@ gpgcheck=1
    
  * This generates the SQL file for recovery using the 'mysql' client  
    **mysql < mysql_bacup_20170709_190432.sql**
+   
+## Load data from a CSV file into MySQL
+* load historical data into a MySQL table  
+* Ensure you convert STR to DATE  
+* The 'ignore 1 lines' ensures that the header line is skipped  
+
+load data local infile '/home/lmascare/misc/mysql/goog.csv'  
+into table goog  
+fields terminated by ',' ignore 1 lines  
+(@date, open, high, low, close, volume)  
+set date = str_to_date(@date,'%d-%b-%y');  

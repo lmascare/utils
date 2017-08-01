@@ -63,6 +63,30 @@ Status
 
 class logme:
 
+    """
+
+    Class logme
+
+    In the init section we
+    - define the directory for global logging,
+    - create the directory
+    - create the file
+    - ensure both are world writable
+
+    Example of usage
+    import obj_utils
+      mylog = obj_utils.logme()
+      mylog.critical('Critical Error')
+
+    This will write "Critical Error" to the logfile as follows
+    <-- time stamp  -->:<Level> :<PID>:  <script>  :<message>
+    12-03-2016 22:54:12:CRITICAL:19790:lm.py:Critical Error
+
+    Status
+    - Completed
+
+    """
+
     logdir = '/u/logs'
     global logfile
     logfile = logdir + '/lank.log'
