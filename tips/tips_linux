@@ -102,3 +102,7 @@ passwd lmascare # Set the new password
 
 # To see which pkg provides a file
 yum whatprovides */mkpasswd
+
+# Ensure rc.d scripts work as expected. Use the Wiki for reference
+# https://wiki.debian.org/LSBInitScripts
+update-rc.d app start 99 2 3 . stop 99 0 1 6 .
