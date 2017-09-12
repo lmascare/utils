@@ -9,14 +9,16 @@ def main():
     #lank.utils.logit("hello",1,"crit")
     
     #from lank import utils
-    #import utils
-    #utils.init()
+
+    # We set the PYTHONPATH so that we don't have to specify the modules dir.
+    import utils
+    utils.init()
     #utils.hello()
     #utils.logit("hello","critical")
     #utils.logit("hello","error")
     #utils.logit("hello","warning")
     #utils.logit("hello","info")
-    #utils.logit("hello","debug")
+    utils.logit("hello","debug")
     
     #utils.runcmd('ps -eaf')
     #utils.runcmd('ifconfig -a')
@@ -27,14 +29,14 @@ def main():
     #import sys
     #sys.path.append('/u/gitwork/utils/python/admin/lank')
 
-    import obj_utils
+    #import obj_utils
 
-    mylog = obj_utils.logme()
-    mylog.critical('Critical Message')
+    #mylog = obj_utils.logme()
+    #mylog.critical('Critical Message')
     #mylog.error('Error Message')
     #mylog.warning('Warning Message')
-    mylog.debug('DEBUG Message')
-    mylog.info('INFO Message')
+    #mylog.debug('DEBUG Message')
+    #mylog.info('INFO Message')
 
 if __name__ == "__main__":
     main()

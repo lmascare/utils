@@ -1,4 +1,4 @@
-cd b    cd #
+#
 # Virtualenv
 # download get-pip.py 
 # python get-pip.py (Make sure python is for v2.7.x
@@ -7,6 +7,13 @@ cd b    cd #
 # source <envname>/bin/activate (this will enable the new virtualenv)
 # deactivate (exit the virtualenv)
 #
+# To get the list of packages in a Virtualenv & save in requirements.txt
+# This .txt file can be used to build your env to move to production
+
+# pip freeze > requirements.txt
+# pip install -r requirements.txt
+
+
 # Install setuptools
 # Download setuptools tarball.
 # python3 setup.py install
