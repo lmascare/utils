@@ -1,4 +1,4 @@
-""" This Module contains commonly used utilities.
+"""This Module contains commonly used utilities.
 
 List of functions available in this module
  - logit  -- Complete
@@ -14,8 +14,9 @@ import subprocess
 import shlex
 from vars import logdir
 
+
 def init():
-    """ Init function
+    """Init function.
 
     - Defines the log directory. Creates it if not present
     - Note that it explicitly calls os.chmod as os.mkdir with perms
@@ -24,20 +25,22 @@ def init():
     global logdir
     global scriptname
 
-    #logdir = '/u/tmp'
+    # logdir = '/u/tmp'
     if not (os.path.isdir(logdir)):
         os.mkdir(logdir)
-        os.chmod(logdir,0o777)
-    #else:
+        os.chmod(logdir, 0o777)
+    # else:
     #   print("{} exists".format(logdir))
 
 
-def logit(message,level):
-    """Function logit
+def logit(message, level):
+    """Function logit.
 
-      - This module derives the logfile name from the scriptname,
+      - This module derives the logfile name from the scriptname.
         It then appends this name to the logdir from function init()
+
       - Receives a message with a level and writes it to the to the logfile
+
       - If it receives a level of 50 (critical), it will display the message
         on the screen and exit.
 
@@ -50,37 +53,39 @@ def logit(message,level):
        <-- time stamp  -->:<Level> :<PID>:<script>:<message>
        12-03-2016 22:54:12:CRITICAL:19790:utils.py:hello
     """
-
     scriptname = os.path.basename(sys.argv[0])
     logfile = logdir + '/' + scriptname + '.log'
 
     '''
     Here's where my main logging functionality is set.
-    I prefer to send the level as a word, but the logging.log function requires 
-    an integer. I don't want users to pass numbers for level. I'll generate it. 
+    I prefer to send the level as a word, but the logging.log function requires
+    an integer. I don't want users to pass numbers for level. I'll generate it.
     I spent too much time searching how to do this.
    '''
 
     if (level == "critical"):
-        plevel=50
+        plevel = 50
     elif (level == "error"):
-        plevel=40
+        plevel = 40
     elif (level == "warning"):
-        plevel=30
+        plevel = 30
     elif (level == "info"):
-        plevel=20
+        plevel = 20
     elif (level == "debug"):
-        plevel=10
+        plevel = 10
     elif (level == "notset"):
-        plevel=0
+        plevel = 0
     else:
-        plevel=50
+        plevel = 50
 
     logging.basicConfig(filename=logfile, level=logging.DEBUG,
-            format='%(asctime)s:%(levelname)-8s:%(process)d:%(filename)s:%(message)s',
+                        format='%(asctime)s:\
+                               %(levelname)-8s:%(process)d:'
+                               '\%(filename)s:'
+                               '\%(message)s',
                         datefmt='%m-%d-%Y %H:%M:%S'
                         )
-    logging.log(plevel,message)
+    logging.log(plevel, message)
     # print("From print : {} : {}".format(message,level))
 
     if(plevel == 10):
@@ -93,7 +98,7 @@ def logit(message,level):
 
 
 def runcmd(os_cmd):
-    """ Function runcmd
+    """Function runcmd.
 
     The purpose of this function is to have a standard way of
     calling OS commands. The STDIN, STDOUT and STDERR are correctly decoded
@@ -103,23 +108,23 @@ def runcmd(os_cmd):
         utils.runcmd('ps -eaf')
         utils.runcmd('ifconfig -a')
     """
-
     args = shlex.split(os_cmd)
     # print(os_cmd, args)
     p = subprocess.Popen(args,
-                         stdout = subprocess.PIPE,
-                         stdin  = subprocess.PIPE,
-                         stderr = subprocess.PIPE
+                         stdout=subprocess.PIPE,
+                         stdin=subprocess.PIPE,
+                         stderr=subprocess.PIPE
                          )
-    stdout,stderr = p.communicate()
+    stdout, stderr = p.communicate()
     out = stdout.decode('utf-8')
     err = stdout.decode('utf-8')
-    print(out,err)
+    print(out, err)
 
 
 def get_filename():
-    """ Function that returns the filename from the calling script """
-
-    frame,filename,line_number,function_name,lines,index = inspect.stack()[1]
-    #print(frame,filename,line_number,function_name,lines,index)
+    """Function that returns the filename from the calling script."""
+    # frame, filename, line_number, function_name, lines, index = \
+    # inspect.stack()[1]
+    frame, filename, blah = inspect.stack()[1]
+    # print(frame,filename,line_number,function_name,lines,index)
     return filename

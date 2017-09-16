@@ -1,6 +1,6 @@
 
 """
-Variables to be used across the board everywhere
+Variables to be used across the board everywhere.
 
 Variables available are
     General purpose
@@ -9,7 +9,6 @@ Variables available are
     For MySQL
         - dbname, dbuser, dbpass, dbport,
 """
-
 """ General Purpose """
 logdir = '/u/logs'
 
