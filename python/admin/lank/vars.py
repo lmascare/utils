@@ -9,6 +9,7 @@ Variables available are
     For MySQL
         - dbname, dbuser, dbpass, dbport,
 """
+
 """ General Purpose """
 logdir = '/u/logs'
 

@@ -13,6 +13,14 @@
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
 
+# Docstrings conformance is checked via pep257, now pydocstyle
+# pip install pep257
+# pip install pydocstyle
+
+# Code conformance to pep8 is checked via pep8, now pycodestyle
+# pip install pep8
+
+
 
 # Install setuptools
 # Download setuptools tarball.
