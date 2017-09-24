@@ -20,7 +20,7 @@
 # Code conformance to pep8 is checked via pep8, now pycodestyle
 # pip install pep8
 
-
+# Flake incorporates both pep8 & pep257
 
 # Install setuptools
 # Download setuptools tarball.
