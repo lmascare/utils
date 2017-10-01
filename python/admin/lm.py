@@ -11,14 +11,20 @@ def main():
     #from lank import utils
 
     # We set the PYTHONPATH so that we don't have to specify the modules dir.
+    # Alternatively, we can set it in the main program as follows
+    # sys.path.append('/u/gitwork/utils/python/admin/lank')
     import utils
+    import signal
+
     utils.init()
     #utils.hello()
     #utils.logit("hello","critical")
     #utils.logit("hello","error")
     #utils.logit("hello","warning")
     #utils.logit("hello","info")
-    utils.logit("hello","debug")
+    utils.logit("info", "hello", 1)
+    utils.timeout(10)
+    signal.pause()
     
     #utils.runcmd('ps -eaf')
     #utils.runcmd('ifconfig -a')
