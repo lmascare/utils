@@ -1,8 +1,10 @@
 """This Module contains commonly used utilities.
 
 List of functions available in this module
- - logit  -- Complete
- - runcmd -- Complete
+ - logit       -- Complete
+ - runcmd      -- Complete
+ - sig_handler -- Complete
+ - timeout     -- Complete
 """
 
 import logging
@@ -12,6 +14,7 @@ import inspect
 
 import subprocess
 import shlex
+import signal
 from vars import logdir
 
 
@@ -33,21 +36,33 @@ def init():
     #   print("{} exists".format(logdir))
 
 
-def logit(message, level):
-    """Function logit.
+def logit(level, message, verbosity):
+    """Standardized logging.
 
       - This module derives the logfile name from the scriptname.
         It then appends this name to the logdir from function init()
 
+      :param level
+      :param message
+      :param verbosity
+
       - Receives a message with a level and writes it to the to the logfile
 
-      - If it receives a level of 50 (critical), it will display the message
-        on the screen and exit.
+      - Verbosity determines if output should write to log and screen
+       - 1 -- Write to logfile and display to screen
+         0 -- Write to logfile only
+
+      - If it receives a level of 50 (critical), it will
+       - Write to the logfile
+       - Display the message on the screen
+       - Exit
 
     Example of usage
-       from lank import utils
+       Ensure PYTHONPATH is set to the modules directory
+
+       import utils
        utils.init()
-       utils.logit("hello","critical")
+       utils.logit("critical", "hello", 1)
 
        This will write "hello" to the logfile as follows and exit
        <-- time stamp  -->:<Level> :<PID>:<script>:<message>
@@ -81,14 +96,14 @@ def logit(message, level):
     logging.basicConfig(filename=logfile, level=logging.DEBUG,
                         format='%(asctime)s:\
                                %(levelname)-8s:%(process)d:'
-                               '\%(filename)s:'
-                               '\%(message)s',
+                               '%(filename)s:'
+                               '%(message)s',
                         datefmt='%m-%d-%Y %H:%M:%S'
                         )
     logging.log(plevel, message)
     # print("From print : {} : {}".format(message,level))
 
-    if(plevel == 10):
+    if ((plevel == 10) or (verbosity == 1)):
         print("{}".format(message))
 
     if (plevel == 50):
@@ -97,16 +112,66 @@ def logit(message, level):
         sys.exit(1)
 
 
+def sig_handler(signal, frame):
+    """
+    Signal Handling.
+
+    Receive signals and determine what to do with them. At this point, it
+    exits with code 1
+
+    :param signal
+    :param frame # Need to research what frame is :)
+
+    -SIGHUP signal. Similar to exit 1.
+    -SIGINT signal. CTRL-C signal number 2.
+    -SIGALRM signal. Alarm signal.
+    -SIGTERM signal. Signal number 15.
+    """
+    logit("info", "Signal received -- {}".format(signal), 1)
+    sys.exit(1)
+
+
+signal.signal(signal.SIGHUP, sig_handler)
+signal.signal(signal.SIGINT, sig_handler)
+signal.signal(signal.SIGTERM, sig_handler)
+signal.signal(signal.SIGALRM, sig_handler)
+
+
+def timeout(secs):
+    """
+    Ensure we timeout after n seconds.
+
+    :param secs:
+
+    This function allows us to run long queries, processes with the assurance
+    that it will timeout in a given amount of time.
+    We have defined - signal.signal(signal.SIGALRM, sig_handler) so after secs
+    seconds, we will call sig_handler.
+
+    Example. To run a command with a timeout of 10 seconds
+
+    import utils
+    utils.timeout(10)
+    signal.pause()
+    """
+    logit("info", "Received request for timeout of {} seconds".format(secs), 0)
+    signal.alarm(secs)
+
+
 def runcmd(os_cmd):
-    """Function runcmd.
+    """Run OS commands.
 
     The purpose of this function is to have a standard way of
     calling OS commands. The STDIN, STDOUT and STDERR are correctly decoded
-    We use shlex to split the command supplied into tokens for Popen
+    We use shlex to split the command supplied into tokens for Popen.
+
+    :param os_cmd
 
     Examples:
         utils.runcmd('ps -eaf')
         utils.runcmd('ifconfig -a')
+    The commands are also logged.
+
     """
     args = shlex.split(os_cmd)
     # print(os_cmd, args)
@@ -119,10 +184,11 @@ def runcmd(os_cmd):
     out = stdout.decode('utf-8')
     err = stdout.decode('utf-8')
     print(out, err)
+    logit("info", "OS Command : {}".format(os_cmd), 0)
 
 
 def get_filename():
-    """Function that returns the filename from the calling script."""
+    """Return the filename from the calling script."""
     # frame, filename, line_number, function_name, lines, index = \
     # inspect.stack()[1]
     frame, filename, blah = inspect.stack()[1]
