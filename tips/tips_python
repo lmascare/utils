@@ -21,6 +21,8 @@
 # pip install pep8
 
 # Flake incorporates both pep8 & pep257
+# To add support for docstrings in flake8, add the plugin
+# pip install flake8-docstrings
 
 # Install setuptools
 # Download setuptools tarball.
