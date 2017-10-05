@@ -16,7 +16,7 @@ def main():
   """
   Nothing for now.
   """
-    pass
+  pass
 
 if __name__ == "__main__":
     main()
