@@ -9,7 +9,6 @@ I can also send attachments by guessing the attachment type.
 
 Usage: mailit.py -f <from> -r <to> -s <Subject> -b <body> -a <attachment>
 """
-
 import smtplib
 import email
 
