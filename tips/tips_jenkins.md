@@ -38,6 +38,39 @@
 * Apply & Save
 * Once the job runs, check the **Console Output** of the job  
 
+####Integration with GIT as a webhook
+* Setup ngrok connection to local host
+* ./ngrok authtoken 7NpbQGqKRcy5AeSVDKexR_2vX56kxSXENMmzirx6AZt
+    * Token saved in /root/.ngrok2/ngrok.yml
+* ./ngrok http 8080 --bind-tls "both"
+
+#####Jenkins
+* Create a new Item
+* Checkbox GitHub Project. Enter the URL of the repository
+* Under Source Code Management - Select Git
+    * Enter Repository URL (See GitHub section item-1). 
+    * Leave branch at */master
+* Under Build Triggers - Checkbox GitHub hook trigger for GITScm polling
+* Save
+* Copy to Clipboard the URL of the Jenkins Server (Top Level)
+
+##### GitHub
+* Select the Repository - Clone or Download
+    * Copy the URL to clipboard. This is the Repository URL to add to Jenkins.
+* In the same Repository - select Settings - Web Hooks - Add webhook
+* Enter the URL of the Jenkins Server - Append **/github-webhook/** to it.
+    * https://<jenkins-server>/github-webhook/ 
+* Change Content-type: application/json
+* For **Which events would you like to trigger this webhook?**
+    * Select Just the push event
+* Click 'Add webhook'
+
+* Push a commit to the repository and observe the call to Jenkins
+
+* be30c73a9fac69d7ca4d67e63ff9ef5cf6d53725 GitHub Personal Token
+##### Reference Video
+* https://www.youtube.com/watch?v=Z3S2gMBUkBo
+
 #### Automated Deployment
 * Start Jenkins
 * Install the Jenkins Deploy Plugin  

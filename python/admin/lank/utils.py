@@ -7,6 +7,18 @@ List of functions available in this module
  - timeout     -- Complete
 """
 
+# ToDo
+# create functions
+#  - unlock_script
+#  - lock_script
+#  - should_i_exit
+#
+# in init() function
+#   - define scriptname
+#   - logfile
+#   - add try: except to trap failures
+#   - create the logfile if it doesn't exist. chmod 664
+#
 import logging
 import sys
 import os
@@ -34,6 +46,31 @@ def init():
         os.chmod(logdir, 0o777)
     # else:
     #   print("{} exists".format(logdir))
+
+
+def sig_handler(signal, frame):
+    """
+    Signal Handling.
+
+    Receive signals and determine what to do with them. At this point, it
+    exits with code 1
+
+    :param signal
+    :param frame # Need to research what frame is :)
+
+    -SIGHUP signal. Similar to exit 1.
+    -SIGINT signal. CTRL-C signal number 2.
+    -SIGALRM signal. Alarm signal.
+    -SIGTERM signal. Signal number 15.
+    """
+    logit("info", "Signal received -- {}".format(signal), 1)
+    sys.exit(1)
+
+
+signal.signal(signal.SIGHUP, sig_handler)
+signal.signal(signal.SIGINT, sig_handler)
+signal.signal(signal.SIGTERM, sig_handler)
+signal.signal(signal.SIGALRM, sig_handler)
 
 
 def logit(level, message, verbosity):
@@ -109,32 +146,11 @@ def logit(level, message, verbosity):
     if (plevel == 50):
         print("{}".format(message))
         print("CRITICAL Level : Mandatory Exit...")
-        sys.exit(1)
-
-
-def sig_handler(signal, frame):
-    """
-    Signal Handling.
-
-    Receive signals and determine what to do with them. At this point, it
-    exits with code 1
-
-    :param signal
-    :param frame # Need to research what frame is :)
-
-    -SIGHUP signal. Similar to exit 1.
-    -SIGINT signal. CTRL-C signal number 2.
-    -SIGALRM signal. Alarm signal.
-    -SIGTERM signal. Signal number 15.
-    """
-    logit("info", "Signal received -- {}".format(signal), 1)
-    sys.exit(1)
-
-
-signal.signal(signal.SIGHUP, sig_handler)
-signal.signal(signal.SIGINT, sig_handler)
-signal.signal(signal.SIGTERM, sig_handler)
-signal.signal(signal.SIGALRM, sig_handler)
+        # We ask sig_handler to handle the exit. the sys.exit(1) does not send
+        # its signal. it has to be explicitly called.
+        #
+        sig_handler(1, 1)
+        # sys.exit(1)
 
 
 def timeout(secs):

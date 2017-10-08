@@ -1,0 +1,487 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:nyt="http://www.nytimes.com/namespaces/rss/2.0" version="2.0">
+<channel>
+<title>NYT > U.S.</title>
+<link>
+https://www.nytimes.com/section/us?partner=rss&emc=rss
+</link>
+<atom:link rel="self" type="application/rss+xml" href="http://www.nytimes.com/services/xml/rss/nyt/US.xml"/>
+<description/>
+<language>en-us</language>
+<copyright>Copyright 2017 The New York Times Company</copyright>
+<lastBuildDate>Sun, 08 Oct 2017 15:15:35 GMT</lastBuildDate>
+<image>
+<title>NYT > U.S.</title>
+<url>
+https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png
+</url>
+<link>
+https://www.nytimes.com/section/us?partner=rss&emc=rss
+</link>
+</image>
+<item>
+<title>
+Who Was Stephen Paddock? The Mystery of a Nondescript ‘Numbers Guy’
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/stephen-paddock-vegas.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/stephen-paddock-vegas.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/stephen-paddock-vegas.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08paddock1/08paddock1-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Workers boarded up a window Friday at the Mandalay Bay hotel, where Stephen Paddock opened fire on a country music festival on Oct. 1.
+</media:description>
+<media:credit>Chris Wattie/Reuters</media:credit>
+<description>
+The Las Vegas gunman was a savvy businessman and an absentee neighbor who lived on his own terms, according to people who knew him.
+</description>
+<dc:creator>
+SABRINA TAVERNISE, SERGE F. KOVALESKI and JULIE TURKEWITZ
+</dc:creator>
+<pubDate>Sun, 08 Oct 2017 01:33:36 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Las Vegas, Nev, Shooting (October, 2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Paddock, Stephen C (1953-2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Murders, Attempted Murders and Homicides</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Las Vegas (Nev)</category>
+</item>
+<item>
+<title>The Victims of Las Vegas: Remembering Their Lives</title>
+<link>
+https://www.nytimes.com/2017/10/02/us/vegas-victims-names.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/02/us/vegas-victims-names.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/02/us/vegas-victims-names.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/04/us/04vegas-live-ALT-SUB/04vegas-live-ALT-SUB-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+A memorial to the victims on the corner of Sahara Avenue and Las Vegas Boulevard on Tuesday.
+</media:description>
+<media:credit>Hilary Swift for The New York Times</media:credit>
+<description>
+They had come from faraway states for country music. They were police officers, teachers, secretaries. Here are the stories of the 58 people who died.
+</description>
+<dc:creator>
+JULIE BOSMAN, AMY HARMON, CHRISTINE HAUSER, JESS BIDGOOD and MAGGIE ASTOR
+</dc:creator>
+<pubDate>Sat, 07 Oct 2017 16:57:47 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Las Vegas, Nev, Shooting (October, 2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Deaths (Fatalities)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Las Vegas (Nev)</category>
+</item>
+<item>
+<title>
+Hurricane Nate Makes Landfall on the Gulf Coast, Then Weakens
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/hurricane-nate-gulf-coast.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/hurricane-nate-gulf-coast.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/hurricane-nate-gulf-coast.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08storm4/08storm-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+A sailboat washed ashore on a beach in Biloxi, Miss., after Hurricane Nate made landfall near the mouth of the Mississippi River with winds of 85 miles per hour.
+</media:description>
+<media:credit>Mark Wallheiser/Getty Images</media:credit>
+<description>
+President Trump declared emergencies in Mississippi and Louisiana, and the hurricane was downgraded to a tropical storm.
+</description>
+<dc:creator>JESS BIDGOOD and JOHN SCHWARTZ</dc:creator>
+<pubDate>Sun, 08 Oct 2017 12:46:52 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Hurricanes and Tropical Storms</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Gulf Coast (US)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_keyword">Hurricane Nate (2017)</category>
+</item>
+<item>
+<title>
+Minus Electrical Grid, Puerto Rico Becomes Generator Island
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/puerto-rico-power-generators.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/puerto-rico-power-generators.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/puerto-rico-power-generators.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/08power-01/08power-01-moth-v2.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Bella Group, in San Juan, P.R., has been selling 200 generators a day since Hurricane Maria hit Puerto Rico.
+</media:description>
+<media:credit>Dennis M. Rivera Pichardo for The New York Times</media:credit>
+<description>
+With 90 percent of the island without power, Puerto Rico has become a place where houses, stores, apartments and public buildings run on diesel generators.
+</description>
+<dc:creator>RICHARD FAUSSET, FRANCES ROBLES and DEBORAH ACOSTA</dc:creator>
+<pubDate>Sat, 07 Oct 2017 21:25:36 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Hurricane Maria (2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Power Failures and Blackouts</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Army Corps of Engineers</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Puerto Rico Electric Power Authority</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Musk, Elon</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Rossello, Ricardo A (1979- )</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Puerto Rico</category>
+</item>
+<item>
+<title>
+As Overdose Deaths Pile Up, a Medical Examiner Quits the Morgue
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/drug-overdose-medical-examiner.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/drug-overdose-medical-examiner.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/drug-overdose-medical-examiner.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/09/26/us/00medicalexaminer1/00medicalexaminer1-moth-v2.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Dr. Thomas Andrew, the chief medical examiner of New Hampshire, retired last month. Bodies from overdose deaths have overwhelmed medical examiners across the country.
+</media:description>
+<media:credit>Todd Heisler/The New York Times</media:credit>
+<description>
+“It has completely overwhelmed us,” Dr. Thomas A. Andrew said of the opioid crisis. His new ambition: minister to the living about the dangers of drugs.
+</description>
+<dc:creator>KATHARINE Q. SEELYE</dc:creator>
+<pubDate>Sat, 07 Oct 2017 09:00:28 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Drug Abuse and Traffic</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Deaths (Fatalities)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Medicine and Health</category>
+</item>
+<item>
+<title>
+Harvey Weinstein Paid Off Sexual Harassment Accusers for Decades
+</title>
+<link>
+https://www.nytimes.com/2017/10/05/us/harvey-weinstein-harassment-allegations.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/05/us/harvey-weinstein-harassment-allegations.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/05/us/harvey-weinstein-harassment-allegations.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/00Inquiry1/00Inquiry1-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Harvey Weinstein apologized for behavior that he said “has caused a lot of pain.”
+</media:description>
+<media:credit>
+Jean Baptiste LaCroix/Agence France-Presse — Getty Images
+</media:credit>
+<description>
+An investigation by The New York Times found allegations stretching back to 1990 about Mr. Weinstein’s treatment of women in Hollywood.
+</description>
+<dc:creator>JODI KANTOR and MEGAN TWOHEY</dc:creator>
+<pubDate>Sun, 08 Oct 2017 08:13:47 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Weinstein, Harvey</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Sexual Harassment</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Movies</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Actors and Actresses</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Weinstein Co</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Miramax Films</category>
+</item>
+<item>
+<title>Now a Hurricane, Nate Is Aiming for Gulf Coast</title>
+<link>
+https://www.nytimes.com/2017/10/06/us/hurricane-nate-tropical-storm-gulf-coast.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/06/us/hurricane-nate-tropical-storm-gulf-coast.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/06/us/hurricane-nate-tropical-storm-gulf-coast.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/07stormwatch-web/07stormwatch-1507329296930-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+New Orleans residents prepared for what was then Tropical Storm Nate. It had intensified to hurricane strength by late Friday night.
+</media:description>
+<media:credit>Sean Gardner/Getty Images</media:credit>
+<description>
+The storm is expected to make landfall on the central Gulf Coast late Saturday as a Category 2 hurricane.
+</description>
+<dc:creator>KATY RECKDAHL and ALAN BLINDER</dc:creator>
+<pubDate>Sat, 07 Oct 2017 18:00:22 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Gulf Coast (US)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Hurricanes and Tropical Storms</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">New Orleans (La)</category>
+</item>
+<item>
+<title>
+Company Scrambles as Weinstein Takes Leave and a Third of the Board Resigns
+</title>
+<link>
+https://www.nytimes.com/2017/10/06/us/harvey-weinstein-sexual-harassment.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/06/us/harvey-weinstein-sexual-harassment.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/06/us/harvey-weinstein-sexual-harassment.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/07xp-weinstein2/07xp-weinstein2-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+The Hollywood producer Harvey Weinstein in Zurich last year. In response to accusations of sexual harassment, he began an indefinite leave of absence from the Weinstein Company on Friday.
+</media:description>
+<media:credit>Andreas Rentz/Getty Images</media:credit>
+<description>
+The moves came as employees and business partners of the company voiced concern about sexual harassment allegations, revealed in a New York Times investigation.
+</description>
+<dc:creator>MEGAN TWOHEY and NIRAJ CHOKSHI</dc:creator>
+<pubDate>Sat, 07 Oct 2017 18:11:51 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Sexual Harassment</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Weinstein, Harvey</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Movies</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Weinstein Co</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Boards of Directors</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Bloom, Lisa (1961- )</category>
+</item>
+<item>
+<title>
+Man Helps Kidnapped Girl and Gives Her His $7,000 Reward
+</title>
+<link>
+https://www.nytimes.com/2017/10/08/us/minnesota-kidnapped-reward.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/08/us/minnesota-kidnapped-reward.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/08/us/minnesota-kidnapped-reward.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/09xp-Rescue/09xp-Rescue-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Earl Melchert, left, who helped rescue the 15-year-old kidnapping victim Jasmine Block, with Police Chief Richard Wyffels of Alexandria, Minn.
+</media:description>
+<media:credit>via Alexandria Police Department</media:credit>
+<description>
+A Minnesota man helped rescue a 15-year-old girl who had been kidnapped and assaulted for 29 days, then gave her his reward money.
+</description>
+<dc:creator>VIVIAN WANG</dc:creator>
+<pubDate>Sun, 08 Oct 2017 14:27:30 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Kidnapping and Hostages</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Child Abuse and Neglect</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Sex Crimes</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Minnesota</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Block, Jasmine</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Melchert, Earl</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Barker, Thomas J (1985- )</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Holby, Joshua L (1985- )</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Powers, Steven Michael Samuel (1997- )</category>
+</item>
+<item>
+<title>
+Erik Prince, Blackwater Founder, Weighs Primary Challenge to Wyoming Republican
+</title>
+<link>
+https://www.nytimes.com/2017/10/08/us/politics/erik-prince-blackwater-wyoming-senate.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/08/us/politics/erik-prince-blackwater-wyoming-senate.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/08/us/politics/erik-prince-blackwater-wyoming-senate.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/09dc-Prince1/09dc-Prince1-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Erik Prince is considering an election campaign against Senator John Barrasso, a senior member of the Republican leadership.
+</media:description>
+<media:credit>Rex Features, via AP Images</media:credit>
+<description>
+If Mr. Prince runs, he would be a high-profile contender in a fledgling drive to oust establishment lawmakers with insurgents in the mold of President Trump.
+</description>
+<dc:creator>JEREMY W. PETERS, MAGGIE HABERMAN and GLENN THRUSH</dc:creator>
+<pubDate>Sun, 08 Oct 2017 12:12:40 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Wyoming</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Republican Party</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Elections, Senate</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Prince, Erik D</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Barrasso, John</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Blackwater Worldwide</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Mercenaries and Private Military Contractors</category>
+</item>
+<item>
+<title>
+Richard Spencer and White Nationalists Return to Charlottesville
+</title>
+<link>
+https://www.nytimes.com/2017/10/08/us/richard-spencer-charlottesville.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/08/us/richard-spencer-charlottesville.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/08/us/richard-spencer-charlottesville.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08xp-Protestsub/08xp-Protestsub-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+A group of white nationalists briefly protested in Charlottesville, Va., on Saturday night, eight weeks after a rally there turned violent.
+</media:description>
+<media:credit/>
+<description>
+A small crowd bearing torches returned briefly to the site of a violent protest in Virginia, chanting, “You will not replace us!”
+</description>
+<dc:creator>MATT STEVENS</dc:creator>
+<pubDate>Sun, 08 Oct 2017 05:12:23 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Spencer, Richard B (1978- )</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Demonstrations, Protests and Riots</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Charlottesville (Va)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Charlottesville, Va, Violence (August, 2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Fringe Groups and Movements</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Race and Ethnicity</category>
+</item>
+<item>
+<title>
+Trump Poised to Sign Order Opening New Paths to Health Insurance
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/politics/trump-association-health-plans.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/politics/trump-association-health-plans.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/politics/trump-association-health-plans.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08dc-Health2/08dc-Health2-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+The National Association of Insurance Commissioners, which represents state regulators, is opposed to association health plans supported by President Trump.
+</media:description>
+<media:credit>Mark Makela for The New York Times</media:credit>
+<description>
+President Trump’s plan would make it easier for consumers to band together and buy insurance on their own, but critics warn of risks to consumers.
+</description>
+<dc:creator>ROBERT PEAR</dc:creator>
+<pubDate>Sun, 08 Oct 2017 01:49:44 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Health Insurance and Managed Care</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Executive Orders and Memorandums</category>
+</item>
+<item>
+<title>
+On Washington: ‘The New Washington’: Once Racing to Flee the Senate, Marco Rubio Now Digs In
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/politics/marco-rubio-new-washington-senate.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/politics/marco-rubio-new-washington-senate.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/politics/marco-rubio-new-washington-senate.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/07dc-hulse/08dc-hulse-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Senator Marco Rubio of Florida. When he first joined the Senate in 2011, he was No. 99 in seniority. Now, he is No. 58.
+</media:description>
+<media:credit>Al Drago for The New York Times</media:credit>
+<description>
+Mr. Rubio, Republican of Florida, seems determined to shrug off the disappointment of a failed presidential race and show he is serious about the Senate, making up for lost time.
+</description>
+<dc:creator>CARL HULSE</dc:creator>
+<pubDate>Sun, 08 Oct 2017 00:31:26 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Rubio, Marco</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Senate</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Presidential Election of 2016</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Republican Party</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Florida</category>
+</item>
+<item>
+<title>
+Death of Chicago Teenager Found in Walk-In Freezer Is Ruled an Accident
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/kenneka-jenkins-autopsy-topiramate.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/kenneka-jenkins-autopsy-topiramate.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/kenneka-jenkins-autopsy-topiramate.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/09/14/business/14xp-chicago1-copy/14xp-chicago1-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Kenneka Jenkins, 19, was found dead last month in a walk-in freezer at a hotel in Rosemont, Ill., after attending a party.
+</media:description>
+<media:credit/>
+<description>
+The death of Kenneka Jenkins was ruled an accident, but its mysterious circumstances are fueling speculation about how she ended up in a hotel freezer last month.
+</description>
+<dc:creator>CHRISTINA CARON</dc:creator>
+<pubDate>Sun, 08 Oct 2017 14:30:23 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Hypothermia</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Jenkins, Kenneka (d 2017)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Autopsies</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_geo">Rosemont (Ill)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_keyword">Topiramate</category>
+</item>
+<item>
+<title>
+Schumer Says He Rebuffed Another Offer From Trump on Health Care
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/politics/trump-schumer-obamacare.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/politics/trump-schumer-obamacare.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/politics/trump-schumer-obamacare.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/07/us/08dc-trump/08dc-trump-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+The Senate Democratic leader, Chuck Schumer, said he had rebuffed President Trump, telling him that Democrats would work with the White House only on fixing the weaknesses in the Affordable Care Act, not replacing it.
+</media:description>
+<media:credit>Pete Marovich for The New York Times</media:credit>
+<description>
+President Trump proposed yet another effort to repeal and replace the Affordable Care Act, but Senator Chuck Schumer later said he had quickly shot down the offer.
+</description>
+<dc:creator>MARK LANDLER</dc:creator>
+<pubDate>Sat, 07 Oct 2017 17:56:52 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Schumer, Charles E</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">Patient Protection and Affordable Care Act (2010)</category>
+</item>
+<item>
+<title>
+The ‘Resistance,’ Raising Big Money, Upends Liberal Politics
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/politics/democrats-resistance-fundraising.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/politics/democrats-resistance-fundraising.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/politics/democrats-resistance-fundraising.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08DC-RESISTANCE/08DC-RESISTANCE-moth-v2.jpg" medium="image" height="151" width="151"/>
+<media:description>
+Supporters of Indivisible, an anti-Trump group, in Olympia, Wash., last month. The so-called resistance is attracting six- and seven-figure checks from major liberal donors.
+</media:description>
+<media:credit>Steve Bloom/The Olympian, via Associated Press</media:credit>
+<description>
+The tug of war between establishment and upstart forces foreshadows a reorganization of the left that could reshape the Democratic Party’s ideology.
+</description>
+<dc:creator>KENNETH P. VOGEL</dc:creator>
+<pubDate>Sun, 08 Oct 2017 01:42:52 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">United States Politics and Government</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Center for American Progress</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Democracy Alliance</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_org_all">Democratic Party</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Soros, George</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Tanden, Neera</category>
+</item>
+<item>
+<title>
+Hoping to Have Trump Cleared, Legal Team Eases Resistance to Inquiry
+</title>
+<link>
+https://www.nytimes.com/2017/10/07/us/politics/trump-russia-legal.html?partner=rss&emc=rss
+</link>
+<guid isPermaLink="true">
+https://www.nytimes.com/2017/10/07/us/politics/trump-russia-legal.html
+</guid>
+<atom:link rel="standout" href="https://www.nytimes.com/2017/10/07/us/politics/trump-russia-legal.html?partner=rss&emc=rss"/>
+<media:content url="https://static01.nyt.com/images/2017/10/08/us/08dc-legal/08dc-legal-moth.jpg" medium="image" height="151" width="151"/>
+<media:description>
+President Trump’s legal team is aiming to create the impression that the White House has nothing to hide from Robert S. Mueller III’s investigation.
+</media:description>
+<media:credit>Doug Mills/The New York Times</media:credit>
+<description>
+President Trump’s aides, who once debated a scorched-earth strategy, hope the special counsel on Russia will give the president the public exoneration he has long sought.
+</description>
+<dc:creator>MATT APUZZO and MICHAEL S. SCHMIDT</dc:creator>
+<pubDate>Sat, 07 Oct 2017 16:32:37 GMT</pubDate>
+<category domain="http://www.nytimes.com/namespaces/keywords/des">
+Russian Interference in 2016 US Elections and Ties to Trump Associates
+</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/mdes">Special Prosecutors (Independent Counsel)</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Cobb, Ty</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Trump, Donald J</category>
+<category domain="http://www.nytimes.com/namespaces/keywords/nyt_per">Mueller, Robert S III</category>
+</item>
+</channel>
+</rss>
