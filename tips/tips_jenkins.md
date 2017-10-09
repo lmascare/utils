@@ -40,7 +40,7 @@
 
 ####Integration with GIT as a webhook
 * Setup ngrok connection to local host
-* ./ngrok authtoken 7NpbQGqKRcy5AeSVDKexR_2vX56kxSXENMmzirx6AZt
+* ./ngrok authtoken <token>
     * Token saved in /root/.ngrok2/ngrok.yml
 * ./ngrok http 8080 --bind-tls "both"
 
@@ -67,7 +67,6 @@
 
 * Push a commit to the repository and observe the call to Jenkins
 
-* be30c73a9fac69d7ca4d67e63ff9ef5cf6d53725 GitHub Personal Token
 ##### Reference Video
 * https://www.youtube.com/watch?v=Z3S2gMBUkBo
 
