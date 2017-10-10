@@ -71,6 +71,20 @@
 ##### Reference Video
 * https://www.youtube.com/watch?v=Z3S2gMBUkBo
 
+#### Role based access controls
+* Install the Role-based Authorization Strategy
+* Create a user account.
+    - Manage Jenkins
+        - Manage Users - Create User
+        - Configure Global Security
+            - In Authorization section enable 'Role-Based Strategy'
+            - This adds a new entry 'Manage and Assign Roles' in Manage Jenkins
+        - Select Manage and Assign Roles
+            - Manage Roles
+                - Create Global & Project Roles
+            - Assign Roles 
+                - Assign people to Roles 
+
 #### Automated Deployment
 * Start Jenkins
 * Install the Jenkins Deploy Plugin  
