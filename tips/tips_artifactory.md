@@ -1,6 +1,8 @@
 ## Artifactory Tips
 
 #### Download from http://jfrog.com
+https://www.jfrog.com/confluence/display/RTF/Installing+Artifactory#InstallingArtifactory-DefaultAdminUser
+https://www.jfrog.com/confluence/display/RTF4X/Welcome+to+Artifactory
 
 #### Install as root
 * rpm -i jfrog-artifactory-oss-5.5.1.rpm
