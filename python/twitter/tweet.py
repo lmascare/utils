@@ -14,8 +14,8 @@ auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
 '''
 Unsure why I needed this now. Perhaps later to get WOE_IDs
 
-Yahoo Client ID dj0yJmk9WU03Z0RCYTVtRjExJmQ9WVdrOVR6SllWRUpETjJVbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1kZA--
-yahoo Client Secret 88f661cac7af208f45798c3a6846ef5fcd164580
+Yahoo Client ID 
+yahoo Client Secret 
 '''
 
 twitter_api = twitter.Twitter(auth=auth)
