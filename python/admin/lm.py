@@ -17,14 +17,19 @@ def main():
     import signal
 
     utils.init()
+
+    (db_name, db_user, db_pass, db_port) = utils.db_creds()
+    print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
+
     #utils.hello()
     #utils.logit("hello","critical")
     #utils.logit("hello","error")
     #utils.logit("hello","warning")
     #utils.logit("hello","info")
-    utils.logit("info", "hello", 1)
-    utils.timeout(10)
-    signal.pause()
+
+    ##utils.logit("info", "hello", 1)
+    ##utils.timeout(1)
+    ##signal.pause()
     
     #utils.runcmd('ps -eaf')
     #utils.runcmd('ifconfig -a')

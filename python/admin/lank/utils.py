@@ -5,6 +5,7 @@ List of functions available in this module
  - runcmd      -- Complete
  - sig_handler -- Complete
  - timeout     -- Complete
+ - db_creds    -- Complete
 """
 
 # ToDo
@@ -18,6 +19,7 @@ List of functions available in this module
 #   - logfile
 #   - add try: except to trap failures
 #   - create the logfile if it doesn't exist. chmod 664
+#   - get the key
 #
 import logging
 import sys
@@ -27,7 +29,7 @@ import inspect
 import subprocess
 import shlex
 import signal
-from vars import logdir
+from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport
 
 
 def init():
@@ -37,15 +39,34 @@ def init():
     - Note that it explicitly calls os.chmod as os.mkdir with perms
       does not correctly set the permissions.
     """
-    global logdir
-    global scriptname
-
-    # logdir = '/u/tmp'
     if not (os.path.isdir(logdir)):
         os.mkdir(logdir)
         os.chmod(logdir, 0o777)
     # else:
     #   print("{} exists".format(logdir))
+
+
+def db_creds():
+    """
+    Decrypt DB creds.
+
+    Creds in vars.py are decrypted and returned
+    :return db_name, db_user, db_pass, db_port:
+    """
+    if (os.path.exists(keyfile)):
+        authkey = open(keyfile, 'r').read()
+        # print(authkey)
+    from cryptography.fernet import Fernet
+    f = Fernet(authkey)
+
+    db_name = f.decrypt(dbname)
+    db_user = f.decrypt(dbuser)
+    db_pass = f.decrypt(dbpass)
+    db_port = f.decrypt(dbport)
+    return (db_name, db_user, db_pass, db_port)
+
+    # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
+    # .format(db_name, db_user, db_pass, db_port))
 
 
 def sig_handler(signal, frame):
