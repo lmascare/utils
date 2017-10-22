@@ -6,6 +6,7 @@ List of functions available in this module
  - sig_handler -- Complete
  - timeout     -- Complete
  - db_creds    -- Complete
+ - get_creds   -- Complete
 """
 
 # ToDo
@@ -15,11 +16,8 @@ List of functions available in this module
 #  - should_i_exit
 #
 # in init() function
-#   - define scriptname
-#   - logfile
 #   - add try: except to trap failures
 #   - create the logfile if it doesn't exist. chmod 664
-#   - get the key
 #
 import logging
 import sys
@@ -50,7 +48,7 @@ def db_creds():
     """
     Decrypt DB creds.
 
-    Creds in vars.py are decrypted and returned
+    Default Creds in vars.py are decrypted and returned.
     :return db_name, db_user, db_pass, db_port:
     """
     if (os.path.exists(keyfile)):
@@ -67,6 +65,33 @@ def db_creds():
 
     # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
     # .format(db_name, db_user, db_pass, db_port))
+
+
+def get_creds(dbname, dbuser, dbpass, dbport):
+    """
+    Decrypt creds.
+
+    Creds are provided as arguments to this routine,
+    decrypted and returned.
+    :param dbname:
+    :param dbuser:
+    :param dbpass:
+    :param dbport:
+    :return db_name, db_user, db_pass, db_port:
+    """
+    if (os.path.exists(keyfile)):
+        authkey = open(keyfile, 'r').read()
+        # print(authkey)
+    from cryptography.fernet import Fernet
+    f = Fernet(authkey)
+
+    db_name = f.decrypt(dbname)
+    db_user = f.decrypt(dbuser)
+    db_pass = f.decrypt(dbpass)
+    db_port = f.decrypt(dbport)
+    # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
+    # .format(db_name, db_user, db_pass, db_port))
+    return (db_name, db_user, db_pass, db_port)
 
 
 def sig_handler(signal, frame):

@@ -14,12 +14,29 @@ def main():
     # Alternatively, we can set it in the main program as follows
     # sys.path.append('/u/gitwork/utils/python/admin/lank')
     import utils
-    import signal
+    # import signal
 
+    #from vars import dbname, dbuser, dbpass, dbport
+    from vars import db_creds
     utils.init()
 
-    (db_name, db_user, db_pass, db_port) = utils.db_creds()
-    print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
+    dbnames = db_creds.keys()
+    # print(dbnames)
+
+    for dbname in dbnames:
+        # print dbname
+
+        dbuser = db_creds[dbname]['db_user']
+        print(dbuser)
+
+        dbpass = db_creds[dbname]['db_pass']
+        print(dbpass)
+
+        dbport = db_creds[dbname]['db_port']
+        print(dbport)
+
+    # (db_name, db_user, db_pass, db_port) = utils.get_creds(dbname, dbuser, dbpass, dbport)
+    #print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
 
     #utils.hello()
     #utils.logit("hello","critical")

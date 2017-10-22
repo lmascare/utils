@@ -33,9 +33,9 @@ keyfile = adm_keys + '/keyfile'
 logdir = adm_logs
 
 """ Used for the MySQL DB """
-dbuser = 'gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61vvzAiDWKyv\
-LYOAlkomZ6NXayxVmU3XLi-ZfleZaQ=='
 dbname = 'gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61vvzAiDWKyv\
+LYOAlkomZ6NXayxVmU3XLi-ZfleZaQ=='
+dbuser = 'gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61vvzAiDWKyv\
 LYOAlkomZ6NXayxVmU3XLi-ZfleZaQ=='
 dbpass = 'gAAAAABZ6-gp2LRJGy6PUolC5lUNd_OimzJChjJDthVVCZXSDvclKLx_6QSZZ-8SJ9ra\
 UErXg5M2P7vmCKGc63T0uMr8J04C6A=='
@@ -47,3 +47,18 @@ RVq1_XDzrKOlXozOq7n90Gsuukegbw=='
 # dbuser = 'lifecycle'
 # dbpass = 'waterloo'
 # dbport = 3306
+
+# DB Credentials for several databases in Python DICT format
+
+db_creds = {
+    "stock": {
+        "db_user": "stock",
+        "db_pass": "stock",
+        "db_port": 3306
+    },
+    "lifecycle": {
+        "db_user": "lifecycle",
+        "db_pass": "lifecycle",
+        "db_port": 3306
+    }
+}
