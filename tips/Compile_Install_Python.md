@@ -18,15 +18,16 @@
 * wget http://python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
 * tar xf Python-2.7.14.tar.xz
 * cd Python-2.7.14
-* ./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared \
-  LDFLAGS="-Wl,-rpath /usr/local/lib"
+* ./configure --prefix=/usr/local/python2.7.14 --enable-unicode=ucs4 --enable-shared \
+  -enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/lib"
 * make && make altinstall
  
 ## Python 3.6.3:
 * wget http://python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
 * tar xf Python-3.6.3.tar.xz
 * cd Python-3.6.3
-* ./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+* ./configure --prefix=/usr/local/python3.6.3 --enable-shared \
+  -enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/lib"
 * make && make altinstall
 
 
@@ -39,9 +40,10 @@
 ### First get the script:
 * wget https://bootstrap.pypa.io/get-pip.py
  
-### Then execute it using Python 2.7 and/or Python 3.6:
+### Then execute it using Python 2.7 
+### Python 3.6 has pip3 by default
 * python2.7 get-pip.py
-* python3.6 get-pip.py
+
  
 # With pip installed you can now do things like this:
 * pip2.7 install [packagename]
