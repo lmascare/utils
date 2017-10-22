@@ -19,24 +19,30 @@ def main():
     #from vars import dbname, dbuser, dbpass, dbport
     from vars import db_creds
     utils.init()
+    # utils.create_key()
+    crd = utils.encrypt_cred('stock')
+    print(crd)
 
     dbnames = db_creds.keys()
-    # print(dbnames)
+    print(dbnames)
 
-    for dbname in dbnames:
-        # print dbname
+    for dbcred in dbnames:
+        print dbcred
 
-        dbuser = db_creds[dbname]['db_user']
+        dbname = db_creds[dbcred]['db_name']
+        print(dbname)
+
+        dbuser = db_creds[dbcred]['db_user']
         print(dbuser)
 
-        dbpass = db_creds[dbname]['db_pass']
+        dbpass = db_creds[dbcred]['db_pass']
         print(dbpass)
 
-        dbport = db_creds[dbname]['db_port']
+        dbport = db_creds[dbcred]['db_port']
         print(dbport)
 
-    # (db_name, db_user, db_pass, db_port) = utils.get_creds(dbname, dbuser, dbpass, dbport)
-    #print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
+        (db_name, db_user, db_pass, db_port) = utils.get_creds(dbname, dbuser, dbpass, dbport)
+        print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
 
     #utils.hello()
     #utils.logit("hello","critical")

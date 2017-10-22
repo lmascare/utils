@@ -8,7 +8,7 @@ List of functions available in this module
  - db_creds      -- Complete
  - get_creds     -- Complete
  - create_key    -- Complete
- - encrypt_cred  -- In Progress
+ - encrypt_cred  -- Complete
 """
 
 # ToDo
@@ -17,7 +17,7 @@ List of functions available in this module
 #  - lock_script
 #  - should_i_exit
 #
-# in init() function
+# in init(), keys functions
 #   - add try: except to trap failures
 #   - create the logfile if it doesn't exist. chmod 664
 #
@@ -83,7 +83,7 @@ def get_creds(dbname, dbuser, dbpass, dbport):
     """
     if (os.path.exists(keyfile)):
         authkey = open(keyfile, 'r').read()
-        print(authkey)
+        # print(authkey)
     from cryptography.fernet import Fernet
     f = Fernet(authkey)
 
@@ -106,6 +106,10 @@ def create_key():
 
     This key should then be copied to the adm_keys dir with appropriate
     permissions. See your Systems Administrator for those details.
+
+    *** IMPORTANT ***
+    This key is used to encrypt all the credentials. Keep it safe. Loss of
+    this key will require you to regenerate all credentials.
     """
     tmp_keyfile = adm_tmp \
         + '/keyfile.' \
@@ -122,6 +126,25 @@ def create_key():
 
     os.chmod(tmp_keyfile, 0o400)
     os.chown(tmp_keyfile, os.getuid(), os.getgid())
+
+
+def encrypt_cred(cred):
+    """
+    Encrypt the supplied credential using the keyfile.
+
+    This important function
+    :param cred:
+    :return encrypted_cred:
+    """
+    if os.path.exists(keyfile):
+        authkey = open(keyfile, "r").read()
+
+    from cryptography.fernet import Fernet
+    f = Fernet(authkey)
+
+    encrypted_cred = f.encrypt(cred)
+    # print (encrypted_cred)
+    return(encrypted_cred)
 
 
 def sig_handler(signal, frame):

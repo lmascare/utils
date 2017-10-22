@@ -43,22 +43,32 @@ dbport = 'gAAAAABZ6-hyadloTFpJyIY9H6Ki4cikqab9GRP9EmjqXk--I6Nz3rd9mqDb_RPpzBaO\
 RVq1_XDzrKOlXozOq7n90Gsuukegbw=='
 
 
-# dbname = 'lifecycle'
-# dbuser = 'lifecycle'
-# dbpass = 'waterloo'
-# dbport = 3306
+# dbname = 'lifecycle' | 'stock'
+# dbuser = 'lifecycle' | 'stock'
+# dbpass = 'waterloo'  | 'stock'
+# dbport = 3306        | 3306
 
 # DB Credentials for several databases in Python DICT format
 
 db_creds = {
     "stock": {
-        "db_user": "stock",
-        "db_pass": "stock",
-        "db_port": 3306
+        "db_name": "gAAAAABZ7KLVM0iwLz2RXncIEWUKUFO4mRsxsKfX_l5beQzSy2a1q-4kuQ\
+xM62R-AGgtmUs588GJTOplpvZSj57Nfot68EIwKw==",
+        "db_user": "gAAAAABZ7KLVM0iwLz2RXncIEWUKUFO4mRsxsKfX_l5beQzSy2a1q-4kuQ\
+xM62R-AGgtmUs588GJTOplpvZSj57Nfot68EIwKw==",
+        "db_pass": "gAAAAABZ7KLVM0iwLz2RXncIEWUKUFO4mRsxsKfX_l5beQzSy2a1q-4kuQ\
+xM62R-AGgtmUs588GJTOplpvZSj57Nfot68EIwKw==",
+        "db_port": "gAAAAABZ6-hyadloTFpJyIY9H6Ki4cikqab9GRP9EmjqXk--I6Nz3rd9mq\
+Db_RPpzBaORVq1_XDzrKOlXozOq7n90Gsuukegbw=="
     },
     "lifecycle": {
-        "db_user": "lifecycle",
-        "db_pass": "lifecycle",
-        "db_port": 3306
+        "db_name": "gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61\
+vvzAiDWKyvLYOAlkomZ6NXayxVmU3XLi-ZfleZaQ==",
+        "db_user": "gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61\
+vvzAiDWKyvLYOAlkomZ6NXayxVmU3XLi-ZfleZaQ==",
+        "db_pass": "gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61\
+vvzAiDWKyvLYOAlkomZ6NXayxVmU3XLi-ZfleZaQ==",
+        "db_port": "gAAAAABZ6-hyadloTFpJyIY9H6Ki4cikqab9GRP9EmjqXk--I6Nz3rd9mq\
+Db_RPpzBaORVq1_XDzrKOlXozOq7n90Gsuukegbw=="
     }
 }
