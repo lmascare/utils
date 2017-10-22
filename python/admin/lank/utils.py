@@ -1,12 +1,14 @@
 """This Module contains commonly used utilities.
 
 List of functions available in this module
- - logit       -- Complete
- - runcmd      -- Complete
- - sig_handler -- Complete
- - timeout     -- Complete
- - db_creds    -- Complete
- - get_creds   -- Complete
+ - logit         -- Complete
+ - runcmd        -- Complete
+ - sig_handler   -- Complete
+ - timeout       -- Complete
+ - db_creds      -- Complete
+ - get_creds     -- Complete
+ - create_key    -- Complete
+ - encrypt_cred  -- In Progress
 """
 
 # ToDo
@@ -27,7 +29,7 @@ import inspect
 import subprocess
 import shlex
 import signal
-from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport
+from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp
 
 
 def init():
@@ -81,7 +83,7 @@ def get_creds(dbname, dbuser, dbpass, dbport):
     """
     if (os.path.exists(keyfile)):
         authkey = open(keyfile, 'r').read()
-        # print(authkey)
+        print(authkey)
     from cryptography.fernet import Fernet
     f = Fernet(authkey)
 
@@ -92,6 +94,34 @@ def get_creds(dbname, dbuser, dbpass, dbport):
     # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
     # .format(db_name, db_user, db_pass, db_port))
     return (db_name, db_user, db_pass, db_port)
+
+
+def create_key():
+    """
+    Create cryptographic key for signing.
+
+    This function will create a keyfile and stash in the adm_tmp directory
+    File format : keyfile.username.pid
+    It will set owner to the current owner and only he can read the file.
+
+    This key should then be copied to the adm_keys dir with appropriate
+    permissions. See your Systems Administrator for those details.
+    """
+    tmp_keyfile = adm_tmp \
+        + '/keyfile.' \
+        + os.environ['USER'] \
+        + '.' \
+        + str(os.getpid())
+    from cryptography.fernet import Fernet
+    key = Fernet.generate_key()
+    # print(key, tmp_keyfile, os.environ, os.getgid())
+
+    f = open(tmp_keyfile, "w")
+    f.write(key)
+    f.close()
+
+    os.chmod(tmp_keyfile, 0o400)
+    os.chown(tmp_keyfile, os.getuid(), os.getgid())
 
 
 def sig_handler(signal, frame):
