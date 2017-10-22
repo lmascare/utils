@@ -11,14 +11,48 @@ def main():
     #from lank import utils
 
     # We set the PYTHONPATH so that we don't have to specify the modules dir.
+    # Alternatively, we can set it in the main program as follows
+    # sys.path.append('/u/gitwork/utils/python/admin/lank')
     import utils
+    # import signal
+
+    #from vars import dbname, dbuser, dbpass, dbport
+    from vars import db_creds
     utils.init()
+    # utils.create_key()
+    crd = utils.encrypt_cred('stock')
+    print(crd)
+
+    dbnames = db_creds.keys()
+    print(dbnames)
+
+    for dbcred in dbnames:
+        print dbcred
+
+        dbname = db_creds[dbcred]['db_name']
+        print(dbname)
+
+        dbuser = db_creds[dbcred]['db_user']
+        print(dbuser)
+
+        dbpass = db_creds[dbcred]['db_pass']
+        print(dbpass)
+
+        dbport = db_creds[dbcred]['db_port']
+        print(dbport)
+
+        (db_name, db_user, db_pass, db_port) = utils.get_creds(dbname, dbuser, dbpass, dbport)
+        print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}".format(db_name, db_user, db_pass, db_port))
+
     #utils.hello()
     #utils.logit("hello","critical")
     #utils.logit("hello","error")
     #utils.logit("hello","warning")
     #utils.logit("hello","info")
-    utils.logit("hello","debug")
+
+    ##utils.logit("info", "hello", 1)
+    ##utils.timeout(1)
+    ##signal.pause()
     
     #utils.runcmd('ps -eaf')
     #utils.runcmd('ifconfig -a')

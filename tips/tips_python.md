@@ -1,33 +1,54 @@
-#
-# Virtualenv
-# download get-pip.py 
-# python get-pip.py (Make sure python is for v2.7.x
-# pip install virtualenv
-# virtualenv <envname>
-# source <envname>/bin/activate (this will enable the new virtualenv)
-# deactivate (exit the virtualenv)
-#
-# To get the list of packages in a Virtualenv & save in requirements.txt
-# This .txt file can be used to build your env to move to production
+#  Python Tips
 
-# pip freeze > requirements.txt
-# pip install -r requirements.txt
+#### Virtualenv Python 2.7
+ * wget https://bootstrap.pypa.io/get-pip.py 
+ * python get-pip.py (Make sure python is for v2.7.x
+ * pip install virtualenv
+ * virtualenv <envname>
+ * source <envname>/bin/activate (this will enable the new virtualenv)
+ * deactivate (exit the virtualenv)
+ 
+#### Virtualenv Python 3.6.3
+ * python3 -m venv <virtualenv>
+ * pip3 is already part of Python3.6.3
+ * source <virtualenv>/bin/activate
+ * deactivate
+ 
+#### Setup local PyPi server
+ * pip download pypiserver
+ # TODO
 
+**To get the list of packages in a Virtualenv & save in requirements.txt**  
+**This .txt file can be used to build your env to move to production**
 
-# Install setuptools
-# Download setuptools tarball.
-# python3 setup.py install
+ * pip freeze > requirements.txt
+ * pip install -r requirements.txt
 
-# Install netifaces. This requires python3-dev
-# python3 setup.py install
-#
-# To get the interfaces
-# python3
-#  import netifaces
-#  netifaces.interfaces()
-#  ['lo', 'enp0s3']
-#
-#  >>> netifaces.ifaddresses('enp0s3')
+ * Docstrings conformance is checked via pep257, now pydocstyle
+ * pip install pep257
+ * pip install pydocstyle
+
+ * Code conformance to pep8 is checked via pep8, now pycodestyle
+ * pip install pep8
+
+ * Flake incorporates both pep8 & pep257
+ * To add support for docstrings in flake8, add the plugin
+ * pip install flake8-docstrings
+
+ * Install setuptools
+ * Download setuptools tarball.
+ * python3 setup.py install
+
+ * Install netifaces. This requires python3-dev
+ * python3 setup.py install
+
+ * To get the interfaces
+ * python3
+   * import netifaces
+   * netifaces.interfaces()
+   *  ['lo', 'enp0s3']
+
+>>> netifaces.ifaddresses('enp0s3')
 {17: [{'addr': '08:00:27:3f:2e:61', 'broadcast': 'ff:ff:ff:ff:ff:ff'}], \
   2: [{'addr': '10.0.2.15', 'netmask': '255.255.255.0', 'broadcast': '10.0.2.255'}], \
  10: [{'addr': 'fe80::856c:a7d7:5d70:9ec4%enp0s3', 'netmask': 'ffff:ffff:ffff:ffff::/64'}]}
