@@ -43,11 +43,6 @@ dbport = 'gAAAAABZ6-hyadloTFpJyIY9H6Ki4cikqab9GRP9EmjqXk--I6Nz3rd9mqDb_RPpzBaO\
 RVq1_XDzrKOlXozOq7n90Gsuukegbw=='
 
 
-# dbname = 'lifecycle' | 'stock'
-# dbuser = 'lifecycle' | 'stock'
-# dbpass = 'waterloo'  | 'stock'
-# dbport = 3306        | 3306
-
 # DB Credentials for several databases in Python DICT format
 
 db_creds = {
