@@ -2,7 +2,7 @@
 
 **Download --> http://jenkins.io**  
 **CHEF Cookbook --> https://github.com/chef-cookbooks/jenkins**  
-**Documentation --> **  
+**Documentation --> https://jenkins.io/doc/**  
 
 #### Installation & Configuration
 * Install Wiki --> https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions
