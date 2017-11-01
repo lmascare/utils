@@ -1,7 +1,7 @@
 # Jenkins Tips
 
 **Download --> http://jenkins.io**  
-**CHEF Cookbook --> https://github.com/chef-cookbooks/jenkins**
+**CHEF Cookbook --> https://github.com/chef-cookbooks/jenkins**  
 **Documentation --> **  
 
 #### Installation & Configuration
