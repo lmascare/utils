@@ -1,6 +1,7 @@
 # Jenkins Tips
 
 **Download --> http://jenkins.io**  
+**CHEF Cookbook --> https://github.com/chef-cookbooks/jenkins**
 **Documentation --> **  
 
 #### Installation & Configuration
@@ -133,3 +134,17 @@ do
 done
 ```
  * Save
+
+#### Jenkinsfile
+```
+pipeline {
+   agent any
+   stages {
+      stage('build') {
+         steps {
+            sh '/usr/local/bin/python2 --version'
+         }
+      }
+   }
+}
+```
