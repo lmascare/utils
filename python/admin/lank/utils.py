@@ -16,6 +16,7 @@ List of functions available in this module
 #  - unlock_script
 #  - lock_script
 #  - should_i_exit
+#  -
 #
 # in init(), keys functions
 #   - add try: except to trap failures
@@ -281,6 +282,9 @@ def runcmd(os_cmd):
     We use shlex to split the command supplied into tokens for Popen.
 
     :param os_cmd
+    :return: STDOUT
+    :return: STDERR
+    :return: Return Code
 
     Examples:
         utils.runcmd('ps -eaf')
@@ -298,8 +302,10 @@ def runcmd(os_cmd):
     stdout, stderr = p.communicate()
     out = stdout.decode('utf-8')
     err = stdout.decode('utf-8')
-    print(out, err)
+    rc = p.returncode
+    # print(out, err, rc)
     logit("info", "OS Command : {}".format(os_cmd), 0)
+    return (out, err, rc)
 
 
 def get_filename():
