@@ -1,32 +1,43 @@
-# Networking
-#
-# /etc/sysconfig/network  - Contains hostname and enable networking
-# NETWORKING=yes
-# HOSTNAME=
-# FORWARD_IPV4=false
-# NTPSERVERARGS=iburst
-#
-# /etc/sysconfig/network-scripts/ifcfg-eth0 has
-# DEVICE=eth
-# IPADDR=
-# NETMASK=
-# BROADCAST=
-# GATEWAY=
-# DNS1=
-# DNS2=
-# DOMAIN=
-# ONBOOT=yes
-# BOOTPROTO=static
-#
-# /etc/hosts will get the IP from there. Also look at /etc/host.conf
-#
-# /etc/resolv.conf for DNS
-# 
-# /etc/ntp.conf
-#
-# Check the status of all the services
-# chkconfig --list
-#
+## Administration
+
+#### Start / stop services
+* systemctl start <service>
+* systemctl stop <service>
+
+#### Enable / Disable services from starting during boot
+* systemctl enable \<service\>
+* systemctl disable \<service\>
+* systemctl reenable \<service\>
+
+#### Networking
+
+* /etc/sysconfig/network  - Contains hostname and enable networking
+* NETWORKING=yes
+* HOSTNAME=
+* FORWARD_IPV4=false
+* NTPSERVERARGS=iburst
+
+* /etc/sysconfig/network-scripts/ifcfg-eth0 has
+* DEVICE=eth
+* IPADDR=
+* NETMASK=
+* BROADCAST=
+* GATEWAY=
+* DNS1=
+* DNS2=
+* DOMAIN=
+* ONBOOT=yes
+* BOOTPROTO=static
+
+* /etc/hosts will get the IP from there. Also look at /etc/host.conf
+
+* /etc/resolv.conf for DNS
+ 
+* /etc/ntp.conf
+
+#### Check the status of all the services
+* chconfig --list
+
 # start the sshd server
 # /etc/ssh contains the config files
 # service sshd status   -- Lists the status of the sshd server
@@ -97,25 +108,23 @@
 # Reference https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-swap-creating-file.html
 #
 
-# YUM
-# 
-# Ensure the rpm to create the repo exists
-# rpm -q -a |egrep createrepo
-# Else
-# yum install createrepo
+#### YUM
+##### Ensure the rpm to create the repo exists
+* yum install createrepo
+* rpm -q -a |egrep createrepo
 
-# Init the repo
-# createrepo /u/repository/fedora-14 (after creating the directories)
-#
+##### Init the repo
+* createrepo /u/repository/fedora-14 (after creating the directories)
 
-# USERADD
+
+#### USERADD
 useradd -c 'Larry Mascarenhas' -d /home/lmascare -g 100 -m -k /etc/skel \
 -s /bin/bash -u 1001 lmascare
 passwd lmascare # Set the new password
 
-# To see which pkg provides a file
+##### To see which pkg provides a file
 yum whatprovides */mkpasswd
 
-# Ensure rc.d scripts work as expected. Use the Wiki for reference
-# https://wiki.debian.org/LSBInitScripts
-update-rc.d app start 99 2 3 . stop 99 0 1 6 .
+#### Ensure rc.d scripts work as expected. Use the Wiki for reference
+* https://wiki.debian.org/LSBInitScripts  
+* update-rc.d app start 99 2 3 . stop 99 0 1 6 .
