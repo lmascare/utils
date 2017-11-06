@@ -54,7 +54,7 @@ def main():
     ##utils.timeout(1)
     ##signal.pause()
     
-    #utils.runcmd('ps -eaf')
+    utils.runcmd('ps -eaf')
     #utils.runcmd('ifconfig -a')
 
     # OO Programming
