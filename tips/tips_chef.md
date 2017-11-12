@@ -96,8 +96,8 @@
 * Ensure that ports 80, 443, 8000 are not used
 * Enable access from everywhere
 ```angular2html
-firewall-cmd --add-port=80/tcp --permanent
-firewall-cmd --add-port=443/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
 ```
@@ -142,6 +142,16 @@ knife node list
 knife node delete <node-name> -y
 knife node show </node-name>
 ```
+
+* Once cookbooks are uploaded to the chef-server, they can be run using chef-client on the node.  
+  But from the chef-server, it is preferable to run knife ssh  
+```apple js
+knife ssh 'name:lmascare-centos' 'sudo chef-client' --ssh-user chef --attribute ipaddress
+sudo chef-client
+```
+  * attributes are in 
+    * https://docs.chef.io/attributes.html#automatic-ohai  
+  
 
 ####**Install additional packages from https://packages.chef.io**  
 **To add support for databags, attributes, runlists, roles, environments, and cookbooks from a 
