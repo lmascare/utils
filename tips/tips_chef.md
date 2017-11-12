@@ -132,14 +132,19 @@ knife cookbook list
 * _Ubuntu_: /etc/sudoers Add __chef    ALL=(ALL) NOPASSWD: ALL__ 
   _Centos_: /etc/sudoers Uncomment __wheel line which has NOPASSWD__
 * Bootstrap the workstation. Works for Centos as the recipe is for Centos.  
-  Ubuntu does not use httpd. Instead it is apache2.
-* It will install chef-client and run the listed recipe
-```angular2html
+  Ubuntu does not use httpd. Instead it is apache2.  
+* It will install chef-client and run the listed recipe   
+```apple js
 knife bootstrap lmascare-centos --ssh-user chef --sudo --node-name lmascare-centos \
     --run-list 'recipe[learn_chef_httpd]' -y
 knife bootstrap lmascare-hp --ssh-user chef --sudo --node-name lithium -y
 knife node list
-knife node delete <node-name> -y
+
+# To delete the node's metadata
+knife node delete <node-name> --yes
+
+# To delete the entry (including RSA Public Key) from Chef Server's API client list
+knife client delete <node-name> --yes
 knife node show </node-name>
 ```
 
@@ -149,16 +154,53 @@ knife node show </node-name>
 knife ssh 'name:lmascare-centos' 'sudo chef-client' --ssh-user chef --attribute ipaddress
 sudo chef-client
 ```
-  * attributes are in 
+  * Attributes are in 
     * https://docs.chef.io/attributes.html#automatic-ohai  
   
+#### Download from Chef Supermarket
+* Create a Berksfile 
+```apple js
+source   'https://supermarket.chef.io'
+cookbook 'chef-client'
+```
+```apple js
+# Download the chef-client cookbooks from the Supermarket
+# into the $HOME/.berkshelf
+berks install
 
+# Upload these cookbooks to the Chef Server
+berks upload
+```
+* Roles enable you to focus on the function the node performs collectively
+* Create a role web.json
+```apple js
+knife role from file roles/web.json
+knife role list
+knife role show web
+knife node run_list set lmascare-centos "role[web]"
+knife node show lmascare-centos --run-list
+knife ssh 'role:web' 'sudo chef-client' --ssh-user chef --attribute ipaddress
+knife status 'role:web' --run-list
+
+# To delete a roles
+knife role delete web --yes
+```
+* To delete a cookbook from the server
+```apple js
+knife cookbook delete learn_chef_httpd --all --yes
+```
+* To delete the RSA private key from the node
+```apple js
+sudo rm /etc/chef/client.pem
+```
 ####**Install additional packages from https://packages.chef.io**  
 **To add support for databags, attributes, runlists, roles, environments, and cookbooks from a 
 web server interfac**
-* sudo chef-server-ctl install chef-manage
-* sudo chef-server-ctl reconfigure
-* sudo chef-manage-ctl reconfigure --accept-license
+```apple js
+sudo chef-server-ctl install chef-manage
+sudo chef-server-ctl reconfigure
+sudo chef-manage-ctl reconfigure --accept-license
+```
 
 **Add reporting**
 * sudo chef-server-ctl install opscode-reporting
