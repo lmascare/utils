@@ -12,6 +12,7 @@ Port Number | Application
 8080 | Jenkins  
 8081 | Artifactory  
 8888 | Home Web Server  
+8443 | Home WS SSL Port  
    
    
   
