@@ -71,22 +71,30 @@
 * Installed in /opt/chefdk
 
 #### Ensure ssh access from CHEF Server to all nodes
-* Use ssh-keygen to create the key-pair on the chef server  
-  and add the id_rsa.pub to the authorized_keys on every node
+* __Use ssh-keygen to create the key-pair on the chef server  
+  and add the id_rsa.pub to the authorized_keys on every node__
 
 #### Setup the Chef Server
 * chef-server-ctl reconfigure
   * This will take some time as it re-configures the server
   * Ensure that the hostname is set to the FQDN  
 * Create the Unix user & group for 'chef'  
-  * groupadd -g 1003 chef
-  * useradd -c 'Chef Automation' -d /home/chef -u 1003 -g 1003 -m -s /bin/bash -k /etc/skel chef
-  * login as chef and create a .chef directory for the PEM file
-* sudo chef-server-ctl user-create chef CHEF Automation chef@kellynoah.com 'PASSWORD' \
+```apple js
+groupadd -g 1003 chef
+useradd -c 'Chef Automation' -d /home/chef -u 1003 -g 1003 -m -s /bin/bash -k /etc/skel chef
+```
+* Login as chef and create a .chef directory for the PEM file
+```apple js
+sudo chef-server-ctl user-create chef CHEF Automation chef@kellynoah.com 'PASSWORD' \
   --filename /users/chef/.chef/chef.pem
-* Display list of users 'chef-server-ctl user-list'
-* sudo chef-server-ctl org-create larrymasc 'Larry Mascarenhas' --association_user chef \
+
+# Display list of users 
+chef-server-ctl user-list
+
+sudo chef-server-ctl org-create larrymasc 'Larry Mascarenhas' --association_user chef \
   --filename /users/chef/.chef/larrymasc-validator.pem  
+
+```
     **NOTE: Uppercase in org name is not supported**  
 
 * The chef-server-ctl has a list of subcommands to administer the server.
@@ -127,10 +135,16 @@ cd cookbooks
 knife cookbook upload learn_chef_httpd
 knife cookbook list
 ``` 
+
+#### Chef Client Setup
+* Create the chef group and user similar to Chef Server setup
+* Copy the chef server id_rsa.pub key to the node's $HOME/.ssh/authorized_keys file
+
 * Ensure that chef has sudo privileges in /etc/sudoers
 * Add username to sudo(ubuntu), wheel(centos) group in /etc/group
 * _Ubuntu_: /etc/sudoers Add __chef    ALL=(ALL) NOPASSWD: ALL__ 
   _Centos_: /etc/sudoers Uncomment __wheel line which has NOPASSWD__
+
 * Bootstrap the workstation. Works for Centos as the recipe is for Centos.  
   Ubuntu does not use httpd. Instead it is apache2.  
 * It will install chef-client and run the listed recipe   
@@ -138,6 +152,7 @@ knife cookbook list
 knife bootstrap lmascare-centos --ssh-user chef --sudo --node-name lmascare-centos \
     --run-list 'recipe[learn_chef_httpd]' -y
 knife bootstrap lmascare-hp --ssh-user chef --sudo --node-name lithium -y
+knife bootstrap silicon --ssh-user chef --sudo --node-name silicon -y
 knife node list
 
 # To delete the node's metadata
@@ -145,7 +160,7 @@ knife node delete <node-name> --yes
 
 # To delete the entry (including RSA Public Key) from Chef Server's API client list
 knife client delete <node-name> --yes
-knife node show </node-name>
+knife node show <node-name>
 ```
 
 * Once cookbooks are uploaded to the chef-server, they can be run using chef-client on the node.  
