@@ -1,4 +1,3 @@
-
 ## ToDo
  - client.rb change log to a dir
  - Ubunto should have learn_chef_apache
@@ -62,16 +61,17 @@ chef-client
         * No    --> Error 401 (Not Authorized)
 
 ## Chef Client Attribute Precedence
- Location **-->**  | Attribute Files | Node Recipe | Environment | Role  
-            --  | -- | -- | -- | -- | -- | 
- Levels         |    |    |    | 3  |  4 |
- default        | 1  |  2 |    |    |    |
- force_default  | 5  |  6 |    |    |    |
- normal         | 7  |  8 |    |    |    |
- override       | 9  | 10 |    |12  | 11 |
- force_override |13  | 14 |    |    |    |
- automatic      |    |    |    |    |    |  
- 
+
+Location | Attribute Files | Node Recipe | Environment | Role  
+--- | --- | --- | --- |  ---
+**Levels** |    |    |   |  
+ default        | 1  |  2 | 3  |  4
+ force\_default  | 5  |  6 |    |  
+ normal         | 7  |  8 |    |  
+ override       | 9  | 10 |12  | 11  
+ force\_override |13  | 14 |    |  
+ automatic      |  15  
+  
 ## Test Kitchen
 **Five stages of test kitchen**  
   1. kitchen create
