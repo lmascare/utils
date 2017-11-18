@@ -70,7 +70,7 @@ Location | Attribute Files | Node Recipe | Environment | Role
  normal         | 7  |  8 |    |  
  override       | 9  | 10 |12  | 11  
  force\_override |13  | 14 |    |  
- automatic      |  15  
+ automatic      | 15 | 15 | 15 | 15
   
 ## Test Kitchen
 **Five stages of test kitchen**  
