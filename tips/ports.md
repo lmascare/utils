@@ -33,8 +33,12 @@ Machine Type | OS Type | Hostname | Notes
 --- | ---  | --- | ---  
 T5220 | Solaris11 | krypton |  
 DL380 G7 | Ubuntu 16.04 | silicon |     
-laptop G62 | Centos 7.2 | lmascare-centos  |   
+laptop G62 | Centos 7.2 | lmascare-centos  
 laptop envy | Ubuntu 16.04 | lithium | Virtual Desktop  
+
+vbox  | Centos | helium  
+vbox  | Ubuntu 16.04  | ozone  
+vbox  | Solaris 11.3  | cobalt  
 
    
    

@@ -1,20 +1,30 @@
+## ToDo
+ - client.rb change log to a dir
+ - Ubunto should have learn_chef_apache
+ - Cookbook infra  
+    - set directory structure  
 
-## Chef User
-* Create the chef-repo in /u/gitwork/utils/chef-repo
-* chef-client --local-mode motd.rb
+## Configuration
+* /var/chef directory has
+  * backup  \<backup of recipes\>  
+  * cache   \<stores cookbooks\>  
+* Installation in /opt/chef & /opt/chefdk
+
+## Chef Client
+* Create the chef-repo in /u/gitwork/utils/chef-repo  
+* chef-client --local-mode motd.rb  
 
 * chef-apply <file.rb>  
-  Run the resources in file.rb. But it doesn't know how to apply cookbooks.
-  That's done by chef-client
+  Run the resources in file.rb. But it doesn't know how to apply cookbooks.  
+  That's done by chef-client  
 
-* mkdir chef-repo/cookbooks
-* cd chef-repo
-* chef generate cookbook cookbooks/workstation
-* chef generate cookbook cookbooks/apache
+* mkdir chef-repo/cookbooks  
+* cd chef-repo  
+* chef generate cookbook cookbooks/workstation  
+* chef generate cookbook cookbooks/apache  
 
-* chef generate cookbook cookbooks/learn_chef_httpd
-* chef generate template cookbooks/learn_chef_httpd index.html
-
+* chef generate cookbook cookbooks/learn_chef_httpd  
+* chef generate template cookbooks/learn_chef_httpd index.html  
 
 * chef generate recipe apache server
 
@@ -33,15 +43,58 @@
 
 * Under cookbooks/<cookbook>/recipes/default.rb you can include_recipe
 
+## Chef-client Run
+chef-client 
+* --> build node --> authenticate --> sync cookbooks (/var/chef/cache)  
+* --> load cookbooks (attributes / library / recipe) (builds resource collection )    
+* -->  converge  
+    * --> success? --> node save  
+    * --> fail? --> stop run  
+* --> Notification handlers  
 
+## Security Model
+* /etc/chef/client.pem
+    * Yes --> sign requests
+    * No  --> /etc/chef/validation.pem?
+        * Yes   --> Request API access --> client.pem
+            * Sign requests
+        * No    --> Error 401 (Not Authorized)
+
+## Chef Client Attribute Precedence
+
+Location | Attribute Files | Node Recipe | Environment | Role  
+--- | --- | --- | --- |  ---
+**Levels** |    |    |   |  
+ default        | 1  |  2 | 3  |  4
+ force\_default  | 5  |  6 |    |  
+ normal         | 7  |  8 |    |  
+ override       | 9  | 10 |12  | 11  
+ force\_override |13  | 14 |    |  
+ automatic      | 15 | 15 | 15 | 15
+  
 ## Test Kitchen
-* 4 stages of test kitchen
+**Five stages of test kitchen**  
   1. kitchen create
   2. kitchen converge
-  3. kitchen verify
-  4. kitchen destroy
+  3. kitchen login
+  4. kitchen verify
+  5. kitchen destroy
 
 * Test are in cookbooks/<cookbook>/test/integration/default/serverspec/default_spec.sh
+
+**kitchen create**  
+```apple js
+cd cookbooks/learn_chef_httpd
+kitchen list
+kitchen create
+kitchen converge
+
+# Test kitchen
+kitchen exec -c 'curl localhost'
+```
+* Kitchen details in cookbooks/learn_chef_httpd/.kitchen.yml  
+* KITCHEN_YAML to define .kitchen.yml file to use
+
 
 ## CHEF Server  
 * Download chef-server from chef.io  
@@ -109,7 +162,7 @@ firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
 ```
-####Chef Workstation
+#### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
 * Requires 2 files to authenticate. Located in .chef directory.
     * RSA private key
@@ -218,24 +271,34 @@ sudo chef-manage-ctl reconfigure --accept-license
 ```
 
 **Add reporting**
-* sudo chef-server-ctl install opscode-reporting
-* sudo chef-server-ctl reconfigure
-* suod opscode-reporting-ctl reconfigure
+```apple js
+sudo chef-server-ctl install opscode-reporting
+sudo chef-server-ctl reconfigure
+suod opscode-reporting-ctl reconfigure
+```
 
 **Install packages from a local directory**
-* sudo chef-server-ctl install chef-manage --path=/path/to/file 
-
+```apple js
+sudo chef-server-ctl install chef-manage --path=/path/to/file
+```
+ 
 **Update CHEF Server to support > 25 nodes**
-* vi /etc/opscode/chef-server.rb
+```apple js
+vi /etc/opscode/chef-server.rb
 license['nodes'] = 100
+```
 
-
-
+#### Create an admin chef node
+```apple js
+tar up the contents of /home/chef/.chef on lmascare-centos and extract on target
+```
 **Install the Opscode Jobs Push Server**
 **It allows you to push jobs independant of the chef-client run**
-* Download from https://downloads.chef.io/push-jobs-server/ubuntu/
-* sudo dpkg -i opscode-push-jobs-server_1.1.6-1_amd64.deb
-* sudo chef-server-ctl install opscode-push-jobs-server
-* sudo chef-server-ctl reconfigure
-* sudo opscode-push-jobs-server-ctl reconfigure
-* 
+```apple js
+# Download from https://downloads.chef.io/push-jobs-server/ubuntu/
+
+sudo dpkg -i opscode-push-jobs-server_1.1.6-1_amd64.deb
+sudo chef-server-ctl install opscode-push-jobs-server
+sudo chef-server-ctl reconfigure
+sudo opscode-push-jobs-server-ctl reconfigure
+```
