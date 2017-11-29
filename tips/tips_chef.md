@@ -169,16 +169,16 @@ firewall-cmd --list-all
  --- | ---
  User config | /etc/opscode  
  pkg installed    | /opt/opscode
-     commands     | /opt/opscode/bin
-     services     | /opt/opscode/sv
-     aux cmds & binaries   | /opt/opscode/embedded/bin
-     cookbooks for 'recongure' | /opt/opscode/embedded/cookbooks
+ commands     | /opt/opscode/bin
+ services     | /opt/opscode/sv
+ aux cmds & binaries   | /opt/opscode/embedded/bin
+ cookbooks for 'recongure' | /opt/opscode/embedded/cookbooks
  Data and non editable cfg | /var/opt/opscode
  Log files    | /var/log/opscode
  Init master  | 
-     RHEL5    | /etc/inittab
-     RHEL6 & Ubuntu   | /etc/init
-     RHEL7            | /usr/lib/systemd/system
+ RHEL5    | /etc/inittab
+ RHEL6 & Ubuntu   | /etc/init
+ RHEL7            | /usr/lib/systemd/system
 
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
