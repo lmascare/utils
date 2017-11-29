@@ -184,7 +184,7 @@ firewall-cmd --list-all
 
 Data
  Item | Location | Notes
- ---  |  ---  |  ---
+ ---  |  ---  |  ---  
  PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
    | bifrost | BiFrost (AuthZ) database
    | reporting | Reporting database (Node run history)
