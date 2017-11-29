@@ -182,7 +182,7 @@ firewall-cmd --list-all
  RHEL6 & Ubuntu   | /etc/init
  RHEL7            | /usr/lib/systemd/system
 
-Data
+**Data**  
  Item | Location | Notes
  ---  |  ---  |  ---  
  PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
