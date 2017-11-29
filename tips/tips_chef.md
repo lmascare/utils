@@ -183,6 +183,7 @@ firewall-cmd --list-all
  RHEL7            | /usr/lib/systemd/system
 
 **Data**  
+
  Item  |  Location  |  Notes  
  --- | --- | ---  
  PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
