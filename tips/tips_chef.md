@@ -165,6 +165,8 @@ firewall-cmd --list-all
 
 ### Understanding the CHEF Server
 #### Omnibus package
+**GitHub**  https://github.com/chef/chef-server
+
   Item   |  Location
  --- | ---
  User config | /etc/opscode  
@@ -180,6 +182,17 @@ firewall-cmd --list-all
  RHEL6 & Ubuntu   | /etc/init
  RHEL7            | /usr/lib/systemd/system
 
+Data
+ Item | Location | Notes
+ ---  |  ---  |  ---
+ PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
+   | bifrost | BiFrost (AuthZ) database
+   | reporting | Reporting database (Node run history)
+ Solr |  | Node is flatened and inserted into Solr for fast searching
+ RabbitMQ | Expander queue | node data waiting for ETL before insertion into Solr
+    | Analytics Queue | API Actions are stored waiting for ETL by an Analytics Server
+      
+  
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
 * Requires 2 files to authenticate. Located in .chef directory.
