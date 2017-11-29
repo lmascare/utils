@@ -186,7 +186,7 @@ firewall-cmd --list-all
 
  Item  |  Location  |  Notes  
  --- | --- | ---  
- PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
+ PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, users, environments etc. Node objects are stored as gzipped blobs)
   -- | bifrost | BiFrost (AuthZ) database  
   -- | reporting | Reporting database (Node run history)  
  Solr | -- | Node is flatened and inserted into Solr for fast searching  
