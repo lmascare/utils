@@ -183,14 +183,14 @@ firewall-cmd --list-all
  RHEL7            | /usr/lib/systemd/system
 
 **Data**  
- Item | Location | Notes  
- ---  |  ---  |  ---  
+ Item  |  Location  |  Notes  
+ --- | --- | ---  
  PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, user environments etc)
-  - | bifrost | BiFrost (AuthZ) database
-  - | reporting | Reporting database (Node run history)
- Solr |  | Node is flatened and inserted into Solr for fast searching
- RabbitMQ | Expander queue | node data waiting for ETL before insertion into Solr
-   - | Analytics Queue | API Actions are stored waiting for ETL by an Analytics Server
+  -- | bifrost | BiFrost (AuthZ) database  
+  -- | reporting | Reporting database (Node run history)  
+ Solr | -- | Node is flatened and inserted into Solr for fast searching  
+ RabbitMQ | Expander queue | node data waiting for ETL before insertion into Solr  
+   -- | Analytics Queue | API Actions are stored waiting for ETL by an Analytics Server  
       
   
 #### Chef Workstation
