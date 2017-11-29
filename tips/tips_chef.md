@@ -165,7 +165,7 @@ firewall-cmd --list-all
 
 ### Understanding the CHEF Server
 #### Omnibus package
-     | 
+  Item   |  Location
  --- | ---
  User config | /etc/opscode  
  pkg installed    | /opt/opscode
