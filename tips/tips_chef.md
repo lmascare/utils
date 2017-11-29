@@ -162,6 +162,24 @@ firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
 ```
+
+### Understanding the CHEF Server
+#### Omnibus package
+     | 
+ --- | ---
+ User config | /etc/opscode  
+ pkg installed    | /opt/opscode
+     commands     | /opt/opscode/bin
+     services     | /opt/opscode/sv
+     aux cmds & binaries   | /opt/opscode/embedded/bin
+     cookbooks for 'recongure' | /opt/opscode/embedded/cookbooks
+ Data and non editable cfg | /var/opt/opscode
+ Log files    | /var/log/opscode
+ Init master  | 
+     RHEL5    | /etc/inittab
+     RHEL6 & Ubuntu   | /etc/init
+     RHEL7            | /usr/lib/systemd/system
+
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
 * Requires 2 files to authenticate. Located in .chef directory.
