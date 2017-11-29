@@ -192,8 +192,13 @@ firewall-cmd --list-all
  Solr | -- | Node is flatened and inserted into Solr for fast searching  
  RabbitMQ | Expander queue | node data waiting for ETL before insertion into Solr  
    -- | Analytics Queue | API Actions are stored waiting for ETL by an Analytics Server  
+ Bookshelf | -- | Lives on Filesystem
       
-  
+* Reporting data should be aged out (turned on)
+* runit is a process supervisor & manages logs.  
+    * ps -eaf|egrep sunsvdir  
+    
+
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
 * Requires 2 files to authenticate. Located in .chef directory.
