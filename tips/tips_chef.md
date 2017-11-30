@@ -197,7 +197,10 @@ firewall-cmd --list-all
 * Reporting data should be aged out (turned on)
 * runit is a process supervisor & manages logs.  
     * ps -eaf|egrep sunsvdir  
-    
+
+#### URLs for CHEF Server
+* https://docs.chef.io/runbook.html
+* http://irvingpop.github.io/blog/2015/04/20/tuning-the-chef-server-for-scale/    
 
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
