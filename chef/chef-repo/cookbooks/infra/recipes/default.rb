@@ -83,7 +83,7 @@ directory   '/var/lib/jenkins/.ssh' do
   action    :create
 end
 
-# Create authorized_keys
+# Create authorized_keys for Jenkins
 file        '/var/lib/jenkins/.ssh/authorized_keys' do
    content  'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFFqffCOHoeUAWlOzoD3m/UtadZdGQza4chh070DT65U22bh/1Kuo0aXGZ4Mv7mTci+ek+M3A2FCHVdr8z0Zl6+nyR//XODNqZBwefWTILTCEIzYTgDJuC4EAM/8zxSHIffscGktw+h8o72bv6IynySApUo8gmoAeFFTBvqXmmWWhxZRDHYK2dJuDyqfEIHRH3XpWQAy0cT7lz0dC6S4iv0Ie8Jv/fYNlgIk3uJcXS4QHcpsT9xhwRNfVAQovBkH2fAHngO+A3jk3+ogM4UoBEHl8OhCTPxEtU7xVI8y7NAOfHw2wLhEXTKBrV7GjANz8c18UEOMTi0mWRJqBUIejF jenkins@lmascare-centos.kellynoah.com'
    owner    'jenkins'
@@ -91,5 +91,13 @@ file        '/var/lib/jenkins/.ssh/authorized_keys' do
    mode     '0600'
 end
 
+# Create directory for Jenkins Workspace
+directory   '/u/jenkins/workspace' do
+  owner     'jenkins'
+  group     'jenkins'
+  mode      '0755'
+  recursive true
+  action    :create
+end
 #
 # Create /u/admin directory structure
