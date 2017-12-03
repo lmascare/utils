@@ -301,6 +301,13 @@ knife cookbook delete learn_chef_httpd --all --yes
 ```apple js
 sudo rm /etc/chef/client.pem
 ```
+
+#### CHEF Data Bags
+
+#### CHEF Secrets Management
+
+
+
 ####**Install additional packages from https://packages.chef.io**  
 **To add support for databags, attributes, runlists, roles, environments, and cookbooks from a 
 web server interfac**

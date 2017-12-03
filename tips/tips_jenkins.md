@@ -11,6 +11,7 @@
 * rpm --import https://pkg.jenkins.io/redhat/jenkins-ci.org.key
 * Ensure version of Java is > 1.7 for 
 * yum install jenkins
+* Unix user & group **jenkins** is created during installation
 * service jenkins start
 * User 'jenkins' is created and process runs as this user
 * Logs are in /var/log/jenkins/jenkins.log
@@ -29,7 +30,7 @@
 * service jenkins start / stop / status
 * chkconfig jenkins on
 
-####Integration with GIT
+#### Integration with GIT
 * Setup a new item (I used shell to run a script (python))
 * Configure the Project
 * In **_Source Code Management :_** **Enter the URL to the GITHUB repository**
@@ -39,13 +40,13 @@
 * Apply & Save
 * Once the job runs, check the **Console Output** of the job  
 
-####Integration with GIT as a webhook
+#### Integration with GIT as a webhook
 * Setup ngrok connection to local host
 * ./ngrok authtoken <token>
     * Token saved in /root/.ngrok2/ngrok.yml
 * ./ngrok http 8080 --bind-tls "both"
 
-#####Jenkins
+#### Jenkins
 * Create a new Item
 * Checkbox GitHub Project. Enter the URL of the repository
 * Under Source Code Management - Select Git
@@ -55,7 +56,7 @@
 * Save
 * Copy to Clipboard the URL of the Jenkins Server (Top Level)
 
-##### GitHub
+#### GitHub
 * Select the Repository - Clone or Download
     * Copy the URL to clipboard. This is the Repository URL to add to Jenkins.
 * In the same Repository - select Settings - Web Hooks - Add webhook
@@ -68,7 +69,55 @@
 
 * Push a commit to the repository and observe the call to Jenkins
 
-##### Reference Video
+#### Build against different platforms
+ * Ubuntu
+ * Centos
+ * Solaris
+ 
+    * Create a workspace common to all platforms
+        * Create Unix user & group __jenkins__  
+        * Create a role account with 'ssh' capability on all
+          nodes   
+        * /u/jenkins/workspace
+        * chown jenkins:jenkins workspace
+    * Create Nodes as required
+        * https://wiki.jenkins.io/display/JENKINS/Distributed+builds  
+        * https://wiki.jenkins.io/display/JENKINS/Step+by+step+guide+to+set+up+master+and+slave+machines+on+Windows 
+    * Use __slave.jar__ from http://yourserver:port/jnlpJars/slave.jar 
+    
+ * Configure credentials
+    * Jenkins - Manage Jenkins - Configure Credentials - Credentials - System
+        * Add domain - slave
+        * Add credentials  
+        
+        Item | Entry
+        --- | ---  
+        Kind | Username with password
+        Scope | Global (Jenkins and nodes)
+        Username | jenkins
+        Password | <password>
+        ID  | <left blank>
+        Description | Unix Jenkins Account 
+        
+  
+ * Configure slaves (Nodes)
+    * Jenkins - Manage Jenkins - New Node  
+    
+     Item | Entry  
+     --- | ---  
+     Name | silicon
+     Description | 
+     # of executors | 2
+     Remote Root directory | /var/lib/jenkins  
+     Labels | UBUNTU
+     Usage | only build jobs with label expressions matching this node
+     Launch method | Launch slave agents via ssh
+     Host | silicon
+     Credentials | jenkins (Unix Jenkins account) 
+     
+     
+        
+#### Reference Video
 * https://www.youtube.com/watch?v=Z3S2gMBUkBo
 
 #### Role based access controls
@@ -117,7 +166,7 @@
     * Delete workspace
     * Add timestames to Console Output
  * Build _script below_
-```
+```apple js
 PY_VERSION=`cat python.txt`
 pwd
 for py_ver in ${PY_VERSION}
@@ -136,7 +185,7 @@ done
  * Save
 
 #### Jenkinsfile
-```
+```apple js
 pipeline {
    agent any
    stages {
