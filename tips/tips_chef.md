@@ -303,6 +303,28 @@ sudo rm /etc/chef/client.pem
 ```
 
 #### CHEF Data Bags
+```apple js
+knife data bag create admins
+knife data bag list
+
+# Create the private key
+openssl rand -base64 512 | tr -d '\r\n' > my_secret_key
+
+# Create the mysql.json data bag item
+{
+  "id":     "mysql",
+  "pass":   "thesecret123",
+  "user":   "fred"
+}
+
+knife data bag create passwords mysql --secret-file ~/.ssh/my_secret_key
+
+knife data bag show passwords mysql
+
+knife data bag show --secret-file ~/.ssh/my_secret_key passwords mysql
+
+knife data bag edit passwords mysql --secret-file ~/.ssh/my_secret_key
+```
 
 #### CHEF Secrets Management
 
