@@ -13,16 +13,33 @@ def main():
     # We set the PYTHONPATH so that we don't have to specify the modules dir.
     # Alternatively, we can set it in the main program as follows
     # sys.path.append('/u/gitwork/utils/python/admin/lank')
-    import utils
+    from lank import utils
     # import signal
 
     #from vars import dbname, dbuser, dbpass, dbport
-    from vars import db_creds
+    from lank.vars import db_creds
     utils.init()
     # utils.create_key()
-    crd = utils.encrypt_cred('stock')
-    print(crd)
+    # crd = utils.encrypt_cred('587')
+    # print(crd)
+    # exit(0)
+    # from lank.vars import smtp_user, smtp_passwd, smtp_server, smtp_port
+    # (gmus, gmpa, gmse, gmpo) = utils.get_creds(smtp_user, smtp_passwd, smtp_server, smtp_port)
+    # print(gmus, gmpa, gmse, gmpo)
+    # exit(0)
 
+    recipient = ['larry.masc@gmail.com', 'larry_mario@yahoo.com']
+    # recipient = 'larry_mario@yahoo.com'
+    # recipient = 'larry.masc@gmail.com'
+    subject = 'Test from Python'
+    body = 'Test 5 to GMail and Yahoo with Mimetext and Multipart with file'
+    # attachment = "NOFILE"
+    attachment = "/home/lmascare/misc/earthmoon_nasa.jpg"
+    # attachment = "/home/lmascare/misc/KEYS.gz"
+
+    utils.send_mail(recipient, subject, body, attachment)
+
+    exit(0)
     dbnames = db_creds.keys()
     print(dbnames)
 

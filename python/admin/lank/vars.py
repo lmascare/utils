@@ -32,6 +32,11 @@ keyfile = adm_keys + '/keyfile'
 
 logdir = adm_logs
 
+smtp_server = 'gAAAAABaRnjQLl5_SHGQZOsI-NLA5aRwMsLIhs2y1_QlMuy1tXkhtIzhEVklYJ1A1lN7bjS0Qf4V0sPJlR_xZZFpZK7mqN0fbQ=='
+smtp_port = 'gAAAAABaRnk-OlKdVvdVddkPEo76iKqyHKYv530XmgLF_38_2jZjlkYPxL20wWVZBPxtCoYBUUL4sxlzoq4EPVQQos6aPIsojg=='
+smtp_user = ''
+smtp_passwd = ''
+
 """ Used for the MySQL DB """
 dbname = 'gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61vvzAiDWKyv\
 LYOAlkomZ6NXayxVmU3XLi-ZfleZaQ=='

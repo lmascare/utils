@@ -30,8 +30,8 @@ import inspect
 import subprocess
 import shlex
 import signal
-from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp
-
+from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp, \
+    smtp_user, smtp_passwd, smtp_server, smtp_port
 
 def init():
     """Init function.
@@ -306,6 +306,102 @@ def runcmd(os_cmd):
     # print(out, err, rc)
     logit("info", "OS Command : {}".format(os_cmd), 0)
     return (out, err, rc)
+
+
+def send_mail(recipient, subject, body, attachment):
+    """Send email via gmail.com.
+
+    Requires gmail credentials and TLS. It also sends attachments in correct
+    MIME encoded format.
+
+    If no attachment is sent, the attachment parameter should say NOFILE.
+
+    :param recipient:   # A Python list of recipients
+    :param subject:
+    :param body:        # Sent as plain text
+    :param attachment:  # Module detects type of file and encodes accordingly
+    :return:
+    """
+    import smtplib
+    import mimetypes
+    from email import encoders
+    from email.message import Message
+    from email.mime.audio import MIMEAudio
+    from email.mime.base import MIMEBase
+    from email.mime.image import MIMEImage
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    # Decrypt the smtp_user, smtp_passwd, smtp_server, smtp_port
+    (gmuser, gmpasswd, gmserver, gmport) = get_creds(smtp_user, smtp_passwd, smtp_server, smtp_port)
+    logit("info", "Sending Mail to {} with Subject {}".format(recipient, subject), 0)
+
+    # Create the enclosing message
+    TO = recipient if type(recipient) is list else [recipient]
+    COMMASPACE = ","
+    msg = MIMEMultipart()
+    msg['Subject'] = subject
+    msg['From'] = gmuser
+    msg['To'] = COMMASPACE.join(TO)
+    msg.preamble = 'Mime Preamble'
+
+    if (body is not ""):
+        msg_body = MIMEText(body, 'plain')
+        msg.attach(msg_body)
+    else:
+        logit("warning", "Sending with No Message Text", 0)
+
+    if os.path.isfile(attachment):
+        logit("info", "Processing {}".format(attachment), 0)
+        ctype, encoding = mimetypes.guess_type(attachment)
+        if ctype is None or encoding is not None:
+            # Could not determine file type based on extension. So use the
+            # generic encoding
+            ctype = "application/octet-stream"
+        maintype, subtype = ctype.split("/", 1)
+        if (maintype == "text"):
+            logit("info", "Text Attachment", 0)
+            fp = open(attachment)
+            att = MIMEText(fp.read(), _subtype=subtype)
+            fp.close()
+        elif (maintype == "image"):
+            logit("info", "Image Attachment", 0)
+            fp = open(attachment, "rb")
+            att = MIMEImage(fp.read(), _subtype=subtype)
+            fp.close()
+        elif (maintype == "audio"):
+            logit("info", "Audio Attachment", 0)
+            fp = open(attachment, "rb")
+            att = MIMEAudio(fp.read(), _subtype=subtype)
+            fp.close()
+        else:
+            logit("info", "Generic Attachment", 0)
+            fp = open(attachment, "rb")
+            att = MIMEBase(maintype, subtype)
+            att.set_payload(fp.read())
+            fp.close()
+
+            # Encode the payload using base64
+            encoders.encode_base64(att)
+
+        att.add_header("Content-Disposition", "attachment", filename="%s" % os.path.basename(attachment))
+        msg.attach(att)
+
+    elif (attachment == "NOFILE"):
+        logit("info", "Attachment --> {}".format(attachment), 0)
+    else:
+        logit("critical", "Unknown type of Attachment --> {}".format(attachment), 0)
+
+    # Initialize the connections
+    s = smtplib.SMTP()
+    s.set_debuglevel(0)
+    s.connect(gmserver, gmport)
+    s.ehlo()
+    s.starttls()
+    s.login(gmuser, gmpasswd)
+
+    s.sendmail(gmuser, recipient, msg.as_string())
+    s.close()
 
 
 def get_filename():
