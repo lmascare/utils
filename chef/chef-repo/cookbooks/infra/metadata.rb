@@ -4,7 +4,7 @@ maintainer_email 'Larry.Masc@gmail.com'
 license 'All Rights Reserved'
 description 'Installs/Configures infra'
 long_description 'Installs/Configures infra'
-version '0.1.1'
+version '0.1.10'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 
 # The `issues_url` points to the location where issues for this cookbook are

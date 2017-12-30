@@ -162,6 +162,46 @@ firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
 ```
+
+### Understanding the CHEF Server
+#### Omnibus package
+**GitHub**  https://github.com/chef/chef-server
+
+  Item   |  Location  
+ --- | ---
+ User config | /etc/opscode  
+ pkg installed    | /opt/opscode
+ commands     | /opt/opscode/bin
+ services     | /opt/opscode/sv
+ aux cmds & binaries   | /opt/opscode/embedded/bin
+ cookbooks for 'recongure' | /opt/opscode/embedded/cookbooks
+ Data and non editable cfg | /var/opt/opscode
+ Log files    | /var/log/opscode
+ Init master  | 
+ RHEL5    | /etc/inittab
+ RHEL6 & Ubuntu   | /etc/init
+ RHEL7            | /usr/lib/systemd/system
+
+**Data**  
+
+ Item  |  Location  |  Notes  
+ --- | --- | ---  
+ PostgreSQL | opscode_chef | Used by Erchef (Tables: nodes, cookbooks, users, environments etc. Node objects are stored as gzipped blobs)
+  -- | bifrost | BiFrost (AuthZ) database  
+  -- | reporting | Reporting database (Node run history)  
+ Solr | -- | Node is flatened and inserted into Solr for fast searching  
+ RabbitMQ | Expander queue | node data waiting for ETL before insertion into Solr  
+   -- | Analytics Queue | API Actions are stored waiting for ETL by an Analytics Server  
+ Bookshelf | -- | Lives on Filesystem
+      
+* Reporting data should be aged out (turned on)
+* runit is a process supervisor & manages logs.  
+    * ps -eaf|egrep sunsvdir  
+
+#### URLs for CHEF Server
+* https://docs.chef.io/runbook.html
+* http://irvingpop.github.io/blog/2015/04/20/tuning-the-chef-server-for-scale/    
+
 #### Chef Workstation
 * knife is the cli interface between workstation and Chef Server
 * Requires 2 files to authenticate. Located in .chef directory.
@@ -261,6 +301,35 @@ knife cookbook delete learn_chef_httpd --all --yes
 ```apple js
 sudo rm /etc/chef/client.pem
 ```
+
+#### CHEF Data Bags
+```apple js
+knife data bag create admins
+knife data bag list
+
+# Create the private key
+openssl rand -base64 512 | tr -d '\r\n' > my_secret_key
+
+# Create the mysql.json data bag item
+{
+  "id":     "mysql",
+  "pass":   "thesecret123",
+  "user":   "fred"
+}
+
+knife data bag create passwords mysql --secret-file ~/.ssh/my_secret_key
+
+knife data bag show passwords mysql
+
+knife data bag show --secret-file ~/.ssh/my_secret_key passwords mysql
+
+knife data bag edit passwords mysql --secret-file ~/.ssh/my_secret_key
+```
+
+#### CHEF Secrets Management
+
+
+
 ####**Install additional packages from https://packages.chef.io**  
 **To add support for databags, attributes, runlists, roles, environments, and cookbooks from a 
 web server interfac**
