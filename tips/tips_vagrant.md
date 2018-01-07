@@ -5,6 +5,18 @@
 ```
 apt-get install virtualbox
 apt-get install vagrant
+
+# To open the GUI
+sudo /usr/bin/virtualbox
+
+# To see the Global Status. Note the id
+sudo vagrant global-status
+
+# SSH onto the box
+vagrant ssh <id>
+
+# To determine the configured ports
+vagrant port <id>
 ```
 
 **Create a location for the Virtualbox Images**  

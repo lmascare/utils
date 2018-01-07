@@ -1,5 +1,10 @@
 # Ubuntu Tips
 
+#### Desktop Software
+```apple js
+sudo apt-get update
+sudo apt-get install ubuntu-desktop
+```
 #### Create Volumes
 * lvdisplay    - Display properties of a volume group with volumes
 * pvs --all    - Dispays all physical volumes and associated volume groups
