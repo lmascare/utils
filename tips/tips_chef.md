@@ -4,6 +4,34 @@
  - Cookbook infra  
     - set directory structure  
 
+### CHEF Cookbook Development
+```apple js
+ # Show version of cookbook in the Supermarket
+ knife supermarket show httpd | egrep -i latest_version
+ 
+chef generate cookbook lamp
+chef generate attribute default
+
+# Add the following entry to attributes/default.rb
+default['lamp']['web']['document_root'] = '/var/www/default/public_html'
+
+# Create the template
+chef generate template default.conf
+
+# Create the first recipe
+chef generate recipe web
+ 
+kitchen exec -c 'wget -qO- localhost'
+
+# MySQL Section
+chef generate recipe database
+# Databag for the creds (in the cookbook dir)
+mkdir -p test/fixtures/default/data_bags/passwords
+
+kitchen converge
+kitchen exec -c 'sudo cat /etc/mysql-default/my.cnf'
+
+```
 ## Configuration
 * /var/chef directory has
   * backup  \<backup of recipes\>  
@@ -82,7 +110,6 @@ Location | Attribute Files | Node Recipe | Environment | Role
 
 * Test are in cookbooks/<cookbook>/test/integration/default/serverspec/default_spec.sh
 
-**kitchen create**  
 ```apple js
 cd cookbooks/learn_chef_httpd
 kitchen list
