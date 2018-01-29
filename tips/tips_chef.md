@@ -30,8 +30,26 @@ mkdir -p test/fixtures/default/data_bags/passwords
 
 kitchen converge
 kitchen exec -c 'sudo cat /etc/mysql-default/my.cnf'
-
 ```
+
+### Wrapping Cookbooks and LAMP Customers
+```angularjs
+chef generate cookbook lamp_customers
+
+# Add the following line to Bersfile in the lamp_customers dir
+cookbook 'lamp', path: '../lamp'
+
+# Update metadata.rb
+supports 'ubuntu'
+depends 'lamp'
+
+# Add to default.rb
+include_recipe 'lamp::default'
+
+# Update .kitchen.yml (suites section under name)
+data_bags_path: ../lamp/test/fixtures/default/data_bags
+```
+
 ## Configuration
 * /var/chef directory has
   * backup  \<backup of recipes\>  

@@ -3,8 +3,15 @@
 
 **Install Oracle Virtualbox**  
 ```
+# Ubuntu
 apt-get install virtualbox
 apt-get install vagrant
+
+# Centos/7
+cd /etc/yum.repos.d
+wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+yum install -y VirtualBox-5.1
+yum -y install https://releases.hashicorp.com/vagrant/2.0.1/vagrant_2.0.1_x86_64.rpm
 
 # To open the GUI
 sudo /usr/bin/virtualbox
