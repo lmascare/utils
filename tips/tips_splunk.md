@@ -92,4 +92,22 @@ cd /opt/splunkforwarder/bin/
 # To add / remove monitoring a resource
 ./splunk add monitor -source /var/log/messages
 ./splunk remove monitor /var/log/messages
+
+# Splunk Add-on provides *nix information about the hardware
+# Download the gzip tarball
+# Extract the tarball in $SPLUNK_HOME/etc/apps directory
+# Restart splunk
+
+# Manage the Addon. Enable / disable as appropriate.
+./splunk cmd /opt/splunkforwarder/etc/apps/Splunk_TA_nix/bin/setup.sh
+
+# The Ubuntu OS needs the sysstat package installed
+apt install sysstat
+
+# For Web Administration
+http://docs.splunk.com/Documentation/UnixAddOn/5.2.4/User/Enabledataandscriptedinputs
+
+# Download the Splunk App for Unix / Linux from the Administration screen
+
+
 ```

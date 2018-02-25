@@ -18,7 +18,7 @@ Port Number | Application
 8888 | Home Web Server  
 8443 | Home WS SSL Port  
 
-**Running on Silicon**  
+**Running on Lithium**  
 
 Port Number | Application
 --- | ---
@@ -26,6 +26,7 @@ Port Number | Application
 8065 | Splunk AppServer Port
 8089 | Splunk Mgmt
 8191 | Splunk kvstore Port
+8999 | Receiver Port
 
 # Systems
 
