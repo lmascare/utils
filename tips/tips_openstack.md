@@ -188,5 +188,60 @@ service nova-novncproxy restart
 
 ## Neutron Installation and Configuration
 ```apple js
+create database neutron;
+
+GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'NEUTRON_DBPASS';
+GRANT ALL PRIVILEGES ON nnutron.* TO 'neutron'@'%' IDENTIFIED BY 'NEUTRON_DBPASS';
+
+openstack user create --domain default --password-prompt neutron
+openstack role add --project service --user neutron admin
+openstack service create --name neutron --description "OpenStack Networking" network
+
+openstack endpoint create --region RegionOne network public http://localhost:9696
+openstack endpoint create --region RegionOne network internal http://localhost:9696
+openstack endpoint create --region RegionOne network admin http://localhost:9696
+
+# Using Networking option1 - Provider Networks
+apt install neutron-server neutron-plugin-ml2 \
+  neutron-linuxbridge-agent neutron-dhcp-agent \
+  neutron-metadata-agent
+  
+# Edit /etc/neutron
+    - neutron.conf
+    - dhcp_agent.conf
+    - metadata_agent.init
+    
+
+# Edit /etc/neutron/plugins/ml2
+    - ml2_conf.ini
+    - linuxbridge_agent.ini
+
+# Edit /etc/nova/nova.conf
+    - Add section for neutron
+
+su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf \
+  --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron
+  
+service nova-api restart
+service neutron-server restart
+service neutron-linuxbridge-agent restart
+service neutron-dhcp-agent restart
+service neutron-metadata-agent restart
+service neutron-l3-agent restart
 
 ```
+#### Setup Network Bridge for Neutron
+[network-bridge](http://docs.platform9.com/support/setup-linux-network-bridges-on-ubuntu-nova-networking/)
+
+
+## Dashboard Installation and Configuration
+```apple js
+apt install openstack-dashboard
+
+# Edit 
+    - /etc/openstack-dashboard/local_settings.py
+    - /etc/apache2/conf-available/openstack-dashboard.conf
+```
+### [Authenticate](http://localhost/horizon)
+Domain  :   default
+User    :   admin

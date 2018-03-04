@@ -38,6 +38,7 @@ Port Number | Application
 8774 | Nova
 8778 | Placement API
 9292 | Glance API
+9696 | Neutron
 11211 | Memcached
 35357 | Keystone Auth_URL
 
