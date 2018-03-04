@@ -43,8 +43,16 @@ Cinder (Block Storage) | [Ubuntu](https://docs.openstack.org/cinder/queens/insta
 apt-get install rabbitmq-server
 rabbitmqctl add_user openstack <passwd>
 
-# Set reqd and write permissions
+# Set read and write permissions
 rabbitmqctl set_permissions openstack ".*" ".*" ".*"
+
+# Install memcached
+apt-get install memcached python-memcached
+
+# Edit /etc/memcached.conf. Update -l to reflect the mgmt interface so that
+# other modules can connect.
+
+systemctl memcached restart
 ```
 ## Keystone Installation  
 
@@ -125,7 +133,7 @@ openstack image create "cirros" \
   --public
 ```
 
-### NOVA Installation and Configuration
+## NOVA Installation and Configuration
 ```apple js
 create database nova;
 create database nova_api;
@@ -176,5 +184,9 @@ service nova-consoleauth restart
 service nova-scheduler restart
 service nova-conductor restart
 service nova-novncproxy restart
+```
+
+## Neutron Installation and Configuration
+```apple js
 
 ```
