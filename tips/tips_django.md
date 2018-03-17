@@ -22,9 +22,12 @@
  * django-admin startproject bookstore
  * cd bookstore
  * ./manage.py migrate (migrates a SQLite3 DB. look in settings.py)
- * ./manage.py runserver 8008 # Run server on port 8008
- * Point your browser to http://127.0.0.1:8008/
+ * ./manage.py runserver 0.0.0.0:8008 # Run server on port 8008
+ * Point your browser to 
+    * http://127.0.0.1:8008/
+    * http://<hostname>:8008
  * Note that DEBUG=True for DEV. Not for Production
+ * Set ALLOWED_HOST = ['*'] to enable access from anywhere
  * Add GIT in the Version Control Section
 
 ### Add an application
@@ -43,14 +46,37 @@
 ### Configure the STORE application
  * ./manage.py startapp store
  * In bookstore/settings.py add 'store', to INSTALL_APPS section
- * ./manage.py makemigrations store
- * ./manage.py sqlmigrate store 0001
- * ./manage.py migrate
+ * See https://stackoverflow.com/questions/38744285/django-urls-error-view-must-be-a-callable-or-a-list-tuple-in-the-case-of-includ
+   for urls.py settings
+   
+   #### To create the Python scripts for the schema
+   * Activate the VENV
+   * cd /u/gitwork/django/bookstore 
+   * ./manage.py makemigrations store
+ 
+   #### To see the SQL 
+   * ./manage.py sqlmigrate store 0001
+   
+   #### To create the schema
+   * ./manage.py migrate
 
-### To show the state of the migrations
- * ./manage.py showmigrations. The x shows which are done
- * Install django-registration-redux
-    - pip install django-registration-redux
+   #### To show the state of the migrations
+   * ./manage.py showmigrations. The x shows which are done
+
+### Install django-registration-redux for authentication / registration
+ * pip install django-registration-redux
+ * pip install django registration
+ * Add 'registration' to settings.py (INSTALLED_APPS)
+ * See entry in bookstore/urls.py
+ * Add 
+    * ACCOUNT_ACTIVATION_DATE = 7
+    * REGISTRATION_AUTO_LOGIN =True (auto login after account activation)
+ * In the templates directory, it expects a registration folder with files
+ * Of importance is the base.html file in the templates folder.
+ * In settings.py, add the email settings.
+ 
+
+
 
 ### Blog Application
  * django-admin startproject mysite

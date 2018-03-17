@@ -47,7 +47,8 @@ gpgcheck=1
         * /usr/bin/mysql_secure_installation
         * mysql -u root -p mysql (enter root password)
         * create user lifecycle identified by '<password>';
-
+    
+    * Directories are in /var/lib/mysql*. Move them aside to and reinstall mysql.
 
  * show tables;
  * describe <tablename>;

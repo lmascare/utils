@@ -1,0 +1,21 @@
+/bb/oracle/admin/rcat/bdump/rcat_qmn1_4515.trc
+Oracle8i Enterprise Edition Release 8.1.7.0.0 - 64bit Production
+With the Partitioning option
+JServer Release 8.1.7.0.0 - 64bit Production
+ORACLE_HOME = /bb/oracle/product/8.1.7
+System name:	SunOS
+Node name:	nycgen11
+Release:	5.8
+Version:	Generic_108528-19
+Machine:	sun4u
+Instance name: rcat
+Redo thread mounted by this instance: 1
+Oracle process number: 39
+Unix process pid: 4515, image: oracle@nycgen11 (QMN1)
+
+*** 2003-09-15 11:28:41.209
+*** SESSION ID:(38.1) 2003-09-15 11:28:41.208
+error 1089 detected in background process
+OPIRIP: Uncaught error 447. Error stack:
+ORA-00447: fatal error in background process
+ORA-01089: immediate shutdown in progress - no operations are permitted

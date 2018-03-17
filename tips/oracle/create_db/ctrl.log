@@ -1,0 +1,131 @@
+SVRMGR> STARTUP NOMOUNT
+ORACLE instance started.
+Total System Global Area                        847839392 bytes
+Fixed Size                                          73888 bytes
+Variable Size                                   640917504 bytes
+Database Buffers                                205783040 bytes
+Redo Buffers                                      1064960 bytes
+SVRMGR> CREATE CONTROLFILE REUSE DATABASE "ESRV" ARCHIVELOG
+     2>     MAXLOGFILES 32
+     3>     MAXLOGMEMBERS 4
+     4>     MAXDATAFILES 254
+     5>     MAXINSTANCES 8
+     6>     MAXLOGHISTORY 904
+     7> LOGFILE
+     8>   GROUP 1 '/u5/oracle/data/esrv/redo01.log'  SIZE 10M,
+     9>   GROUP 2 '/u5/oracle/data/esrv/redo02.log'  SIZE 10M,
+    10>   GROUP 3 '/u5/oracle/data/esrv/redo03.log'  SIZE 10M,
+    11>   GROUP 4 '/u5/oracle/data/esrv/redo04.log'  SIZE 10M
+    12> DATAFILE
+    13>   '/u5/oracle/data/esrv/system01.dbf',
+    14>   '/u5/oracle/data/esrv/tools01.dbf',
+    15>   '/u5/oracle/data/esrv/rbs01.dbf',
+    16>   '/u5/oracle/data/esrv/users01.dbf',
+    17>   '/u5/oracle/data/esrv/ofcmain01.dbf',
+    18>   '/u5/oracle/data/esrv/ofcmesg01.dbf',
+    19>   '/u5/oracle/data/esrv/ofcindb01.dbf',
+    20>   '/u5/oracle/data/esrv/ofcinds01.dbf'
+    21> CHARACTER SET UTF8
+    22> ;
+
+*
+ORA-01969: You must specify RESETLOGS or NORESETLOGS
+SVRMGR> # Recovery is required if any of the datafiles are restored backups,
+SVRMGR> # or if the last shutdown was not normal or immediate.
+SVRMGR> RECOVER DATABASE
+ORA-01507: database not mounted
+SVRMGR> # All logs need archiving and a log switch is needed.
+SVRMGR> ALTER SYSTEM ARCHIVE LOG ALL;
+ORA-01507: database not mounted
+SVRMGR> # Database can now be opened normally.
+SVRMGR> ALTER DATABASE OPEN RESETLOGS;
+ALTER DATABASE OPEN RESETLOGS
+*
+ORA-01507: database not mounted
+SVRMGR> # Commands to add tempfiles to temporary tablespaces.
+SVRMGR> # Online tempfiles have complete space information.
+SVRMGR> # Other tempfiles may require adjustment.
+SVRMGR> ALTER TABLESPACE TEMP ADD TEMPFILE '/u5/oracle/data/esrv/temp01.dbf' REUSE;
+ALTER TABLESPACE TEMP ADD TEMPFILE '/u5/oracle/data/esrv/temp01.dbf' REUSE
+*
+ORA-01109: database not open
+SVRMGR> # End of tempfile additions.
+SVRMGR> #
+SVRMGR> shutdown;
+ORA-01507: database not mounted
+ORACLE instance shut down.
+SVRMGR> @cre_ctrl.sql
+SVRMGR> set echo on
+Echo                            ON
+SVRMGR> spool ctrl
+MGR-03512: spool file "ctrl.log" is already open
+SVRMGR> STARTUP NOMOUNT
+ORACLE instance started.
+Total System Global Area                        847839392 bytes
+Fixed Size                                          73888 bytes
+Variable Size                                   640917504 bytes
+Database Buffers                                205783040 bytes
+Redo Buffers                                      1064960 bytes
+SVRMGR> CREATE CONTROLFILE REUSE DATABASE "ESRV" NORESETLOGS ARCHIVELOG
+     2>     MAXLOGFILES 32
+     3>     MAXLOGMEMBERS 4
+     4>     MAXDATAFILES 254
+     5>     MAXINSTANCES 8
+     6>     MAXLOGHISTORY 904
+     7> LOGFILE
+     8>   GROUP 1 '/u5/oracle/data/esrv/redo01.log'  SIZE 10M,
+     9>   GROUP 2 '/u5/oracle/data/esrv/redo02.log'  SIZE 10M,
+    10>   GROUP 3 '/u5/oracle/data/esrv/redo03.log'  SIZE 10M,
+    11>   GROUP 4 '/u5/oracle/data/esrv/redo04.log'  SIZE 10M
+    12> DATAFILE
+    13>   '/u5/oracle/data/esrv/system01.dbf',
+    14>   '/u5/oracle/data/esrv/tools01.dbf',
+    15>   '/u5/oracle/data/esrv/rbs01.dbf',
+    16>   '/u5/oracle/data/esrv/users01.dbf',
+    17>   '/u5/oracle/data/esrv/ofcmain01.dbf',
+    18>   '/u5/oracle/data/esrv/ofcmesg01.dbf',
+    19>   '/u5/oracle/data/esrv/ofcindb01.dbf',
+    20>   '/u5/oracle/data/esrv/ofcinds01.dbf'
+    21> CHARACTER SET UTF8
+    22> ;
+Statement processed.
+SVRMGR> # Recovery is required if any of the datafiles are restored backups,
+SVRMGR> # or if the last shutdown was not normal or immediate.
+SVRMGR> RECOVER DATABASE
+ORA-00283: recovery session canceled due to errors
+ORA-00264: no recovery required
+SVRMGR> # All logs need archiving and a log switch is needed.
+SVRMGR> ALTER SYSTEM ARCHIVE LOG ALL;
+Statement processed.
+SVRMGR> # Database can now be opened normally.
+SVRMGR> rem ALTER DATABASE OPEN RESETLOGS;
+SVRMGR> # Commands to add tempfiles to temporary tablespaces.
+SVRMGR> # Online tempfiles have complete space information.
+SVRMGR> # Other tempfiles may require adjustment.
+SVRMGR> rem ALTER TABLESPACE TEMP ADD TEMPFILE '/u5/oracle/data/esrv/temp01.dbf' REUSE;
+SVRMGR> # End of tempfile additions.
+SVRMGR> #
+SVRMGR> rem spool off
+SVRMGR> ALTER DATABASE OPEN ;
+Statement processed.
+SVRMGR> ALTER TABLESPACE TEMP ADD TEMPFILE '/u5/oracle/data/esrv/temp01.dbf' REUSE;
+Statement processed.
+SVRMGR> alter system switch logfile;
+Statement processed.
+SVRMGR> select file_name from dba_data_files;
+FILE_NAME                                                                       
+--------------------------------------------------------------------------------
+/u5/oracle/data/esrv/ofcinds01.dbf                                              
+/u5/oracle/data/esrv/ofcindb01.dbf                                              
+/u5/oracle/data/esrv/ofcmesg01.dbf                                              
+/u5/oracle/data/esrv/ofcmain01.dbf                                              
+/u5/oracle/data/esrv/system01.dbf                                               
+/u5/oracle/data/esrv/users01.dbf                                                
+/u5/oracle/data/esrv/rbs01.dbf                                                  
+/u5/oracle/data/esrv/tools01.dbf                                                
+8 rows selected.
+SVRMGR> shutdown;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SVRMGR> spool off

@@ -18,7 +18,7 @@ Port Number | Application
 8888 | Home Web Server  
 8443 | Home WS SSL Port  
 
-**Running on Silicon**  
+**Running on Lithium**  
 
 Port Number | Application
 --- | ---
@@ -26,7 +26,24 @@ Port Number | Application
 8065 | Splunk AppServer Port
 8089 | Splunk Mgmt
 8191 | Splunk kvstore Port
+8999 | Receiver Port
 
+
+**Running on Silicon**
+
+Port Number | Application
+--- | ---
+80 | Apache
+5000 | Keystone Auth_URI
+8774 | Nova
+8778 | Placement API
+9292 | Glance API
+9696 | Neutron
+11211 | Memcached
+35357 | Keystone Auth_URL
+
+
+  
 # Systems
 
 Machine Type | OS Type | Hostname | Notes  

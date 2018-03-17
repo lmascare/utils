@@ -1,0 +1,90 @@
+:
+# 
+# $Header: OFC_build7.sh,v 1.4 93/06/04 11:51:30 gmehra: Stab $ 
+# 
+#  Copyright (c) 1991 by Oracle Corporation 
+#    NAME
+#      OFC_build7.sh - <one-line expansion of the name>
+#    DESCRIPTION
+#      <short description of component this file declares/defines>
+#    RETURNS
+# 
+#    NOTES
+#      <other useful comments, qualifications, etc.>
+#    MODIFIED   (MM/DD/YY)
+#     gmehra     06/04/93 -  rename the tablespaces 
+#     gmehra     02/18/93 -  change initial dbf file names 
+#     gmehra     02/08/93 -  minextents for rollbacks must be at least 2 
+#     gmehra     01/26/93 -  Creation 
+
+# Assume that ORACLE_HOME and ORACLE_SID are correct
+
+# The following parameters are the default chosen sizes for the rest of 
+# the installation utility.   Please feel free to comment out the old
+# values and insert your new choices.  [Later on we can prompt for values
+# and keep these as the defaults.]   
+#
+#   This build assumes 30M free above and beyond that of the SYSTEM tablespace.
+#
+
+TINYEXTENT=4K
+SMALLEXTENT=10K
+NORMALEXTENT=50K
+BIGEXTENT=100K
+LARGEEXTENT=250K
+
+TEMP_FILE=$ORACLE_HOME/dbs/ofctemp${ORACLE_SID}.dbf
+TEMP_SIZE=2M
+TEMP_INIT=$SMALLEXTENT
+TEMP_NEXT=$NORMALEXTENT
+
+MAIN_FILE=/u6/oracle/data/esrv/ofcmain.dbf
+MAIN_SIZE=100M
+MAIN_INIT=$SMALLEXTENT
+MAIN_NEXT=$NORMALEXTENT
+
+MESG_FILE=/u6/oracle/data/esrv/ofcmesg01.dbf
+MESG_SIZE=500M
+MESG_INIT=$BIGEXTENT
+MESG_NEXT=$LARGEEXTENT
+
+ROLL_FILE=$ORACLE_HOME/dbs/ofcroll${ORACLE_SID}.dbf
+ROLL_SIZE=8M
+ROLL_INIT=$LARGEEXTENT
+ROLL_NEXT=$LARGEEXTENT
+
+INDB_FILE=/u6/oracle/data/esrv/ofcindb01.dbf
+INDB_SIZE=100M
+INDB_INIT=$BIGEXTENT
+INDB_NEXT=$LARGEEXTENT
+
+INDS_FILE=/u6/oracle/data/esrv/ofcinds01.dbf
+INDS_SIZE=100M
+INDS_INIT=$SMALLEXTENT
+INDS_NEXT=$NORMALEXTENT
+
+LOGFILE=/u2/admins/oracle/admin/esrv/create/Install.log
+
+svrmgrl << END_sqldba >> $LOGFILE
+connect internal
+set echo on
+spool ofc_build
+
+create tablespace OFC_MAIN datafile '$MAIN_FILE' size $MAIN_SIZE
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M ;
+ALTER DATABASE DATAFILE '$MAIN_FILE' AUTOEXTEND OFF;
+
+create tablespace OFC_MESG datafile '$MESG_FILE' size $MESG_SIZE
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M ;
+ALTER DATABASE DATAFILE '$MESG_FILE' AUTOEXTEND OFF;
+
+create tablespace OFC_INDB datafile '$INDB_FILE' size $INDB_SIZE
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M ;
+ALTER DATABASE DATAFILE '$INDB_FILE' AUTOEXTEND OFF;
+
+create tablespace OFC_INDS datafile '$INDS_FILE' size $INDS_SIZE
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M ;
+ALTER DATABASE DATAFILE '$INDS_FILE' AUTOEXTEND OFF;
+
+spool off
+END_sqldba

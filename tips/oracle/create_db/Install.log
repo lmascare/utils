@@ -1,0 +1,47 @@
+
+Oracle Server Manager Release 3.1.7.0.0 - Production
+
+Copyright (c) 1997, 1999, Oracle Corporation.  All Rights Reserved.
+
+Oracle8i Enterprise Edition Release 8.1.7.0.0 - Production
+With the Partitioning option
+JServer Release 8.1.7.0.0 - Production
+
+SVRMGR> Connected.
+SVRMGR> Echo                            ON
+SVRMGR> SVRMGR> SVRMGR>      2> Statement processed.
+SVRMGR> ALTER DATABASE DATAFILE '/u6/oracle/data/esrv/ofcmain.dbf' AUTOEXEND OFF
+                                                           *
+ORA-01916: keyword ONLINE, OFFLINE, RESIZE, AUTOEXTEND or END/DROP expected
+SVRMGR> SVRMGR>      2> Statement processed.
+SVRMGR> ALTER DATABASE DATAFILE '/u6/oracle/data/esrv/ofcmesg01dbf' AUTOEXEND OFF
+                                                            *
+ORA-01916: keyword ONLINE, OFFLINE, RESIZE, AUTOEXTEND or END/DROP expected
+SVRMGR> SVRMGR>      2> Statement processed.
+SVRMGR> ALTER DATABASE DATAFILE '/u6/oracle/data/esrv/ofcindb01.dbf' AUTOEXEND OFF
+                                                             *
+ORA-01916: keyword ONLINE, OFFLINE, RESIZE, AUTOEXTEND or END/DROP expected
+SVRMGR> SVRMGR>      2> Statement processed.
+SVRMGR> ALTER DATABASE DATAFILE '/u6/oracle/data/esrv/ofcinds01.dbf' AUTOEXEND OFF
+                                                             *
+ORA-01916: keyword ONLINE, OFFLINE, RESIZE, AUTOEXTEND or END/DROP expected
+SVRMGR> SVRMGR> SVRMGR> 
+Server Manager complete.
+
+Oracle Server Manager Release 3.1.7.0.0 - Production
+
+Copyright (c) 1997, 1999, Oracle Corporation.  All Rights Reserved.
+
+Oracle8i Enterprise Edition Release 8.1.7.0.0 - Production
+With the Partitioning option
+JServer Release 8.1.7.0.0 - Production
+
+SVRMGR> Connected.
+SVRMGR> Echo                            ON
+SVRMGR> SVRMGR> SVRMGR>      2>      3> Statement processed.
+SVRMGR> SVRMGR>      2>      3> Statement processed.
+SVRMGR> Statement processed.
+SVRMGR> SVRMGR>      2>      3> Statement processed.
+SVRMGR> SVRMGR>      2>      3> Statement processed.
+SVRMGR> SVRMGR> SVRMGR> 
+Server Manager complete.

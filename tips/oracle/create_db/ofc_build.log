@@ -1,0 +1,24 @@
+SVRMGR> 
+SVRMGR> create tablespace OFC_MAIN datafile '/u6/oracle/data/esrv/ofcmain01.dbf' size 100M
+     2>  default storage (initial 10K next 50K minextents 1 
+     3>  maxextents 99 pctincrease 0) online;
+Statement processed.
+SVRMGR> 
+SVRMGR> create tablespace OFC_MESG datafile '/u6/oracle/data/esrv/ofcmesg01.dbf' size 1000M
+     2>  default storage (initial 100K next 250K minextents 1 
+     3>  maxextents 99 pctincrease 0) online;
+Statement processed.
+SVRMGR>  ALTER DATABASE DATAFILE '/u6/oracle/data/esrv/ofcmesg01.dbf' AUTOEXTEND ON NEXT 500M;
+Statement processed.
+SVRMGR> 
+SVRMGR> create tablespace OFC_INDB datafile '/u6/oracle/data/esrv/ofcindb01.dbf' size 100M
+     2>  default storage (initial 100K next 250K minextents 1  
+     3>  maxextents 99 pctincrease 0) online;
+Statement processed.
+SVRMGR> 
+SVRMGR> create tablespace OFC_INDS datafile '/u6/oracle/data/esrv/ofcinds01.dbf' size 100M
+     2>  default storage (initial 10K next 50K minextents 1 
+     3>  maxextents 99 pctincrease 0) online;
+Statement processed.
+SVRMGR> 
+SVRMGR> spool off
