@@ -1,0 +1,384 @@
+Mon Sep 15 13:08:15 2003
+Starting ORACLE instance (normal)
+LICENSE_MAX_SESSION = 0
+LICENSE_SESSIONS_WARNING = 0
+LICENSE_MAX_USERS = 0
+Starting up ORACLE RDBMS Version: 8.1.7.0.0.
+System parameters with non-default values:
+  processes                = 100
+  shared_pool_size         = 104857600
+  large_pool_size          = 52448800
+  java_pool_size           = 1048576
+  control_files            = /oradata/data/prueba/control01.ctl, /oradata/data/prueba/control02.ctl
+  db_block_buffers         = 20000
+  db_block_size            = 8192
+  compatible               = 8.1.7
+  log_buffer               = 524288
+  log_checkpoint_interval  = 10000
+  log_checkpoint_timeout   = 1800
+  rollback_segments        = r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, r11, r12, r13, r14, r15
+  db_domain                = bloomberg.com
+  instance_name            = prueba
+  service_names            = prueba.bloomberg.com
+  mts_dispatchers          = (address=(protocol=ipc))(dispatchers=1), (address=(protocol=tcp))(dispatchers=1)
+  mts_servers              = 2
+  mts_max_servers          = 10
+  mts_max_dispatchers      = 10
+  mts_service              = prueba
+  open_links               = 4
+  sort_area_size           = 131072
+  sort_area_retained_size  = 65536
+  db_name                  = prueba
+  open_cursors             = 255
+  utl_file_dir             = /bb/oracle/admin/prueba/utl
+  job_queue_processes      = 3
+  job_queue_interval       = 10
+  background_dump_dest     = /bb/oracle/admin/prueba/bdump
+  user_dump_dest           = /bb/oracle/admin/prueba/udump
+  core_dump_dest           = /bb/oracle/admin/prueba/cdump
+PMON started with pid=2
+DBW0 started with pid=3
+LGWR started with pid=4
+CKPT started with pid=5
+SMON started with pid=6
+RECO started with pid=7
+SNP0 started with pid=8
+SNP1 started with pid=9
+SNP2 started with pid=10
+Mon Sep 15 13:08:15 2003
+starting up 2 shared server(s) ...
+starting up 1 dispatcher(s) for network address '(address=(protocol=ipc))'...
+starting up 1 dispatcher(s) for network address '(address=(protocol=tcp))'...
+Mon Sep 15 13:08:16 2003
+CREATE DATABASE "prueba"
+   maxdatafiles 254
+   maxinstances 8
+   maxlogfiles 32
+   maxlogmembers 4
+   character set UTF8
+   national character set UTF8
+DATAFILE '/oradata/data/prueba/system01.dbf' SIZE 100M AUTOEXTEND ON
+logfile '/oradata/data/prueba/redo01.log' SIZE 10M, 
+        '/oradata/data/prueba/redo02.log' SIZE 10M, 
+        '/oradata/data/prueba/redo03.log' SIZE 10M,
+        '/oradata/data/prueba/redo04.log' SIZE 10M
+Mon Sep 15 13:08:19 2003
+Database mounted in Exclusive Mode.
+Mon Sep 15 13:08:21 2003
+Successful mount of redo thread 1, with mount id 3824721539.
+Thread 1 opened at log sequence 1
+  Current log# 1 seq# 1 mem# 0: /oradata/data/prueba/redo01.log
+Successful open of redo thread 1.
+Mon Sep 15 13:08:21 2003
+SMON: enabling cache recovery
+Mon Sep 15 13:08:21 2003
+create tablespace SYSTEM datafile  '/oradata/data/prueba/system01.dbf' SIZE 100M AUTOEXTEND ON
+  default storage (initial 10K next 10K) online
+Mon Sep 15 13:08:24 2003
+Completed: create tablespace SYSTEM datafile  '/oradata/data/
+Mon Sep 15 13:08:24 2003
+create rollback segment SYSTEM tablespace SYSTEM
+  storage (initial 50K next 50K)
+Completed: create rollback segment SYSTEM tablespace SYSTEM
+ 
+Mon Sep 15 13:08:39 2003
+SMON: enabling tx recovery
+Mon Sep 15 13:08:45 2003
+Completed: CREATE DATABASE "prueba"
+   maxdatafiles 254
+   ma
+Mon Sep 15 13:09:29 2003
+Thread 1 advanced to log sequence 2
+  Current log# 2 seq# 2 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:10:07 2003
+Thread 1 advanced to log sequence 3
+  Current log# 3 seq# 3 mem# 0: /oradata/data/prueba/redo03.log
+Mon Sep 15 13:10:52 2003
+Thread 1 advanced to log sequence 4
+  Current log# 4 seq# 4 mem# 0: /oradata/data/prueba/redo04.log
+Mon Sep 15 13:11:25 2003
+CREATE ROLLBACK SEGMENT r0 TABLESPACE SYSTEM
+STORAGE (INITIAL 16K NEXT 16K MINEXTENTS 2 MAXEXTENTS 20)
+Mon Sep 15 13:11:25 2003
+Completed: CREATE ROLLBACK SEGMENT r0 TABLESPACE SYSTEM
+STORA
+Mon Sep 15 13:11:25 2003
+ALTER ROLLBACK SEGMENT r0 ONLINE
+Completed: ALTER ROLLBACK SEGMENT r0 ONLINE
+Mon Sep 15 13:11:25 2003
+ALTER TABLESPACE SYSTEM
+DEFAULT STORAGE ( INITIAL 64K NEXT 64K MINEXTENTS 1 MAXEXTENTS UNLIMITED PCTINCREASE 0)
+Completed: ALTER TABLESPACE SYSTEM
+DEFAULT STORAGE ( INITIAL 
+Mon Sep 15 13:11:25 2003
+CREATE TABLESPACE TOOLS DATAFILE '/oradata/data/prueba/tools01.dbf' SIZE 10M 
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M 
+Completed: CREATE TABLESPACE TOOLS DATAFILE '/oradata/data/pr
+Mon Sep 15 13:11:26 2003
+ALTER DATABASE DATAFILE '/oradata/data/prueba/tools01.dbf' AUTOEXTEND OFF
+Completed: ALTER DATABASE DATAFILE '/oradata/data/prueba/tool
+Mon Sep 15 13:11:26 2003
+CREATE TABLESPACE RBS DATAFILE '/oradata/data/prueba/rbs01.dbf' SIZE 100M 
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 2M 
+Completed: CREATE TABLESPACE RBS DATAFILE '/oradata/data/prue
+Mon Sep 15 13:11:29 2003
+ALTER DATABASE DATAFILE '/oradata/data/prueba/rbs01.dbf' AUTOEXTEND OFF
+Completed: ALTER DATABASE DATAFILE '/oradata/data/prueba/rbs0
+Mon Sep 15 13:11:29 2003
+CREATE TEMPORARY TABLESPACE TEMP TEMPFILE '/oradata/data/prueba/temp01.dbf' SIZE 100M 
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M 
+Completed: CREATE TEMPORARY TABLESPACE TEMP TEMPFILE '/oradat
+Mon Sep 15 13:11:29 2003
+ALTER DATABASE TEMPFILE '/oradata/data/prueba/temp01.dbf' AUTOEXTEND OFF
+Completed: ALTER DATABASE TEMPFILE '/oradata/data/prueba/temp
+Mon Sep 15 13:11:29 2003
+CREATE TABLESPACE USERS DATAFILE '/oradata/data/prueba/users01.dbf' SIZE 10M 
+EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M 
+Completed: CREATE TABLESPACE USERS DATAFILE '/oradata/data/pr
+Mon Sep 15 13:11:30 2003
+ALTER DATABASE DATAFILE '/oradata/data/prueba/users01.dbf' AUTOEXTEND OFF
+Completed: ALTER DATABASE DATAFILE '/oradata/data/prueba/user
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R01 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R01 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R02 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R02 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R03 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R03 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R04 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R04 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R05 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R05 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R06 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R06 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R07 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R07 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R08 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R08 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R09 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R09 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R10 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R10 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R11 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R11 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R12 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R12 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R13 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R13 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R14 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R14 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+CREATE PUBLIC ROLLBACK SEGMENT R15 TABLESPACE RBS
+STORAGE ( OPTIMAL 4096K )
+Completed: CREATE PUBLIC ROLLBACK SEGMENT R15 TABLESPACE RBS
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R01" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R01" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R02" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R02" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R03" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R03" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R04" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R04" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R05" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R05" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R06" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R06" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R07" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R07" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R08" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R08" ONLINE
+Mon Sep 15 13:11:30 2003
+ALTER ROLLBACK SEGMENT "R09" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R09" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R10" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R10" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R11" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R11" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R12" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R12" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R13" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R13" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R14" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R14" ONLINE
+Mon Sep 15 13:11:31 2003
+ALTER ROLLBACK SEGMENT "R15" ONLINE
+Completed: ALTER ROLLBACK SEGMENT "R15" ONLINE
+Mon Sep 15 13:12:19 2003
+Thread 1 advanced to log sequence 5
+  Current log# 1 seq# 5 mem# 0: /oradata/data/prueba/redo01.log
+Mon Sep 15 13:12:39 2003
+Thread 1 advanced to log sequence 6
+  Current log# 2 seq# 6 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:12:54 2003
+Thread 1 advanced to log sequence 7
+  Current log# 3 seq# 7 mem# 0: /oradata/data/prueba/redo03.log
+Mon Sep 15 13:13:07 2003
+Thread 1 advanced to log sequence 8
+  Current log# 4 seq# 8 mem# 0: /oradata/data/prueba/redo04.log
+Mon Sep 15 13:13:22 2003
+Thread 1 advanced to log sequence 9
+  Current log# 1 seq# 9 mem# 0: /oradata/data/prueba/redo01.log
+Mon Sep 15 13:13:36 2003
+Thread 1 advanced to log sequence 10
+  Current log# 2 seq# 10 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:13:54 2003
+Thread 1 advanced to log sequence 11
+  Current log# 3 seq# 11 mem# 0: /oradata/data/prueba/redo03.log
+Mon Sep 15 13:14:08 2003
+Thread 1 advanced to log sequence 12
+  Current log# 4 seq# 12 mem# 0: /oradata/data/prueba/redo04.log
+Mon Sep 15 13:14:23 2003
+Thread 1 advanced to log sequence 13
+  Current log# 1 seq# 13 mem# 0: /oradata/data/prueba/redo01.log
+Mon Sep 15 13:14:47 2003
+Thread 1 advanced to log sequence 14
+  Current log# 2 seq# 14 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:15:01 2003
+Thread 1 advanced to log sequence 15
+  Current log# 3 seq# 15 mem# 0: /oradata/data/prueba/redo03.log
+Mon Sep 15 13:15:14 2003
+Thread 1 advanced to log sequence 16
+  Current log# 4 seq# 16 mem# 0: /oradata/data/prueba/redo04.log
+Mon Sep 15 13:15:28 2003
+Thread 1 advanced to log sequence 17
+  Current log# 1 seq# 17 mem# 0: /oradata/data/prueba/redo01.log
+Mon Sep 15 13:15:42 2003
+Thread 1 advanced to log sequence 18
+  Current log# 2 seq# 18 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:15:56 2003
+Thread 1 advanced to log sequence 19
+  Current log# 3 seq# 19 mem# 0: /oradata/data/prueba/redo03.log
+Mon Sep 15 13:16:08 2003
+Thread 1 advanced to log sequence 20
+  Current log# 4 seq# 20 mem# 0: /oradata/data/prueba/redo04.log
+Mon Sep 15 13:16:28 2003
+Thread 1 advanced to log sequence 21
+  Current log# 1 seq# 21 mem# 0: /oradata/data/prueba/redo01.log
+Mon Sep 15 13:16:45 2003
+Thread 1 advanced to log sequence 22
+  Current log# 2 seq# 22 mem# 0: /oradata/data/prueba/redo02.log
+Mon Sep 15 13:18:21 2003
+Shutting down instance (immediate)
+License high water mark = 4
+Mon Sep 15 13:18:22 2003
+ALTER DATABASE CLOSE NORMAL
+Mon Sep 15 13:18:22 2003
+SMON: disabling tx recovery
+SMON: disabling cache recovery
+Mon Sep 15 13:18:24 2003
+Thread 1 closed at log sequence 22
+Mon Sep 15 13:18:24 2003
+Completed: ALTER DATABASE CLOSE NORMAL
+Mon Sep 15 13:18:24 2003
+ALTER DATABASE DISMOUNT
+Completed: ALTER DATABASE DISMOUNT
+archiving is disabled
+Mon Sep 15 13:20:38 2003
+Starting ORACLE instance (normal)
+LICENSE_MAX_SESSION = 0
+LICENSE_SESSIONS_WARNING = 0
+LICENSE_MAX_USERS = 0
+Starting up ORACLE RDBMS Version: 8.1.7.0.0.
+System parameters with non-default values:
+  processes                = 100
+  shared_pool_size         = 104857600
+  large_pool_size          = 52448800
+  java_pool_size           = 1048576
+  control_files            = /oradata/data/prueba/control01.ctl, /oradata/data/prueba/control02.ctl
+  db_block_buffers         = 20000
+  db_block_size            = 8192
+  compatible               = 8.1.7
+  log_buffer               = 524288
+  log_checkpoint_interval  = 10000
+  log_checkpoint_timeout   = 1800
+  rollback_segments        = r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, r11, r12, r13, r14, r15
+  db_domain                = bloomberg.com
+  instance_name            = prueba
+  service_names            = prueba.bloomberg.com
+  mts_dispatchers          = (address=(protocol=ipc))(dispatchers=1), (address=(protocol=tcp))(dispatchers=1)
+  mts_servers              = 2
+  mts_max_servers          = 10
+  mts_max_dispatchers      = 10
+  mts_service              = prueba
+  open_links               = 4
+  sort_area_size           = 131072
+  sort_area_retained_size  = 65536
+  db_name                  = prueba
+  open_cursors             = 255
+  utl_file_dir             = /bb/oracle/admin/prueba/utl
+  job_queue_processes      = 3
+  job_queue_interval       = 10
+  background_dump_dest     = /bb/oracle/admin/prueba/bdump
+  user_dump_dest           = /bb/oracle/admin/prueba/udump
+  core_dump_dest           = /bb/oracle/admin/prueba/cdump
+PMON started with pid=2
+DBW0 started with pid=3
+LGWR started with pid=4
+CKPT started with pid=5
+SMON started with pid=6
+RECO started with pid=7
+SNP0 started with pid=8
+SNP1 started with pid=9
+SNP2 started with pid=10
+Mon Sep 15 13:20:39 2003
+starting up 2 shared server(s) ...
+starting up 1 dispatcher(s) for network address '(address=(protocol=ipc))'...
+starting up 1 dispatcher(s) for network address '(address=(protocol=tcp))'...
+Mon Sep 15 13:20:39 2003
+alter database  mount
+Mon Sep 15 13:20:46 2003
+Successful mount of redo thread 1, with mount id 3824729198.
+Mon Sep 15 13:20:46 2003
+Database mounted in Exclusive Mode.
+Completed: alter database  mount
+Mon Sep 15 13:20:46 2003
+alter database open 
+Mon Sep 15 13:20:46 2003
+Thread 1 opened at log sequence 22
+  Current log# 2 seq# 22 mem# 0: /oradata/data/prueba/redo02.log
+Successful open of redo thread 1.
+Mon Sep 15 13:20:46 2003
+SMON: enabling cache recovery
+SMON: enabling tx recovery
+Mon Sep 15 13:20:47 2003
+Completed: alter database open 

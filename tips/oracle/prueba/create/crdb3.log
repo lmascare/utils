@@ -1,0 +1,3517 @@
+Connected.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_ERRORS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_ERRORS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_ERRORS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_SOURCE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_SOURCE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_SOURCE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_INTERNAL_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_INTERNAL_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_INTERNAL_TRIGGERS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_TRIGGER_COLS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_TRIGGER_COLS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_TRIGGER_COLS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_DEPENDENCIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_DEPENDENCIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_DEPENDENCIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym PUBLIC_DEPENDENCY
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_OBJECT_SIZE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_OBJECT_SIZE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_JOBS_RUNNING
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_JOBS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_JOBS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+drop public synonym ALL_JOBS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_DEPENDENCIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_IDL_UB1
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_IDL_CHAR
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_IDL_UB2
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_IDL_SB4
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ORA_KGLR7_DB_LINKS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+drop package dbms_standard
+*
+ORA-04043: object DBMS_STANDARD does not exist
+Statement processed.
+drop public synonym dbms_standard
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+drop public synonym plitblm
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop package sys.plitblm
+*
+ORA-04043: object PLITBLM does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE SYS_STUB_FOR_PURITY_ANALYSIS
+Statement processed.
+Statement processed.
+Statement processed.
+drop package body sys.diana
+*
+ORA-04043: object DIANA does not exist
+drop package sys.diana
+*
+ORA-04043: object DIANA does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop table sys.pstubtbl
+               *
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+drop package body sys.diutil
+*
+ORA-04043: object DIUTIL does not exist
+drop package sys.diutil
+*
+ORA-04043: object DIUTIL does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop procedure sys.pstubt
+*
+ORA-04043: object PSTUBT does not exist
+Statement processed.
+Statement processed.
+drop procedure sys.pstub
+*
+ORA-04043: object PSTUB does not exist
+Statement processed.
+Statement processed.
+drop procedure sys.subptxt2
+*
+ORA-04043: object SUBPTXT2 does not exist
+Statement processed.
+drop procedure sys.subptxt
+*
+ORA-04043: object SUBPTXT does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop library SYS.DBMS_PICKLER_LIB
+*
+ORA-04043: object DBMS_PICKLER_LIB does not exist
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_pickler
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_java_test
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE UTL_FILE
+Statement processed.
+No errors for PACKAGE BODY UTL_FILE
+drop public synonym utl_file
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE UTL_RAW
+Statement processed.
+No errors for PACKAGE BODY UTL_RAW
+drop public synonym utl_raw
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM utl_tcp
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM utl_inaddr
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM utl_smtp
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_space_admin
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_SEGMENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_SEGMENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_EXTENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_EXTENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_LMT_USED_EXTENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_DMT_USED_EXTENTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_FREE_SPACE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_FREE_SPACE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_LMT_FREE_SPACE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_DMT_FREE_SPACE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_FREE_SPACE_COALESCED
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_DATA_FILES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_TABLESPACES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_TABLESPACES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_TEMP_FILES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym v$temp_extent_map
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym gv$temp_extent_map
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym v$temp_extent_pool
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym gv$temp_extent_pool
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym v$temp_space_header
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym gv$temp_space_header
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym v$context
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym gv$context
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_CONTEXT
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_CONTEXT
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym sm$version
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_transaction
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_session
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_ddl
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_utility
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_space
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_rowid
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_pclxutil
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_lock
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_pipe
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_output
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_describe
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_sql
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_job
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_stats
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_ddl_internal
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop table dbms_lock_allocated
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence dbms_lock_id
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop table dbms_alert_info
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+drop public synonym dbms_alert
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE BODY DBMS_EXPORT_EXTENSION
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_zhelp
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_zhelp_ir
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbmszexp_syspkggrnt
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_psp
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_RULESETS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RULESETS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rule_adm
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rule
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Echo                            ON
+SVRMGR> create or replace view DBA_PENDING_TRANSACTIONS(formatid, globalid, branchid)
+     2> as
+     3> (((select formatid, globalid, branchid
+     4>    from   gv$global_transaction
+     5>    where  refcount = preparecount)
+     6>  minus
+     7>   (select global_tran_fmt, global_foreign_id, branch_id
+     8>    from   sys.pending_trans$ tran, sys.pending_sessions$ sess
+     9>    where  tran.local_tran_id = sess.local_tran_id
+    10>      and  tran.state != 'collecting'
+    11>      and  dbms_utility.is_bit_set(tran.session_vector, sess.session_id)=1)
+    12>  )
+    13>  union
+    14>   (select global_tran_fmt, global_foreign_id, branch_id
+    15>    from   sys.pending_trans$ tran, sys.pending_sessions$ sess
+    16>    where  tran.local_tran_id = sess.local_tran_id
+    17>      and  tran.state != 'collecting'
+    18>      and  dbms_utility.is_bit_set(tran.session_vector, sess.session_id)=1)
+    19> );
+Statement processed.
+SVRMGR> drop public synonym DBA_PENDING_TRANSACTIONS;
+Statement processed.
+SVRMGR> create public synonym DBA_PENDING_TRANSACTIONS for DBA_PENDING_TRANSACTIONS;
+Statement processed.
+SVRMGR> grant select on DBA_PENDING_TRANSACTIONS to select_catalog_role;
+Statement processed.
+SVRMGR> comment on table DBA_PENDING_TRANSACTIONS is
+     2>   'information about unresolved global transactions';
+Statement processed.
+SVRMGR> comment on column DBA_PENDING_TRANSACTIONS.formatid is
+     2>   'format identifier of the transaction identifier';
+Statement processed.
+SVRMGR> comment on column DBA_PENDING_TRANSACTIONS.globalid is
+     2>   'global part (gtrid) of the transaction identifier';
+Statement processed.
+SVRMGR> comment on column DBA_PENDING_TRANSACTIONS.branchid is
+     2>   'branch qualifier (bqual) of the transaction identifier';
+Statement processed.
+SVRMGR> 
+SVRMGR> set echo off
+Echo                            OFF
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+1 row processed.
+1 row processed.
+Statement processed.
+0 rows processed.
+0 rows processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_QUEUE_TABLES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_QUEUE_TABLES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_QUEUE_TABLES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_QUEUES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_QUEUES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_QUEUES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_QUEUE_SCHEDULES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_QUEUE_SCHEDULES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym QUEUE_PRIVILEGES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym v$aq
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym gv$aq
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aqadm
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aqadm_syscalls
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_sys_exp_internal
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_sys_exp_actions
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_zecurity
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_queue_tables
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_index_tables
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_timemgr_tables
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_history_tables
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_subscriber_tables
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_exp_queues
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop type aq$_jms_text_message
+*
+ORA-04043: object AQ$_JMS_TEXT_MESSAGE does not exist
+drop type aq$_jms_bytes_message
+*
+ORA-04043: object AQ$_JMS_BYTES_MESSAGE does not exist
+drop type aq$_jms_stream_message
+*
+ORA-04043: object AQ$_JMS_STREAM_MESSAGE does not exist
+drop type aq$_jms_map_message
+*
+ORA-04043: object AQ$_JMS_MAP_MESSAGE does not exist
+drop type aq$_jms_object_message
+*
+ORA-04043: object AQ$_JMS_OBJECT_MESSAGE does not exist
+drop type aq$_jms_header
+*
+ORA-04043: object AQ$_JMS_HEADER does not exist
+drop type aq$_jms_userproparray
+*
+ORA-04043: object AQ$_JMS_USERPROPARRAY does not exist
+drop type aq$_jms_userproperty
+*
+ORA-04043: object AQ$_JMS_USERPROPERTY does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aqin
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC synonym dbms_aqjms
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_sys_imp_internal
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_imp_zecurity
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_aq_imp_internal
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rmin
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_resource_manager
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_resource_manager_privs
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rmgr_plan_export
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rmgr_group_export
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rmgr_pact_export
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+0 rows processed.
+0 rows processed.
+1 row processed.
+1 row processed.
+1 row processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RSRC_PLANS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RSRC_CONSUMER_GROUPS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RSRC_PLAN_DIRECTIVES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RSRC_CONSUMER_GROUP_PRIVS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_RSRC_CONSUMER_GROUP_PRIVS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RSRC_MANAGER_SYSTEM_PRIVS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_RSRC_MANAGER_SYSTEM_PRIVS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP SYNONYM def$_tran
+             *
+ORA-01434: private synonym to be dropped does not exist
+DROP SYNONYM def$_call
+             *
+ORA-01434: private synonym to be dropped does not exist
+DROP SYNONYM def$_calldest
+             *
+ORA-01434: private synonym to be dropped does not exist
+DROP SYNONYM def$_error
+             *
+ORA-01434: private synonym to be dropped does not exist
+DROP SYNONYM def$_defaultdest
+             *
+ORA-01434: private synonym to be dropped does not exist
+DROP SYNONYM def$_schedule
+             *
+ORA-01434: private synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym temp$lob
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM defschedule
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM deferror
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM deferrcount
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM deftran
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM deftrandest
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM defdefaultdest
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+DROP SYNONYM def$_lob
+             *
+ORA-01434: private synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM DefLOB
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM defpropagator
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+0 rows processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+1 row processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_SNAPSHOT_REFRESH_TIMES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_SNAPSHOT_REFRESH_TIMES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_SNAPSHOT_REFRESH_TIMES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_SNAPSHOT_LOGS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_SNAPSHOT_LOGS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_SNAPSHOT_LOGS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RCHILD
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_RGROUP
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_REFRESH
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_REFRESH
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_REFRESH
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_REFRESH_CHILDREN
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_REFRESH_CHILDREN
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_REFRESH_CHILDREN
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_REGISTERED_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_REGISTERED_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_REGISTERED_SNAPSHOTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_MVIEWS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_MVIEWS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_MVIEWS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_pswmg_import
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBMS_DEBUG
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym pbsde
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Server Output                   ON
+Statement processed.
+DBMS_DEBUG successfully loaded.
+PBUTL      successfully loaded.
+PBRPH      successfully loaded.
+PBSDE      successfully loaded.
+PBREAK     successfully loaded.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_summary
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+DROP PUBLIC SYNONYM dbms_olap
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_snapshot
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+DROP PUBLIC SYNONYM dbms_mview
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_refresh
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+Statement processed.
+Statement processed.
+Statement processed.
+0 rows processed.
+1 row processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_ias_configure
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_ias_session
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_ias_query
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE SYS.DBMS_TRACE
+Statement processed.
+drop public synonym dbms_trace
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop view sys.transport_set_violations
+*
+ORA-00942: table or view does not exist
+truncate table sys.transts_error$
+                   *
+ORA-00942: table or view does not exist
+drop table sys.transts_error$
+               *
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_lob
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+No errors for PACKAGE DBMS_LOB
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM utl_ref
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM utl_coll
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_distributed_trust_admin
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE BODY DBMS_LOGMNR_D
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop role SNMPAGENT
+          *
+ORA-01919: role 'SNMPAGENT' does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop user DBSNMP cascade
+          *
+ORA-01918: user 'DBSNMP' does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop role OEM_MONITOR
+          *
+ORA-01919: role 'OEM_MONITOR' does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_POLICIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ALL_POLICIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_POLICIES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_rls
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_OUTLINES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+drop public synonym ALL_OUTLINES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_OUTLINES
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym USER_OUTLINE_HINTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+drop public synonym ALL_OUTLINE_HINTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym DBA_OUTLINE_HINTS
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM outln_pkg
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM outline
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+1 row processed.
+1 row processed.
+1 row processed.
+Statement processed.
+No errors for PACKAGE BODY SYS.OUTLN_PKG
+DROP PROCEDURE ODCIIndexInfoDump
+*
+ORA-04043: object ODCIINDEXINFODUMP does not exist
+DROP PROCEDURE ODCIPredInfoDump
+*
+ORA-04043: object ODCIPREDINFODUMP does not exist
+DROP PROCEDURE ODCIQueryInfoDump
+*
+ORA-04043: object ODCIQUERYINFODUMP does not exist
+DROP PROCEDURE ODCIColInfoDump
+*
+ORA-04043: object ODCICOLINFODUMP does not exist
+DROP PROCEDURE ODCIStatsOptionsDump
+*
+ORA-04043: object ODCISTATSOPTIONSDUMP does not exist
+DROP PROCEDURE ODCIIndexAlterOptionDump
+*
+ORA-04043: object ODCIINDEXALTEROPTIONDUMP does not exist
+DROP TYPE ODCIIndexCtx
+*
+ORA-04043: object ODCIINDEXCTX does not exist
+DROP TYPE ODCIRidList
+*
+ORA-04043: object ODCIRIDLIST does not exist
+DROP TYPE ODCIPredInfo
+*
+ORA-04043: object ODCIPREDINFO does not exist
+DROP TYPE ODCIIndexInfo
+*
+ORA-04043: object ODCIINDEXINFO does not exist
+DROP TYPE ODCIColInfoList
+*
+ORA-04043: object ODCICOLINFOLIST does not exist
+DROP TYPE ODCIColInfo
+*
+ORA-04043: object ODCICOLINFO does not exist
+DROP TYPE ODCICost
+*
+ORA-04043: object ODCICOST does not exist
+DROP TYPE ODCIArgDescList
+*
+ORA-04043: object ODCIARGDESCLIST does not exist
+DROP TYPE ODCIArgDesc
+*
+ORA-04043: object ODCIARGDESC does not exist
+DROP TYPE ODCIQueryInfo
+*
+ORA-04043: object ODCIQUERYINFO does not exist
+DROP TYPE ODCIObjectList
+*
+ORA-04043: object ODCIOBJECTLIST does not exist
+DROP TYPE ODCIObject
+*
+ORA-04043: object ODCIOBJECT does not exist
+DROP TYPE ODCIFuncInfo
+*
+ORA-04043: object ODCIFUNCINFO does not exist
+DROP TYPE ODCIStatsOptions
+*
+ORA-04043: object ODCISTATSOPTIONS does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM ODCIConst
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_sysevent
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_dict_obj_type
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_dict_obj_owner
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_dict_obj_name
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_database_name
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_instance_num
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_login_user
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_is_servererror
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_server_error
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_des_encrypted_password
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_is_alter_column
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_is_drop_column
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_grantee
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_revokee
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_privilege_list
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_with_grant_option
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_dict_obj_owner_list
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_dict_obj_name_list
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_is_creating_nested_table
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym ora_client_ip_address
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_random
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_obfuscation_toolkit
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE BODY DBMS_OBFUSCATION_TOOLKIT_FFI
+Statement processed.
+No errors for PACKAGE BODY DBMS_OBFUSCATION_TOOLKIT
+drop package sys.wpiutl
+*
+ORA-04043: object WPIUTL does not exist
+Statement processed.
+Statement processed.
+No errors for PACKAGE BODY SYS.WPIUTL
+Statement processed.
+Statement processed.
+No errors for PACKAGE DBMS_EPGC
+DROP PUBLIC SYNONYM dbms_epgc
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+No errors for PACKAGE PRVT_EGUTL
+Statement processed.
+No errors for PACKAGE BODY PRVT_EGUTL
+Statement processed.
+Statement processed.
+No errors for PACKAGE PRVT_EPGC
+Statement processed.
+No errors for PACKAGE BODY PRVT_EPGC
+Statement processed.
+No errors for PACKAGE BODY DBMS_EPGC
+drop package owa_cookie
+*
+ORA-04043: object OWA_COOKIE does not exist
+drop package owa_image
+*
+ORA-04043: object OWA_IMAGE does not exist
+drop package owa_pattern
+*
+ORA-04043: object OWA_PATTERN does not exist
+drop package owa_text
+*
+ORA-04043: object OWA_TEXT does not exist
+drop package owa_util
+*
+ORA-04043: object OWA_UTIL does not exist
+drop package owa
+*
+ORA-04043: object OWA does not exist
+drop package htp
+*
+ORA-04043: object HTP does not exist
+drop package htf
+*
+ORA-04043: object HTF does not exist
+drop package owa_custom
+*
+ORA-04043: object OWA_CUSTOM does not exist
+drop package owa_sec
+*
+ORA-04043: object OWA_SEC does not exist
+drop package owa_opt_lock
+*
+ORA-04043: object OWA_OPT_LOCK does not exist
+drop package owa_cache
+*
+ORA-04043: object OWA_CACHE does not exist
+drop package wpg_docload
+*
+ORA-04043: object WPG_DOCLOAD does not exist
+drop public synonym OWA_CUSTOM
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_GLOBAL
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym HTF
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym HTP
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_COOKIE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_IMAGE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_OPT_LOCK
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_PATTERN
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_SEC
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_TEXT
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_UTIL
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_INIT
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym OWA_CACHE
+                    *
+ORA-01432: public synonym to be dropped does not exist
+drop public synonym WPG_DOCLOAD
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+No errors for PACKAGE OWA_CUSTOM
+Statement processed.
+No errors for PACKAGE HTF
+Statement processed.
+No errors for PACKAGE HTP
+Statement processed.
+No errors for PACKAGE OWA_UTIL
+Statement processed.
+No errors for PACKAGE OWA_SEC
+Statement processed.
+No errors for PACKAGE OWA
+Statement processed.
+No errors for PACKAGE OWA_TEXT
+Statement processed.
+No errors for PACKAGE OWA_PATTERN
+Statement processed.
+No errors for PACKAGE OWA_IMAGE
+Statement processed.
+No errors for PACKAGE OWA_COOKIE
+Statement processed.
+No errors for PACKAGE OWA_OPT_LOCK
+Statement processed.
+No errors for PACKAGE OWA_CACHE
+Statement processed.
+No errors for PACKAGE WPG_DOCLOAD
+Statement processed.
+No errors for PACKAGE BODY OWA_CUSTOM
+Statement processed.
+No errors for PACKAGE BODY HTF
+Statement processed.
+No errors for PACKAGE BODY HTP
+Statement processed.
+No errors for PACKAGE BODY OWA
+Statement processed.
+No errors for PACKAGE BODY OWA_UTIL
+Statement processed.
+No errors for PACKAGE BODY OWA_TEXT
+Statement processed.
+No errors for PACKAGE BODY OWA_PATTERN
+Statement processed.
+No errors for PACKAGE BODY OWA_IMAGE
+Statement processed.
+No errors for PACKAGE BODY OWA_COOKIE
+Statement processed.
+No errors for PACKAGE BODY OWA_OPT_LOCK
+Statement processed.
+No errors for PACKAGE BODY OWA_SEC
+Statement processed.
+No errors for PACKAGE BODY OWA_CACHE
+Statement processed.
+No errors for PACKAGE BODY WPG_DOCLOAD
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+drop role hs_admin_role
+          *
+ORA-01919: role 'HS_ADMIN_ROLE' does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop table hs$_fds_class cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_fds_class_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_fds_class
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_fds_inst cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_fds_inst_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_fds_inst
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_base_caps cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_base_caps
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_class_caps cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_class_caps_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_class_caps
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_inst_caps cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_inst_caps_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_inst_caps
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_base_dd cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_base_dd_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_base_dd
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_class_dd cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_class_dd_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_class_dd
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_inst_dd cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_inst_dd_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_inst_dd
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_class_init cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_class_init_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_class_init
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_inst_init cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_inst_init_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_inst_init
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_external_objects cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_external_objects_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_external_objects
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop table hs$_granted_users cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_granted_users_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+drop table hs$_privileges cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop sequence hs$_privileges_s
+              *
+ORA-02289: sequence does not exist
+Statement processed.
+drop table hs$_access_grantees cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+drop table hs$_create_grantees cascade constraints
+           *
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_external_object_privileges
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_external_user_privileges
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_all_caps
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_all_dd
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym hs_all_inits
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_hs
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+drop public synonym dbms_hs_extproc
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+DROP PUBLIC SYNONYM dbms_oracle_trace_user
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Statement processed.
+Connected.
+drop synonym product_user_profile
+             *
+ORA-01434: private synonym to be dropped does not exist
+  date_value from product_user_profile
+                  *
+ORA-00942: table or view does not exist
+drop table product_user_profile
+           *
+ORA-00942: table or view does not exist
+alter table sqlplus_product_profile add (long_value long)
+*
+ORA-00942: table or view does not exist
+Statement processed.
+drop table product_profile
+           *
+ORA-00942: table or view does not exist
+drop view product_privs
+*
+ORA-00942: table or view does not exist
+Statement processed.
+Statement processed.
+drop public synonym product_profile
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+drop synonym product_user_profile
+             *
+ORA-01434: private synonym to be dropped does not exist
+Statement processed.
+drop public synonym product_user_profile
+                    *
+ORA-01432: public synonym to be dropped does not exist
+Statement processed.
+Disconnected.
