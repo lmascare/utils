@@ -17,7 +17,7 @@ useradd -c 'Postgres SQL' -d /home/postgres -g 8889 -m -r -s /bin/bash -u 8889 p
  * Determine if memory overcommit is an issue (sysctl -w vm.overcommit_memory=2)
  * [Parameter Settings](https://www.postgresql.org/docs/current/static/runtime-config.html) 
  * psql [PROMPT](https://www.postgresql.org/docs/8.4/static/app-psql.html#APP-PSQL-PROMPTING)
-
+wh
 DB Item | Configuration
 --- | ---
 Installation Dir | /u/PostgreSQL/10
@@ -49,3 +49,4 @@ Create an Index Tablespace | create tablespace lc_index location '/u/postgres/lc
 Create a TEMP Tablespace | create tablespace lc_temp location '/u/postgres/lc/temp';
 Create a DB | create database lcdb tablespace lc_data;
 Set Prompt in ~/.psqlrc | \set PROMPT1 '%[%033[1;33;40m%]%n@%/%R%[%033[0m%]%# '
+Create user | createuser -S -D -R -P -e lcuser (No superuser/create db/create role/sets password)
