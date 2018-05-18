@@ -68,8 +68,8 @@ def main():
         table += "</table>"
 
         table += "</html>"
-    print table
-    # utils.send_mail(recipient, subject, table, attachment)
+    # print table
+    utils.send_mail(recipient, subject, table, attachment)
 
 
 
