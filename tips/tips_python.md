@@ -13,7 +13,9 @@
  * pip3 is already part of Python3.6.3
  * source <virtualenv>/bin/activate
  * deactivate
- 
+
+#### Update pip for TLS/SSL issuues
+ * pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
 #### Setup local PyPi server
  * pip download pypiserver
  # TODO
