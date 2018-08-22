@@ -18,6 +18,7 @@ useradd -c 'Postgres SQL' -d /home/postgres -g 8889 -m -r -s /bin/bash -u 8889 p
  * [Parameter Settings](https://www.postgresql.org/docs/current/static/runtime-config.html) 
  * psql [PROMPT](https://www.postgresql.org/docs/8.4/static/app-psql.html#APP-PSQL-PROMPTING)
 wh
+
 DB Item | Configuration
 --- | ---
 Installation Dir | /u/PostgreSQL/10
@@ -27,10 +28,16 @@ Port | 5432
 Locale | C
 
 #### Command line utilities
+```
+# Create a DB. All commands from SHELL (bash) prompt
+createdb django
+createuser django
 
+```
 Command | Options | Notes
 --- |--- | ---
-pg_ctl | | Initialize start / stop / Control a PostGres server 
+initdb | -D /var/lib/postgresql/10/main --auth-local peer --auth-host md5 | Create a new PG cluster
+pg_ctl | -D /var/lib/postgresql/10/main -l logfile start | Initialize start / stop / Control a PostGres server
 psql | -d \<dbname> -h \<host> -p \<port> -U \<dbuser> | Connect to a DB and perform DML
 
 #### psql command options

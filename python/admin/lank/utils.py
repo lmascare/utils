@@ -316,6 +316,8 @@ def send_mail(recipient, subject, body, attachment):
 
     If no attachment is sent, the attachment parameter should say NOFILE.
 
+    Message body is always sent via HTML mail
+
     :param recipient:   # A Python list of recipients
     :param subject:
     :param body:        # Sent as plain text
@@ -346,8 +348,10 @@ def send_mail(recipient, subject, body, attachment):
     msg.preamble = 'Mime Preamble'
 
     if (body is not ""):
-        msg_body = MIMEText(body, 'plain')
-        msg.attach(msg_body)
+        # plain_msg_body = MIMEText(body, 'plain')
+        html_msg_body = MIMEText(body, 'html')
+        # msg.attach(plain_msg_body)
+        msg.attach(html_msg_body)
     else:
         logit("warning", "Sending with No Message Text", 0)
 
