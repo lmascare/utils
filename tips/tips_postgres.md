@@ -33,6 +33,8 @@ Locale | C
 createdb django
 createuser django
 
+# To login w/o password. Set the .pgpass file. Then login 
+psql -h localhost -d django -U django
 ```
 Command | Options | Notes
 --- |--- | ---
