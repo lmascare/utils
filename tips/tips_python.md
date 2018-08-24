@@ -9,7 +9,7 @@
  * deactivate (exit the virtualenv)
  
 #### Virtualenv Python 3.6.3
- * python3 -m venv <virtualenv>
+ * python3 -m venv \<virtualenv_dir\>
  * pip3 is already part of Python3.6.3
  * source <virtualenv>/bin/activate
  * deactivate
