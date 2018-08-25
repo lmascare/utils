@@ -33,8 +33,20 @@ def main():
     # recipient = 'larry.masc@gmail.com'
     subject = 'Test from Python'
     body = 'Test 5 to GMail and Yahoo with Mimetext and Multipart with file'
+    # body = """
+    # <html>
+    # <head></head>
+    # <body>
+    # <p>Hi!
+      # <br><b>How are you?<br></b>
+       # Here is the <a href="https://www.python.org">link</a> you wanted.
+    # </p>
+    # </body>
+    # </html>
+    # """
+    attachment = "/u/tmp/test.html"
     # attachment = "NOFILE"
-    attachment = "/home/lmascare/misc/earthmoon_nasa.jpg"
+    # attachment = "/home/lmascare/misc/earthmoon_nasa.jpg"
     # attachment = "/home/lmascare/misc/KEYS.gz"
 
     utils.send_mail(recipient, subject, body, attachment)
