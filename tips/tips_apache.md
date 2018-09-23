@@ -43,3 +43,46 @@
     - ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
  - apr-iconv
     - ./configure --prefix=/usr/local/apr-iconv --with-apr=/usr/local/apr
+
+
+### To Enable mod_wsgi
+https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/
+
+```text
+# wsgi Module
+LoadModule wsgi_module modules/mod_wsgi.so
+
+<IfModule wsgi_module>
+WSGIScriptAlias / /u/gitwork/django/django/config/wsgi.py
+WSGIPythonHome /u/gitwork/django/venv
+WSGIPythonPath /u/gitwork/django/django
+</IfModule>
+
+WSGIDaemonProcess kellynoah.com processes=2 threads=15 \
+python-home=/u/gitwork/django/venv \
+python-path=/u/gitwork/django/django
+
+WSGIProcessGroup kellynoah.com
+
+Alias /robots.txt /u/gitwork/django/django/static/robots.txt
+Alias /favicon.ico /u/gitwork/django/django/static/favicon.ico
+
+Alias /media/ /u/gitwork/django/django/media/
+#Alias /static/ /u/gitwork/django/django/static/
+Alias /static/ /u/gitwork/django/venv/lib/python3.6/site-packages/django/contrib/admin/static/
+
+<Directory /u/gitwork/django/django/config>
+<Files wsgi.py>
+Require all granted
+</Files>
+</Directory>
+
+<Directory /u/gitwork/django/venv/lib/python3.6/site-packages/django/contrib/admin/static>
+Require all granted
+</Directory>
+
+<Directory /u/gitwork/django/django>
+Require all granted
+</Directory>
+
+```
