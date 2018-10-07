@@ -33,6 +33,8 @@ Locale | C
 createdb django
 createuser django
 
+# To login w/o password. Set the .pgpass file. Then login 
+psql -h localhost -d django -U django
 ```
 Command | Options | Notes
 --- |--- | ---
@@ -42,7 +44,7 @@ psql | -d \<dbname> -h \<host> -p \<port> -U \<dbuser> | Connect to a DB and per
 
 #### psql command options
 
-Option | Results
+Option | Results | 
 --- | ---
 \l | lis the Databases
 \d *. | Lists all the Instance Tables
@@ -57,3 +59,7 @@ Create a TEMP Tablespace | create tablespace lc_temp location '/u/postgres/lc/te
 Create a DB | create database lcdb tablespace lc_data;
 Set Prompt in ~/.psqlrc | \set PROMPT1 '%[%033[1;33;40m%]%n@%/%R%[%033[0m%]%# '
 Create user | createuser -S -D -R -P -e lcuser (No superuser/create db/create role/sets password)
+Create a schema for the user | create schema mymdb authorization mymdb; (In the owner's DB)
+Set search path to role | alter role mymdb set search_path = "mymdb"; (as superuser)
+Revoke schema creation from public |  revoke create on schema public from public; (as superuser)
+
