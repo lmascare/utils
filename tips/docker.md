@@ -25,11 +25,15 @@ docker run -it --rm busybox | Will drop you into a 'sh' inside busybox
 docker run --name <docker_name <image> | Name your container
 docker run -d | Runs docker detached (daemon mode)  
 docker run -it --rm -p <host_port>:<container_port>  
+docker run -d -p <host_port>:<container_port> --link <dest_container> | Container Links 
 docker tag <image_id> docker_hub/repo | Tag an image **Avoid the _latest_ tag**  
+docker-compose up | Build services from docker-compose.yml9
+docker-compose <build, ps, logs, logs -s, logs <container_id> | Docker-compose Services
+docker-compose <start, stop> | Start / Stop containers
+docker-compose rm | Removes ALL containers
 docker-machine ls | State of the Docker container  
 
 
- 
 ####Registries  
  - Location where Docker Images are stored
  - You can host your own or use Docker's public registry called DockerHub
