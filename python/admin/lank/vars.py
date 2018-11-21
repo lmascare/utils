@@ -34,8 +34,8 @@ logdir = adm_logs
 
 smtp_server = 'gAAAAABaRnjQLl5_SHGQZOsI-NLA5aRwMsLIhs2y1_QlMuy1tXkhtIzhEVklYJ1A1lN7bjS0Qf4V0sPJlR_xZZFpZK7mqN0fbQ=='
 smtp_port = 'gAAAAABaRnk-OlKdVvdVddkPEo76iKqyHKYv530XmgLF_38_2jZjlkYPxL20wWVZBPxtCoYBUUL4sxlzoq4EPVQQos6aPIsojg=='
-smtp_user = ''
-smtp_passwd = ''
+smtp_user = 'gAAAAABaRner9zdw5UhBqJpvLIPuQnsF2rbB9I1ZGT6Xw4MfgMhePzoS7_8LH8mtzwukNQqkayTHJUp_A3tq9xCiDHo8nn51eyIEFQk0MRcSYF-jbBfJCp0='
+smtp_passwd = 'gAAAAABaRncp-P5SkWyKz9P9ddUxtB38uoenTMRQa-dJlch3CWHDX6bLpW_89QYcndJDwfVmz2XLGjsc1U5DEknjlqdmC73QpQ=='
 
 """ Used for the MySQL DB """
 dbname = 'gAAAAABZ6-fP7U7x2xo4h6qA912CYmjQOnMVrXfJbhnFzd2LbuLpRR_j61vvzAiDWKyv\

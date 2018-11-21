@@ -2,6 +2,8 @@
 #
 # Utils is always imported first
 #
+import csv
+import string
 
 def main():
     #import lank.utils
@@ -48,8 +50,42 @@ def main():
     # attachment = "NOFILE"
     # attachment = "/home/lmascare/misc/earthmoon_nasa.jpg"
     # attachment = "/home/lmascare/misc/KEYS.gz"
+    attachment = "NOFILE"
 
-    utils.send_mail(recipient, subject, body, attachment)
+    # Process a CSV file and send the data as a table.
+    csv_file = "/u/tmp/cities.csv"
+    with open(csv_file, "r") as csv_data:
+        csv_reader = csv.reader(csv_data, dialect="excel", delimiter=",", quotechar='"')
+        # Begin table definition
+        table = "<!DOCTYPE html>"
+        table += "<html>"
+        table += "<head>"
+        table += "<style>"
+        table += """
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        """
+        table += "</head>"
+        table += "</style>"
+        table += "<table>\n"
+        for row in csv_reader:
+            table += "<tr>" + \
+                          "<td>" + \
+                              string.join( row, "</td><td>" ) + \
+                          "</td>" + \
+                     "</tr>\n"
+        # End table definition
+        table += "</table>"
+
+        table += "</html>"
+    # print table
+    utils.send_mail(recipient, subject, table, attachment)
+
+
+
+
 
     exit(0)
     dbnames = db_creds.keys()

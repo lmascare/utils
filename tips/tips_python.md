@@ -9,10 +9,14 @@
  * deactivate (exit the virtualenv)
  
 #### Virtualenv Python 3.6.3
- * python3 -m venv <virtualenv>
+ * python3 -m venv \<virtualenv_dir\>
  * pip3 is already part of Python3.6.3
  * source <virtualenv>/bin/activate
  * deactivate
+
+#### Update pip for TLS/SSL issuues
+ * sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+ * pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
  
 #### Setup local PyPi server
  * pip download pypiserver

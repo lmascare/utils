@@ -176,7 +176,7 @@ do
 
 	cd Python-${py_ver}
 	./configure --prefix=/usr/local/${py_ver} --enable-unicode=ucs4 --enable-shared \
-  	--enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/lib"
+  	--enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/${py_ver}/lib"
 
 	make
     cd ..
