@@ -1,4 +1,3 @@
-
 """
 Variables to be used across the board everywhere.
 

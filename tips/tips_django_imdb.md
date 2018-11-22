@@ -1,6 +1,21 @@
 ## Django IMDB Application Tutorial
 
 ```
+# GitHub Requirements
+# Create a new repository. Fork the repository
+cd /u/gitwork
+git clone git@github.com:lmascare/lank.git
+git remote add upstream git@github.com:LarryMasc/lank.git
+
+# Create a .gitignore file in /u/gitwork/lank
+
+# Python requirements for Django
+/usr/local/bin/python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install django
+pip install psycopg2
+
 # PostgreSQL setup
 # Download and install PostgreSQL. It will create the DB
 # Now create a database, user, schema.
@@ -25,7 +40,36 @@ create schema <schema_name>
 django-admin startproject config
 mv config django
 cd django
+
+# In settings.py
+import os
+import json
+DEBUG = False
 set ALLOWED_HOSTS = ['*']
+
+with open('/u/gitwork/django/django/config/.secret_key') as f:
+    SECRET_KEY = f.read().strip()
+
+with open('/u/gitwork/django/django/config/.db_settings') as f:
+    DATABASES = json.load(f)
+
+TIME_ZONE = 'America/New_York'
+
+# .db_settings (perms 400)
+{
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "****",
+        "USER": "****",
+        "PASSWORD": "****",
+        "HOST": "127.0.0.1",
+        "PORT": "5432"
+    }
+}
+
+# .secret_key file (perms 400)
+******
+
 ./manage.py startapp core
 
 # In settings.py, add 'core' as a list element
