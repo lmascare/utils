@@ -1,0 +1,22 @@
+#!/bin/bash
+
+db=$1
+case $db in
+    django) 
+            psql -h localhost -d django -U django
+                ;;
+    mymdb)
+            psql -h localhost -d mymdb -U mymdb
+                ;;
+    imdb)
+            psql -h localhost -d imdb -U imdb
+                ;;
+    lank)
+            psql -h localhost -d lank -U lank
+                ;;
+        *)
+            echo "Unknown DB. Exiting.."
+            exit 1
+                ;;
+esac
+
