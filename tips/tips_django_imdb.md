@@ -15,6 +15,7 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install django
 pip install psycopg2
+pip install psycopg2-binary
 
 # PostgreSQL setup
 # Download and install PostgreSQL. It will create the DB
@@ -72,7 +73,7 @@ TIME_ZONE = 'America/New_York'
 
 ./manage.py startapp core
 
-# In settings.py, add 'core' as a list element
+# In settings.py, add 'core' as a list element to INSTALLED_APPS
 
 # Create your table schema in core/models.py
 

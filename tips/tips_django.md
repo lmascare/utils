@@ -45,6 +45,10 @@
  * To enable access from remote browsers
     * On the Linux host run 'firewall-cmd --permanent --add-port=8008/tcp'
  
+### To reverse a migration
+ * ./manage.py migrate core zero
+ * Remove all the files from the migrations folder
+
 ### Configure the STORE application
  * ./manage.py startapp store
  * In bookstore/settings.py add 'store', to INSTALL_APPS section
