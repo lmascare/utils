@@ -30,8 +30,10 @@ import inspect
 import subprocess
 import shlex
 import signal
-from vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp, \
+from dns import resolver, reversename
+from .vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp, \
     smtp_user, smtp_passwd, smtp_server, smtp_port
+
 
 def init():
     """Init function.
@@ -45,6 +47,26 @@ def init():
         os.chmod(logdir, 0o777)
     # else:
     #   print("{} exists".format(logdir))
+
+
+def dns_queries(host_name):
+    r"""DNS Query.
+
+    This function will receive a hostname an returns a 'tuple' of
+    (Host Name, IP Address, PTR Record, Original Hostname)
+    https://www.adampalmer.me/iodigitalsec/2014/11/21/performing-dns-queries-python/
+    :param host_name:
+    :return: (host_name, host_ip, host_ptr, host_ori)
+    """
+    host_ip = str(resolver.query(host_name, "A")[0])
+    # host_ip = str(host_ip[0])
+    # print(host_ip, type(host_ip))
+    host_ptr = str(reversename.from_address(host_ip))
+    # print(host_ptr)
+    # print("Hostname --> {} : IP --> {} : PTR --> {}".format(host_name, host_ip, host_ptr))
+    host_ori = str(resolver.query(host_ptr, "PTR")[0])
+    tuple_rec = (host_name, host_ip, host_ptr, host_ori)
+    return(tuple_rec)
 
 
 def db_creds():

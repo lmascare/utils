@@ -28,6 +28,8 @@
     * http://<hostname>:8008
  * Note that DEBUG=True for DEV. Not for Production
  * Set ALLOWED_HOST = ['*'] to enable access from anywhere
+ * Set TIMEZONE = 'America/New_York'
+ * Set full path to the SQLite3 DB file eg '/u/sqlite3/db.sqlite3'
  * Add GIT in the Version Control Section
 
 ### Add an application
@@ -43,6 +45,10 @@
  * To enable access from remote browsers
     * On the Linux host run 'firewall-cmd --permanent --add-port=8008/tcp'
  
+### To reverse a migration
+ * ./manage.py migrate core zero
+ * Remove all the files from the migrations folder
+
 ### Configure the STORE application
  * ./manage.py startapp store
  * In bookstore/settings.py add 'store', to INSTALL_APPS section
@@ -94,6 +100,15 @@
 #### Querying the DB
  * Interactive shell (for mysite)
     * ./manage.py shell
+      * from polls.models import Choice, Question
+      * Question.objects.all()
+      * from django.utils import timezone
+      * q = Question(question_text="What's new?", pub_date=timezone.now())
+      * q.save()
+      * q.id
+      * q.question_text
+      * q.pub_date
+      
       * from django.contrib.auth.models import User
       * from blog.models import Post
       * user = User.objects.get(username='admin')

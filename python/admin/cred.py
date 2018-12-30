@@ -25,10 +25,10 @@ def main():
     # crd = utils.encrypt_cred('587')
     # print(crd)
     # exit(0)
-    # from lank.vars import smtp_user, smtp_passwd, smtp_server, smtp_port
-    # (gmus, gmpa, gmse, gmpo) = utils.get_creds(smtp_user, smtp_passwd, smtp_server, smtp_port)
-    # print(gmus, gmpa, gmse, gmpo)
-    # exit(0)
+    from lank.vars import smtp_user, smtp_passwd, smtp_server, smtp_port
+    (gmus, gmpa, gmse, gmpo) = utils.get_creds(smtp_user, smtp_passwd, smtp_server, smtp_port)
+    print(gmus, gmpa, gmse, gmpo)
+    exit(0)
 
     recipient = ['larry.masc@gmail.com', 'larry_mario@yahoo.com']
     # recipient = 'larry_mario@yahoo.com'
