@@ -25,6 +25,7 @@ cd django
  * ALLOWED_HOSTS
  * import json
 
+#### Static files are not served by Django Webserver. Use Apache instead
 #### Enable _core_ application
 ```
 ./manage.py migrate
@@ -41,4 +42,11 @@ cd django
     'users' to INSTALLED_APPS
     AUTH_USER_MODEL = 'users.CustomUser'
 ./manage.py createsuperuser
+```
+
+####Filters
+```markdown
+pip install django-filter
+# Add to settings.py
+    'django_filters' to INSTALLED_APPS
 ```
