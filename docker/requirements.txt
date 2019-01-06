@@ -1,4 +1,7 @@
-Django
-psycopg2-binary
-dnspython
-netaddr
+# Django
+# psycopg2-binary
+# dnspython
+# netaddr
+
+Redis
+Flask
