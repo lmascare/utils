@@ -20,7 +20,18 @@
  - Install docker-compose
     * curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     * chmod +x /usr/local/bin/docker-compose
-
+ - Install docker-machine
+    * curl -L https://github.com/docker/machine/releases/tag/v0.16.0/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine
+    * sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+ - Install bash completion scripts
+    
+    ```text
+    base=https://raw.githubusercontent.com/docker/machine/v0.16.0    
+    for i in docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash
+    do
+        sudo wget "$base/contrib/completion/bash/${i}" -P /etc/bash_completion.d
+    done
+```
 ### Docker CLI  
 Docker cli | Description |
 --- | ---  
@@ -139,7 +150,7 @@ docker push lmascare/get-started:part2
 docker run -p 4000:80 lmascare/get-started:part2
 ```
 
-### Scaling services in Docker
+### Scaling services in Docker (SWARM)
 A _docker_compose.yaml_ file defines how Docker Containers behave in Production
 ```yaml
 version: "3"
@@ -150,7 +161,7 @@ services:
       replicas: 5
       resources:
         limits:
-          cpu: "0.1"
+          cpus: "0.1"
           memory: 50M
       restart_policy:
         condition: on-failure
@@ -163,7 +174,16 @@ networks:
 ```
 ```commandline
 docker swarm init
+docker stack deploy -c docker-compose.yaml getstartedlab
+docker service ls
 
+# To scale the APP, update the number of replicas. then run
+docker stack deploy -c docker-compose.yaml getstartedlab
+
+# Take down the app
+docker stack rm getstartedlab
+
+# docker swarm leave --force
 ```
 
 
