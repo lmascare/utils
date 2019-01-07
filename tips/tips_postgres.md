@@ -31,7 +31,7 @@ Locale | C
 ```
 # Create a DB. All commands from SHELL (bash) prompt as user 'postgres'
 createdb django
-createuser django
+createuser -S -D -R -P -e <user>
 psql -d django # This logs as superuser into DB 'django'
 create schema django authorization django;
 alter role django set search_path = "django";
