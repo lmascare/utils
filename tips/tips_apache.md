@@ -45,9 +45,7 @@
     - ./configure --prefix=/usr/local/apr-iconv --with-apr=/usr/local/apr
 
 
-### To Enable mod_wsgi
-https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/
-
+### To Enable [mod_wsgi](https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/modwsgi/)
 ```text
 # wsgi Module
 LoadModule wsgi_module modules/mod_wsgi.so

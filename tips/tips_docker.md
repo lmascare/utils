@@ -5,13 +5,31 @@
  - It also installs __docker toolbox__
  - Setup a Docker [Hub](http://hub.docker.com) account
  
-### Docker CLI  
+### Linux Installation
+#### Ubuntu
+ - sudo apt-get update
+ - sudo apt-get install apt-transport-https \
+ ca-certificates, curl, software-properties-common 
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ - sudo apt-key fingerprint 0EBFCD88
+ - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ - sudo apt-get update
+ - sudo apt-get install docker-ce
+ - sudo docker run hello-world (Confirm installation)
+ - sudo usermod -aG docker $USER (so that the user can run docker)
+ - Install docker-compose
+    * curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    * chmod +x /usr/local/bin/docker-compose
 
+### Docker CLI  
 Docker cli | Description |
 --- | ---  
 docker      | Lists help of all docker commands  
 docker commit container_id repo_name:tag | Save changes in a docker container's FS to a new image
 docker build -t <taglist> PATH  | Build a docker image
+docker container ls -a | List all containers
+docker container rm <container_id> | Remove a container
+docker container stop <container_id> | Stop a container
 docker exec -it <container_id> <command> | Run a command in a running container
 docker images | Lists docker images 
 docker info | Details of the docker installation
@@ -21,7 +39,7 @@ docker login --username=<username> | Login to docker Hub
 docker ps   | Lists docker containers
 docker rmi <image> | Remove local copy of the image
 docker run  | Run a command in a container
-docker run -it --rm busybox | Will drop you into a 'sh' inside busybox
+docker run -it --rm busybox | Will drop you into a 'sh' inside busybox. --rm removes container after exit
 docker run --name <docker_name <image> | Name your container
 docker run -d | Runs docker detached (daemon mode)  
 docker run -it --rm -p <host_port>:<container_port>  
@@ -78,3 +96,92 @@ docker tag <image_id> lmascare/debian:1.2
 docker login --username=<username>
 docker push lmascare/debian:1.2
 ```
+### Setting DNS for docker daemon
+```markdown
+/etc/docker/daemon.json
+{
+  "dns": ["your_dns_address", "8.8.8.8"]
+}
+sudo service docker restart
+```
+
+### Running python from a Docker image
+```text
+https://hub.docker.com/_/python
+
+Dockerfile
+----------
+FROM python:3
+WORKDIR /home/lmascare/misc/gitwork/utils/python/admin
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+RUN mkdir -p /u/admin/logs
+COPY . .
+CMD ["python", "./mp_ping.py"]
+
+docker build -t "python_app" .
+docker run python_app
+
+Run a Python script against the docker image
+docker run -it --rm -v "$PWD":/home/lmascare/misc/gitwork/utils/python/admin \
+-w /home/lmascare/misc/gitwork/utils/python/admin python_app python mp_v1.py
+```
+
+### Publish an image to Docker Hub
+```markdown
+Configure credential-store
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+docker build -t friendlyhello .
+docker tag friendlyhello lmascare/get-started:part2
+docker login
+docker push lmascare/get-started:part2
+docker run -p 4000:80 lmascare/get-started:part2
+```
+
+### Scaling services in Docker
+A _docker_compose.yaml_ file defines how Docker Containers behave in Production
+```yaml
+version: "3"
+services:
+  web:
+    image: lmascare/get-started:part2
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpu: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+```
+```commandline
+docker swarm init
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
