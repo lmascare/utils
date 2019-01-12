@@ -17,7 +17,21 @@
  - sudo apt-get install docker-ce
  - sudo docker run hello-world (Confirm installation)
  - sudo usermod -aG docker $USER (so that the user can run docker)
-
+ - Install docker-compose
+    * curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    * chmod +x /usr/local/bin/docker-compose
+ - Install docker-machine
+    * curl -L https://github.com/docker/machine/releases/tag/v0.16.0/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine
+    * sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+ - Install bash completion scripts
+    
+    ```text
+    base=https://raw.githubusercontent.com/docker/machine/v0.16.0    
+    for i in docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash
+    do
+        sudo wget "$base/contrib/completion/bash/${i}" -P /etc/bash_completion.d
+    done
+```
 ### Docker CLI  
 Docker cli | Description |
 --- | ---  
@@ -26,6 +40,7 @@ docker commit container_id repo_name:tag | Save changes in a docker container's 
 docker build -t <taglist> PATH  | Build a docker image
 docker container ls -a | List all containers
 docker container rm <container_id> | Remove a container
+docker container stop <container_id> | Stop a container
 docker exec -it <container_id> <command> | Run a command in a running container
 docker images | Lists docker images 
 docker info | Details of the docker installation
@@ -92,6 +107,14 @@ docker tag <image_id> lmascare/debian:1.2
 docker login --username=<username>
 docker push lmascare/debian:1.2
 ```
+### Setting DNS for docker daemon
+```markdown
+/etc/docker/daemon.json
+{
+  "dns": ["your_dns_address", "8.8.8.8"]
+}
+sudo service docker restart
+```
 
 ### Running python from a Docker image
 ```text
@@ -114,3 +137,71 @@ Run a Python script against the docker image
 docker run -it --rm -v "$PWD":/home/lmascare/misc/gitwork/utils/python/admin \
 -w /home/lmascare/misc/gitwork/utils/python/admin python_app python mp_v1.py
 ```
+
+### Publish an image to Docker Hub
+```markdown
+Configure credential-store
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+docker build -t friendlyhello .
+docker tag friendlyhello lmascare/get-started:part2
+docker login
+docker push lmascare/get-started:part2
+docker run -p 4000:80 lmascare/get-started:part2
+```
+
+### Scaling services in Docker (SWARM)
+A _docker_compose.yaml_ file defines how Docker Containers behave in Production
+```yaml
+version: "3"
+services:
+  web:
+    image: lmascare/get-started:part2
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+```
+```commandline
+docker swarm init
+docker stack deploy -c docker-compose.yaml getstartedlab
+docker service ls
+
+# To scale the APP, update the number of replicas. then run
+docker stack deploy -c docker-compose.yaml getstartedlab
+
+# Take down the app
+docker stack rm getstartedlab
+
+# docker swarm leave --force
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
