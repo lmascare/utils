@@ -4,7 +4,15 @@
  - Select Stable Version
  - It also installs __docker toolbox__
  - Setup a Docker [Hub](http://hub.docker.com) account
- 
+
+### Docker Ports
+Port Number | Description
+--- | ---
+2376 | Docker Daemon
+2377 | Docker Swarm Manager
+4789 UDP | Container Ingress Network
+7956 TCP/UDP | Container Network Discovery 
+
 ### Linux Installation
 #### Ubuntu
  - sudo apt-get update
@@ -23,7 +31,7 @@
  - Install docker-machine
     * curl -L https://github.com/docker/machine/releases/tag/v0.16.0/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine
     * sudo install /tmp/docker-machine /usr/local/bin/docker-machine
- - Install bash completion scripts
+ - #####*Install bash completion scripts*
     
     ```text
     base=https://raw.githubusercontent.com/docker/machine/v0.16.0    
@@ -179,6 +187,7 @@ docker service ls
 
 # To scale the APP, update the number of replicas. then run
 docker stack deploy -c docker-compose.yaml getstartedlab
+docker stack ps getstartedlab
 
 # Take down the app
 docker stack rm getstartedlab
@@ -186,7 +195,50 @@ docker stack rm getstartedlab
 # docker swarm leave --force
 ```
 
+### Creating a SWARM of Docker Nodes
+```text
+docker-machine create -d virtualbox myvm1 (eg IP 192.168.99.100)
+docker-machine create -d virtualbox myvm2 (eg IP 192.168.99.101)
+docker-machine ls
 
+# Note the directives to add a worker & another master
+docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
+
+# To add a worker
+docker-machine ssh myvm2 "docker swarm join \
+--token <token-id> 192.168.99.100:2377"
+
+# To view the nodes in the swarm
+docker-machine ssh myvm1 "docker node ls"
+
+# Only swarm Managers execute Docker Commands. Others are workers for capacity
+
+
+# These settings tell docker-machine to connect to the swarm manager
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/home/<username>/.docker/machine/machines/myvm1"
+export DOCKER_MACHINE_NAME="myvm1"
+
+# Run this command to configure your shell: 
+eval $(docker-machine env myvm1)
+
+# Unconfigure the shell
+eval $(docker-machine env -u)
+
+# Deploy the app to the swarm
+docker stack deploy -c docker-compose.yaml getstartedlab
+docker stack ps getstartedlab
+
+# Start and Stop Docker Nodes
+docker-machine ls
+docker-machine start <docker-node>
+
+docker stack deploy -c docker-compose.yaml getstartedlab
+
+# Store data on the host FS. Review docker-compose.yaml
+docker-machine ssh myvm1 "mkdir ./data"
+```
 
 
 
