@@ -8,14 +8,44 @@ https://xael.org/norman/python/python-nmap/python-nmap-0.4.1.tar.gz
 nmap --script ssl-enum-ciphers -p 443 www.ibm.com
 """
 import nmap
+import json
+
 scan_host = 'www.ibm.com'
+# scan_host = 'www.incspot.com'
+# scan_host = 'www.google.com'
 scan_port = '443'
 # nm = nmap.PortScanner()
 # nmap_results = nm.scan(scan_host, arguments='--script ssl-enum-ciphers -p 443')
 # print (nmap_results)
 # print (nmap_results.keys())
 
-results = {
+# print(json.dumps(nmap_results))
+# exit(0)
+
+# ciphers_file = 'google_ciphers.json'
+ciphers_file = 'ibm_ciphers.json'
+with open(ciphers_file) as f:
+    json_file = json.load(f)
+
+# print(type(json_file))
+# print (json_file['nmap']['command_line'])
+
+# ip_address = json_file['scan'].keys()
+for ip_address in json_file['scan'].keys():
+    #print(json_file['scan'][ip_address]['hostnames'])
+    #print(json_file['scan'][ip_address]['tcp']['443']['script'])
+    # for cip in (json_file['scan'][ip_address]['tcp']['443']['script']['ssl-enum-ciphers']):
+    #     print ("{}".format(cip))
+    results = json_file['scan'][ip_address]['tcp']['443']['script']['ssl-enum-ciphers']
+    print (results, type(results))
+
+
+
+
+
+
+
+ibm_results = {
     'nmap':
         {
             'command_line': 'nmap -oX - --script ssl-enum-ciphers -p 443 www.ibm.com',
@@ -79,3 +109,4 @@ results = {
 }
 
 #print (type(results))
+#print (results['nmap']['command_line'])
