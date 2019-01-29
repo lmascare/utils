@@ -22,6 +22,12 @@
  * pip download pypiserver
  # TODO
 
+#### List Functions in a module
+dir(module)
+
+#### Help on a module
+help(module)
+
 **To get the list of packages in a Virtualenv & save in requirements.txt**  
 **This .txt file can be used to build your env to move to production**
 
