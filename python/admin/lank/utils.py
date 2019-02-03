@@ -31,8 +31,8 @@ import subprocess
 import shlex
 import signal
 from dns import resolver, reversename
-from .vars import logdir, keyfile, dbname, dbuser, dbpass, dbport, adm_tmp, \
-    smtp_user, smtp_passwd, smtp_server, smtp_port
+from .vars import logdir, keyfile, key_file, dbname, dbuser, dbpass, dbport,\
+    adm_tmp, smtp_user, smtp_passwd, smtp_server, smtp_port, db_creds
 
 
 def init():
@@ -64,12 +64,98 @@ def dns_queries(host_name):
     host_ptr = str(reversename.from_address(host_ip))
     # print(host_ptr)
     # print("Hostname --> {} : IP --> {} : PTR --> {}".format(host_name, host_ip, host_ptr))
-    host_ori = str(resolver.query(host_ptr, "PTR")[0])
-    tuple_rec = (host_name, host_ip, host_ptr, host_ori)
+    fqdn = str(resolver.query(host_ptr, "PTR")[0])
+    tuple_rec = (host_name, host_ip, host_ptr, fqdn)
     return(tuple_rec)
 
 
-def db_creds():
+def encrypt_token(token):
+    """Decrypt a token."""
+    if (os.path.exists(key_file)):
+        authkey = open(key_file, "rb").read()
+    else:
+        print("Key File '{}' does not exist".format(key_file))
+        exit(1)
+    from cryptography.fernet import Fernet
+
+    # print (type(authkey))
+    f = Fernet(authkey)
+
+    # Ensure the supplied string is converted to bytes
+    byte_token = str.encode(token)
+    encrypted_token = (f.encrypt(byte_token)).decode()
+    return (encrypted_token)
+
+
+def encrypt_cred(cred):
+    """
+    Encrypt the supplied credential using the keyfile.
+
+    This important function
+    :param cred:
+    :return encrypted_cred:
+    """
+    if os.path.exists(keyfile):
+        authkey = open(keyfile, "r").read()
+
+    from cryptography.fernet import Fernet
+    f = Fernet(authkey)
+
+    byte_cred = str.encode(cred)
+    encrypted_cred = (f.encrypt(byte_cred)).decode()
+    # print (encrypted_cred)
+    return(encrypted_cred)
+
+
+def encrypt_creds(dbname, dbuser, dbpass, dbport):
+    """
+    Encrypt the supplied credential using the keyfile.
+
+    This important function
+    :param dbname, dbuser, dbpass, dbport:
+    :return encrypted(dbname, dbuser, dbpass, dbport):
+    """
+    if os.path.exists(keyfile):
+        authkey = open(keyfile, "rb").read()
+    else:
+        print ("Keyfile '{}' does not exist".format(keyfile))
+        exit(1)
+
+    from cryptography.fernet import Fernet
+    f = Fernet(authkey)
+
+    byte_dbname = str.encode(dbname)
+    byte_dbuser = str.encode(dbuser)
+    byte_dbpass = str.encode(dbpass)
+    byte_dbport = str.encode(dbport)
+
+    encrypted_dbname = (f.encrypt(byte_dbname)).decode()
+    encrypted_dbuser = (f.encrypt(byte_dbuser)).decode()
+    encrypted_dbpass = (f.encrypt(byte_dbpass)).decode()
+    encrypted_dbport = (f.encrypt(byte_dbport)).decode()
+
+    return(encrypted_dbname, encrypted_dbuser, encrypted_dbpass, encrypted_dbport)
+
+
+def decrypt_token(token):
+    """Decrypt a token."""
+    if (os.path.exists(key_file)):
+        authkey = open(key_file, "rb").read()
+    else:
+        print ("Key File '{}' does not exist".format(key_file))
+        exit(1)
+    from cryptography.fernet import Fernet
+
+    # print (type(authkey))
+    f = Fernet(authkey)
+
+    byte_token = str.encode(token)
+    # Convert the bytestream back to string
+    decrypted_token = (f.decrypt(byte_token)).decode()
+    return (decrypted_token)
+
+
+def decrypt_creds(dbname, dbuser, dbpass, dbport):
     """
     Decrypt DB creds.
 
@@ -77,19 +163,28 @@ def db_creds():
     :return db_name, db_user, db_pass, db_port:
     """
     if (os.path.exists(keyfile)):
-        authkey = open(keyfile, 'r').read()
+        authkey = open(keyfile, 'rb').read()
         # print(authkey)
+    else:
+        print ("Key File '{}' does not exist".format(keyfile))
+        exit(1)
     from cryptography.fernet import Fernet
     f = Fernet(authkey)
 
-    db_name = f.decrypt(dbname)
-    db_user = f.decrypt(dbuser)
-    db_pass = f.decrypt(dbpass)
-    db_port = f.decrypt(dbport)
-    return (db_name, db_user, db_pass, db_port)
+    byte_dbname = str.encode(dbname)
+    byte_dbuser = str.encode(dbuser)
+    byte_dbpass = str.encode(dbpass)
+    byte_dbport = str.encode(dbport)
 
-    # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
-    # .format(db_name, db_user, db_pass, db_port))
+    db_name = (f.decrypt(byte_dbname)).decode()
+    db_user = (f.decrypt(byte_dbuser)).decode()
+    db_pass = (f.decrypt(byte_dbpass)).decode()
+    db_port = (f.decrypt(byte_dbport)).decode()
+
+    print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"
+          .format(db_name, db_user, db_pass, db_port))
+
+    return (db_name, db_user, db_pass, db_port)
 
 
 def get_creds(dbname, dbuser, dbpass, dbport):
@@ -105,18 +200,65 @@ def get_creds(dbname, dbuser, dbpass, dbport):
     :return db_name, db_user, db_pass, db_port:
     """
     if (os.path.exists(keyfile)):
-        authkey = open(keyfile, 'r').read()
+        authkey = open(keyfile, 'rb').read()
         # print(authkey)
+    else:
+        print("Key File '{}' does not exist".format(keyfile))
+        exit(1)
+
     from cryptography.fernet import Fernet
     f = Fernet(authkey)
 
-    db_name = f.decrypt(dbname)
-    db_user = f.decrypt(dbuser)
-    db_pass = f.decrypt(dbpass)
-    db_port = f.decrypt(dbport)
+    byte_dbname = str.encode(dbname)
+    byte_dbuser = str.encode(dbuser)
+    byte_dbpass = str.encode(dbpass)
+    byte_dbport = str.encode(dbport)
+
+    db_name = (f.decrypt(byte_dbname)).decode()
+    db_user = (f.decrypt(byte_dbuser)).decode()
+    db_pass = (f.decrypt(byte_dbpass)).decode()
+    db_port = (f.decrypt(byte_dbport)).decode()
     # print("DBNAME = {} DBUSER = {} DBPASS = {} DBPORT = {}"\
     # .format(db_name, db_user, db_pass, db_port))
     return (db_name, db_user, db_pass, db_port)
+
+
+def db_connect(dbid, dbtype):
+    """Establish a connection to the DB.
+
+    This connection accepts a DBID and DBTYPE. It then establishes a
+    connection to the DB and returns a cursor & connection
+    """
+    if dbid not in db_creds.keys():
+        logit("critical", "Unknown DBID --> {}".format(dbid), 0)
+
+    dbna = db_creds[dbid]["db_name"]
+    dbus = db_creds[dbid]["db_user"]
+    dbpa = db_creds[dbid]["db_pass"]
+    dbpo = db_creds[dbid]["db_port"]
+
+    (dbname, dbuser, dbpass, dbport) = get_creds(dbna, dbus, dbpa, dbpo)
+    if (dbtype == "mysql"):
+        import pymysql
+        conn = pymysql.connect(host='localhost',
+                               port=int(dbport),
+                               user=dbuser,
+                               password=dbpass,
+                               db=dbname,
+                               local_infile=True
+                              )
+    elif (dbtype == "postgres"):
+        import psycopg2
+        conn = psycopg2.connect(host='localhost',
+                              port=dbport,
+                              user=dbuser,
+                              password=dbpass,
+                              dbname=dbname
+                              )
+    else:
+        logit("critical", "Unknown DB Type --> {}".format(dbtype), 1)
+    cur = conn.cursor()
+    return (cur, conn)
 
 
 def create_key():
@@ -142,32 +284,15 @@ def create_key():
     from cryptography.fernet import Fernet
     key = Fernet.generate_key()
     # print(key, tmp_keyfile, os.environ, os.getgid())
-
-    f = open(tmp_keyfile, "w")
-    f.write(key)
+    try:
+        f = open(tmp_keyfile, "wb")
+        f.write(key)
+    except Exception as e:
+        print ("Error Writing '{}'. Error --> {}".format(tmp_keyfile, e))
     f.close()
 
     os.chmod(tmp_keyfile, 0o400)
     os.chown(tmp_keyfile, os.getuid(), os.getgid())
-
-
-def encrypt_cred(cred):
-    """
-    Encrypt the supplied credential using the keyfile.
-
-    This important function
-    :param cred:
-    :return encrypted_cred:
-    """
-    if os.path.exists(keyfile):
-        authkey = open(keyfile, "r").read()
-
-    from cryptography.fernet import Fernet
-    f = Fernet(authkey)
-
-    encrypted_cred = f.encrypt(cred)
-    # print (encrypted_cred)
-    return(encrypted_cred)
 
 
 def sig_handler(signal, frame):

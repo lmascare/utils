@@ -28,6 +28,7 @@ adm_logs = adm_home + '/logs'
 adm_tmp = adm_home + '/tmp'
 
 keyfile = adm_keys + '/keyfile'
+key_file = adm_keys + "/key_file"
 
 logdir = adm_logs
 
@@ -69,5 +70,15 @@ vvzAiDWKyvLYOAlkomZ6NXayxVmU3XLi-ZfleZaQ==",
 vvzAiDWKyvLYOAlkomZ6NXayxVmU3XLi-ZfleZaQ==",
         "db_port": "gAAAAABZ6-hyadloTFpJyIY9H6Ki4cikqab9GRP9EmjqXk--I6Nz3rd9mq\
 Db_RPpzBaORVq1_XDzrKOlXozOq7n90Gsuukegbw=="
+    },
+    "dmzdb": {
+        "db_name": "gAAAAABcV1tIN02hM6Ncdmig5Wi7_IgtgYVPqowYi_zpCb1zZS0yqehsp\
+Ci-HooAR-5Nf0uWC71SYJPuVLRhs1MlXApvXTi54g==",
+        "db_user": "gAAAAABcV1tIrYidvtXvqLpUwzdxsoouIWVHrs78wjG_Imf3_Unv651rA\
+KzQ77ipr51CtGdpwxa88iOisAk7PG_WdX4NYyo2KA==",
+        "db_pass": "gAAAAABcV1tIfJn2agR2Siq4kt9QG_BQaC6ZSj4rscE0GzKr2m7p9JQB8\
+TEqRW9LXIJbg7C4khNbkYjqUJDOCyFDHtmwYqvb6w==",
+        "db_port": "gAAAAABcV1tIHRR9s_Qy5zsUcQl0zdPWdUNWqX50fbskmqoIQwPC2rlT9\
+7-oGP0ZsIlBpKonSJdx1IkOO8bA_CAXAkQI-DTuyg=="
     }
 }

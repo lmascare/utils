@@ -34,7 +34,10 @@ Port Number | Application
 Port Number | Application
 --- | ---
 80 | Apache
+2376 | Docker Daemon Port
+2377 | Docker SWARM Management Port
 5000 | Keystone Auth_URI
+6379 | Redis
 8774 | Nova
 8778 | Placement API
 9292 | Glance API

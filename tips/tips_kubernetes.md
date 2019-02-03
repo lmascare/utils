@@ -11,8 +11,37 @@
     - Virtualbox
     - VMware Fusion
     - Hyper-V
-- Install kubectl from [here](http://kubernetes.io)
-    - OS-X (brew install kubectl)
+- Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+    - OS-X
+        - brew install kubectl
+    - Ubuntu
+        ```text
+        sudo apt-get update && sudo apt-get install -y apt-transport-https
+        curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+        echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+        sudo apt-get update
+        sudo apt-get install -y kubectl
+        ```
+    - CentOS or RHEL
+        ```text
+        cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+        [kubernetes]
+        name=Kubernetes
+        baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled=1
+        gpgcheck=1
+        repo_gpgcheck=1
+        gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+        EOF
+        yum install -y kubectl
+          ```
+    - For use as a single node cluster install minikube
+        - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+        ```text
+        curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        chmod +x minikube
+        sudo cp minikube /usr/local/bin && rm minikube
+        ```
     - Verify 'kubectl version'
 - Install minikube from [here](http://github.com/kubernetes/minikube/releases)
     - OS-X (brew cask install minikube)
@@ -22,7 +51,9 @@
 
 Command | Description
 --- | ---
+minikube dashboard | Access the kubernetes dashboard
 minikube start | Start minikube
+minikube status | Status of the Kubernetes Cluster
 minikube stop  | Stop minikube
 kubectl apply -f deployment.yaml | Deploy the Kubernetes YAML file
 kubectl create (_run_ is deprecated) | Deploy a sample Kubernetes "deployment"
