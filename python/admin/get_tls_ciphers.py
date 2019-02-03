@@ -9,18 +9,67 @@ nmap --script ssl-enum-ciphers -p 443 www.ibm.com
 """
 import nmap
 import json
+import xmltodict
+
+# import xml.etree.ElementTree as ET
 
 scan_host = 'www.ibm.com'
 # scan_host = 'www.incspot.com'
 # scan_host = 'www.google.com'
 scan_port = '443'
-# nm = nmap.PortScanner()
-# nmap_results = nm.scan(scan_host, arguments='--script ssl-enum-ciphers -p 443')
+nm = nmap.PortScanner()
+#nmap_results = nm.scan(scan_host, arguments='--script ssl-enum-ciphers -p 443')
+# nm.scan(scan_host, arguments='--script ssl-enum-ciphers -p 443')
+# nmap_results = nm.get_nmap_last_output()
 # print (nmap_results)
-# print (nmap_results.keys())
-
 # print(json.dumps(nmap_results))
-# exit(0)
+
+## XML Crap
+# tree = ET.parse('ibm_ciphers.xml')
+# root = tree.getroot()
+#
+# # root = ET.fromstring(nmap_results)
+# # print (root)
+#
+# for elem in root:
+#     a_d = [(e.tag, e.attrib) for e in elem.iter()]
+#     print (a_d)
+# print (nmap_results.keys())
+#
+
+
+# Use xmltodict
+with open('ibm_ciphers.xml') as fd:
+    doc = xmltodict.parse(fd.read())
+    # print (doc)
+    # exit(0)
+    print(doc['nmaprun']['@scanner'])
+    print(doc['nmaprun']['@args'])
+    print(doc['nmaprun']['@start'])
+    print(doc['nmaprun']['@version'])
+    print(doc['nmaprun']['scaninfo']['@type'])
+    print(doc['nmaprun']['verbose']['@level'])
+    print(doc['nmaprun']['debugging']['@level'])
+    print(doc['nmaprun']['host']['@starttime'])
+    print(doc['nmaprun']['host']['@endtime'])
+    print(doc['nmaprun']['host']['status']['@state'])
+    print(doc['nmaprun']['host']['address']['@addr'])
+    print(doc['nmaprun']['host']['hostnames']['hostname'][0]['@name'])
+    print(doc['nmaprun']['host']['hostnames']['hostname'][1]['@name'])
+    print(doc['nmaprun']['host']['ports']['port']['@protocol'])
+    print(doc['nmaprun']['host']['ports']['port']['@portid'])
+    print(doc['nmaprun']['host']['ports']['port']['state']['@state'])
+    print(doc['nmaprun']['host']['ports']['port']['service']['@name'])
+    print(doc['nmaprun']['host']['ports']['port']['script']['@id'])
+    # print(doc['nmaprun']['host']['ports']['port']['script']['@output'])
+    print(doc['nmaprun']['host']['ports']['port']['script']['table'][0])
+    print(doc['nmaprun']['host']['ports']['port']['script']['table'][1])
+    print(doc['nmaprun']['host']['ports']['port']['script']['table'][2])
+    print(len(doc['nmaprun']['host']['ports']['port']['script']['table']))
+    print(doc['nmaprun']['runstats']['finished']['@time'])
+    print(doc['nmaprun']['runstats']['finished']['@exit'])
+    print(doc['nmaprun']['runstats']['finished']['@summary'])
+exit(0)
 
 # ciphers_file = 'google_ciphers.json'
 ciphers_file = 'ibm_ciphers.json'
