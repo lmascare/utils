@@ -48,6 +48,7 @@ with open('ibm_ciphers.xml') as fd:
     print(doc['nmaprun']['@start'])
     print(doc['nmaprun']['@version'])
     print(doc['nmaprun']['scaninfo']['@type'])
+    print(doc['nmaprun']['scaninfo']['@protocol'])
     print(doc['nmaprun']['verbose']['@level'])
     print(doc['nmaprun']['debugging']['@level'])
     print(doc['nmaprun']['host']['@starttime'])
@@ -62,13 +63,28 @@ with open('ibm_ciphers.xml') as fd:
     print(doc['nmaprun']['host']['ports']['port']['service']['@name'])
     print(doc['nmaprun']['host']['ports']['port']['script']['@id'])
     # print(doc['nmaprun']['host']['ports']['port']['script']['@output'])
-    print(doc['nmaprun']['host']['ports']['port']['script']['table'][0])
-    print(doc['nmaprun']['host']['ports']['port']['script']['table'][1])
-    print(doc['nmaprun']['host']['ports']['port']['script']['table'][2])
-    print(len(doc['nmaprun']['host']['ports']['port']['script']['table']))
+    # print(doc['nmaprun']['host']['ports']['port']['script']['table'][0])
+    #print(doc['nmaprun']['host']['ports']['port']['script']['table'][1])
+    #print(doc['nmaprun']['host']['ports']['port']['script']['table'][2])
+    print("Number of Protocols --> {}".format(len(doc['nmaprun']['host']['ports']['port']['script']['table'])))
+    protocol_count = len(doc['nmaprun']['host']['ports']['port']['script']['table'])
+    # for p_c in protocol_count:
+    #     print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c])
     print(doc['nmaprun']['runstats']['finished']['@time'])
     print(doc['nmaprun']['runstats']['finished']['@exit'])
     print(doc['nmaprun']['runstats']['finished']['@summary'])
+
+    for p_c in range(protocol_count):
+        print (p_c)
+        p_c = 0
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['@key'])
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][0]['@key'])
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][0]['table'])
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][0]['@key'])
+        cipher_count = len(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][0]['@key'])
+        print ("Number of Ciphers --> {}".format(cipher_count))
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][1]['@key'])
+        print(doc['nmaprun']['host']['ports']['port']['script']['table'][p_c]['table'][1]['elem'])
 exit(0)
 
 # ciphers_file = 'google_ciphers.json'
@@ -91,7 +107,79 @@ for ip_address in json_file['scan'].keys():
 
 
 
-
+google_results = {
+    {"nmap":
+         {
+             "command_line": "nmap -oX - --script ssl-enum-ciphers -p 443 www.google.com",
+             "scaninfo": {"tcp": {"method": "connect", "services": "443"}},
+             "scanstats": {"timestr": "Mon Jan 28 21:11:13 2019", "elapsed": "3.04", "uphosts": "1", "downhosts": "0", "totalhosts": "1"}},
+        "scan":
+            {
+                "172.217.10.100":
+                    {"hostnames": [{"name": "www.google.com", "type": "user"},
+                                   {"name": "lga34s15-in-f4.1e100.net", "type": "PTR"}],
+                     "addresses": {"ipv4": "172.217.10.100"},
+                     "vendor": {},
+                     "status": {"state": "up", "reason": "syn-ack"},
+                     "tcp": {"443": {"state": "open",
+                                     "reason": "syn-ack",
+                                     "name": "https",
+                                     "product": "",
+                                     "version": "",
+                                     "extrainfo": "",
+                                     "conf": "3",
+                                     "cpe": "",
+                                     "script": {"ssl-enum-ciphers":
+                                                    "\n  TLSv1.0: "
+                                                    "\n    ciphers: "
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_3DES_EDE_CBC_SHA (rsa 2048) - C"
+                                                    "\n    compressors: "
+                                                    "\n      NULL"
+                                                    "\n    cipher preference: server"
+                                                    "\n  TLSv1.1: "
+                                                    "\n    ciphers: "
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_3DES_EDE_CBC_SHA (rsa 2048) - C"
+                                                    "\n    compressors: "
+                                                    "\n      NULL"
+                                                    "\n    cipher preference: server"
+                                                    "\n  TLSv1.2: "
+                                                    "\n    ciphers: "
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A"
+                                                    "\n      TLS_RSA_WITH_AES_128_GCM_SHA256 (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A"
+                                                    "\n      TLS_RSA_WITH_3DES_EDE_CBC_SHA (rsa 2048) - C"
+                                                    "\n    compressors: "
+                                                    "\n      NULL"
+                                                    "\n    cipher preference: server"
+                                                    "\n  least strength: C"
+                                                }
+                                     }
+                             }
+                     }
+            }
+    }
+}
 
 
 ibm_results = {
