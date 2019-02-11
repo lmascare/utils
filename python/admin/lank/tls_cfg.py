@@ -2,6 +2,8 @@
 
 dbid = "dmzdb"
 dbtype = "postgres"
+import os
+host = os.uname()[1]
 
 hosts_to_scan = [
     "www.bloomberg.com",

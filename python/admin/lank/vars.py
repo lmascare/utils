@@ -16,6 +16,8 @@ Variables available are
     For MySQL
         - dbname, dbuser, dbpass, dbport,
 """
+import os
+import sys
 
 """ General Purpose """
 adm_home = '/u/admin'
@@ -31,6 +33,8 @@ keyfile = adm_keys + '/keyfile'
 key_file = adm_keys + "/key_file"
 
 logdir = adm_logs
+
+scriptname = os.path.basename(sys.argv[0])
 
 smtp_server = 'gAAAAABaRnjQLl5_SHGQZOsI-NLA5aRwMsLIhs2y1_QlMuy1tXkhtIzhEVklYJ1A1lN7bjS0Qf4V0sPJlR_xZZFpZK7mqN0fbQ=='
 smtp_port = 'gAAAAABaRnk-OlKdVvdVddkPEo76iKqyHKYv530XmgLF_38_2jZjlkYPxL20wWVZBPxtCoYBUUL4sxlzoq4EPVQQos6aPIsojg=='
