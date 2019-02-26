@@ -32,21 +32,7 @@ import shlex
 import signal
 from dns import resolver, reversename
 from .vars import logdir, keyfile, key_file, dbname, dbuser, dbpass, dbport,\
-    adm_tmp, smtp_user, smtp_passwd, smtp_server, smtp_port, db_creds
-
-
-def init():
-    """Init function.
-
-    - Defines the log directory. Creates it if not present
-    - Note that it explicitly calls os.chmod as os.mkdir with perms
-      does not correctly set the permissions.
-    """
-    if not (os.path.isdir(logdir)):
-        os.mkdir(logdir)
-        os.chmod(logdir, 0o777)
-    # else:
-    #   print("{} exists".format(logdir))
+    adm_tmp, smtp_user, smtp_passwd, smtp_server, smtp_port, db_creds, scriptname
 
 
 def dns_queries(host_name):
@@ -378,11 +364,12 @@ def logit(level, message, verbosity):
         plevel = 50
 
     logging.basicConfig(filename=logfile, level=logging.DEBUG,
-                        format='%(asctime)s:\
-                               %(levelname)-8s:%(process)d:'
+                        format='%(asctime)s:'
+                               '%(levelname)s:'
+                               '%(process)d:'
                                '%(filename)s:'
                                '%(message)s',
-                        datefmt='%m-%d-%Y %H:%M:%S'
+                        datefmt='%Y-%m-%d %H:%M:%S'
                         )
     logging.log(plevel, message)
     # print("From print : {} : {}".format(message,level))
@@ -398,6 +385,20 @@ def logit(level, message, verbosity):
         #
         sig_handler(1, 1)
         # sys.exit(1)
+
+def init():
+    """Init function.
+
+    - Defines the log directory. Creates it if not present
+    - Note that it explicitly calls os.chmod as os.mkdir with perms
+      does not correctly set the permissions.
+    """
+    if not (os.path.isdir(logdir)):
+        os.mkdir(logdir)
+        os.chmod(logdir, 0o777)
+    # else:
+    #   print("{} exists".format(logdir))
+    logit("info", "Started script '{}'".format(scriptname), 0)
 
 
 def timeout(secs):
