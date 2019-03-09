@@ -3,7 +3,7 @@ import sys
 import os
 import logging
 
-# from vars import dbname,dbuser,dbpass,dbport
+from .vars import dbname, dbuser, dbpass, dbport, logdir
 # import subprocess
 # import shlex
 
@@ -47,20 +47,18 @@ class logme:
        12-03-2016 22:54:12:CRITICAL:19790:lm.py:Critical Error
     """
 
-    logdir = '/u/logs'
-    global logfile
-    logfile = logdir + '/lank.log'
-    # print logfile
-    if not (os.path.exists(logdir)):
-        os.mkdir(logdir)
-        os.chmod(logdir, 0o777)
-        os.open(logfile, 'w', 0o777)
-        os.close(logfile)
-
     def __init__(self):
         """Initialize the class."""
+        global logfile
+        scriptname = os.path.basename(sys.argv[0])
+        logfile = logdir + "/" + scriptname
         # print(logfile)
-        pass
+        if not (os.path.exists(logdir)):
+            os.mkdir(logdir)
+            os.chmod(logdir, 0o777)
+            os.open(logfile, 'w', 0o777)
+            os.close(logfile)
+        return (None)
 
     def critical(self, message):
         """Level: Critical messages."""
