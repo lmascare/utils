@@ -13,19 +13,22 @@ This module contains Classes
  - runcmd (run an OS command) -- Status not started
 """
 
-# ToDo
 """
+ToDo
+
  - Define a module which has only variables. Those should be imported here.
     -- Completed
 
- - The logdir check should be outside the class as every invocation of the
-   class will run the logdir check. It is called once when class object is
-   initialzed. Change logging so that log.debug will display to STDOUT as well.
-   Default will be log.info
     -- Completed.
  - Port runcmd.
  - Create a class to import CSV files.
- """
+
+Completed
+    - logme
+         - The 'init' function now correctly handles creating the logfile. The
+           class is initialized once in the code which runs the init function.
+
+"""
 
 
 class logme:
@@ -39,26 +42,33 @@ class logme:
 
      Example of usage
        import obj_utils
-          mylog = obj_utils.logme()
-          mylog.critical('Critical Error')
+       mylog = obj_utils.logme()
+       mylog.critical('Critical Error')
 
        This will write "Critical Error" to the logfile as follows
        <-- time stamp  -->:<Level> :<PID>:  <script>  :<message>
-       12-03-2016 22:54:12:CRITICAL:19790:lm.py:Critical Error
+       12-03-2016 22:54:12:CRITICAL:19790:<script_name>.log:Critical Error
     """
 
     def __init__(self):
         """Initialize the class."""
         global logfile
         scriptname = os.path.basename(sys.argv[0])
-        logfile = logdir + "/" + scriptname
+        logfile = logdir + "/" + scriptname + ".log"
         # print(logfile)
         if not (os.path.exists(logdir)):
             os.mkdir(logdir)
             os.chmod(logdir, 0o777)
-            os.open(logfile, 'w', 0o777)
-            os.close(logfile)
-        return (None)
+
+        if not os.path.exists(logfile):
+            os.mknod(logfile, 0o666)
+            os.chmod(logfile, 0o666)
+
+        # Since it is called from init. It will print to the logfile only
+        # once when the class is initialized. The plevel=20 is 'info'
+        self.writelog(20, "Started " + scriptname)
+        # Best practice is to remove the return statement from init
+        # return (None)
 
     def critical(self, message):
         """Level: Critical messages."""
