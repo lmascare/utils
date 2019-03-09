@@ -1,6 +1,4 @@
-"""
-Will be used by logme
-"""
+"""Use Object Oriented Programming for functions."""
 import sys
 import os
 import logging
@@ -31,9 +29,7 @@ This module contains Classes
 
 
 class logme:
-
-    """
-    Class logme
+    """Class logme.
 
     In this section we
      - define the directory for global logging,
@@ -49,8 +45,7 @@ class logme:
        This will write "Critical Error" to the logfile as follows
        <-- time stamp  -->:<Level> :<PID>:  <script>  :<message>
        12-03-2016 22:54:12:CRITICAL:19790:lm.py:Critical Error
-
-     """
+    """
 
     logdir = '/u/logs'
     global logfile
@@ -63,46 +58,59 @@ class logme:
         os.close(logfile)
 
     def __init__(self):
+        """Initialize the class."""
         # print(logfile)
         pass
 
     def critical(self, message):
-        """Critical messages will
-         -- Display to STDOUT
-         -- Write to the logfile
-         -- Exit with error code 1
-         """
+        """Level: Critical messages."""
         plevel = 50
         self.message = message
         self.writelog(plevel, message)
 
     def error(self, message):
+        """Level: ERROR messages."""
         plevel = 40
         self.message = message
         self.writelog(plevel, message)
 
     def warning(self, message):
+        """Level: WARNING messages."""
         plevel = 30
         self.message = message
         self.writelog(plevel, message)
 
     def info(self, message):
+        """Level: INFO messages."""
         plevel = 20
         self.message = message
         self.writelog(plevel, message)
 
     def debug(self, message):
+        """Level: DEBUG messages."""
         """This level will write to the logfile as well as STDOUT"""
         plevel = 10
         self.message = message
         self.writelog(plevel, message)
 
     def notset(self, message):
+        """Level: LEVEL NOT SET messages."""
         plevel = 0
         self.message = message
         self.writelog(plevel, message)
 
     def writelog(self, plevel, message):
+        """Write the message to logfile.
+
+        This function performs the following steps
+         - Defines the format for logging
+         - Sets the logging level based on input
+         - If LEVEL = Debug
+                - print to STDOUT
+         - If LEVEL = CRITICAL
+                - print to STDOUT
+                - Exit with status = 1
+        """
         # filename = os.path.basename(sys.argv[0])
         # We need to log the source filename. Easiest way is to prepend
         # it to the message
@@ -121,6 +129,12 @@ class logme:
         if (plevel == 10):
             print("{}".format(message))
 
+        """
+        Critical Mesages will
+         -- Display to STDOUT
+         -- Write to the logfile
+         -- Exit with error code 1
+        """
         if (plevel == 50):
             print("{}".format(message))
             print("CRITICAL Level : Mandatory Exit...")
