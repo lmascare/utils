@@ -3,7 +3,7 @@ import sys
 import os
 import logging
 
-from vars import logdir, keyfile, adm_tmp
+from lank.vars import logdir, keyfile, adm_tmp
 # import subprocess
 # import shlex
 
@@ -28,147 +28,6 @@ Completed
     - The 'init' function now correctly handles creating the logfile. The
       class is initialized once in the code which runs the init function.
 """
-
-
-class creds:
-    """Class creds. Encrypt, Decrypt Creds.
-
-    This class provides the following functions
-    encrypt_cred   - Encrypt a single credential
-    decrypt_token  - Decrypt a single token
-    encrypt_creds  - Encrypt creds to connect to a DB
-    decrypt_tokens - Decrypt tokens to connect to a DB
-    create_key     - Create a private key to use for encryption / decription
-    """
-
-    def __init__(self):
-        """Initiaze the class.
-
-        The key is essential to all functions. Ensure it is available.
-        """
-        if os.path.exists(keyfile):
-            global authkey, f
-            authkey = open(keyfile, "r").read()
-            from cryptography.fernet import Fernet
-            f = Fernet(authkey)
-        else:
-            mylog = logme()
-            mylog.critical("AUTHKEY {} does not exit".format(authkey))
-
-    def encrypt_cred(self, cred):
-        """Encrypt a credential.
-
-        :param  cred:  - Credential to be encrypted
-        :return token: - Returns the encrypted token
-        """
-        # Ensure the supplied string is converted to bytes
-        byte_token = str.encode(cred)
-        encrypted_token = (f.encrypt(byte_token)).decode()
-        return (encrypted_token)
-
-    def decrypt_token(self, token):
-        """Decrypt a token.
-
-        :param  token: - Encrypted token to be decrypted
-        :return cred:  - Returned the decrypted credential
-        """
-        byte_token = str.encode(token)
-        # Convert the bytestream back to string
-        decrypted_token = (f.decrypt(byte_token)).decode()
-        return (decrypted_token)
-
-    def encrypt_creds(self, dbname, dbuser, dbpass, dbhost, dbport):
-        """Encrypt credentials to connect to a DB or RESTApi.
-
-        It accepts the following parameters for encryption
-        :param dbname:  - Database Name
-        :param dbuser:  - Database Username
-        :param dbpass:  - Database Password
-        :param dbhost:  - Database Hostname
-        :param dbport:  - Database Port
-
-        :returns (dbname, dbuser, dbpass, dbhost, dbport):
-        """
-        # Ensure the supplied string is converted to bytes
-        byte_dbname = str.encode(dbname)
-        byte_dbuser = str.encode(dbuser)
-        byte_dbpass = str.encode(dbpass)
-        byte_dbhost = str.encode(dbhost)
-        byte_dbport = str.encode(dbport)
-
-        # Now encrypt these strings
-        encrypted_dbname = (f.encrypt(byte_dbname)).decode()
-        encrypted_dbuser = (f.encrypt(byte_dbuser)).decode()
-        encrypted_dbpass = (f.encrypt(byte_dbpass)).decode()
-        encrypted_dbhost = (f.encrypt(byte_dbhost)).decode()
-        encrypted_dbport = (f.encrypt(byte_dbport)).decode()
-
-        return (encrypted_dbname, encrypted_dbuser, encrypted_dbpass,
-                encrypted_dbhost, encrypted_dbport)
-
-    def decrypt_tokens(self, dbname, dbuser, dbpass, dbhost, dbport):
-        """Decrypts tokens to connect to a DB or RESTApi.
-
-        It accepts the following encrypted tokens for decryption
-        :param dbname:  - Database Name
-        :param dbuser:  - Database Username
-        :param dbpass:  - Database Password
-        :param dbhost:  - Database Hostname
-        :param dbport:  - Database Port
-
-        :returns (dbname, dbuser, dbpass, dbhost, dbport):
-        """
-        byte_dbname = str.encode(dbname)
-        byte_dbuser = str.encode(dbuser)
-        byte_dbpass = str.encode(dbpass)
-        byte_dbhost = str.encode(dbhost)
-        byte_dbport = str.encode(dbport)
-
-        db_name = (f.decrypt(byte_dbname)).decode()
-        db_user = (f.decrypt(byte_dbuser)).decode()
-        db_pass = (f.decrypt(byte_dbpass)).decode()
-        db_host = (f.decrypt(byte_dbhost)).decode()
-        db_port = (f.decrypt(byte_dbport)).decode()
-
-        return (db_name, db_user, db_pass, db_host, db_port)
-
-    def create_key(self, tmp_keyfile=None):
-        """
-        Create cryptographic key for signing.
-
-        This function will create a keyfile and stash in the adm_tmp directory
-        File format : keyfile.username.pid
-        It will set owner to the current owner and only he can read the file.
-
-        This key should then be copied to the adm_keys dir with appropriate
-        permissions. See your Systems Administrator for those details.
-
-        *** IMPORTANT ***
-        This key is used to encrypt all the credentials. Keep it safe. Loss of
-        this key will require you to regenerate all credentials.
-        :param  tmp_keyfile: - optional
-        :return output_file: - Default location is
-                               /u/admin/tmp/keyfile.<username>.<pid>
-                               PERMS 0400
-        """
-        self.tmp_keyfile = tmp_keyfile
-        if tmp_keyfile is None:
-            tmp_keyfile = adm_tmp \
-                          + '/keyfile.' \
-                          + os.environ['USER'] \
-                          + '.' \
-                          + str(os.getpid())
-        from cryptography.fernet import Fernet
-        key = Fernet.generate_key()
-        try:
-            f = open(tmp_keyfile, "wb")
-            f.write(key)
-            os.chmod(tmp_keyfile, 0o400)
-            os.chown(tmp_keyfile, os.getuid(), os.getgid())
-            print("Keyfile written to --> {}".format(tmp_keyfile))
-        except Exception as e:
-            print("Error Writing '{}'. Error --> {}".format(tmp_keyfile, e))
-        f.close()
 
 
 class logme:
@@ -290,3 +149,161 @@ class logme:
 
 # End class logme
 #################
+
+
+class creds:
+    """Class creds. Encrypt, Decrypt Creds.
+
+    This class provides the following functions
+    encrypt_cred   - Encrypt a single credential
+    decrypt_token  - Decrypt a single token
+    encrypt_creds  - Encrypt creds to connect to a DB
+    decrypt_tokens - Decrypt tokens to connect to a DB
+    create_key     - Create a private key to use for encryption / description
+    """
+
+    from cryptography.fernet import Fernet
+
+    def __init__(self):
+        """Initialize the class."""
+        if os.path.exists(keyfile):
+            self.authkey = open(keyfile, "r").read()
+            self.f = self.Fernet(self.authkey)
+        else:
+            self.mylog = logme()
+            self.mylog.info("Keyfile {} does not exit".format(keyfile))
+            self.authkey = None
+            self.f = None
+
+    def encrypt_cred(self, cred):
+        """Encrypt a credential.
+
+        :param  cred:  - Credential to be encrypted
+        :return token: - Returns the encrypted token
+        """
+        if self.f is None:
+            return ("No Keyfile")
+        # Ensure the supplied string is converted to bytes
+        self.cred = cred
+        self.byte_token = str.encode(self.cred)
+        self.encrypted_token = (self.f.encrypt(self.byte_token)).decode()
+        return (self.encrypted_token)
+
+    def decrypt_token(self, token):
+        """Decrypt a token.
+
+        :param  token: - Encrypted token to be decrypted
+        :return cred:  - Returned the decrypted credential
+        """
+        if self.f is None:
+            return ('No Keyfile')
+        self.token = token
+        self.byte_token = str.encode(self.token)
+        # Convert the bytestream back to string
+        self.decrypted_token = (self.f.decrypt(self.byte_token)).decode()
+        return (self.decrypted_token)
+
+    def encrypt_creds(self, dbname, dbuser, dbpass, dbhost, dbport):
+        """Encrypt credentials to connect to a DB or RESTApi.
+
+        It accepts the following parameters for encryption
+        :param dbname:  - Database Name
+        :param dbuser:  - Database Username
+        :param dbpass:  - Database Password
+        :param dbhost:  - Database Hostname
+        :param dbport:  - Database Port
+
+        :returns (dbname, dbuser, dbpass, dbhost, dbport):
+        """
+        # Ensure the supplied string is converted to bytes
+        self.dbname = dbname
+        self.dbuser = dbuser
+        self.dbpass = dbpass
+        self.dbhost = dbhost
+        self.dbport = dbport
+        self.byte_dbname = str.encode(self.dbname)
+        self.byte_dbuser = str.encode(self.dbuser)
+        self.byte_dbpass = str.encode(self.dbpass)
+        self.byte_dbhost = str.encode(self.dbhost)
+        self.byte_dbport = str.encode(self.dbport)
+
+        # Now encrypt these strings
+        self.encrypted_dbname = (self.f.encrypt(self.byte_dbname)).decode()
+        self.encrypted_dbuser = (self.f.encrypt(self.byte_dbuser)).decode()
+        self.encrypted_dbpass = (self.f.encrypt(self.byte_dbpass)).decode()
+        self.encrypted_dbhost = (self.f.encrypt(self.byte_dbhost)).decode()
+        self.encrypted_dbport = (self.f.encrypt(self.byte_dbport)).decode()
+
+        return (self.encrypted_dbname, self.encrypted_dbuser,
+                self.encrypted_dbpass, self.encrypted_dbhost,
+                self.encrypted_dbport)
+
+    def decrypt_tokens(self, dbname, dbuser, dbpass, dbhost, dbport):
+        """Decrypts tokens to connect to a DB or RESTApi.
+
+        It accepts the following encrypted tokens for decryption
+        :param dbname:  - Database Name
+        :param dbuser:  - Database Username
+        :param dbpass:  - Database Password
+        :param dbhost:  - Database Hostname
+        :param dbport:  - Database Port
+
+        :returns (dbname, dbuser, dbpass, dbhost, dbport):
+        """
+        self.dbname = dbname
+        self.dbuser = dbuser
+        self.dbpass = dbpass
+        self.dbhost = dbhost
+        self.dbport = dbport
+        self.byte_dbname = str.encode(self.dbname)
+        self.byte_dbuser = str.encode(self.dbuser)
+        self.byte_dbpass = str.encode(self.dbpass)
+        self.byte_dbhost = str.encode(self.dbhost)
+        self.byte_dbport = str.encode(self.dbport)
+
+        self.db_name = (self.f.decrypt(self.byte_dbname)).decode()
+        self.db_user = (self.f.decrypt(self.byte_dbuser)).decode()
+        self.db_pass = (self.f.decrypt(self.byte_dbpass)).decode()
+        self.db_host = (self.f.decrypt(self.byte_dbhost)).decode()
+        self.db_port = (self.f.decrypt(self.byte_dbport)).decode()
+
+        return (self.db_name, self.db_user, self.db_pass, self.db_host,
+                self.db_port)
+
+    def create_key(self, tmp_keyfile=None):
+        """
+        Create cryptographic key for signing.
+
+        This function will create a keyfile and stash in the adm_tmp directory
+        File format : keyfile.username.pid
+        It will set owner to the current owner and only he can read the file.
+
+        This key should then be copied to the adm_keys dir with appropriate
+        permissions. See your Systems Administrator for those details.
+
+        *** IMPORTANT ***
+        This key is used to encrypt all the credentials. Keep it safe. Loss of
+        this key will require you to regenerate all credentials.
+        :param  tmp_keyfile: - optional
+        :return output_file: - Default location is
+                               /u/admin/tmp/keyfile.<username>.<pid>
+                               PERMS 0400
+        """
+        self.tmp_keyfile = tmp_keyfile
+        if self.tmp_keyfile is None:
+            self.tmp_keyfile = adm_tmp \
+                               + '/keyfile.' \
+                               + os.environ['USER'] \
+                               + '.' \
+                               + str(os.getpid())
+        self.key = self.Fernet.generate_key()
+        try:
+            self.f = open(self.tmp_keyfile, "wb")
+            self.f.write(self.key)
+            os.chmod(self.tmp_keyfile, 0o400)
+            os.chown(self.tmp_keyfile, os.getuid(), os.getgid())
+            self.f.close()
+            print("Keyfile written to --> {}".format(self.tmp_keyfile))
+        except Exception as e:
+            print("Error Writing '{}'. Error --> {}".
+                  format(self.tmp_keyfile, e))
