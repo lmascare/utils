@@ -17,7 +17,7 @@ This module contains Classes
 ToDo
  - dbconnect
     - Inputs are dbid & dbtype
-    - Retuns cursor, connection
+    - Returns cursor, connection
  - runcmd.
  - Create a class to import CSV files
 
@@ -33,78 +33,97 @@ Completed
 class logme:
     """Class logme. Provide logging functionality.
 
-    In this section we
-     - define the directory for global logging,
-     - create the directory
-     - create the file
-     - ensure both are world writable
+    This class provide logging functionality at various levels. Table below
+    indicates how it will handle various levels
+    ---------------------------------------------------------
+    | Level     | Write to logfile | Write to STDOUT | Exit |
+    |--------------------------------------------------------
+    | critical  |     x            |      x          |  x   |
+    | error     |     x            |      -          |  -   |
+    | warning   |     x            |      -          |  -   |
+    | info      |     x            |      -          |  -   |
+    | debug     |     x            |      x          |  -   |
+    ---------------------------------------------------------
+    Definitions
+        logdir  - Defined in global configuration file
+        scriptname = os.path.basename(sys.argv[0])
+        logfile = logdir + "/" + scriptname + ".log"
 
-     Example of usage
+    Example of usage
+    test.py
        import obj_utils
        mylog = obj_utils.logme()
        mylog.critical('Critical Error')
 
+       logfile = "/u/admin/logs/test.py.log"
        This will write "Critical Error" to the logfile as follows
        <-- time stamp  -->:<Level> :<PID>:  <script>  :<message>
        12-03-2016 22:54:12:CRITICAL:19790:<script_name>.log:Critical Error
     """
 
     def __init__(self):
-        """Initialize the class."""
-        global logfile
-        scriptname = os.path.basename(sys.argv[0])
-        logfile = logdir + "/" + scriptname + ".log"
+        """Initialize the class.
+
+        In this section we
+          - define the directory for global logging,
+          - create the directory
+          - create the file
+          - ensure both are world writable
+
+        """
+        self.scriptname = os.path.basename(sys.argv[0])
+        self.logfile = logdir + "/" + self.scriptname + ".log"
         # print(logfile)
         if not (os.path.exists(logdir)):
             os.mkdir(logdir)
             os.chmod(logdir, 0o777)
 
-        if not os.path.exists(logfile):
-            os.mknod(logfile, 0o666)
-            os.chmod(logfile, 0o666)
+        if not os.path.exists(self.logfile):
+            os.mknod(self.logfile, 0o666)
+            os.chmod(self.logfile, 0o666)
 
         # Since it is called from init. It will print to the logfile only
         # once when the class is initialized. The plevel=20 is 'info'
-        self.writelog(20, "Started " + scriptname)
+        self.writelog(20, "*** Started " + self.scriptname + " ***")
         # Best practice is to remove the return statement from init
         # return (None)
 
     def critical(self, message):
         """Level: Critical messages."""
-        plevel = 50
+        self.plevel = 50
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def error(self, message):
         """Level: ERROR messages."""
-        plevel = 40
+        self.plevel = 40
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def warning(self, message):
         """Level: WARNING messages."""
-        plevel = 30
+        self.plevel = 30
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def info(self, message):
         """Level: INFO messages."""
-        plevel = 20
+        self.plevel = 20
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def debug(self, message):
         """Level: DEBUG messages."""
         """This level will write to the logfile as well as STDOUT"""
-        plevel = 10
+        self.plevel = 10
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def notset(self, message):
         """Level: LEVEL NOT SET messages."""
-        plevel = 0
+        self.plevel = 0
         self.message = message
-        self.writelog(plevel, message)
+        self.writelog(self.plevel, self.message)
 
     def writelog(self, plevel, message):
         """Write the message to logfile.
@@ -125,16 +144,18 @@ class logme:
         # string and dict/list object added
         # message = src_filename + ':' + message
         # print(filename)
+        self.plevel = plevel
+        self.message = message
         logging.basicConfig(
-            filename=logfile,
+            filename=self.logfile,
             level=logging.DEBUG,
             format='%(asctime)s:%(levelname)-8s:%(process)d:%(message)s',
             datefmt='%m-%d-%Y %H:%M:%S'
         )
-        logging.log(plevel, message)
+        logging.log(self.plevel, self.message)
 
-        if (plevel == 10):
-            print("{}".format(message))
+        if (self.plevel == 10):
+            print("{}".format(self.message))
 
         """
         Critical Mesages will
@@ -142,8 +163,8 @@ class logme:
          -- Write to the logfile
          -- Exit with error code 1
         """
-        if (plevel == 50):
-            print("{}".format(message))
+        if (self.plevel == 50):
+            print("{}".format(self.message))
             print("CRITICAL Level : Mandatory Exit...")
             sys.exit(1)
 
