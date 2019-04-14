@@ -29,10 +29,12 @@ adm_keys = adm_home + '/keys'
 adm_logs = adm_home + '/logs'
 adm_tmp = adm_home + '/tmp'
 
+logdir = adm_logs
+
 keyfile = adm_keys + '/keyfile'
 key_file = adm_keys + "/key_file"
 
-logdir = adm_logs
+host = os.uname()[1]
 
 scriptname = os.path.basename(sys.argv[0])
 
