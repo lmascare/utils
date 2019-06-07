@@ -30,8 +30,8 @@ Completed
 """
 
 
-class logme:
-    """Class logme. Provide logging functionality.
+class LogMe:
+    """Class LogMe. Provide logging functionality.
 
     This class provide logging functionality at various levels. Table below
     indicates how it will handle various levels
@@ -52,7 +52,7 @@ class logme:
     Example of usage
     test.py
        import obj_utils
-       mylog = obj_utils.logme()
+       mylog = obj_utils.LogMe()
        mylog.critical('Critical Error')
 
        logfile = "/u/admin/logs/test.py.log"
@@ -172,7 +172,7 @@ class logme:
 #################
 
 
-class creds:
+class Creds:
     """Class creds. Encrypt, Decrypt Creds.
 
     This class provides the following functions
