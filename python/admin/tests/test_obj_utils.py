@@ -5,13 +5,21 @@ Classes to test
   - Creds
     - encrypt_cred    -- Done
     - decrypt_token   -- Done
-    - encrypt_creds
-    - decrypt_tokens
-    - create_key
+    - encrypt_creds   -- Done
+    - decrypt_tokens  -- Done
+    - create_key      -- Not started
   - Logme
+    - critical
+    - error
+    - warning
+    - info
+    - debug
+    - notset
+    - writelog
 """
 from lank import obj_utils
 import pytest
+
 
 @pytest.fixture
 def creds():
@@ -59,11 +67,5 @@ def test_encrypt_creds(creds):
         e_dbname, e_dbuser, e_dbpass, e_dbhost, e_dbport)
 
     # After decryption, both cred and e_token should match
-    assert (dbname, dbuser, dbpass, dbhost, dbport) == (d_dbname, d_dbuser, d_dbpass, d_dbhost, d_dbport)
-
-
-
-
-
-
-
+    assert (dbname, dbuser, dbpass, dbhost, dbport) == (
+        d_dbname, d_dbuser, d_dbpass, d_dbhost, d_dbport)

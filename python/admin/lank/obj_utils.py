@@ -19,11 +19,14 @@ ToDo
     - Inputs are dbid & dbtype
     - Returns cursor, connection
  - runcmd.
- - Create a class to import CSV files
+ - Import CSV files
+ - dns_query
+ - dbconnect
+ 
 
 Completed
  - creds
-    - Encrypt, decrypt, create_key
+    - Encrypt, Decrypt, Create key
  - logme
     - The 'init' function now correctly handles creating the logfile. The
       class is initialized once in the code which runs the init function.
