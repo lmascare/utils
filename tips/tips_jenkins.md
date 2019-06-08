@@ -175,7 +175,8 @@ do
     tar xf Python-${py_ver}.tar.xz
 
 	cd Python-${py_ver}
-	./configure --prefix=/usr/local/${py_ver} --enable-unicode=ucs4 --enable-shared \
+	./configure --prefix=/usr/local/python_${py_ver} \
+	--enable-unicode=ucs4 --enable-shared \
   	--enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/${py_ver}/lib"
 
 	make

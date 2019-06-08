@@ -9,6 +9,13 @@
 * systemctl disable \<service\>
 * systemctl reenable \<service\>
 
+#### Services disabled
+* systemctl disable private_chef-runsvdir-start.service
+* systemctl disable chef-client.service
+* systemctl disable nexposeconsole.service
+* systemctl disable splunk.service
+
+
 #### Networking
 
 * /etc/sysconfig/network  - Contains hostname and enable networking
@@ -119,6 +126,9 @@ https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-swap-creating-file.ht
 ##### Init the repo
 * createrepo /u/repository/fedora-14 (after creating the directories)
 
+#### Yum cleanup
+* yum-complete-transaction --cleanup-only
+* yum history redo last
 
 #### USERADD
 useradd -c 'Larry Mascarenhas' -d /home/lmascare -g 100 -m -k /etc/skel \
