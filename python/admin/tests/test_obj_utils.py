@@ -20,9 +20,16 @@ Classes to test
 from lank import obj_utils
 import pytest
 
+# Test class DnsQuery
+@pytest.fixture
+def dns_qry():
+    return obj_utils.DnsQuery()
 
+
+# Test class Creds
 @pytest.fixture
 def creds():
+    """Decorator to return an instance of class Creds."""
     return obj_utils.Creds()
 
 

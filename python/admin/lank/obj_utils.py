@@ -9,8 +9,8 @@ from lank.vars import logdir, keyfile, adm_tmp
 
 """
 This module contains Classes
- - logme (logging in OO)      -- Status completed
- - runcmd (run an OS command) -- Status not started
+ - LogMe (logging in OO)
+ - Creds (Encrypt / Decrypt / Create keyfile)
 """
 
 """
@@ -18,19 +18,115 @@ ToDo
  - dbconnect
     - Inputs are dbid & dbtype
     - Returns cursor, connection
- - runcmd.
- - Import CSV files
- - dns_query
+ - runcmd
  - dbconnect
- 
+ - Export DB rows into CSV file
+ - Import CSV files into DB
+ - dns_query
+ - sendmail
+ - signal handler
+    - timeout
+    - graceful exit
 
 Completed
- - creds
+ - Creds
     - Encrypt, Decrypt, Create key
- - logme
+ - LogMe
     - The 'init' function now correctly handles creating the logfile. The
       class is initialized once in the code which runs the init function.
 """
+
+
+class DnsQuery():
+    """DNS Queries.
+
+    This class provides forward, reverse, PTR records
+    """
+
+    # DNS module will be used across this class.
+    from dns import resolver, reversename
+
+    def __init__(self, ip_address=None, hostname=None):
+        """Initialize the class.
+
+        The DnsQuery class provides functionality to receive either a
+        hostname or an IP Address and returns a tuple of the remaining
+        attributes.
+
+        Output format : (hostname, ip_address, ptr, fqdn)
+        --------------------------------------------------
+        | Input      | Output                            |
+        --------------------------------------------------
+        | Hostname   | (hostname, ip_address, ptr, fqdn) |
+        | IP Address | (hostname, ip_address, ptr, fqdn) |
+        --------------------------------------------------
+
+        Separately, you can get several Resource Records independently like:
+        cname
+        name server
+        mx record
+        SOA
+        """
+        self.dns_rec = ()
+        self.ip_address = ip_address
+        self.hostname = hostname
+
+
+    def get_ptr(self):
+        """Receive the IP Address. Return PTR Record."""
+        self.host_ptr = str(self.reversename.from_address(self.ip_address))
+        return self.host_ptr
+
+    def get_host_ip(self):
+        """Receive the Hostame. Return IP Address."""
+        self.host_ip = str(self.resolver.query(self.hostname, "A")[0])
+        return self.host_ip
+
+    def get_fqdn(self):
+        """Receive the PTR. Return FQDN"""
+        self.host_fqdn = str(self.resolver.query(self.host_ptr, "PTR")[0])
+        return self.host_fqdn
+
+    def get_hostname(self):
+        """Receive the IP, get the hostname."""
+        self.hostname = self.host_fqdn.split('.')[0]
+        return self.hostname
+
+    def get_cname(self):
+        """Get CNAME for a host.
+
+        Be friendly. If hostname is provided, use it first, if not, use
+        the IP address to get the hostname. Then the CNAME
+        """
+        try:
+            self.host_cname = str(self.resolver.query(self.hostname, "CNAME")[0])
+        except Exception as e:
+            return e
+        return self.host_cname
+
+    def get_dns_rec(self):
+        """Return a tuple of the DNS Record."""
+        if self.ip_address is None and self.hostname is None:
+            return self.dns_rec
+
+        elif self.ip_address == "" and self.hostname == "":
+            return self.dns_rec
+
+        elif (self.ip_address is not None):
+            self.host_ptr = self.get_ptr()
+            self.host_fqdn = self.get_fqdn()
+            self.hostname = self.get_hostname()
+
+        elif (self.hostname is not None):
+            self.ip_address = self.get_host_ip()
+            self.host_ptr = self.get_ptr()
+            self.host_fqdn = self.get_fqdn()
+        else:
+            self.host_ptr = ""
+            self.host_fqdn = ""
+
+        self.dns_rec = (self.hostname, self.ip_address, self.host_ptr, self.host_fqdn)
+        return (self.dns_rec)
 
 
 class LogMe:
@@ -171,7 +267,18 @@ class LogMe:
             print("CRITICAL Level : Mandatory Exit...")
             sys.exit(1)
 
-# End class logme
+# End class LogMe
+#################
+
+
+class LogIt(LogMe):
+    """Class LogIt. Inherits from LogMe.
+
+    It prints the message to logfile and/or STDOUT and uses LogMe. Wow!!
+    """
+    pass
+
+# End class LogIt
 #################
 
 
@@ -194,7 +301,7 @@ class Creds:
             self.authkey = open(keyfile, "r").read()
             self.f = self.Fernet(self.authkey)
         else:
-            self.mylog = logme()
+            self.mylog = LogMe()
             self.mylog.info("Keyfile {} does not exit".format(keyfile))
             self.authkey = None
             self.f = None
