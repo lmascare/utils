@@ -24,7 +24,7 @@ pep257
 pep8
 pluggy
 # psycopg2
-# psycopg2-binary
+psycopg2-binary
 pycodestyle
 pycparser
 pyflakes
@@ -33,8 +33,6 @@ pymysql
 pyparsing
 pysftp
 pytest
-pytest
-pytest-cov
 pytest-cov
 pytz
 requests
