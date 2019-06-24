@@ -12,6 +12,7 @@
 pip3 install pytest
 pip3 install pytest-cov
 python3 -m pytest -v --cov
+python3 -m pytest -v --cov --cov-report term-missing
 ```
 ##### Fixtures
 ```commandline

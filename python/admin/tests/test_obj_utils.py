@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 """Test Driven Development.
 
 This suite of tests will pytest all functions in lank.obj_utils
@@ -21,9 +22,55 @@ from lank import obj_utils
 import pytest
 
 # Test class DnsQuery
-@pytest.fixture
-def dns_qry():
-    return obj_utils.DnsQuery()
+# @pytest.fixture
+# def dns_qry():
+#    return obj_utils.DnsQuery()
+
+def test_get_dns_rec():
+    r"""Get the DNS record for IP address and hostname.
+
+    Getting the record will exercise all the methods within the DnsQyery
+    class.
+    Hostname   --> www.incspot.com
+    IP Address --> 165.160.32.176
+    """
+    my_dns_ip = obj_utils.DnsQuery(ip_address='165.160.32.176')
+    my_dns_host = obj_utils.DnsQuery(hostname='www.incspot.com')
+    # my_dns_i_h = obj_utils.DnsQuery(ip_address='165.160.32.176', hostname="")
+    # my_dns_h_i = obj_utils.DnsQuery(ip_address=None, hostname="www.incspot.com")
+
+    expected_host = "incspot"
+    expected_ip = "165.160.32.176"
+    expected_ptr = "176.32.160.165.in-addr.arpa."
+    expected_fqdn = "incspot.cscinfo.com."
+    expected_cname = "The DNS query name does not exist: incspot.kellynoah.com."
+
+    ip_dns_rec = my_dns_ip.get_dns_rec()
+    host_dns_rec = my_dns_host.get_dns_rec()
+
+    recd_host = ip_dns_rec[0]
+    recd_ip = ip_dns_rec[1]
+    recd_ptr = ip_dns_rec[2]
+    recd_fqdn = ip_dns_rec[3]
+    recd_cname = ip_dns_rec[4]
+
+    assert expected_host == recd_host
+    assert expected_ip == recd_ip
+    assert expected_ptr == recd_ptr
+    assert expected_fqdn == recd_fqdn
+    assert expected_cname == recd_cname
+
+    rcd_host = host_dns_rec[0]
+    rcd_ip = host_dns_rec[1]
+    rcd_ptr = host_dns_rec[2]
+    rcd_fqdn = host_dns_rec[3]
+    rcd_cname = host_dns_rec[4]
+
+    assert expected_host == rcd_host
+    assert expected_ip == rcd_ip
+    assert expected_ptr == rcd_ptr
+    assert expected_fqdn == rcd_fqdn
+    assert expected_cname == rcd_cname
 
 
 # Test class Creds

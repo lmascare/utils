@@ -22,7 +22,7 @@ ToDo
  - dbconnect
  - Export DB rows into CSV file
  - Import CSV files into DB
- - dns_query
+ 
  - sendmail
  - signal handler
     - timeout
@@ -34,6 +34,7 @@ Completed
  - LogMe
     - The 'init' function now correctly handles creating the logfile. The
       class is initialized once in the code which runs the init function.
+ - dns_query
 """
 
 
@@ -66,31 +67,49 @@ class DnsQuery():
         name server
         mx record
         SOA
+        Ref : https://stackoverflow.com/questions/13842116/\
+              how-do-we-get-txt-cname-and-soa-records-from-dnspython
         """
         self.dns_rec = ()
         self.ip_address = ip_address
         self.hostname = hostname
+        self.host_ptr = None
+        self.host_cname = None
+        self.host_fqdn = None
+
+
+    def get_host_ip(self):
+        """Receive the Hostame. Return IP Address."""
+        if self.ip_address is None and self.hostname is not None:
+            self.host_ip = str(self.resolver.query(self.hostname, "A")[0])
+        elif self.ip_address is not None:
+            self.host_ip = self.ip_address
+        return self.host_ip
 
 
     def get_ptr(self):
         """Receive the IP Address. Return PTR Record."""
+        if self.ip_address is None:
+            self.ip_address = self.get_host_ip()
         self.host_ptr = str(self.reversename.from_address(self.ip_address))
         return self.host_ptr
 
-    def get_host_ip(self):
-        """Receive the Hostame. Return IP Address."""
-        self.host_ip = str(self.resolver.query(self.hostname, "A")[0])
-        return self.host_ip
 
     def get_fqdn(self):
         """Receive the PTR. Return FQDN"""
+        if self.host_ptr is None:
+            self.host_ptr = self.get_ptr()
         self.host_fqdn = str(self.resolver.query(self.host_ptr, "PTR")[0])
         return self.host_fqdn
 
+
     def get_hostname(self):
         """Receive the IP, get the hostname."""
+        if self.host_fqdn is None:
+            self.host_fqdn = self.get_fqdn()
         self.hostname = self.host_fqdn.split('.')[0]
         return self.hostname
+
 
     def get_cname(self):
         """Get CNAME for a host.
@@ -98,34 +117,25 @@ class DnsQuery():
         Be friendly. If hostname is provided, use it first, if not, use
         the IP address to get the hostname. Then the CNAME
         """
+        if self.hostname is None:
+            self.hostname = self.get_hostname()
         try:
             self.host_cname = str(self.resolver.query(self.hostname, "CNAME")[0])
         except Exception as e:
-            return e
+            return ("{}".format(e))
         return self.host_cname
+
 
     def get_dns_rec(self):
         """Return a tuple of the DNS Record."""
-        if self.ip_address is None and self.hostname is None:
-            return self.dns_rec
+        self.ip_address = self.get_host_ip()
+        self.hostname = self.get_hostname()
+        self.host_ptr = self.get_ptr()
+        self.host_fqdn = self.get_fqdn()
+        self.host_cname = self.get_cname()
 
-        elif self.ip_address == "" and self.hostname == "":
-            return self.dns_rec
-
-        elif (self.ip_address is not None):
-            self.host_ptr = self.get_ptr()
-            self.host_fqdn = self.get_fqdn()
-            self.hostname = self.get_hostname()
-
-        elif (self.hostname is not None):
-            self.ip_address = self.get_host_ip()
-            self.host_ptr = self.get_ptr()
-            self.host_fqdn = self.get_fqdn()
-        else:
-            self.host_ptr = ""
-            self.host_fqdn = ""
-
-        self.dns_rec = (self.hostname, self.ip_address, self.host_ptr, self.host_fqdn)
+        self.dns_rec = (self.hostname, self.ip_address, self.host_ptr,
+                        self.host_fqdn, self.host_cname)
         return (self.dns_rec)
 
 
@@ -271,12 +281,12 @@ class LogMe:
 #################
 
 
-class LogIt(LogMe):
-    """Class LogIt. Inherits from LogMe.
-
-    It prints the message to logfile and/or STDOUT and uses LogMe. Wow!!
-    """
-    pass
+# class LogIt(LogMe):
+#     """Class LogIt. Inherits from LogMe.
+#
+#     It prints the message to logfile and/or STDOUT and uses LogMe. Wow!!
+#     """
+#     pass
 
 # End class LogIt
 #################

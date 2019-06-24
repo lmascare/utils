@@ -54,6 +54,11 @@
   --with-system-ffi \
   --enable-ipv6 --with-threads --with-pydebug --disable-rpath
 
+* 23-June-2019 Compiled with following options on Ubuntu
+./configure --prefix=/usr/local/python_3.7.3 \
+    --enable-loadable-sqlite-extensions   
+    --with-system-ffi
+
 ### Strip the Python 2.7 binary:
 * strip /usr/local/lib/libpython2.7.so.1.0
 
