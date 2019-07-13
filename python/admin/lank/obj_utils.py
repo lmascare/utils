@@ -3,7 +3,7 @@ import sys
 import os
 import logging
 
-from lank.vars import logdir, keyfile, adm_tmp
+from .lank_cfg import logdir, keyfile, adm_tmp, db_creds
 # import subprocess
 # import shlex
 
@@ -22,7 +22,7 @@ ToDo
  - dbconnect
  - Export DB rows into CSV file
  - Import CSV files into DB
- 
+
  - sendmail
  - signal handler
     - timeout
@@ -38,7 +38,27 @@ Completed
 """
 
 
-class DnsQuery():
+class DBConnect:
+    r"""Establish a connection to the DB of choice & RESTApi endpoint.
+
+    This module will establish a cursor & connection to the following
+    database types. If 'restapi' is specified, it will return the credentials
+    needed to establish a connection.
+    - mysql
+    - postgresql
+    - restapi
+    """
+    def __init__(self, dbid, dbtype):
+        r"""Initialize the class."""
+        self.dbid = dbid
+        self.dbtype = dbtype
+
+        if self.dbid not in db_creds.keys():
+            mylog = LogMe()
+            mylog.error("Invalid DBID --> {}".format(self.dbid), 0)
+
+
+class DnsQuery:
     """DNS Queries.
 
     This class provides forward, reverse, PTR records
@@ -48,7 +68,7 @@ class DnsQuery():
     from dns import resolver, reversename
 
     def __init__(self, ip_address=None, hostname=None):
-        """Initialize the class.
+        r"""Initialize the class.
 
         The DnsQuery class provides functionality to receive either a
         hostname or an IP Address and returns a tuple of the remaining
@@ -77,42 +97,37 @@ class DnsQuery():
         self.host_cname = None
         self.host_fqdn = None
 
-
     def get_host_ip(self):
-        """Receive the Hostame. Return IP Address."""
+        r"""Receive the Hostame. Return IP Address."""
         if self.ip_address is None and self.hostname is not None:
             self.host_ip = str(self.resolver.query(self.hostname, "A")[0])
         elif self.ip_address is not None:
             self.host_ip = self.ip_address
         return self.host_ip
 
-
     def get_ptr(self):
-        """Receive the IP Address. Return PTR Record."""
+        r"""Receive the IP Address. Return PTR Record."""
         if self.ip_address is None:
             self.ip_address = self.get_host_ip()
         self.host_ptr = str(self.reversename.from_address(self.ip_address))
         return self.host_ptr
 
-
     def get_fqdn(self):
-        """Receive the PTR. Return FQDN"""
+        r"""Receive the PTR. Return FQDN."""
         if self.host_ptr is None:
             self.host_ptr = self.get_ptr()
         self.host_fqdn = str(self.resolver.query(self.host_ptr, "PTR")[0])
         return self.host_fqdn
 
-
     def get_hostname(self):
-        """Receive the IP, get the hostname."""
+        r"""Receive the IP, get the hostname."""
         if self.host_fqdn is None:
             self.host_fqdn = self.get_fqdn()
         self.hostname = self.host_fqdn.split('.')[0]
         return self.hostname
 
-
     def get_cname(self):
-        """Get CNAME for a host.
+        r"""Get CNAME for a host.
 
         Be friendly. If hostname is provided, use it first, if not, use
         the IP address to get the hostname. Then the CNAME
@@ -120,14 +135,14 @@ class DnsQuery():
         if self.hostname is None:
             self.hostname = self.get_hostname()
         try:
-            self.host_cname = str(self.resolver.query(self.hostname, "CNAME")[0])
+            self.host_cname = str(self.resolver.query(
+                self.hostname, "CNAME")[0])
         except Exception as e:
             return ("{}".format(e))
         return self.host_cname
 
-
     def get_dns_rec(self):
-        """Return a tuple of the DNS Record."""
+        r"""Return a tuple of the DNS Record."""
         self.ip_address = self.get_host_ip()
         self.hostname = self.get_hostname()
         self.host_ptr = self.get_ptr()
@@ -193,48 +208,55 @@ class LogMe:
 
         # Since it is called from init. It will print to the logfile only
         # once when the class is initialized. The plevel=20 is 'info'
-        self.writelog(20, "*** Started " + self.scriptname + " ***")
+        self.writelog(20, "*** Started " + self.scriptname + " ***", 0)
         # Best practice is to remove the return statement from init
         # return (None)
 
-    def critical(self, message):
+    def critical(self, message, verbosity):
         """Level: Critical messages."""
         self.plevel = 50
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def error(self, message):
+    def error(self, message, verbosity):
         """Level: ERROR messages."""
         self.plevel = 40
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def warning(self, message):
+    def warning(self, message, verbosity):
         """Level: WARNING messages."""
         self.plevel = 30
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def info(self, message):
+    def info(self, message, verbosity):
         """Level: INFO messages."""
         self.plevel = 20
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def debug(self, message):
-        """Level: DEBUG messages."""
-        """This level will write to the logfile as well as STDOUT"""
+    def debug(self, message, verbosity):
+        """Level: DEBUG messages.
+
+        This level will write to the logfile as well as STDOUT"""
         self.plevel = 10
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def notset(self, message):
+    def notset(self, message, verbosity):
         """Level: LEVEL NOT SET messages."""
         self.plevel = 0
         self.message = message
-        self.writelog(self.plevel, self.message)
+        self.verbosity = verbosity
+        self.writelog(self.plevel, self.message, self.verbosity)
 
-    def writelog(self, plevel, message):
+    def writelog(self, plevel, message, verbosity):
         """Write the message to logfile.
 
         This function performs the following steps
@@ -255,6 +277,7 @@ class LogMe:
         # print(filename)
         self.plevel = plevel
         self.message = message
+        self.verbosity = verbosity
         logging.basicConfig(
             filename=self.logfile,
             level=logging.DEBUG,
@@ -263,7 +286,7 @@ class LogMe:
         )
         logging.log(self.plevel, self.message)
 
-        if (self.plevel == 10):
+        if (self.plevel == 10) or (self.verbosity == 1):
             print("{}".format(self.message))
 
         """
@@ -278,17 +301,6 @@ class LogMe:
             sys.exit(1)
 
 # End class LogMe
-#################
-
-
-# class LogIt(LogMe):
-#     """Class LogIt. Inherits from LogMe.
-#
-#     It prints the message to logfile and/or STDOUT and uses LogMe. Wow!!
-#     """
-#     pass
-
-# End class LogIt
 #################
 
 
@@ -380,7 +392,7 @@ class Creds:
                 self.encrypted_dbport)
 
     def decrypt_tokens(self, dbname, dbuser, dbpass, dbhost, dbport):
-        """Decrypts tokens to connect to a DB or RESTApi.
+        r"""Decrypt tokens to connect to a DB or RESTApi.
 
         It accepts the following encrypted tokens for decryption
         :param dbname:  - Database Name
@@ -448,3 +460,7 @@ class Creds:
         except Exception as e:
             print("Error Writing '{}'. Error --> {}".
                   format(self.tmp_keyfile, e))
+
+if __name__ == "__main__":
+    print("Script can be called as a module only. Exiting...")
+    exit(1)

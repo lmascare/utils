@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/local/bin/python3.7
 
 from lank import obj_utils
 
@@ -22,4 +22,11 @@ my_dns = obj_utils.DnsQuery(ip_address='165.160.32.176')
 
 
 
-print (my_dns.get_dns_rec())
+# print (my_dns.get_dns_rec())
+# rec = my_dns.get_dns_rec()
+rec2 = f"DNS Rec --> {my_dns.get_dns_rec()}"
+# print ("{}".format(rec))
+
+# print(f"DNS Rec --> {my_dns.get_dns_rec()}")
+
+print (rec2)

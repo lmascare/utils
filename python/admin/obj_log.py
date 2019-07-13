@@ -6,10 +6,10 @@ from lank import obj_utils
 def main():
     """OO Programming."""
     mylog = obj_utils.LogMe()
-    mylog.error('ERROR Message')
-    mylog.warning('WARNING Message')
-    mylog.debug('DEBUG Message')
-    mylog.info('INFO Message')
+    mylog.error('ERROR Message', 1)
+    mylog.warning('WARNING Message', 1)
+    mylog.debug('DEBUG Message', 0)
+    mylog.info('INFO Message', 0)
     # mylog.critical('Critical Message')
 
 
