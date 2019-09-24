@@ -38,26 +38,6 @@ Completed
 """
 
 
-class DBConnect:
-    r"""Establish a connection to the DB of choice & RESTApi endpoint.
-
-    This module will establish a cursor & connection to the following
-    database types. If 'restapi' is specified, it will return the credentials
-    needed to establish a connection.
-    - mysql
-    - postgresql
-    - restapi
-    """
-    def __init__(self, dbid, dbtype):
-        r"""Initialize the class."""
-        self.dbid = dbid
-        self.dbtype = dbtype
-
-        if self.dbid not in db_creds.keys():
-            mylog = LogMe()
-            mylog.error("Invalid DBID --> {}".format(self.dbid), 0)
-
-
 class DnsQuery:
     """DNS Queries.
 
@@ -107,8 +87,8 @@ class DnsQuery:
 
     def get_ptr(self):
         r"""Receive the IP Address. Return PTR Record."""
-        if self.ip_address is None:
-            self.ip_address = self.get_host_ip()
+        # if self.ip_address is None:
+        #     self.ip_address = self.get_host_ip()
         self.host_ptr = str(self.reversename.from_address(self.ip_address))
         return self.host_ptr
 
@@ -132,14 +112,14 @@ class DnsQuery:
         Be friendly. If hostname is provided, use it first, if not, use
         the IP address to get the hostname. Then the CNAME
         """
-        if self.hostname is None:
-            self.hostname = self.get_hostname()
+        # if self.hostname is None:
+        #     self.hostname = self.get_hostname()
         try:
             self.host_cname = str(self.resolver.query(
                 self.hostname, "CNAME")[0])
         except Exception as e:
             return ("{}".format(e))
-        return self.host_cname
+        # return self.host_cname
 
     def get_dns_rec(self):
         r"""Return a tuple of the DNS Record."""
@@ -317,14 +297,14 @@ class Creds:
 
     from cryptography.fernet import Fernet
 
-    def __init__(self):
+    def __init__(self, keyfile=keyfile):
         """Initialize the class."""
         if os.path.exists(keyfile):
             self.authkey = open(keyfile, "r").read()
             self.f = self.Fernet(self.authkey)
         else:
             self.mylog = LogMe()
-            self.mylog.info("Keyfile {} does not exit".format(keyfile))
+            self.mylog.info("Keyfile {} does not exit".format(keyfile), 0)
             self.authkey = None
             self.f = None
 
@@ -369,6 +349,8 @@ class Creds:
         :returns (dbname, dbuser, dbpass, dbhost, dbport):
         """
         # Ensure the supplied string is converted to bytes
+        if self.f is None:
+            return ("No Keyfile")
         self.dbname = dbname
         self.dbuser = dbuser
         self.dbpass = dbpass
@@ -403,6 +385,8 @@ class Creds:
 
         :returns (dbname, dbuser, dbpass, dbhost, dbport):
         """
+        if self.f is None:
+            return ("No Keyfile")
         self.dbname = dbname
         self.dbuser = dbuser
         self.dbpass = dbpass
@@ -460,6 +444,113 @@ class Creds:
         except Exception as e:
             print("Error Writing '{}'. Error --> {}".
                   format(self.tmp_keyfile, e))
+
+
+class DBConnect:
+    r"""Establish a connection to the DB of choice & RESTApi endpoint.
+
+    This module will establish a cursor & connection to the following
+    database types. If 'restapi' is specified, it will return the credentials
+    needed to establish a connection.
+    - mysql
+    - postgresql
+    - restapi
+    """
+    def __init__(self, dbid, dbtype, timeout=60):
+        r"""Initialize the class."""
+        self.dbid = dbid
+        self.dbtype = dbtype
+        self.timeout = timeout
+        self.db_error = None
+        if self.dbid not in db_creds:
+            mylog = LogMe()
+            self.db_error = "Invalid DBID --> {}".format(self.dbid)
+            mylog.error(self.db_error, 0)
+            self.cursor = None
+            self.connection = None
+        else:
+            db_name = db_creds[self.dbid]["db_name"]
+            db_user = db_creds[self.dbid]["db_user"]
+            db_pass = db_creds[self.dbid]["db_pass"]
+            db_host = db_creds[self.dbid]["db_host"]
+            db_port = db_creds[self.dbid]["db_port"]
+
+            dbcreds = Creds()
+            (self.dbname, self.dbuser, self.dbpass, self.dbhost, self.dbport) \
+                = dbcreds.decrypt_tokens(db_name, db_user, db_pass, db_host, db_port)
+
+    def postgres(self):
+        import psycopg2
+        connection = psycopg2.connect(
+            host=self.dbhost,
+            port=int(self.dbport),
+            user=self.dbuser,
+            password=self.dbpass,
+            dbname=self.dbname,
+            connect_timeout=self.timeout
+        )
+        cursor = connection.cursor()
+        return (cursor, connection)
+
+    def connect(self):
+        r"""Establish a cursor and connection to the DB."""
+        if (self.db_error is None):
+            if (self.dbtype == "postgres"):
+                (self.cursor, self.connection) = self.postgres()
+                return (self.cursor, self.connection)
+        else:
+            return (self.cursor, self.connection)
+
+
+# Get the diff / union of two lists.
+class list_diff_union():
+    r"""Return Difference or Union of lists.
+
+    In this class, the two methods, diff_lists and union_lists provide
+     - A difference of the left list against the right list. This means
+     that elements of the left list are compared against the right list and
+     those that are not present are returned.
+
+     - A union of the left list against the right list. In this method, the
+     elements of the left list are compared against the right list and only
+     those that are match are returned.
+     e.g.
+     l1 = ['1', '2', 'b']
+     r1 = ['3', '4', 'b', '1',]
+
+    """
+    def __init__(self, left_list, right_list):
+        self.left_list = left_list
+        self.right_list = right_list
+
+    def diff_lists(self):
+        r"""Get the difference of two lists.
+
+        The elements in the left list is checked if they exist in the right
+        list. We create a Python set of the right list to remove duplicates as
+        well as speed up processing
+        """
+        self.set_right_list = set(self.right_list)
+        self.list_diff = [x for x in self.left_list if x not in self.set_right_list]
+
+        # list_union = [x for x in left_list if x in set_right_list]
+        #return(list_diff, list_union)
+        return(self.list_diff)
+
+    def union_lists(self):
+        r"""Get the union of two lists.
+
+        The elements in the left list is checked if they exist in the right
+        list. We create a Python set of the right list to remove duplicates as
+        well as speed up processing
+        """
+        self.set_right_list = set(self.right_list)
+        self.list_union = [x for x in self.left_list if x in self.set_right_list]
+
+        # list_union = [x for x in left_list if x in set_right_list]
+        # return(list_diff, list_union)
+        return (self.list_union)
+
 
 if __name__ == "__main__":
     print("Script can be called as a module only. Exiting...")
