@@ -23,10 +23,44 @@ def parse_win_table(url):
     # for meta in soup.select('body'):
     #     print (meta)
 
-    p = soup.find('h3')
-    q = p.find_next_sibling('p')
-    r = q.next_sibling
-    print (r.split()[2])
+    # Get the Last published date
+    # p = soup.find('h3')
+    # q = p.find_next_sibling('p')
+    # r = q.next_sibling
+    # print (r.split()[2])
+
+    s = (soup.find('h3').find_next_sibling('p').next_sibling).split()[2]
+    print (s)
+
+    b = soup.find('body')
+    c = (b.find_all('h3'))[1]
+    # print (c[1].text)
+    print (c.text)
+    # exit()
+
+
+    # l = b.find_all('table')
+    # print(l[2])
+
+    # for table in b.find_all('table'):
+    #     print(table.extract())
+    # exit()
+
+    # Working code
+    for t_row in b.find_all("tr")[1::]:
+        t_data = t_row.find_all("td")
+        if len(t_data) > 0:
+            build_ubr = t_data[0].text
+            release_date = t_data[1].text
+            kb = t_data[3].text
+            print ("{} {} {}".format(build_ubr, release_date, kb))
+
+    # t = soup.find_all('h3')
+    # print (t)
+    # for h3 in t:
+    #     if h3.text == "Windows 10 release history":
+    #         print ("Gotcha!")
+
     exit()
 
     for meta in soup.select('body', text="Last Updated:"):
