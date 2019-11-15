@@ -3,85 +3,112 @@ r"""Script to create a Python Dict of Windows UBR versions."""
 
 import requests
 import bs4
-from collections import defaultdict
+import pprint
 
 url_top_level = "https://docs.microsoft.com/en-us/windows/release-information/"
 url = "https://winreleaseinfoprod.blob.core.windows.net/winreleaseinfoprod/en-US.html"
-
-def parse_win_table(url):
-    # print(url)
-    sauce = requests.get(url)
-    # print(sauce.content)
-    soup = bs4.BeautifulSoup(sauce.content, "html.parser")
-    # soup = bs4.BeautifulSoup(sauce.content, "html5lib")
-    # print(soup.prettify())
-
-    # lu = soup.find(text="Last Updated:")
-    # print (lu)
-    # exit()
-
-    # for meta in soup.select('body'):
-    #     print (meta)
-
-    # Get the Last published date
-    # p = soup.find('h3')
-    # q = p.find_next_sibling('p')
-    # r = q.next_sibling
-    # print (r.split()[2])
-
-    s = (soup.find('h3').find_next_sibling('p').next_sibling).split()[2]
-    print (s)
-
-    b = soup.find('body')
-    c = (b.find_all('h3'))[1]
-    # print (c[1].text)
-    print (c.text)
-    # exit()
+html_file = "/u/admin/tmp/win_build_ubr.html"
 
 
-    # l = b.find_all('table')
-    # print(l[2])
+def dwnload_html(url, html_file):
+    r"""Download the HTML page to a file."""
 
-    # for table in b.find_all('table'):
-    #     print(table.extract())
-    # exit()
+    with open(html_file, "w") as f:
+        h = (requests.get(url)).text
+        f.write(h)
+    return (0)
 
-    # Working code
-    for t_row in b.find_all("tr")[1::]:
-        t_data = t_row.find_all("td")
-        if len(t_data) > 0:
-            build_ubr = t_data[0].text
+
+def parse_win_table_v1(html_file):
+    r"""Parse the HTML document, one tag at a time."""
+    # Parse the downloaded file to reduce HTTP calls.
+    with open(html_file, "r") as f:
+        sauce = f.read()
+
+    soup = bs4.BeautifulSoup(sauce, "html.parser")
+
+    update = (soup.find('h3').find_next_sibling('p').next_sibling).split()[2]
+    print (update)
+
+    for x in soup.find_all('h4'):
+        t = x.find_next_sibling('table')
+        os_details = x.text.replace(')','').split()
+        os_ver = os_details[2]
+        os_build = os_details[5]
+        if (os_ver == '1507'):
+            os_build = os_details[-1]
+        for t_row in t.find_all("tr")[1::]:
+            t_data = t_row.find_all("td")
+            (build, ubr) = t_data[0].text.split('.')
             release_date = t_data[1].text
-            kb = t_data[3].text
-            print ("{} {} {}".format(build_ubr, release_date, kb))
-
-    # t = soup.find_all('h3')
-    # print (t)
-    # for h3 in t:
-    #     if h3.text == "Windows 10 release history":
-    #         print ("Gotcha!")
-
+            k = (t_data[3].text)
+            if len(k) > 0:
+                kb = k.split()[-1]
+            else:
+                kb = t_data[3].text
+            print (os_ver, os_build, build, ubr, release_date, kb)
     exit()
 
-    for meta in soup.select('body', text="Last Updated:"):
-        print (meta.text)
 
-    # if meta['style'] == "margin-top:0px;":
-    #     # for meta in soup.find_all()
-    #     print (meta.text)
+def parse_win_table(html_file):
+    r"""Parse the HTML document, one tag at a time."""
+    # Parse the downloaded file to reduce HTTP calls.
+    with open(html_file, "r") as f:
+        sauce = f.read()
+
+    soup = bs4.BeautifulSoup(sauce, "html.parser")
+
+    update = (soup.find('h3').find_next_sibling('p').next_sibling).split()[2]
+    print (update)
+
+    build_dict = {}
+    for x in soup.find_all('h4'):
+        t = x.find_next_sibling('table')
+        os_details = x.text.replace(')','').split()
+        os_ver = os_details[2]
+        os_build = os_details[5]
+        if (os_ver == '1507'):
+            os_build = os_details[-1]
+        all_kbs = []
+        ubr_dict = {}
+        for t_row in t.find_all("tr")[1::]:
+            t_data = t_row.find_all("td")
+            (build, ubr) = t_data[0].text.split('.')
+            release_date = t_data[1].text
+            k = (t_data[3].text)
+            if len(k) > 0:
+                kb = k.split()[-1]
+            else:
+                kb = t_data[3].text
+            all_kbs.append(kb)
+            ubr_dict[ubr] = [release_date, kb, build]
+            # print (os_ver, os_build, build, ubr, release_date, kb)
+        ubr_dict["kbs"] = all_kbs
+        build_dict[os_ver] = ubr_dict
+        # pprint.pprint(build_dict)
+        # exit()
+    pprint.pprint(build_dict)
+    exit()
 
 
 def create_dict():
     build_ubr_dict_template = {
         "build": {
-            "ubr": ["release_date", "kb"],
+            "ubr": ["release_date", "kb", "os_build"],
             "kbs": ["all_kbs"]
+        },
+        "1909": {
+            "116": ['2019-05-21', "4505057", "18362"],
+            "kbs": ["4505057", "4497935", "4503293"]
         }
     }
 
 def main():
     r"Fabled main where it all begins."
-    parse_win_table(url)
+
+    # Enable as needed html_file = dwnload_html(url)
+    os_ver_dict = parse_win_table(html_file)
+    pprint.pprint(os_ver_dict)
     exit()
 
     ubr = "/u/tmp/16299.lst"
