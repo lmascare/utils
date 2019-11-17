@@ -19,6 +19,7 @@ PAGER=/usr/bin/less
 
 export EDITOR PAGER PATH
 ```
+ - Add .vimrc to /etc/skel
  - Update ~root/.bashrc with same customizations.
  - Create FS
    - /u
@@ -35,6 +36,12 @@ export EDITOR PAGER PATH
   admin/keys 770   oper:oper
   admin/logs 771   oper:oper
   admin/tmp  771   oper:oper
+
+  # Location of MySQL installation
+  mysql/<version>
+  
+  # Location of Postgres installation
+  postgres/<version>
 
   # Toplevel directory for users
   users      755   root:root
@@ -80,18 +87,65 @@ oper
 
  - Install Python3 and its modules
 ```text
-
+See compile_and_install_python.md
 ```
 
  - Install MySQL
 ```
+sudo apt-get update
+sudo apt-get install cmake
+sudo apt-get install build-essential
+sudo apt-get install libssl-dev
+sudo apt-get install libncurses5-dev
+sudo apt-get install  pkg-config
+
+Download & Install MySQL community edition source code
+sudo dpkg --instdir=/u/mysql/5.7.28 -i mysql-community-source_5.7.28-1ubuntu18.04_amd64.deb
+
+cd ~/misc
+tar xfz /u/mysql/5.7.28/usr/share/src/mysql-community_5.7.28.orig.tar.gz
+
+cd mysql-5.7.28
+mkdir build
+cd build
+# LM Method
+cmake .. -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/opt/bb/local \
+ -DCMAKE_INSTALL_PREFIX=/u/mysql/5.7.28 \
+ -DMYSQL_DATADIR=/db/mysql/data \
+ -DMYSQL_UNIX_ADDR=/var/run/mysqld.lock
+cd ..
+make
+
+# Initial test cmake .. -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/opt/bb/local
+
+
+# One way of running cmake
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
+  -DMYSQL_DATADIR=/usr/local/mysql/data \ 
+  -DSYSCONFDIR=/etc \ 
+  -DWITH_MYISAM_STORAGE_ENGINE=1 \
+  -DWITH_INNOBASE_STORAGE_ENGINE=1 \
+  -DWITH_MEMORY_STORAGE_ENGINE=1 \
+  -DMYSQL_UNIX_ADDR=/tmp/mysqld.sock \
+  -DMYSQL_TCP_PORT=3306 \
+  -DENABLED_LOCAL_INFILE=1 \
+  -DWITH_READLINE=1 \
+  -DWITH_PARTITION_STORAGE_ENGINE=1 \
+  -DEXTRA_CHARSETS=all \
+  -DDEFAULT_CHARSET=utf8 \
+  -DDEFAULT_COLLATION=utf8_general_ci \
+  -DWITH_SSL=/usr/local/openssl
 
 ```
+
+ - Start / Stop scripts for MySQL
 
  - Install Postgres
  ```
  
  ```
+
+    - Start / Stop scripts for Postgres
 
  - Install PERL
 ```
