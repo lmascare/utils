@@ -26,10 +26,38 @@
 * wget http://python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
 * tar xf Python-3.6.3.tar.xz
 * cd Python-3.6.3
-* ./configure --prefix=/usr/local/python3.6.3 --enable-shared \
+* ./configure --prefix=/usr/local/python_3.6.3 --enable-shared \
   -enable-optimizations LDFLAGS="-Wl,-rpath /usr/local/lib"
 * make && make altinstall
 
+## Python 3.7.3
+* wget http://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz
+* tar xfz ../Downloads/Python-3.7.3.tgz
+* cd Python-3.7.3
+* CentOS needs 
+    * yum install libffi-devel
+* Ubuntu need
+    * sudo apt-get install libffi-dev
+* ./configure --prefix=/usr/local/python_3.7.3 \
+    --disable-shared \
+     --enable-optimizations \
+     --with-lto \
+     --with-pydebug
+     
+```From Stackoverflow```
+* ./configure --prefix=/usr/local/python3.7.3 \
+  --enable-loadable-sqlite-extensions \
+  --enable-shared \
+  --with-lto \
+  --enable-optimizations \
+  --with-system-expat \
+  --with-system-ffi \
+  --enable-ipv6 --with-threads --with-pydebug --disable-rpath
+
+* 23-June-2019 Compiled with following options on Ubuntu
+./configure --prefix=/usr/local/python_3.7.3 \
+    --enable-loadable-sqlite-extensions   
+    --with-system-ffi
 
 ### Strip the Python 2.7 binary:
 * strip /usr/local/lib/libpython2.7.so.1.0
@@ -49,3 +77,6 @@
 * pip2.7 install [packagename]
 * pip2.7 install --upgrade [packagename]
 * pip2.7 uninstall [packagename]
+* pip freeze > requirements.txt
+* pip install -r requirements.txt
+* pip install --upgrade -r requirements.txt

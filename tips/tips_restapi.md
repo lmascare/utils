@@ -1,10 +1,10 @@
 # Using Flask
+
 #### Create a virtualenv
 ```
 sudo pip3 install flask
 
-# The connexion module allows a Python program to use the SWAGGER
-# specification
+# The connexion module allows a Python program to use the SWAGGER specification
 sudo pip3 install connexion
 sudo pip3 install connexion[swagger-ui]
 
