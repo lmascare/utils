@@ -13,11 +13,14 @@ alias p="ps -eaf | egrep $1"
 set -o vi
 set -o ignoreeof
 
-PATH=$PATH:/opt/bb/bin
+MYSQL_HOME=/u/mysql/5.7.28
+MANPATH=${MYSQL_HOME}/man
+
+PATH=$PATH:/opt/bb/bin:${MYSQL_HOME}/bin
 EDITOR=/usr/bin/vi
 PAGER=/usr/bin/less
 
-export EDITOR PAGER PATH
+export EDITOR PAGER PATH MYSQL_HOME MANPATH
 ```
  - Add .vimrc to /etc/skel
  - Update ~root/.bashrc with same customizations.
@@ -117,9 +120,7 @@ cd ..
 make
 
 # Initial test cmake .. -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/opt/bb/local
-
-
-# One way of running cmake
+# cmake with all options
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
   -DMYSQL_DATADIR=/usr/local/mysql/data \ 
   -DSYSCONFDIR=/etc \ 
