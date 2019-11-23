@@ -45,7 +45,10 @@
     --disable-shared \
      --enable-optimizations \
      --with-lto \
-     --with-pydebug
+     --with-pydebug \
+     --with-system-ffi      \
+     --with-system-expat    \
+     --enable-loadable-sqlite-extensions
      
 ```From Stackoverflow```
 * ./configure --prefix=/usr/local/python3.7.3 \
