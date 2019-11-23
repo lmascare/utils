@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/local/bin/python3.7
 """Multiprocessing Ping.
 
 This script will take a Network Range. Then ping the hosts using a defined
@@ -59,6 +59,8 @@ def process_args():
     broadcast_ip = hosts.broadcast
     subnet_size = hosts.size
 
+    # print (hosts, network_ip, broadcast_ip, subnet_size)
+    # exit()
     hosts = list(IPNetwork(subnet))
     hosts.remove(network_ip)
     hosts.remove(broadcast_ip)
