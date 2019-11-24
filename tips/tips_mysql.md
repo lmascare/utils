@@ -1,5 +1,50 @@
 # MySQL Tips
 
+## Setup MySQL on Ubuntu (Tested with 18.04 (Bionic))
+* Review tips_build_new_system.md to build from Source
+* Create /etc/my.cnf
+```text
+[client]
+socket=/u/mysql/5.7.28/run/mysqld.sock
+
+[mysqld]
+socket=/u/mysql/5.7.28/run/mysqld.sock
+```    
+* As root run 
+```text
+mysqld \
+    --initialize \
+    --user=mysql \
+    --datadir=/db/mysql/data
+# MySQL default password is in ~root/.mysql_secret
+        
+cd /u/mysql/5.7.28/support-files
+./mysql.server start
+./mysql.server status
+./mysql.server stop
+
+cp mysql.server /usr/local/bin
+cd /etc/systemd/system
+
+cat > mysql.service
+[Unit]
+Description=MySQL Database Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/mysql.server start
+ExecStop=/usr/local/bin/mysql.server stop
+Type=forking
+
+[Install]
+WantedBy=default.target
+
+chmod 644 mysql.service
+systemctl daemon-reload
+systemctl enable mysql.service
+
+```
+    
 ## MariaDB installation
  * cd /etc/yum.repos.d
  * vi mariadb.repo   
@@ -46,7 +91,8 @@ gpgcheck=1
         * systemctl start mariadb
         * /usr/bin/mysql_secure_installation
         * mysql -u root -p mysql (enter root password)
-        * create user lifecycle identified by '<password>';
+        * alter user 'root'@'localhost' identified by '<password>';
+        * create user lifecycle IDENTIFIED BY '<password>';
     
     * Directories are in /var/lib/mysql*. Move them aside to and reinstall mysql.
 
@@ -55,12 +101,12 @@ gpgcheck=1
  * select user from mysql.user;
  * Wildcard is %.
 
- * create user 'lifecycle'@'localhost' identifed by 'PASSWORD';
- * grant all privileges on lifecycle.* to 'lifecycle'@'localhost' \
-   identified by 'PASSWORD';
- * grant all privileges on lifecycle.* to 'lifecycle'@'%' \
-   identified by 'PASSWORD';
+ * create user 'lifecycle'@'localhost' IDENTIFIED BY 'PASSWORD';
  * create database lifecycle default character set UTF8;
+ * grant all privileges on lifecycle.* to 'lifecycle'@'localhost' \
+   IDENTIFIED BY 'PASSWORD';
+ * grant all privileges on lifecycle.* to 'lifecycle'@'%' \
+   IDENTIFIED BY 'PASSWORD';
 
  * use lifecycle;
  * CREATE TABLE hostinfo (
