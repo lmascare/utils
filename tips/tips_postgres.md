@@ -5,14 +5,61 @@
 groupadd -g 8889 postgres
 useradd -c 'Postgres SQL' -d /home/postgres -g 8889 -m -r -s /bin/bash -u 8889 postgres
 
-
-
-
 # Install the software using the Configuration items in the table below
 # The initdb is run duing installation to create the DB (postgres)
 ```
+
+
 [Documentation](https://www.postgresql.org/docs/current/static/index.html)
- 
+ * Using the [Postgres APT Repository](https://wiki.postgresql.org/wiki/Apt) 
+ * Move the [INSTALLATION and DATADIR](https://www.digitalocean.com/community/tutorials/how-to-move-a-postgresql-data-directory-to-a-new-location-on-ubuntu-16-04) to the desired location
+   * Edit /etc/postgresql/12/main/postgresql.conf
+       - Change data_directory to /db/postgresql/12/main
+   * Move /var/lib/postgresql to /db
+        ```text
+        cd /var/lib
+        tar cf - postgresql | (cd /db ; tar xf -)
+        mv postgresql postgresql.ori
+        ```
+   * Move installation to /u 
+      #####Important to note /usr/lib is hardcoded in /usr/share/perl5/PgCommon.pm
+        ```text
+        cd /usr/lib
+        tar cf - postgresql | (cd /u ; tar xf -)
+        mv postgresql postgresql.ori
+        ln -s /u/postgresql /usr/lib/postgresql
+    
+    * The startup script for postgres is linked to the SysV startup
+        ```
+        systemctl enable postgresql
+        Synchronizing state of postgresql.service with SysV service script with /lib/systemd/systemd-sysv-install.
+        Executing: /lib/systemd/systemd-sysv-install enable postgresql
+        ```text
+    * Start / stop PostgreSQL
+        ```text
+        systemctl start postgresql
+        systemctl stop postgresql
+        ```
+    * Create ENV scripts (/usr/local/bin/pgenv)
+    ```text
+        #
+        # Settings for PostgreSQL
+        #
+        PGSQL_HOME=/u/postgresql/12/
+        MANPATH=${MANPATH}:/usr/share/postgresql/12
+        #
+        PATH=${PGSQL_HOME}/bin:${PATH}
+        export PATH MANPATH
+    ```
+    * Create global profile script (/etc/profile.d/pgenv)
+    ```
+        # Set environment for PostgreSQL
+        if [[ -f /usr/local/bin/pgenv ]]
+        then
+            source /usr/local/bin/pgenv
+        fi
+    ```
+```
  * Verify the [Shared Memory](https://www.postgresql.org/docs/current/static/kernel-resources.html) parameters
  * Determine if memory overcommit is an issue (sysctl -w vm.overcommit_memory=2)
  * [Parameter Settings](https://www.postgresql.org/docs/current/static/runtime-config.html) 
@@ -29,14 +76,14 @@ Locale | C
 
 #### Command line utilities
 ```
-# Create a DB. All commands from SHELL (bash) prompt as user 'postgres'
+#### Create a DB. All commands from SHELL (bash) prompt as user 'postgres'
 createdb django
 createuser -S -D -R -P -e <user>
 psql -d django # This logs as superuser into DB 'django'
 create schema django authorization django;
 alter role django set search_path = "django";
 
-# To login w/o password. Set the .pgpass file. Then login 
+#### To login w/o password. Set the .pgpass file. Then login 
 psql -h localhost -d django -U django
 ```
 Command | Options | Notes

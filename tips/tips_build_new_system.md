@@ -2,6 +2,14 @@
 
  - Load the OS
  - Patch to the latest version
+ - Use static IP address
+ - Setup DNS Client
+```text
+UBUNTU 18.04
+/etc/network/interfaces.d
+
+```
+ - Setup FQDN
  - Update /etc/skel/.bashrc
 ```text
 alias h=history
@@ -13,14 +21,11 @@ alias p="ps -eaf | egrep $1"
 set -o vi
 set -o ignoreeof
 
-MYSQL_HOME=/u/mysql/5.7.28
-MANPATH=${MYSQL_HOME}/man
-
-PATH=$PATH:/opt/bb/bin:${MYSQL_HOME}/bin
+PATH=/opt/bb/bin:${PATH}
 EDITOR=/usr/bin/vi
 PAGER=/usr/bin/less
 
-export EDITOR PAGER PATH MYSQL_HOME MANPATH
+export EDITOR PAGER PATH
 ```
  - Add .vimrc to /etc/skel
  - Update ~root/.bashrc with same customizations.
@@ -44,7 +49,7 @@ export EDITOR PAGER PATH MYSQL_HOME MANPATH
   mysql/<version>
   
   # Location of Postgres installation
-  postgres/<version>
+  postgresql/<version>
 
   # Toplevel directory for users
   users      755   root:root
@@ -79,6 +84,9 @@ useradd -c 'Postgres Database' -d /u/users/postgres -g 4002 -m -k /etc/skel \
  - Enable logging of SU, FAILLOG_ENAB, LOG_UNKFAIL_ENAB, SULOG_FILE
  - Update PATH to include /opt/bb/bin
  - Set UMASK to 022
+ 
+passwd mysql
+passwd postgres
 ```
 
  - CRON allowed
@@ -115,7 +123,7 @@ cd build
 cmake .. -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/opt/bb/local \
  -DCMAKE_INSTALL_PREFIX=/u/mysql/5.7.28 \
  -DMYSQL_DATADIR=/db/mysql/data \
- -DMYSQL_UNIX_ADDR=/var/run/mysqld.lock
+ -DMYSQL_UNIX_ADDR=/u/mysql/5.7.28/run/mysqld.lock
 cd ..
 make
 
@@ -137,11 +145,42 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
   -DDEFAULT_COLLATION=utf8_general_ci \
   -DWITH_SSL=/usr/local/openssl
 
+make install
 ```
 
- - Start / Stop scripts for MySQL
+ - Setup ENV for MySQL
+    - create /usr/local/bin/mysqlenv
+```
+MYSQL_HOME=/u/mysql/5.7.28
+MANPATH=${MYSQL_HOME}/man
+
+PATH=${MYSQL_HOME}/bin:${PATH}
+
+export PATH MANPATH
+```
+    - create /etc/profile.d/mysql.sh
+```
+# Set environment for MySQL
+if [[ -f /usr/local/bin/mysqlenv ]]
+then
+    source /usr/local/bin/mysqlenv
+fi
+```
+ - Create DATA directory for MySQL
+    - mkdir /db/mysql/data
+    - chown mysql:mysql /db/mysql/data
+    - chmod 700 /db/mysql/data
+ 
+ - Define a location for MySQL Socket
+    - mkdir /u/mysql/5.7.28/run
+    - chown mysql:mysql /u/mysql/5.7.28/run
+    - chmod 700 /u/mysql/5.7.28/run
+  
+ - Review tips_mysql.md for Ubuntu initial setup
+    
 
  - Install Postgres
+   * See tips_postgres.md
  ```
  
  ```
