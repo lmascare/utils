@@ -9,8 +9,8 @@ from lank import obj_utils
 
 #my_dns = obj_utils.DnsQuery(ip_address='165.160.32.176', hostname="")
 # my_dns = obj_utils.DnsQuery(ip_address=None, hostname="www.incspot.com")
-my_dns = obj_utils.DnsQuery(ip_address='165.160.32.176')
-# my_dns = obj_utils.DnsQuery(hostname="www.incspot.com")
+my_dns_i = obj_utils.DnsQuery(ip_address='165.160.32.176')
+my_dns_h = obj_utils.DnsQuery(hostname="www.incspot.com")
 # my_dns = obj_utils.DnsQuery(hostname="www.ibm.com")
 
 
@@ -24,9 +24,11 @@ my_dns = obj_utils.DnsQuery(ip_address='165.160.32.176')
 
 # print (my_dns.get_dns_rec())
 # rec = my_dns.get_dns_rec()
-rec2 = f"DNS Rec --> {my_dns.get_dns_rec()}"
+rec2 = f"DNS Rec --> {my_dns_i.get_dns_rec()}"
+rec3 = f"DNS Rec --> {my_dns_h.get_dns_rec()}"
 # print ("{}".format(rec))
 
 # print(f"DNS Rec --> {my_dns.get_dns_rec()}")
 
 print (rec2)
+print (rec3)

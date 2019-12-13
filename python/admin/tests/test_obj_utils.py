@@ -34,10 +34,8 @@ def test_get_dns_rec():
     Hostname   --> www.incspot.com
     IP Address --> 165.160.32.176
     """
-    my_dns_ip = obj_utils.DnsQuery(ip_address='165.160.32.176')
-    my_dns_host = obj_utils.DnsQuery(hostname='www.incspot.com')
-    # my_dns_i_h = obj_utils.DnsQuery(ip_address='165.160.32.176', hostname="")
-    # my_dns_h_i = obj_utils.DnsQuery(ip_address=None, hostname="www.incspot.com")
+    my_dns_ip = obj_utils.DnsQuery(ip_address='165.160.32.176', hostname=None)
+    my_dns_host = obj_utils.DnsQuery(hostname='www.incspot.com', ip_address=None)
 
     expected_host = "incspot"
     expected_ip = "165.160.32.176"
@@ -47,6 +45,7 @@ def test_get_dns_rec():
 
     ip_dns_rec = my_dns_ip.get_dns_rec()
     host_dns_rec = my_dns_host.get_dns_rec()
+    # ptr_record = my_dns_host.get_ptr()
 
     recd_host = ip_dns_rec[0]
     recd_ip = ip_dns_rec[1]
@@ -79,6 +78,26 @@ def creds():
     """Decorator to return an instance of class Creds."""
     return obj_utils.Creds()
 
+def test_keyfile():
+    """Pass in an invalid keyfile for test."""
+    import random
+    import string
+
+    string_length = 10
+    letters = string.ascii_lowercase
+    keyfile = "".join(random.choice(letters) for i in range(string_length))
+    my_invalid_keyfile = obj_utils.Creds(keyfile=keyfile)
+
+    cred_invalid_keyfile = "Pytest Cred"
+
+    # Test encrypt and decrypt with and invalid keyfile
+    e_cred_invalid_keyfile = my_invalid_keyfile.encrypt_cred(cred_invalid_keyfile)
+    assert e_cred_invalid_keyfile == "No Keyfile"
+
+    d_cred_invalid_keyfile = my_invalid_keyfile.decrypt_token(cred_invalid_keyfile)
+    assert d_cred_invalid_keyfile == "No Keyfile"
+
+    # Test encrypts and decrypt multiple creds with invalid keyfile.
 
 def test_encrypt_cred():
     """Define a Credential, encrypt it. Decrypt it to confirm."""
