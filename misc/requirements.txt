@@ -16,7 +16,7 @@ importlib-metadata
 mccabe
 more-itertools
 netaddr
-numpy
+#numpy
 packaging
 pandas
 paramiko
@@ -24,7 +24,7 @@ pep257
 pep8
 pluggy
 # psycopg2
-psycopg2-binary
+# psycopg2-binary
 pycodestyle
 pycparser
 pyflakes
