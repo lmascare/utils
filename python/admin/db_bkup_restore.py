@@ -16,8 +16,14 @@ Restore Strategy
  - Incremental Restore of a single database
 
 ToDO
- - Check if DB requested are configured in dbcreds
+ - Update brman table when
+    - Backup Starts
+    - Backup Ends
+ - INCR backups
+
+Completed
  - Check mysqldump and mysqlbinlog executable exists
+ - Check if DB requested are configured in dbcreds
 """
 from lank import obj_utils
 from lank.lank_cfg import host, scriptname, maintainers
@@ -46,7 +52,7 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
     https://stackoverflow.com/questions/2783313/
     how-can-i-get-around-mysql-errcode-13-with-select-into-outfile
 
-    InnoDB tables are used so mysqldump options to use are
+    InnoDB tables are used so mysqldump options for full backups are
     --defaults-file          File created in backup_dir/.my.cnf to protect
                              username and password
     --single-transaction     Uses are consistent read and guarantees that data
@@ -59,6 +65,11 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
     --fields-terminated-by   Use ',' to separate fields
     --fields-enclosed-by='"' Use '"' to encapsulate fields that have ','.
     --lines-terminated-by    Handle lines terminated by \r\n
+
+    Incremental backups
+    mysqladmin --defaults-file flush-logs
+    Then read the mysql-bin.index file and copy all the log files specified.
+    select @@log_bin_index;
 
     :param      dbname:     Database to be backed up
     :param      bkup_type:  Backup type 'full | incr'
@@ -95,7 +106,14 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
             f.write("user={}\n".format(db_creds.dbuser))
             f.write("password={}\n".format(db_creds.dbpass))
             f.write("host={}\n".format(db_creds.dbhost))
+            f.write("port={}\n\n".format(db_creds.dbport))
+
+            f.write("[mysqladmin]\n")
+            f.write("user={}\n".format(db_creds.dbuser))
+            f.write("password={}\n".format(db_creds.dbpass))
+            f.write("host={}\n".format(db_creds.dbhost))
             f.write("port={}\n".format(db_creds.dbport))
+
             f.close()
             os.chmod(db_defaults_file, 0o0600)
         mylog.info("Received credentials for --> {}. Performing backup".
@@ -110,7 +128,10 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
             mylog.info("Backup Command --> {}".format(bkup_cmd), 0)
             os.system(bkup_cmd)
         elif (bkup_type == "incr"):
-            os.system(incr_bkup_cmd)
+            bkup_cmd = incr_bkup_cmd.format(
+                db_defaults_file
+            )
+            os.system(bkup_cmd)
     except Exception as e:
         err = "FAILED: Errors during backup. Error --> {}".format(e)
         bkup_msgs.append(err)
@@ -348,6 +369,8 @@ def main():
 
     dbname = args.dbname
     mylog.info("Database Name    --> {}".format(dbname), 0)
+    if dbname not in dbs:
+        mylog.critical("Invalid Database specified --> {}".format(dbname), 0)
 
     if (args.timestamp):
         timestamp = args.timestamp

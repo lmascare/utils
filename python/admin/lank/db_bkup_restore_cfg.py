@@ -19,11 +19,13 @@ connect_sql = """select curdate();"""
 
 verify_sql = """show binary logs;"""
 secure_sql = """select @@secure_file_priv;"""
+logbin_index_sql = """select @@log_bin_index;"""
 
 full_bkup_cmd = mysqldump + """ \
     --defaults-file={} \
     --single-transaction \
     --flush-logs \
+    --delete-master-logs \
     --master-data=2 \
     --fields-terminated-by=, \
     --fields-enclosed-by='"' \
@@ -33,7 +35,10 @@ full_bkup_cmd = mysqldump + """ \
     > {}
 """
 
-incr_bkup_cmd = mysqladmin + "flush_logs"
+incr_bkup_cmd = mysqladmin + """ \
+    --defaults-file={} \
+    flush_logs
+"""
 
 dbs = {
     "mysqldb": {
