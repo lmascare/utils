@@ -20,14 +20,15 @@ ToDO
 """
 from lank import obj_utils
 from lank.lank_cfg import host, scriptname, maintainers
-from lank.db_bkup_restore_cfg import dbs, brman_db, dir_perms
+from lank.db_bkup_restore_cfg import dbs, brman_db, mysql_db, dir_perms, \
+    connect_sql, verify_sql
 from datetime import datetime
 
 import argparse
 import os
 # import stat
 
-def pre_req_checks(brman_db, dbname):
+def pre_req_checks(brman_db, dbname, mysqldb, today):
     r"""Pre-requisite checks to ensure DB backup / restore will succceed.
 
     Following checks are implemented
@@ -42,9 +43,13 @@ def pre_req_checks(brman_db, dbname):
     """
     precheck_msgs = []
     precheck_rc = 0
+    mylog.info("Pre-requisites check for {}".format(dbname), 0)
     # Extract properties of the DB
     brman_dbid = dbs[brman_db]["dbid"]
     brman_dbtype = dbs[brman_db]["dbtype"]
+
+    mysql_dbid = dbs[mysqldb]["dbid"]
+    mysql_dbtype = dbs[mysqldb]["dbtype"]
 
     dbid = dbs[dbname]["dbid"]
     dbtype = dbs[dbname]["dbtype"]
@@ -93,6 +98,7 @@ def pre_req_checks(brman_db, dbname):
                 except Exception as e:
                     err = "Unable to set permissions for {}. Error --> {}".\
                         format(chk_dir, e)
+                    mylog.warning(err, 0)
                     dir_msg.append(err)
                     dir_rc += 1
         else:
@@ -109,11 +115,59 @@ def pre_req_checks(brman_db, dbname):
             precheck_msgs.append(msg)
             precheck_rc += rc
 
-    # Establish connectivity
+    # Verify DB connectivity
+    def db_checks(dbid, dbtype):
+        r"""Database connectivity and settings checks."""
+        dbcheck_msgs = []
+        dbcheck_rc = 0
+        mylog.info("Testing DB connectivity --> {}".format(dbid), 0)
+        try:
+            mydb_creds = obj_utils.DBConnect(dbid, dbtype)
+            (mydb_cursor, my_connection) = mydb_creds.connect()
+
+            mydb_cursor.execute(connect_sql)
+            row_data = (mydb_cursor.fetchone()[0]).strftime("%Y-%m-%d")
+
+            if (row_data == today):
+                mylog.info("Established DB connectivity", 0)
+            else:
+                err = "Failed DB connectivity check"
+                dbcheck_msgs.append(err)
+                mylog.warning(err, 0)
+                dbcheck_rc += 1
+                my_connection.close()
+        except Exception as e:
+            err = "FAILED. DB Connectivity & Settings checks . Error --> {}".\
+                format(e)
+            dbcheck_msgs.append(err)
+            dbcheck_rc += 1
+
+        return (dbcheck_msgs, dbcheck_rc)
+
+    for db_check in [(brman_dbid, brman_dbtype), (dbid, dbtype)]:
+        (db_msg, db_rc) = db_checks(db_check[0], db_check[1])
+        if (rc > 0):
+            precheck_msgs.append(db_msg)
+            precheck_rc += db_rc
 
     # Verify DB settings
+    mylog.info("Verifying DB settings for backup and restore", 0)
+    try:
+        mysql_creds = obj_utils.DBConnect(mysql_dbid, mysql_dbtype)
+        (mysql_cursor, mysql_connection) = mysql_creds.connect()
+        mysql_cursor.execute(verify_sql)
+        row_data = mysql_cursor.fetchall()
+        if (len(row_data) > 0):
+            mylog.info("DB correctly set for backup and restore", 0)
+    except Exception as e:
+        err = "Failed verifying DB settings for backup and restore. " \
+              "Error --> {}".format(e)
+        precheck_msgs.append(err)
+        precheck_rc += 1
+        mylog.warning(err, 0)
 
     return (precheck_msgs, precheck_rc)
+
 
 def main():
     r"""Fabled main, where it all begins.
@@ -181,7 +235,9 @@ def main():
         timestamp = args.timestamp
     else:
         timestamp = datetime.now()
+    today = timestamp.strftime("%Y-%m-%d")
     mylog.info("Timestamp        --> {}".format(timestamp), 0)
+    mylog.info("Today            --> {}".format(today), 0)
 
     if (args.action_type):
         action_type  = args.action_type
@@ -203,7 +259,9 @@ def main():
     if (args.pre_reqs):
         pre_reqs = args.pre_reqs
         mylog.info("Pre Reqs Checks  --> {}".format(pre_reqs), 0)
-        (prereqs_msgs, prereqs_rc) = pre_req_checks(brman_db, dbname)
+        (prereqs_msgs, prereqs_rc) = pre_req_checks(
+            brman_db, dbname, mysql_db, today
+        )
         if (prereqs_rc > 0):
             mylog.warning("Error count --> {}".format(prereqs_rc), 0)
             error_rc += prereqs_rc

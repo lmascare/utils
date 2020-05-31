@@ -4,9 +4,20 @@ from .lank_cfg import scriptname, adm_bkup, adm_restore
 from . import obj_utils
 
 brman_db = "brman"
+mysql_db = "mysqldb"
 dir_perms = "0o40777"
 
+connect_sql = """select curdate();"""
+
+verify_sql = """show binary logs;"""
+
 dbs = {
+    "mysqldb": {
+        "dbid": "mysql",
+        "dbtype": "mysql",
+        "backup_dir": adm_bkup + "/mysql/",
+        "restore_dir": adm_restore + "/mysql/",
+    },
     "brman": {
         "dbid": "brman",
         "dbtype": "mysql",

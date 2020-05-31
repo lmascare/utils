@@ -241,7 +241,7 @@ class LogMe:
 
         This function performs the following steps
          - Defines the format for logging
-         - Sets the logging level based on input
+         - Sets the logging level based on inputImportError: attempted relative import with no known parent package
          - If LEVEL = Debug
                 - print to STDOUT
          - If LEVEL = CRITICAL
@@ -492,14 +492,28 @@ class DBConnect:
         cursor = connection.cursor()
         return (cursor, connection)
 
+    def mysql(self):
+        import mysql.connector
+        connection = mysql.connector.connect(
+            host=self.dbhost,
+            port=int(self.dbport),
+            user=self.dbuser,
+            password=self.dbpass,
+            database=self.dbname,
+            connect_timeout=self.timeout
+        )
+        cursor = connection.cursor()
+        return (cursor, connection)
+
     def connect(self):
         r"""Establish a cursor and connection to the DB."""
         if (self.db_error is None):
             if (self.dbtype == "postgres"):
                 (self.cursor, self.connection) = self.postgres()
-                return (self.cursor, self.connection)
-        else:
-            return (self.cursor, self.connection)
+            elif (self.dbtype == "mysql"):
+                (self.cursor, self.connection) = self.mysql()
+
+        return (self.cursor, self.connection)
 
 
 # Get the diff / union of two lists.
