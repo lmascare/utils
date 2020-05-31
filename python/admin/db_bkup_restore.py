@@ -29,6 +29,7 @@ from datetime import datetime
 import argparse
 import os
 
+
 def do_backup(dbname, bkup_type, timestamp, timestamp2):
     r"""Perform Database backup.
 
@@ -46,15 +47,18 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
     how-can-i-get-around-mysql-errcode-13-with-select-into-outfile
 
     InnoDB tables are used so mysqldump options to use are
-    --single-transaction    Uses are consistent read and guarantees that data
-                            seen my mysqldump does not change
-    --flush-logs            Enables point-in-time restore
-    --master-data=2         Causes mysqldump to write binary log info to output
-                            which assists in point-in-time recovery.
-    --databases             Database to be backed up
-    --tab                   Location of backup
-    --defaults-file         File created in backup_dir/.my.cnf to protect
-                            username and password
+    --defaults-file          File created in backup_dir/.my.cnf to protect
+                             username and password
+    --single-transaction     Uses are consistent read and guarantees that data
+                             seen my mysqldump does not change
+    --flush-logs             Enables point-in-time restore
+    --master-data=2          Causes mysqldump to write binary log info to output
+                             which assists in point-in-time recovery.
+    --databases              Database to be backed up
+    --tab                    Location of backup /u/admin/bkup/<dbname>/<YYYY-MM-DD>/
+    --fields-terminated-by   Use ',' to separate fields
+    --fields-enclosed-by='"' Use '"' to encapsulate fields that have ','.
+    --lines-terminated-by    Handle lines terminated by \r\n
 
     :param      dbname:     Database to be backed up
     :param      bkup_type:  Backup type 'full | incr'

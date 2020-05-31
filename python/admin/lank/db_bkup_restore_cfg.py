@@ -27,6 +27,7 @@ full_bkup_cmd = mysqldump + """ \
     --master-data=2 \
     --fields-terminated-by=, \
     --fields-enclosed-by='"' \
+    --lines-terminated-by=0x0d0a \
     --tab={} \
     {} \
     > {}
