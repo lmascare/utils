@@ -14,6 +14,8 @@ def table_db_brman_status(*args):
     id              bigint auto_increment,
     PRIMARY KEY (id)
     );
+    CREATE INDEX brman_status_bkup_date on db_brman_status(bkup_date);
+    CREATE INDEX brman_status_type on db_brman_status(type);
     """
 
     insert_sql = None
