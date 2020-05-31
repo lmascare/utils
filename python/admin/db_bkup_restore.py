@@ -16,17 +16,105 @@ Restore Strategy
  - Incremental Restore of a single database
 
 ToDO
- - Check if DB requested are configured
+ - Check if DB requested are configured in dbcreds
+ - Check mysqldump and mysqlbinlog executable exists
 """
 from lank import obj_utils
 from lank.lank_cfg import host, scriptname, maintainers
 from lank.db_bkup_restore_cfg import dbs, brman_db, mysql_db, dir_perms, \
-    connect_sql, verify_sql
+    connect_sql, verify_sql, check_files, full_bkup_cmd, incr_bkup_cmd, \
+    defaults_file, secure_sql
 from datetime import datetime
 
 import argparse
 import os
-# import stat
+
+def do_backup(dbname, bkup_type, timestamp, timestamp2):
+    r"""Perform Database backup.
+
+    Database backup is performed based on the type of request. Invokes
+    mysqldump with appropriate options to perform the backup.
+
+    Ref:
+    https://dev.mysql.com/doc/refman/5.7/en/backup-policy.html
+    https://dev.mysql.com/doc/refman/5.7/en/recovery-from-backups.html
+    https://dev.mysql.com/doc/refman/5.7/en/mysqladmin.html
+    mysqldump options --> https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html
+
+    # Permission denied when SELECT INTO OUTFILE
+    https://stackoverflow.com/questions/2783313/
+    how-can-i-get-around-mysql-errcode-13-with-select-into-outfile
+
+    InnoDB tables are used so mysqldump options to use are
+    --single-transaction    Uses are consistent read and guarantees that data
+                            seen my mysqldump does not change
+    --flush-logs            Enables point-in-time restore
+    --master-data=2         Causes mysqldump to write binary log info to output
+                            which assists in point-in-time recovery.
+    --databases             Database to be backed up
+    --tab                   Location of backup
+    --defaults-file         File created in backup_dir/.my.cnf to protect
+                            username and password
+
+    :param      dbname:     Database to be backed up
+    :param      bkup_type:  Backup type 'full | incr'
+
+    :returns    bkup_msgs:  Messages received from components
+                bkup_rc:    Error count encountered from components
+    """
+    bkup_msgs = []
+    bkup_rc = 0
+    mylog.info("Performing backup of {}".format(dbname.upper()), 0)
+    try:
+        # backups are done as the root user
+        mysql_dbid = dbs[mysql_db]["dbid"]
+        dbid = dbs[dbname]["dbid"]
+
+        db_backup_dir = dbs[dbname]["backup_dir"] + "/" + timestamp
+
+        db_defaults_file = db_backup_dir + "/" + defaults_file
+
+        db_backup_file = db_backup_dir + "/" + dbname + "_" + timestamp2 + ".binlog"
+
+        if not os.path.isdir(db_backup_dir):
+            mylog.info("Creating directory --> {}".format(db_backup_dir), 0)
+            os.mkdir(db_backup_dir)
+            os.chmod(db_backup_dir, 0o777)
+        # The mysqldump uses credentials to perform the backup. This is
+        # received via the restapi database type variable dbtype.
+        dbtype = "restapi"
+        mylog.info("Retrieving credentials for dbname --> {} dbtype --> {}".
+                   format(dbid, dbtype), 0)
+        db_creds = obj_utils.DBConnect(mysql_dbid, dbtype)
+        with open(db_defaults_file, "w") as f:
+            f.write("[mysqldump]\n")
+            f.write("user={}\n".format(db_creds.dbuser))
+            f.write("password={}\n".format(db_creds.dbpass))
+            f.write("host={}\n".format(db_creds.dbhost))
+            f.write("port={}\n".format(db_creds.dbport))
+            f.close()
+            os.chmod(db_defaults_file, 0o0600)
+        mylog.info("Received credentials for --> {}. Performing backup".
+                   format(db_creds.dbuser), 0)
+        if (bkup_type == "full"):
+            bkup_cmd = full_bkup_cmd.format(
+                db_defaults_file,
+                db_backup_dir,
+                dbname,
+                db_backup_file
+            )
+            mylog.info("Backup Command --> {}".format(bkup_cmd), 0)
+            os.system(bkup_cmd)
+        elif (bkup_type == "incr"):
+            os.system(incr_bkup_cmd)
+    except Exception as e:
+        err = "FAILED: Errors during backup. Error --> {}".format(e)
+        bkup_msgs.append(err)
+        bkup_rc += 1
+        mylog.warning(err, 0)
+
+    return (bkup_msgs, bkup_rc)
+
 
 def pre_req_checks(brman_db, dbname, mysqldb, today):
     r"""Pre-requisite checks to ensure DB backup / restore will succceed.
@@ -35,6 +123,7 @@ def pre_req_checks(brman_db, dbname, mysqldb, today):
      - Establish connectivity to the BRMAN database and Target DB
      - Ensure DB properties are correctly set
         - Binary Logs are enabled
+        - secure-file-priv
      - Ensure destination directories are present with valid permissions
 
     :param      dbname:         Database to be backed up
@@ -155,16 +244,37 @@ def pre_req_checks(brman_db, dbname, mysqldb, today):
     try:
         mysql_creds = obj_utils.DBConnect(mysql_dbid, mysql_dbtype)
         (mysql_cursor, mysql_connection) = mysql_creds.connect()
+
+        # Binary logs settings
+        mylog.info("Checking Binary Logs settings", 0)
         mysql_cursor.execute(verify_sql)
         row_data = mysql_cursor.fetchall()
         if (len(row_data) > 0):
             mylog.info("DB correctly set for backup and restore", 0)
+
+        # secure-file-priv settings
+        mylog.info("Checking secure-file-priv settings", 0)
+        mysql_cursor.execute(secure_sql)
+        row_data = mysql_cursor.fetchone()[0]
+        if (row_data == ""):
+            mylog.info("DB correctly set for secure-file-priv", 0)
     except Exception as e:
         err = "Failed verifying DB settings for backup and restore. " \
               "Error --> {}".format(e)
         precheck_msgs.append(err)
         precheck_rc += 1
         mylog.warning(err, 0)
+
+    # Check existence of required binaries
+    mylog.info("Checking existence of required files", 0)
+    for req_file in check_files:
+        if not os.path.exists(req_file):
+            err = "FAILED: File does not exist --> {}".format(req_file)
+            precheck_msgs.append(err)
+            precheck_rc += 1
+            mylog.warning(err, 0)
+        else:
+            mylog.info("SUCCESS: File exists --> {}".format(req_file), 0)
 
     return (precheck_msgs, precheck_rc)
 
@@ -222,6 +332,10 @@ def main():
         action = args.action
         mylog.info("Action           --> {}".format(action), 0)
 
+    if (args.action_type):
+        action_type = args.action_type
+        mylog.info("Action Type      --> {}".format(action_type), 0)
+
     if (args.email):
         recipient = args.email.split(',')
     else:
@@ -236,26 +350,12 @@ def main():
     else:
         timestamp = datetime.now()
     today = timestamp.strftime("%Y-%m-%d")
+    timestamp2 = timestamp.strftime("%Y%m%d_%H%M%S")
     mylog.info("Timestamp        --> {}".format(timestamp), 0)
+    mylog.info("Timestamp2       --> {}".format(timestamp2), 0)
     mylog.info("Today            --> {}".format(today), 0)
 
-    if (args.action_type):
-        action_type  = args.action_type
-        mylog.info("Action Type      --> {}".format(action_type), 0)
-
-    # Establish a Cursor and Connection to the database. At this time
-    # all options require a connection to the Database.
-
-    # The state of the db backups and restore is in the brman DB.
-    # brman_dbid = dbs["brman"]["dbid"]
-    # brman_dbtype = dbs["brman"]["dbtype"]
-
-    # dbid = dbs[dbname]["dbid"]
-    # dbtype = dbs[dbname]["dbtype"]
-
-    # mydb_brman = obj_utils.DBConnect(brman_dbid, brman_dbtype)
-    # mydb = obj_utils.DBConnect(dbid, dbtype)
-
+    # pre_reqs is a required parameter. Therefore no need to check for else.
     if (args.pre_reqs):
         pre_reqs = args.pre_reqs
         mylog.info("Pre Reqs Checks  --> {}".format(pre_reqs), 0)
@@ -266,14 +366,14 @@ def main():
             mylog.warning("Error count --> {}".format(prereqs_rc), 0)
             error_rc += prereqs_rc
             error_msgs.append(prereqs_msgs)
-
-    # except Exception as e:
-    # error_rc += 1
-    # err = "Errors in {}. Error Code --> {}. RC --> {}".\
-    #     format(scriptname, error_msgs, error_rc)
-    # mylog.warning(err, 0)
-
-    # exit(error_rc)
+        else:
+            if (action == "backup"):
+                (bkup_msgs, bkup_rc) = do_backup(dbname, action_type, today, timestamp2)
+                if (bkup_rc > 0):
+                    mylog.warning("Error count --> {}".format(bkup_rc), 0)
+                    error_rc += bkup_rc
+                    error_msgs.append(bkup_msgs)
+    exit(error_rc)
 
 if __name__ == "__main__":
     mylog = obj_utils.LogMe()
