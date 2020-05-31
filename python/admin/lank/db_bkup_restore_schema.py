@@ -10,7 +10,8 @@ def table_db_brman_status(*args):
     filesize        bigint,
     action          varchar(16),
     status          varchar(16),
-    bkup_date       timestamp,
+    bkup_start      timestamp,
+    bkup_end        timestamp,
     id              bigint auto_increment,
     PRIMARY KEY (id)
     );
