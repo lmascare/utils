@@ -16,21 +16,25 @@ Restore Strategy
  - Incremental Restore of a single database
 
 ToDO
+ - Run as mysql user only
  - Update brman table when
     - Backup Starts
     - Backup Ends
- - INCR backups
+ - INCR backups.
+ - In the log index file, upload every entry into the database.
 
 Completed
  - Check mysqldump and mysqlbinlog executable exists
  - Check if DB requested are configured in dbcreds
+ - Full backup
 """
 from lank import obj_utils
 from lank.lank_cfg import host, scriptname, maintainers
 from lank.db_bkup_restore_cfg import dbs, brman_db, mysql_db, dir_perms, \
     connect_sql, verify_sql, check_files, full_bkup_cmd, incr_bkup_cmd, \
-    defaults_file, secure_sql
+    defaults_file, secure_sql, logbin_index_sql
 from datetime import datetime
+from shutil import copyfile
 
 import argparse
 import os
@@ -83,6 +87,7 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
     try:
         # backups are done as the root user
         mysql_dbid = dbs[mysql_db]["dbid"]
+        mysql_dbtype = dbs[mysql_db]["dbtype"]
         dbid = dbs[dbname]["dbid"]
 
         db_backup_dir = dbs[dbname]["backup_dir"] + "/" + timestamp
@@ -96,7 +101,8 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
             os.mkdir(db_backup_dir)
             os.chmod(db_backup_dir, 0o777)
         # The mysqldump uses credentials to perform the backup. This is
-        # received via the restapi database type variable dbtype.
+        # received via the restapi database type variable dbtype. It is used
+        # create the .my.cnf file for mysqldump and mysqladmin entries
         dbtype = "restapi"
         mylog.info("Retrieving credentials for dbname --> {} dbtype --> {}".
                    format(dbid, dbtype), 0)
@@ -128,10 +134,31 @@ def do_backup(dbname, bkup_type, timestamp, timestamp2):
             mylog.info("Backup Command --> {}".format(bkup_cmd), 0)
             os.system(bkup_cmd)
         elif (bkup_type == "incr"):
+            # For Incremental backups, run
+            #   - mysqladmin flush-logs
+            #   - Read the index file for all the logs to be copied
+            #   - Copy them over to the backup_dir
+            #   - Update the DB with the stat of each file.
             bkup_cmd = incr_bkup_cmd.format(
                 db_defaults_file
             )
+            mylog.info("Backup Command --> {}".format(bkup_cmd), 0)
             os.system(bkup_cmd)
+            mydb_creds = obj_utils.DBConnect(mysql_dbid, mysql_dbtype)
+            (mydb_cursor, mydb_connection) = mydb_creds.connect()
+            mydb_cursor.execute(logbin_index_sql)
+            log_index_file = mydb_cursor.fetchone()[0]
+            mylog.info("Log Index File --> {}".format(log_index_file), 0)
+            mydb_connection.close()
+
+            # Now copy the files specified in the log_index_file
+            with open(log_index_file, "r") as f:
+                logfiles = f.readlines()
+                logfiles = [x.strip() for x in logfiles]
+                mylog.info("List of logfiles --> {}".format(logfiles), 0)
+                for logfile in logfiles:
+                    base_filename = os.path.basename(logfile)
+                    copyfile(logfile, db_backup_dir + "/" + base_filename)
     except Exception as e:
         err = "FAILED: Errors during backup. Error --> {}".format(e)
         bkup_msgs.append(err)

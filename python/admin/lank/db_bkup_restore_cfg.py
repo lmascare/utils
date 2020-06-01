@@ -37,7 +37,7 @@ full_bkup_cmd = mysqldump + """ \
 
 incr_bkup_cmd = mysqladmin + """ \
     --defaults-file={} \
-    flush_logs
+    flush-logs
 """
 
 dbs = {

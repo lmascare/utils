@@ -5,11 +5,12 @@ def table_db_brman_status(*args):
     create_sql = """
     CREATE TABLE IF NOT EXISTS db_brman_status (
     dbname          varchar(16),
-    type            varchar(8),
+    bkup_rest       varchar(8),
     filename        varchar(128),
     filesize        bigint,
-    action          varchar(16),
-    status          varchar(16),
+    filetimestamp   timestamp,
+    full_incr       varchar(16),
+    bkup_status     varchar(16),
     bkup_start      timestamp,
     bkup_end        timestamp,
     id              bigint auto_increment,
