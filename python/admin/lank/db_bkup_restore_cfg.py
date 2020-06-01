@@ -7,6 +7,7 @@ brman_db = "brman"
 mysql_db = "mysqldb"
 dir_perms = "0o40777"
 
+preferred_user = "mysql"
 mysql = "/usr/bin/mysql"
 mysqladmin = "/usr/bin/mysqladmin"
 mysqlbinlog = "/usr/bin/mysqlbinlog"

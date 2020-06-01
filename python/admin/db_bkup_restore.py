@@ -16,23 +16,22 @@ Restore Strategy
  - Incremental Restore of a single database
 
 ToDO
- - Run as mysql user only
  - Update brman table when
-    - Backup Starts
-    - Backup Ends
- - INCR backups.
+    - Backup Starts, Ends, Backup Type (Full / Incr), Status
  - In the log index file, upload every entry into the database.
 
 Completed
+ - Run as mysql user only
  - Check mysqldump and mysqlbinlog executable exists
  - Check if DB requested are configured in dbcreds
  - Full backup
+ - INCR backups.
 """
 from lank import obj_utils
 from lank.lank_cfg import host, scriptname, maintainers
 from lank.db_bkup_restore_cfg import dbs, brman_db, mysql_db, dir_perms, \
     connect_sql, verify_sql, check_files, full_bkup_cmd, incr_bkup_cmd, \
-    defaults_file, secure_sql, logbin_index_sql
+    defaults_file, secure_sql, logbin_index_sql, preferred_user
 from datetime import datetime
 from shutil import copyfile
 
@@ -185,6 +184,16 @@ def pre_req_checks(brman_db, dbname, mysqldb, today):
     precheck_msgs = []
     precheck_rc = 0
     mylog.info("Pre-requisites check for {}".format(dbname), 0)
+    # Ensure it runs only as preferred_user
+    current_user = os.environ['LOGNAME']
+    if [current_user != preferred_user]:
+        err = "FAILED: Incorrect user --> {}. Preferred --> {}".\
+            format(current_user, preferred_user)
+        precheck_msgs.append(err)
+        precheck_rc += 1
+        mylog.warning(err, 0)
+    else:
+        mylog.info("SUCCESS: Preferred user logged in", 0)
     # Extract properties of the DB
     brman_dbid = dbs[brman_db]["dbid"]
     brman_dbtype = dbs[brman_db]["dbtype"]
@@ -417,12 +426,17 @@ def main():
             brman_db, dbname, mysql_db, today
         )
         if (prereqs_rc > 0):
-            mylog.warning("Error count --> {}".format(prereqs_rc), 0)
+            mylog.warning("FAILED: Pre-requisites. Error count --> {}".
+                          format(prereqs_rc), 0)
+            mylog.warning("Pre-requisite failure(s) --> {}".
+                          format(prereqs_msgs), 0)
             error_rc += prereqs_rc
             error_msgs.append(prereqs_msgs)
         else:
             if (action == "backup"):
-                (bkup_msgs, bkup_rc) = do_backup(dbname, action_type, today, timestamp2)
+                (bkup_msgs, bkup_rc) = do_backup(
+                    dbname, action_type, today, timestamp2
+                )
                 if (bkup_rc > 0):
                     mylog.warning("Error count --> {}".format(bkup_rc), 0)
                     error_rc += bkup_rc
