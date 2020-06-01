@@ -30,3 +30,14 @@ sudo certbot --apache certonly
 ```
 
 #### [Local CA](https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/)
+
+### Compile OpenSSL source code
+ - Download [here](https://www.openssl.org/source/openssl-1.1.1d.tar.gz)
+ - Compile directives
+    - openssldir used for storing OpenSSL Configuration files, certs and keystore
+    - prefix --> installation directory. Preference is to keep the version so
+    multiple versions can be supported.
+```text
+tar xfz ../Downloads/openssl-1.1.1d.tar.gz
+./config --prefix=/usr/local/openssl-1.1.1d --openssldir=/usr/local/ssl
+```

@@ -12,7 +12,7 @@
 * run as root. MIT Magic Cookie needs to be added
 
 ### CLI 
-```commandline
+```text
 # as regular user
 echo $DISPLAY
 xauth list 
@@ -22,4 +22,17 @@ xauth add lmascare-centos/unix:12  MIT-MAGIC-COOKIE-1  504d59ed15113e4a1f4722e1d
 
 # Test SMTP mail relay
 nmap -sV --script smtp-open-relay -v <target>
+```
+### Download and install
+```text
+apt install libpcap-dev
+cd ~lmascare/Download
+wget https://nmap.org/dist/nmap-7.80.tar.bz2
+cd ../misc
+bzip2 -cd ../Downloads/nmap-7.80.tar.bz2 | tar xvf -
+cd nmap-7.80
+./configure --prefix=/usr/local/nmap-7.80 --with-openssl=/usr/local/openssl-1.1.1d
+make
+sudo su
+make install
 ```

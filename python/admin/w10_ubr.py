@@ -87,8 +87,9 @@ def parse_win_table(html_file):
         build_dict[os_ver] = ubr_dict
         # pprint.pprint(build_dict)
         # exit()
-    pprint.pprint(build_dict)
-    exit()
+    # pprint.pprint(build_dict)
+    # exit()
+    return (build_dict)
 
 
 def create_dict():

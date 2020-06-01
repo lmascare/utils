@@ -36,13 +36,19 @@
 * cd Python-3.7.3
 * CentOS needs 
     * yum install libffi-devel
-* Ubuntu need
+    * yum install zlib-devel
+* Ubuntu needs
     * sudo apt-get install libffi-dev
+    * sudo apt-get install zlib1g-dev
+    * sudo apt-get install libexpat1-dev
 * ./configure --prefix=/usr/local/python_3.7.3 \
     --disable-shared \
      --enable-optimizations \
      --with-lto \
-     --with-pydebug
+     --with-pydebug \
+     --with-system-ffi      \
+     --with-system-expat    \
+     --enable-loadable-sqlite-extensions
      
 ```From Stackoverflow```
 * ./configure --prefix=/usr/local/python3.7.3 \
