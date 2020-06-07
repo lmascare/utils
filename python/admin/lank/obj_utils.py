@@ -241,7 +241,7 @@ class LogMe:
 
         This function performs the following steps
          - Defines the format for logging
-         - Sets the logging level based on input
+         - Sets the logging level based on inputImportError: attempted relative import with no known parent package
          - If LEVEL = Debug
                 - print to STDOUT
          - If LEVEL = CRITICAL
@@ -463,9 +463,9 @@ class DBConnect:
         self.timeout = timeout
         self.db_error = None
         if self.dbid not in db_creds:
-            mylog = LogMe()
+            self.mylog = LogMe()
             self.db_error = "Invalid DBID --> {}".format(self.dbid)
-            mylog.error(self.db_error, 0)
+            self.mylog.error(self.db_error, 0)
             self.cursor = None
             self.connection = None
         else:
@@ -492,14 +492,45 @@ class DBConnect:
         cursor = connection.cursor()
         return (cursor, connection)
 
+    def mysql(self):
+        import mysql.connector
+        connection = mysql.connector.connect(
+            host=self.dbhost,
+            port=int(self.dbport),
+            user=self.dbuser,
+            password=self.dbpass,
+            database=self.dbname,
+            connect_timeout=self.timeout
+        )
+        cursor = connection.cursor()
+        return (cursor, connection)
+
+    def restapi(self):
+        self.mylog.info("Returning RESTApi Credentails for --> {}".
+                        format(self.dbname), 0)
+        return (
+            self.dbname, self.dbuser, self.dbpass,self.dbhost, self.dbport
+        )
+
     def connect(self):
         r"""Establish a cursor and connection to the DB."""
+        # self.mylog.info("Establishing Connection to --> {}. Type --> {}".
+        #                 format(self.dbname, self.dbtype), 0)
         if (self.db_error is None):
             if (self.dbtype == "postgres"):
                 (self.cursor, self.connection) = self.postgres()
-                return (self.cursor, self.connection)
-        else:
-            return (self.cursor, self.connection)
+            elif (self.dbtype == "mysql"):
+                (self.cursor, self.connection) = self.mysql()
+            elif (self.dbtype == "restapi"):
+                # (self.dbname, self.dbuser, self.dbpass, self.dbhost,
+                #  self.dbport) = self.restapi()
+                self.mylog.info("Returning RESTApi Credentails for --> {}".
+                                format(self.dbname), 0)
+                return (
+                    self.dbname, self.dbuser, self.dbpass, self.dbhost, self.dbport
+                )
+
+        return (self.cursor, self.connection)
 
 
 # Get the diff / union of two lists.
