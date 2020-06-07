@@ -1,0 +1,8 @@
+xterm*font: 10x20
+xterm*geometry: 90x40+740+40
+xterm*scrollBar: True
+xterm*scrollkey: True
+xterm*saveLines: 5000
+xterm*background: black
+xterm*foreground: orange
+xterm*loginshell: true
