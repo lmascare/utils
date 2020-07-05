@@ -93,7 +93,20 @@ passwd postgres
 ```text
 cat /etc/cron.allow
 oper
+```
+```text
+ - Set Timezone
+ timedatectl set-timezone America/New_York
 
+ cat /etc/timezone
+ America/New_York
+```
+
+```text
+ - Install NTP
+ apt install ntp ntpdate ntpstat -y
+ systemctl enable ntp
+ systemctl start ntp
 ```
 
  - Install Python3 and its modules
