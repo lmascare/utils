@@ -1,0 +1,3 @@
+:
+set -x
+/usr/local/bin/named-checkconf -t /home/chroot/domain -z /etc/named.conf
