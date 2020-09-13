@@ -33,7 +33,7 @@ pep257
 pep8
 pluggy
 protobuf
-psycopg2-binary
+# psycopg2-binary
 py
 pyasn1
 pycodestyle
