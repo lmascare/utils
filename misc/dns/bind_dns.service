@@ -1,0 +1,16 @@
+# 2020-09-12 Larry Mascarenhas
+# Bind DNS Start / Stop service for CenOS
+#
+[Unit]
+Descrition=Bind DNS Start / Stop service
+Documentation=https://bind9.readthedocs.io/en/latest/introduction.html
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+Alias=bind_dns
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/named -u named -t /home/chroot/domain  -c /etc/named.conf
+ExecReload=/usr/local/bin/rndc -c /home/chroot/domain/etc/rndc.conf reload

@@ -54,6 +54,19 @@
 * service sshd stop     -- stops the sshd server
 * service sshd start    -- starts the sshd server
 
+### Determine of SELinux is enforcing
+* [Article](https://stackoverflow.com/questions/20688844/sshd-gives-error-could-not-open-authorized-keys-although-permissions-seem-corre)
+* [Article on SeLinux ssh] (https://linux.die.net/man/8/ssh_selinux)
+* getenforce will return enforcing
+
+```
+# Temporary change
+chcon  -t ssh_home_t /u/users/lmascare/.ssh/authorized_keys
+ls -ldZ /u/users/lmascare/.ssh/authorized_keys
+
+
+```
+
 
 #### Update the /etc/sysconfig/iptables with an entry for port 22
 * iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT

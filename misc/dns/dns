@@ -1,0 +1,3 @@
+:
+set -x
+/usr/local/bin/rndc -c /home/chroot/domain/etc/rndc.conf reload

@@ -60,10 +60,31 @@
   --with-system-ffi \
   --enable-ipv6 --with-threads --with-pydebug --disable-rpath
 
+* 07-June-2019 Compiled on CentOS
+./configure --prefix=/usr/local/python_3.7.3 \
+   --disable-shared 
+   --enable-optimizations \
+   --with-lto 
+   --with-pydebug
+
 * 23-June-2019 Compiled with following options on Ubuntu
 ./configure --prefix=/usr/local/python_3.7.3 \
     --enable-loadable-sqlite-extensions   
     --with-system-ffi
+
+## Python 3.7.9
+* wget http://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
+* tar xfz ../Downloads/Python-3.7.9.tgz
+* cd Python-3.7.9
+
+* CentOS 09-Sep-2020
+./configure --prefix=/usr/local/python_3.7.9 \
+   --disable-shared  \
+   --enable-optimizations \
+   --with-lto \
+   --with-pydebug
+
+* Ubuntu 
 
 ### Strip the Python 2.7 binary:
 * strip /usr/local/lib/libpython2.7.so.1.0

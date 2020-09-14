@@ -1,0 +1,21 @@
+;
+; Reverse Zone file for 172.31.251
+;
+$TTL 3D
+@       IN      SOA     ns.kellynoah.com. hostmaster.kellynoah.com. (
+                        202009002     ; serial, todays date + todays serial #
+                        8H              ; refresh, seconds
+                        2H              ; retry, seconds
+                        4W              ; expire, seconds
+                        1D )            ; minimum, seconds
+;
+                TXT     "Segment 172.31.251.0 in kellynoah.com"
+                NS      ns.kellynoah.com.    ; Inet Address of name server
+;               MX      10 mail              ; Primary Mail Exchanger
+
+50          IN PTR   lmascare-laptop.kellynoah.com.
+63          IN PTR   lmascare-centos.kellynoah.com.
+63          IN PTR   ns.kellynoah.com.
+63          IN PTR   mail.kellynoah.com.
+64          IN PTR   silicon.kellynoah.com.
+;

@@ -1,0 +1,21 @@
+;
+; Zone file for 172.31.251
+;
+$TTL 3D
+@       IN      SOA     ns.kellynoah.com. hostmaster.kellynoah.com. (
+                        202009002     ; serial, todays date + todays serial #
+                        8H              ; refresh, seconds
+                        2H              ; retry, seconds
+                        4W              ; expire, seconds
+                        1D )            ; minimum, seconds
+;
+                TXT     "Segment 172.31.251.0 in kellynoah.com"
+                NS      ns          ; Inet Address of name server
+                MX      10 mail     ; Primary Mail Exchanger
+
+localhost            A     127.0.0.1
+lmascare-laptop      A     172.31.251.50
+lmascare-centos      A     172.31.251.63
+ns                   A     172.31.251.63
+mail                 A     172.31.251.63
+silicon              A     172.31.251.64

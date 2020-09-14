@@ -1,0 +1,99 @@
+// Define our ACLs first
+
+// Set up an ACL named "bogusnets" that blocks
+// RFC1918 space and some reserved space, which is
+// commonly used in spoofing attacks.
+
+// We use 172.31.251 which is part of 172.12.0.0/12
+// acl bogusnets {
+    // 0.0.0.0/8;  192.0.2.0/24; 224.0.0.0/3;
+    // 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16;
+// };
+
+acl bogusnets {
+     0.0.0.0/8;  192.0.2.0/24; 224.0.0.0/3;
+     10.0.0.0/8; 192.168.0.0/16;
+};
+
+acl internal { 127.0.0.1;  172.31.251.0/24; 192.168.8.0/24; };
+
+
+key "rndc-key" {
+      algorithm hmac-sha256;
+      secret "Af14YoMaTp4vm3PeVIZimEuPNUz3llWHvfsoc5pciw4=";
+};
+
+controls {
+      inet 127.0.0.1 port 953
+              allow { 127.0.0.1; } keys { "rndc-key"; };
+};
+
+options {
+   directory "/var/named";
+   allow-query-cache { internal; };
+   allow-query { internal; };
+   recursion yes;
+   allow-recursion { internal; };
+   blackhole { bogusnets; };
+
+   // Dont listen on IPv6
+   listen-on-v6 { none; };
+
+   // Added Per Debian buster Bind9. 
+   // Due to : resolver: info: resolver priming query complete messages in the logs. 
+   // See: https://gitlab.isc.org/isc-projects/bind9/commit/4a827494618e776a78b413d863bc23badd14ea42
+
+    minimal-responses yes;
+
+    forwarders {
+       1.1.1.1;
+       1.0.0.1;
+       // 8.8.8.8;
+    };
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+zone "." {
+   type  hint;
+   file "named.ca";
+};
+
+
+// ZONES
+// localhost
+zone "localhost" {
+   type primary;
+   file "localhost";
+   notify no;
+};
+
+zone "0.0.127.in-addr-arpa" {
+   type primary;
+   file "localhost.rev";
+   notify no;
+};
+
+// 172.31.251.0
+zone "kellynoah.com" {
+   type primary;
+   file "172_31_251_0";
+   notify yes;
+   allow-transfer {
+      172.31.251.64;
+   };
+};
+
+zone "251.31.172.in-addr.arpa" {
+   type primary;
+   file "172_31_251_0.rev";
+   allow-transfer {
+      172.31.251.64;
+   };
+   notify yes;
+};
