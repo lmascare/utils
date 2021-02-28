@@ -13,3 +13,9 @@ esxcli software vib install –f –v /tmp/hpacucli-9.40-12.0.vib
 
 #### Get Device Paths
 esxcli storage core path list
+
+#### Install Ubuntu on Vsphere
+[Procedure](https://graspingtech.com/esxi-ubuntu-18.04-vm/)
+
+#### Install Ubuntu on Vsphere using VCenter
+[Procedure](https://graspingtech.com/vcenter-create-ubuntu-vm/)
