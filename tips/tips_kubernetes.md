@@ -5,6 +5,8 @@
  - **Pods** are instances of a container in a deployment
  - **Services** are endpoints that export ports to the outside world
 
+### Kubenetes HOME
+ - https://kubernetes.io/docs/home/
 #### Installation
 #####Pre-requisite
 - Virtualizaton technology like
@@ -35,6 +37,10 @@
         EOF
         yum install -y kubectl
           ```
+    - Just the binary
+    ```text
+      curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    ```
     - For use as a single node cluster install minikube
         - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
         ```text

@@ -14,6 +14,25 @@ Port Number | Description
 7956 TCP/UDP | Container Network Discovery 
 
 ### Linux Installation
+### IMPORTANT - Docker Security
+ - Manage docker as a non-root user  
+   https://docs.docker.com/engine/install/linux-postinstall/
+ 
+ - Docker Daemon Attack Surface
+   https://docs.docker.com/engine/security/#docker-daemon-attack-surface
+
+### Centos
+Download [here](http://docs.docker.com/install)
+ - yum install -y yum-utils
+ - yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+ - yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+ - systemctl start docker
+ - docker run hello-world
+ - systemctl enable docker.service
+ - systemctl enable containerd.service
+
 #### Ubuntu
  - sudo apt-get update
  - sudo apt-get install apt-transport-https \
