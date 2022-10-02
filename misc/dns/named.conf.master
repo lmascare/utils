@@ -32,7 +32,7 @@ options {
    directory "/var/named";
    allow-query-cache { internal; };
    allow-query { internal; };
-   recursion yes;
+   // recursion yes;
    allow-recursion { internal; };
    blackhole { bogusnets; };
 
