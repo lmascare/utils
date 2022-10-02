@@ -7,8 +7,21 @@ openssl s_client -connect www.incspot.com:443 -tls1_1
 openssl s_client -connect www.incspot.com:443 -tls1_2
 openssl s_client -connect www.incspot.com:443 -ssl3
 
+# Show certs for a given domain
+openssl s_client -connect <fqdn> -showcerts
+
+# Generate a CSR
+openssl req -out mycsr.csr -new -newkey rsa:4096 -nodes -keyout private.key
+
+# Read the CSR
+openssl req -in mycsr.csr -noout -text
+
 # Using nmap
 nmap --script ssl-enum-ciphers -p 443 www.ibm.com
+
+# Details of the certificate
+cat mycert.crt | openssl x509 -text -noout
+
 ``` 
 ### Generating SSL Certs
 #### [Lets Encryt](https://letsencrypt.org/getting-started/)

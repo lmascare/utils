@@ -20,7 +20,7 @@ acl internal { 127.0.0.1;  172.31.251.0/24; 192.168.8.0/24; };
 
 key "rndc-key" {
       algorithm hmac-sha256;
-      secret "Af14YoMaTp4vm3PeVIZimEuPNUz3llWHvfsoc5pciw4=";
+      secret "SaFupRioaHJRqZSBWIFMqQML8Y4/zx4k66u4m4RjLzs=";
 };
 
 controls {
@@ -47,8 +47,7 @@ options {
 
     forwarders {
        1.1.1.1;
-       1.0.0.1;
-       // 8.8.8.8;
+       8.8.8.8;
     };
 };
 
@@ -81,19 +80,19 @@ zone "0.0.127.in-addr-arpa" {
 
 // 172.31.251.0
 zone "kellynoah.com" {
-   type primary;
+   type secondary;
    file "172_31_251_0";
-   notify yes;
-   allow-transfer {
-      172.31.251.64;
+   masters {
+      172.31.251.63;
    };
+   notify yes;
 };
 
 zone "251.31.172.in-addr.arpa" {
-   type primary;
+   type secondary;
    file "172_31_251_0.rev";
-   allow-transfer {
-      172.31.251.64;
+   masters {
+      172.31.251.63;
    };
    notify yes;
 };
