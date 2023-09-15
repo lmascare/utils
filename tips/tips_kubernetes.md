@@ -13,6 +13,10 @@
     - Virtualbox
     - VMware Fusion
     - Hyper-V
+- Install kind 
+    - curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+    - chmod +x kind
+    - cp kind /usr/local/bin/kind
 - Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     - OS-X
         - brew install kubectl
@@ -52,23 +56,164 @@
 - Install minikube from [here](http://github.com/kubernetes/minikube/releases)
     - OS-X (brew cask install minikube)
     - Verify 'minikube version'
-    
+- 
 #### 'minikube' Commands
 
 Command | Description
 --- | ---
-minikube dashboard | Access the kubernetes dashboard
-minikube start | Start minikube
-minikube status | Status of the Kubernetes Cluster
-minikube stop  | Stop minikube
+kind create cluster --name <string> | Creates a cluster. Default name kind
+kind delete cluster | Deletes a cluster. Default name kind
 kubectl apply -f deployment.yaml | Deploy the Kubernetes YAML file
 kubectl create (_run_ is deprecated) | Deploy a sample Kubernetes "deployment"
 kubectl describe pod <pod_name> | Provides details of the deployment pod
 kubectl exec [-it] <pod_name> [-c CONTAINER] COMMAND [args...] | Execute a command within a container 
 kubectl expose deployment <deployment>| Expose the deployment to an external network
 kubectl get pod | List the "pods"
+kubectl get nodes -o wide | List the "nodes" with additional details
 kubectl delete | Delete the deployment
 kubectl port-forward <pod name> [LOCALPORT]:{REMOTE_PORT]
+minikube dashboard | Access the kubernetes dashboard
+minikube start | Starts a local K8s cluster
+minikube start --nodes 2 -p nginx-demo | Starts 2 nodes  
+minikube status -p nginx-demo | Status of the nodes
+minikube status | Status of the Kubernetes Cluster
+minikube stop  | Stop minikube
+
+```
+# Run a stateless application (nginx)
+# Create 2 Nodes
+minikube start --nodes 2 -p nginx-demo
+
+# Get the status of the nodes
+minikube status -p nginx-demo
+kubectl get nodes -o wide
+
+# Create a YAML configuration file in /u/k8s/apps/nginx.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.24.0
+        ports:
+        - containerPort: 80
+
+# Deploy the application
+kubectl apply -f /u/k8s/apps/nginx.yaml
+# output --> deployment.apps/nginx-deployment created
+
+# Query the rollout status
+kubectl rollout status deployment.apps/nginx-deployment created
+
+# Additionally query the status of the PODs
+# It transitions from ContainerCreating -> Running
+kubectl get pod
+
+# List services exposed
+minikube service list -p nginx-demo
+
+# Create 2 additional services 
+# hello-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      affinity:
+        # ⬇⬇⬇ This ensures pods will land on separate hosts
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions: [{ key: app, operator: In, values: [hello] }]
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: hello-from
+          image: pbitty/hello-from:latest
+          ports:
+            - name: http
+              containerPort: 80
+      terminationGracePeriodSeconds: 1
+
+# hello-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  type: NodePort
+  selector:
+    app: hello
+  ports:
+    - protocol: TCP
+      nodePort: 31000
+      port: 80
+      targetPort: http
+
+# Apply the deployments
+kubectl apply -f /u/k8s/apps/hello-deployment.yaml
+# Output --> deployment.apps/hello created
+
+kubectl apply -f /u/k8s/apps/hello-svc.yaml
+# Output --> service/hello created
+
+# Verify the service is running
+minikube service list -o wide
+|-------------|------------|--------------|---------------------------|
+|  NAMESPACE  |    NAME    | TARGET PORT  |            URL            |
+|-------------|------------|--------------|---------------------------|
+| default     | hello      |           80 | http://192.168.58.2:31000 |
+| default     | kubernetes | No node port |                           |
+| kube-system | kube-dns   | No node port |                           |
+|-------------|------------|--------------|---------------------------|
+
+# Get the IP addresses of the Nodes (192.168.58.2 & 192.168.58.3)
+kubectl get nodes -o wide
+
+# Get the names of the running PODs 
+kubectl get pod
+NAME                               READY   STATUS    RESTARTS   AGE
+hello-66cff8ff7b-7j5f9             1/1     Running   0          103s
+hello-66cff8ff7b-kwhrm             1/1     Running   0          103s
+nginx-deployment-b55dcc56f-4x2q2   1/1     Running   0          14m
+nginx-deployment-b55dcc56f-q59gn   1/1     Running   0          14m
+
+# Test the deployment
+curl http://192.168.58.2:31000
+# output --> Hello from hello-66cff8ff7b-7j5f9
+
+# Running it a few more times gets you from the other pod
+curl http://192.168.58.2:31000
+Hello from hello-66cff8ff7b-7j5f9 (10.244.1.3)
+
+curl http://192.168.58.2:31000
+Hello from hello-66cff8ff7b-kwhrm (10.244.0.4)
+
+
+```
 
 ```commandline
 kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080

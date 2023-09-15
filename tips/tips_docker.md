@@ -34,6 +34,10 @@ Download [here](http://docs.docker.com/install)
  - systemctl enable containerd.service
 
 #### Ubuntu
+### Installation [location](https://docs.docker.com/engine/install/ubuntu/)
+
+### Run docker in [rootless mode](https://docs.docker.com/engine/security/rootless/)
+
  - sudo apt-get update
  - sudo apt-get install apt-transport-https \
  ca-certificates, curl, software-properties-common 
@@ -134,11 +138,12 @@ docker tag <image_id> lmascare/debian:1.2
 docker login --username=<username>
 docker push lmascare/debian:1.2
 ```
-### Setting DNS for docker daemon
+### Settings for docker daemon
 ```markdown
 /etc/docker/daemon.json
 {
   "dns": ["your_dns_address", "8.8.8.8"]
+  "data-root": "/u/docker/data"
 }
 sudo service docker restart
 ```
