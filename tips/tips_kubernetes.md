@@ -17,6 +17,7 @@
 ### Kubenetes HOME
  - https://kubernetes.io/docs/home/
  - [Tutorial](https://kubernetes.io/docs/tutorials/)
+ 
 #### Installation
 #####Pre-requisite
 - Virtualizaton technology like
@@ -75,13 +76,18 @@
     - OS-X (brew cask install minikube)
     - Verify 'minikube version'
 - 
-#### 'minikube' Commands
+####[kubectl cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+####[kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/)
+
+#### minikube / kubectl Commands
 
 Command | Description
 --- | ---
 kind create cluster --name <string> | Creates a cluster. Default name kind
 kind delete cluster | Deletes a cluster. Default name kind
 kubectl apply -f deployment.yaml | Deploy the Kubernetes YAML file
+kubectl config view | View the Kubernetes Clusters and Contexts  
 kubectl create (_run_ is deprecated) | Deploy a sample Kubernetes "deployment"
 kubectl describe pod <pod_name> | Provides details of the deployment pod
 kubectl exec [-it] <pod_name> [-c CONTAINER] COMMAND [args...] | Execute a command within a container 
@@ -98,6 +104,34 @@ minikube status -p nginx-demo | Status of the nodes
 minikube status | Status of the Kubernetes Cluster
 minikube stop  | Stop minikube
 
+#### Ports
+
+##### Control Plane
+Protocol | Direction | Port Range | Purpose | Used By
+--- | --- | --- | --- | ---
+TCP | Inbound | 6443 | Kubernetes API Server | All
+TCP | Inbound | 2379 - 2789 | etcd Server Client API | kube-apiserver, etcd
+TCP | Inbound | 10250 | Kubelet API | Self, Control Plane
+TCP | Inbound | 10259 | kube-scheduler | Self
+TCP | Inbound | 10257 | kube-controller-manager | Self
+Although etcd ports are included in the control plane section, you can host your own
+etcd cluster externally or on custom ports
+
+##### Worker Nodes
+Protocol | Direction | Port Range | Purpose | Used By
+--- | --- | --- | --- | ---
+TCP | Inbound | 10250 | Kubelet API | Self, Control Plane
+TCP | Inbound | 30000 - 32767 | Node Port Services | All
+All default port numbers can be overridden. When custom ports are used those ports need to be open instead of defaults mentioned here.
+
+One common example is API server port that is sometimes switched to 443. Alternatively, the default port is kept as is and API server is put behind a load balancer that listens on 443 and routes the requests to API server on the default port.
+
+#### Acronyms
+
+Acronym | Expanded version
+--- | ---
+CRI | Container Runtime Interface
+ 
 ```
 # Run a stateless application (nginx)
 # Create 2 Nodes
