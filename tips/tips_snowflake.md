@@ -51,4 +51,10 @@ Cloud Services layer has the following services
  - Security
  - Metadata Manager
 
- - 
+### Caching Tips
+  - You always need a virtual warehouse to execute queries
+  - Always use a limit clause in queries
+  - During development. always keep auto suspend time limit >= 15mins
+  - Share the virtual warehouse when common tables are used
+  - Never disable cloud services layer result cache
+  - Resuing query result in snowflake is free
